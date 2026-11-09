@@ -13,7 +13,7 @@ export default function XPWelcome({ onEnter }) {
   return (
     <main className="xp-entry" aria-labelledby="xp-entry-title">
       <h1 id="xp-entry-title" className="sr-only">
-        Portfólio de Tiago Miranda — Project Designer
+        Portfólio de Thiago Miranda — Product Designer
       </h1>
       <div className="xp-entry-top" aria-hidden="true" />
       <section
@@ -24,26 +24,26 @@ export default function XPWelcome({ onEnter }) {
         <div className="xp-entry-intro">
           <img
             className="xp-entry-logo"
-            src="/assets/xp/windows-xp-logo.webp"
-            width="800"
-            height="648"
-            alt="Windows XP"
+            src="/assets/xp/thiago-miranda-xp.png"
+            width="1620"
+            height="971"
+            alt="Thiago Miranda XP · Product Designer"
             fetchPriority="high"
             draggable="false"
           />
-          <p>Para começar, clique em Tiago Miranda para entrar.</p>
+          <p>Para começar, clique em Thiago Miranda para fazer login.</p>
         </div>
         <div className="xp-entry-account">
           <button
             ref={profileRef}
             className="xp-entry-profile"
             onClick={onEnter}
-            aria-label="Entrar no portfólio de Tiago Miranda, Project Designer"
+            aria-label="Entrar no portfólio de Thiago Miranda, Product Designer"
           >
             <span className="xp-entry-avatar" aria-hidden="true" />
             <span className="xp-entry-identity">
-              <span className="xp-entry-name">Tiago Miranda</span>
-              <span className="xp-entry-role">Project Designer</span>
+              <span className="xp-entry-name">Thiago Miranda</span>
+              <span className="xp-entry-role">Product Designer</span>
             </span>
           </button>
         </div>
@@ -57,12 +57,11 @@ export default function XPWelcome({ onEnter }) {
           <span>
             Depois de entrar, explore meus projetos e conheça meu trabalho.
           </span>
-          <span>Cada detalhe foi desenhado com intenção.</span>
         </p>
       </footer>
       <span className="sr-only" role="status" key={resetVersion}>
         {resetVersion > 0
-          ? "Tela reiniciada. Selecione Tiago Miranda para entrar."
+          ? "Tela reiniciada. Selecione Thiago Miranda para entrar."
           : ""}
       </span>
     </main>

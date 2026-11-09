@@ -57,3 +57,13 @@ pessoal, o currículo e os projetos do Mitch não foram incorporados.
 
 O avatar de Miranda permanece vazio. Nenhum arquivo de Tahoma foi baixado:
 a família continua sendo solicitada do sistema, com os fallbacks já documentados.
+
+
+### Refinamento da identidade — 09/11
+
+O logo de abertura foi substituído por `public/assets/xp/thiago-miranda-xp.png`,
+baseado no anexo personalizado enviado pelo usuário nesta conversa: bandeira XP,
+“Thiago Miranda”, “xp” e “Product Designer”. A preparação de transparência foi feita
+com edição de imagem para compor o logo sobre o fundo azul. Não é um screenshot
+de uma página nem uma imagem que substitui texto ou interação da interface.
+O logo anterior `windows-xp-logo.webp` deixa de ser usado na tela de entrada.

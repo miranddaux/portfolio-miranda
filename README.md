@@ -29,15 +29,16 @@ nenhum arquivo proprietário de fonte é distribuído.
 ## Tela de entrada — rodada 09/11
 
 A primeira visita à raiz abre a tela de boas-vindas inspirada no XP. Selecione
-**Tiago Miranda · Project Designer** para entrar (grafia pedida para esta tela).
+**Thiago Miranda · Product Designer** para entrar.
 O espaço do avatar permanece vazio. Hover e foco usam azul escuro e amarelo.
 A sessão memoriza a entrada para não interromper a volta dos cases.
 O botão “Tela inicial” e a URL `/?entrada=1` permitem rever a abertura.
 Links diretos para cases e seções não exigem passar pela abertura.
 
 As novas escalas de azul, neutros e destaque ficam em `src/styles/tokens.css`;
-a interface de entrada não usa preto ou branco puros. O logo Windows XP e o
-ícone de reinício solicitados foram baixados e incluídos localmente nesta rodada.
+a interface de entrada não usa preto ou branco puros. O logo personalizado enviado
+pelo usuário e o ícone de reinício são arquivos locais. A instrução de login usa
+15 px sem negrito, com contraste mínimo calculado acima de 4,5:1.
 As fontes de origem estão em [docs/XP_WELCOME.md](docs/XP_WELCOME.md).
 
 ## Arquitetura
@@ -63,8 +64,8 @@ Ainda faltam screenshots reais/autorizados dos cases, curadoria editorial detalh
 e-mail público, LinkedIn e CV revisado. As interfaces indicam essas pendências;
 nenhum contato ou resultado foi inventado.
 
-A direção visual usa Mitch Ivin como referência. A rodada inicial usou assets originais; na rodada de 09/11, o logo XP e o ícone
-de reinício pedidos pelo usuário foram incorporados com origem e atribuição registradas. Origem dos
+A direção visual usa Mitch Ivin como referência. A rodada inicial usou assets originais; na rodada de 09/11, o logo personalizado fornecido pelo usuário e o ícone de
+reinício foram incorporados com origem e atribuição registradas. Origem dos
 assets e alternativas avaliadas: [docs/ASSETS.md](docs/ASSETS.md).
 
 ## Fontes oficiais

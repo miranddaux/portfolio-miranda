@@ -26,7 +26,7 @@ Miranda segue a composição dos prints, acrescentando amarelo ao nome conforme 
 - `src/styles/tokens.css`: azuis 50–950, neutros 50–950, amarelo de destaque.
 - `src/App.jsx`: entrada na sessão, retorno à abertura e preservação de links diretos.
 
-A grafia **Tiago Miranda** e o cargo **Project Designer** seguem o pedido desta tela.
+A identidade final é **Thiago Miranda · Product Designer**, após a correção do usuário.
 Os demais textos existentes foram preservados para as próximas rodadas.
 
 O botão do perfil funciona com clique, Enter ou Espaço nativos de um `button`.
@@ -38,9 +38,10 @@ Links para `/cases/*` ou seções da Home passam direto ao conteúdo.
 
 ## Assets
 
-Logo Windows XP (800×648 WebP) e ícone de reinício (200×200 WebP) baixados diretamente
-dos recursos gráficos da referência por pedido explícito do usuário. Arquivos
-preservados sem edição, em `public/assets/xp/`. Origem e atribuições: `docs/ASSETS.md`.
+O logo personalizado enviado pelo usuário substitui a marca Windows XP usada
+na primeira rodada. Foi preparado com fundo transparente para uso sobre azul.
+O ícone de reinício (200×200 WebP) veio dos recursos da referência. Arquivos
+locais em `public/assets/xp/`. Origem e atribuições: `docs/ASSETS.md`.
 A foto do Mitch não foi usada. O espaço de foto de Miranda está vazio.
 
 ## Verificação
@@ -50,9 +51,15 @@ A foto do Mitch não foi usada. O espaço de foto de Miranda está vazio.
   clique para entrar, persistência na sessão, replay e acesso direto a quatro cases.
 - Regressão DOM dos três modos, filtros e janelas passou.
 - Os dois WebPs são válidos e não vazios; nenhuma URL remota de imagem no componente.
-- Contrastes calculados: neutro claro sobre faixa azul escura ≈11,5:1; cargo escuro
-  sobre azul médio >4,5:1; amarelo sobre azul de destaque ≈7,2:1. O nome (26 px) e a
-  instrução (19 px, bold) usam a regra WCAG para texto grande.
+- Refinamento: logo com 176 px no desktop/160 px no celular; instrução em 15 px,
+  peso 400, com o texto “Para começar, clique em Thiago Miranda para fazer login.”.
+- Rodapé contém somente “Depois de entrar, explore meus projetos e conheça meu trabalho.”.
+- Azuis mais saturados: plano central `#2359D5`, faixa `#073AC0` e azul luminoso
+  `#0646DA`; hover amarelo mantido. Cargo normal usa neutro claro para manter contraste.
+- Contrastes calculados: texto claro/plano central ≈5,66:1, cargo/plano central
+  ≈5,18:1, texto claro/faixas ≥6,76:1, amarelo/fundo mais claro do hover ≥4,65:1.
+  Essas combinações atendem AA para texto pequeno; não equivalem a uma auditoria
+  completa de acessibilidade no navegador.
 
 Limite: a ferramenta de navegador compartilhado não foi oferecida e o preview relay
 continua indisponível. Não se afirma validação visual de hover ou geometria desktop/

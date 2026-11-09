@@ -13,9 +13,9 @@ Build a polished, recruiter-first Product Designer portfolio for Thiago Miranda,
 
 ## Latest explicit user direction — 2026-11-09
 - Refine one screen at a time, starting with the XP welcome screen before the Home.
-- Recreate the supplied XP welcome layout, with locally stored Windows XP logo and restart artwork requested from mitchivin.com. Attribute the sources; do not claim an open license for these images.
-- Welcome screen copy: Tiago Miranda, Project Designer. Leave the avatar empty. Hover/focus: darker blue background, yellow avatar border and name.
-- Use system Tahoma UI. Add blue and neutral token scales, avoiding pure black/white in the new interface.
+- Recreate the supplied XP welcome layout. Use the latest user-supplied Thiago Miranda XP logo, at a smaller size, and the restart artwork requested from mitchivin.com. Attribute sources accurately.
+- Welcome screen copy: Thiago Miranda, Product Designer. Leave the avatar empty. Hover/focus: darker blue background, yellow avatar border and name.
+- Use system Tahoma UI. Keep the login instruction at 15px, regular weight. Use vivid blue and neutral token scales, avoiding pure black/white and preserving WCAG AA contrast.
 - Welcome is presentational, never authentication. Preserve direct access to cases and existing modes.
 
 ## Key product decisions
