@@ -27,18 +27,20 @@ reorganizam-se em coluna e suas alturas crescem com o conteúdo.
 
 ## Abertura desta rodada
 
-- Logo: 256 px no desktop, 208 px no celular e 192 px em telas desktop baixas.
+- Logo: 280 px no desktop, 224 px no celular e 208 px em telas desktop baixas.
 - Plano central: `#5179E1`; faixas superior/inferior planas: `#002697`.
 - Âncoras `--color-xp-mid` e `--color-xp-deep`; o restante da escala azul deriva
   dessas duas cores. As superfícies neutras dos modos Rápido e Noite permanecem.
-- Instrução (20 px/500) e cargo (16 px) usam `#070E1A` sobre o centro: ≈4,76:1.
+- Instrução (20 px/500) e cargo (16 px) usam off-white `#F5F7FB` por pedido
+  explícito do usuário. O contraste sobre `#5179E1` é ≈3,79:1; essa combinação
+  não é registrada como AA para texto pequeno. O hover amarelo permanece.
 - O nome é 24 px, claro, com contraste ≈3,79:1 — atende ao critério de texto grande.
 - Perfil reduzido: avatar 64 px no desktop/56 px no celular; cartão 320 px.
 - Hover amarelo sobre azul profundo: ≈9,34:1. O degradê só desvanece na borda.
 - Uma camada CRT compartilhada cobre abertura e XP: linhas horizontais a 2,5%
   e máscara vertical a 1%, sem animação ou eventos de ponteiro.
-- Contraste calculado mínimo do texto pequeno considerando todas as fases da
-  textura: ≈4,57:1. Isso não substitui uma auditoria visual completa no navegador.
+- Nos demais componentes que usam texto escuro `#070E1A`, o contraste mínimo
+  calculado com a textura é ≈4,57:1. Isso não substitui auditoria visual no navegador.
 
 ## Validação
 

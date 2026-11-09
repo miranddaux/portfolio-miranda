@@ -92,7 +92,7 @@
 
 .xp-entry-logo {
   display: block;
-  width: calc(var(--space-unit) * 32);
+  width: calc(var(--space-unit) * 35);
   height: auto;
   user-select: none;
 }
@@ -104,7 +104,7 @@
   line-height: var(--space-4);
   white-space: nowrap;
   text-shadow: none;
-  color: var(--color-entry-ink);
+  color: var(--entry-text);
 }
 
 .xp-entry-account {
@@ -199,7 +199,7 @@
   font-size: var(--text-16);
   font-weight: 700;
   line-height: var(--space-3);
-  color: var(--color-entry-ink);
+  color: var(--entry-text);
 }
 
 .xp-entry-profile:focus-visible {
@@ -341,7 +341,7 @@
     align-items: center;
   }
   .xp-entry-logo {
-    width: calc(var(--space-unit) * 26);
+    width: calc(var(--space-unit) * 28);
   }
   .xp-entry-intro p {
     font-size: var(--text-welcome);
@@ -407,7 +407,7 @@
       var(--space-9);
   }
   .xp-entry-logo {
-    width: calc(var(--space-unit) * 24);
+    width: calc(var(--space-unit) * 26);
   }
   .xp-entry-intro p {
     margin-top: var(--space-1);

@@ -38,7 +38,7 @@ Links diretos para cases e seções não exigem passar pela abertura.
 As novas escalas de azul, neutros e destaque ficam em `src/styles/tokens.css`;
 a interface de entrada não usa preto ou branco puros. O logo personalizado enviado
 pelo usuário e o ícone de reinício são arquivos locais. A instrução de login usa
-20 px em peso medium (exceção explícita à escala de 8), com contraste calculado de 4,76:1 para texto escuro sobre o azul central.
+20 px em peso medium (exceção explícita à escala de 8), em off-white (#F5F7FB), conforme a escolha visual mais recente.
 As fontes de origem estão em [docs/XP_WELCOME.md](docs/XP_WELCOME.md).
 
 ## Design system
@@ -56,7 +56,8 @@ centralizadas nos tokens `--color-xp-deep` e `--color-xp-mid`. Janelas, botões,
 links, filtros e foco usam essas cores ou tonalidades derivadas. Os modos claro
 e escuro preservam suas superfícies neutras.
 
-A abertura tem faixas planas nas cores exatas, nome de perfil em 24 px e avatar
+A abertura tem faixas planas nas cores exatas, logo com 280 px no desktop/224 px
+no celular, nome de perfil em 24 px e avatar
 vazio de 64 px (56 px no celular). Uma textura CRT estática e discreta cobre a
 abertura e a experiência XP, sem animação ou bloqueio de cliques.
 
