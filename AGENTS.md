@@ -11,6 +11,13 @@ Build a polished, recruiter-first Product Designer portfolio for Thiago Miranda,
 4. Notion UX structure: https://app.notion.com/p/3fe34785429b810b984bea054c22588f
 5. This repository's existing code.
 
+## Latest explicit user direction — 2026-11-09
+- Refine one screen at a time, starting with the XP welcome screen before the Home.
+- Recreate the supplied XP welcome layout, with locally stored Windows XP logo and restart artwork requested from mitchivin.com. Attribute the sources; do not claim an open license for these images.
+- Welcome screen copy: Tiago Miranda, Project Designer. Leave the avatar empty. Hover/focus: darker blue background, yellow avatar border and name.
+- Use system Tahoma UI. Add blue and neutral token scales, avoiding pure black/white in the new interface.
+- Welcome is presentational, never authentication. Preserve direct access to cases and existing modes.
+
 ## Key product decisions
 - Featured three: ANIMAE, Navaja, Oficina do Tenista, in that order. UltraGrip belongs to `Mais trabalhos`, NOT to featured trio.
 - Navigation: Cases, Playground, Sobre, Contato; CV one click from home when valid asset exists.

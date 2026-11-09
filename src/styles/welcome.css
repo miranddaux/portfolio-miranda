@@ -1,0 +1,432 @@
+/* Welcome screen: XP's layout, adapted to the portfolio's own content. */
+.xp-entry {
+  --entry-band-height: clamp(68px, 10.9svh, 104px);
+  --entry-gap: 52px;
+  --entry-divider-width: 2px;
+  --entry-background: var(--color-blue-500);
+  --entry-band: var(--color-blue-900);
+  --entry-text: var(--color-neutral-50);
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: var(--entry-band-height) minmax(400px, 1fr) var(
+      --entry-band-height
+    );
+  background: var(--entry-band);
+  color: var(--entry-text);
+  font-family: var(--font-ui);
+  isolation: isolate;
+  position: relative;
+}
+
+/* Static display texture: no flicker, animation or pointer interception. */
+.xp-entry::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    rgb(13 20 34 / 3%) 2px 3px
+  );
+}
+
+.xp-entry-top {
+  background: linear-gradient(
+    110deg,
+    var(--color-blue-850),
+    var(--entry-band) 65%
+  );
+}
+
+.xp-entry-center {
+  position: relative;
+  background: var(--entry-background);
+  min-width: 0;
+}
+
+.xp-entry-center::before,
+.xp-entry-center::after {
+  position: absolute;
+  content: "";
+  inset-inline: 0;
+  height: 2px;
+  pointer-events: none;
+}
+
+.xp-entry-center::before {
+  top: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-blue-100) 25%,
+    transparent 65%
+  );
+}
+
+.xp-entry-center::after {
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-highlight-amber) 25%,
+    transparent 65%
+  );
+}
+
+.xp-entry-divider {
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+  left: 50%;
+  width: var(--entry-divider-width);
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--color-blue-100) 40%,
+    var(--color-blue-100) 60%,
+    transparent
+  );
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.xp-entry-intro {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(
+    calc(-100% - var(--entry-gap) - var(--entry-divider-width) / 2),
+    -50%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.xp-entry-logo {
+  display: block;
+  width: 208px;
+  height: auto;
+  user-select: none;
+}
+
+.xp-entry-intro p {
+  margin: 18px 28px 0 0;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-shadow: 0 1px 1px var(--color-blue-600);
+}
+
+.xp-entry-account {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(
+    calc(var(--entry-gap) + var(--entry-divider-width) / 2),
+    -50%
+  );
+}
+
+.xp-entry-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 20px 9px 9px;
+  width: 320px;
+  min-height: 90px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--entry-text);
+  text-align: left;
+  cursor: pointer;
+  isolation: isolate;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.xp-entry-profile::before {
+  position: absolute;
+  content: "";
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--color-blue-800),
+    var(--color-blue-700) 45%,
+    var(--entry-background)
+  );
+  opacity: 0;
+  transition: opacity 90ms linear;
+}
+
+.xp-entry-profile::after {
+  position: absolute;
+  content: "";
+  inset: -1px;
+  border: 1px solid var(--color-blue-100);
+  border-radius: inherit;
+  mask-image: linear-gradient(90deg, var(--color-neutral-950), transparent 95%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 90ms linear;
+}
+
+.xp-entry-avatar {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  background: linear-gradient(
+    145deg,
+    var(--color-blue-200),
+    var(--color-blue-400)
+  );
+  border: 3px solid var(--color-neutral-50);
+  border-radius: 3px;
+  box-shadow: 1px 2px 3px rgb(13 20 34 / 18%);
+  transition: border-color 90ms linear;
+}
+
+.xp-entry-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 1px;
+}
+
+.xp-entry-name {
+  display: block;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: 0.1px;
+  text-shadow: 0 1px 1px rgb(13 20 34 / 16%);
+}
+
+.xp-entry-role {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-neutral-950);
+}
+
+.xp-entry-profile:focus-visible {
+  outline: 2px solid var(--color-highlight-amber);
+  outline-offset: 4px;
+}
+
+.xp-entry-profile:is(:hover, :focus-visible, :active)::before {
+  opacity: 1;
+}
+
+.xp-entry-profile:is(:hover, :focus-visible, :active)::after {
+  opacity: 0.55;
+}
+
+.xp-entry-profile:is(:hover, :focus-visible, :active) .xp-entry-avatar {
+  border-color: var(--color-highlight-amber);
+}
+
+.xp-entry-profile:is(:hover, :focus-visible, :active) .xp-entry-name,
+.xp-entry-profile:is(:hover, :focus-visible, :active) .xp-entry-role {
+  color: var(--color-highlight-amber);
+}
+
+.xp-entry-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 18px 50px;
+  background: linear-gradient(
+    110deg,
+    var(--color-blue-850),
+    var(--entry-band) 65%
+  );
+}
+
+.xp-entry-restart {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border: 0;
+  padding: 6px 0;
+  background: transparent;
+  color: var(--entry-text);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.xp-entry-restart img {
+  width: 32px;
+  height: 32px;
+  opacity: 0.9;
+}
+
+.xp-entry-restart:hover img {
+  opacity: 1;
+}
+
+.xp-entry-restart:hover span {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.xp-entry-restart:focus-visible {
+  outline: 2px solid var(--color-highlight-amber);
+  outline-offset: 5px;
+}
+
+.xp-entry-note {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.xp-entry-note span {
+  display: block;
+}
+
+.entry-return {
+  font-size: 12px;
+  color: var(--muted);
+  padding: 5px 0;
+  background: transparent;
+  border: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+@media (max-width: 1150px) and (min-width: 761px) {
+  .xp-entry {
+    --entry-gap: 28px;
+  }
+  .xp-entry-intro {
+    width: calc(50vw - 58px);
+  }
+  .xp-entry-intro p {
+    white-space: normal;
+    max-width: 340px;
+    text-align: right;
+    margin-right: 0;
+  }
+  .xp-entry-profile {
+    width: min(320px, calc(50vw - 45px));
+  }
+  .xp-entry-bottom {
+    padding-inline: 30px;
+  }
+  .xp-entry-note {
+    max-width: 380px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 760px) {
+  .xp-entry {
+    --entry-band-height: 64px;
+    grid-template-rows: var(--entry-band-height) minmax(430px, 1fr) auto;
+  }
+  .xp-entry-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    padding: 32px 20px 48px;
+  }
+  .xp-entry-intro,
+  .xp-entry-account {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    max-width: 100%;
+  }
+  .xp-entry-intro {
+    align-items: center;
+  }
+  .xp-entry-logo {
+    width: 190px;
+  }
+  .xp-entry-intro p {
+    font-size: 19px;
+    text-align: center;
+    white-space: normal;
+    margin: 18px 0 0;
+    max-width: 340px;
+  }
+  .xp-entry-divider {
+    display: none;
+  }
+  .xp-entry-account::before {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    top: -19px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-blue-100),
+      transparent
+    );
+    opacity: 0.6;
+  }
+  .xp-entry-profile {
+    width: min(320px, calc(100vw - 40px));
+  }
+  .xp-entry-name {
+    font-size: 25px;
+  }
+  .xp-entry-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    padding: 20px;
+  }
+  .xp-entry-note {
+    font-size: 12px;
+    max-width: 340px;
+  }
+  .entry-return {
+    display: none;
+  }
+}
+
+@media (max-height: 560px) and (min-width: 761px) {
+  .xp-entry {
+    --entry-band-height: 52px;
+    grid-template-rows: 52px minmax(280px, 1fr) 72px;
+  }
+  .xp-entry-logo {
+    width: 170px;
+  }
+  .xp-entry-intro p {
+    margin-top: 8px;
+  }
+  .xp-entry-bottom {
+    padding-block: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xp-entry *,
+  .xp-entry *::before,
+  .xp-entry *::after {
+    transition: none;
+  }
+}
+html[data-screen="welcome"] body {
+  background: var(--color-blue-900);
+}

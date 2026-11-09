@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-export default function Header({ mode, setMode }) {
+export default function Header({ mode, setMode, onShowWelcome }) {
   const [open, setOpen] = useState(false);
   return (
     <header className="header">
@@ -25,6 +25,9 @@ export default function Header({ mode, setMode }) {
         ))}
       </nav>
       <div className="header-actions">
+        <button className="entry-return" onClick={onShowWelcome}>
+          Tela inicial
+        </button>
         <div className="mode-switch" role="group" aria-label="Modo visual">
           {[
             ["rapido", "Rápido"],

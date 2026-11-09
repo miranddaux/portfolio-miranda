@@ -1,7 +1,32 @@
+/* Foundations: system Tahoma UI; blue, neutral and focus scales for the XP UI. */
 :root {
+  --color-blue-50: #e8f0fc;
+  --color-blue-100: #bad7f8;
+  --color-blue-200: #a8c8f4;
+  --color-blue-300: #91b4ee;
+  --color-blue-400: #7799e8;
+  --color-blue-500: #587cdb;
+  --color-blue-600: #3f67c7;
+  --color-blue-700: #2454b5;
+  --color-blue-800: #153f9e;
+  --color-blue-850: #0738a5;
+  --color-blue-900: #082c84;
+  --color-blue-950: #06236d;
+  --color-neutral-50: #f5f7fb;
+  --color-neutral-100: #e9edf4;
+  --color-neutral-200: #d7dde8;
+  --color-neutral-300: #bac3d2;
+  --color-neutral-400: #929eb1;
+  --color-neutral-500: #6f7c92;
+  --color-neutral-600: #536078;
+  --color-neutral-700: #39445a;
+  --color-neutral-800: #283247;
+  --color-neutral-900: #1b2436;
+  --color-neutral-950: #0d1422;
+  --color-highlight-amber: #ffdf7d;
   --font-ui: Tahoma, Verdana, Arial, sans-serif;
   --bg: #f5f0ea;
-  --paper: #fff;
+  --paper: var(--color-neutral-50);
   --ink: #1b1818;
   --muted: #5e5853;
   --line: #e4ddd3;
@@ -24,13 +49,13 @@ html[data-mode="noite"] {
 }
 html[data-mode="xp"] {
   --bg: #236cc4;
-  --paper: #fff;
+  --paper: var(--color-neutral-50);
   --ink: #172434;
   --muted: #4b5563;
   --line: #a9b4c7;
   --sunken: #ece9d8;
   --accent: #245edb;
-  --casebg: #fff;
+  --casebg: var(--color-neutral-50);
   --shadow: 2px 4px 16px #10235455;
   --xp-blue: #0058e6;
   --xp-surface: #ece9d8;
