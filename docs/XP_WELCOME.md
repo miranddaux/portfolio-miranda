@@ -68,3 +68,28 @@ A foto do Mitch não foi usada. O espaço de foto de Miranda está vazio.
 Limite: a ferramenta de navegador compartilhado não foi oferecida e o preview relay
 continua indisponível. Não se afirma validação visual de hover ou geometria desktop/
 mobile nesta sessão. A publicação permite a avaliação visual pelo usuário.
+
+
+## Transição “Bem-vindo” e som de login
+
+Ao selecionar o perfil, a aplicação mostra `XPGreeting` entre a entrada e a Home.
+A mensagem usa Tahoma itálico, 48 px no desktop/40 px no celular, as mesmas cores
+e a textura estática já aprovadas. Dura 2,4 s e pode ser pulada a qualquer momento.
+Movimento reduzido desativa o fade de entrada; nenhuma animação controla navegação.
+
+`useXPLogin` mantém três fases (`profile`, `welcome`, `portfolio`), impede entrada
+repetida e limpa temporizadores/áudio no unmount. A sessão só é marcada como
+iniciada ao chegar à Home. Links de case continuam passando diretamente ao conteúdo.
+
+O áudio é pré-carregado na entrada, mas `play()` é chamado somente dentro do clique
+ou ativação por teclado, antes de qualquer `await`. O volume começa em 35%. Som
+silenciado é lembrado via `miranda-sound`; o controle também está no cabeçalho.
+A transição não depende de o arquivo carregar ou terminar. Rejeição de reprodução
+mostra “Tocar som”, e a navegação continua normalmente.
+
+Verificação: build e escala passaram. Teste DOM com áudio simulado passou para
+pré-carga sem reprodução, clique, fase intermediária, avanço automático/pular,
+preferência silenciosa, mute durante reprodução, bloqueio/retry e cleanup, além
+da regressão dos modos, cases e janelas. `ffprobe` validou o MP3 local (4,127 s,
+estéreo/44,1 kHz). Reprodução audível e sincronismo no navegador real continuam
+sem verificação nesta sessão devido à indisponibilidade do controle de navegador.

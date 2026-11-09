@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-export default function Header({ mode, setMode, onShowWelcome }) {
+import SoundToggle from "./SoundToggle";
+export default function Header({
+  mode,
+  setMode,
+  onShowWelcome,
+  soundEnabled,
+  onToggleSound,
+}) {
   const [open, setOpen] = useState(false);
   return (
     <header className="header">
@@ -25,6 +32,7 @@ export default function Header({ mode, setMode, onShowWelcome }) {
         ))}
       </nav>
       <div className="header-actions">
+        <SoundToggle compact enabled={soundEnabled} onToggle={onToggleSound} />
         <button className="entry-return" onClick={onShowWelcome}>
           Tela inicial
         </button>

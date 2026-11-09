@@ -31,6 +31,8 @@ nenhum arquivo proprietário de fonte é distribuído.
 A primeira visita à raiz abre a tela de boas-vindas inspirada no XP. Selecione
 **Thiago Miranda · Product Designer** para entrar.
 O espaço do avatar permanece vazio. Hover e foco usam azul escuro e amarelo.
+Após o clique, uma tela “Bem-vindo” em Tahoma itálico aparece por 2,4 segundos
+antes da Home; “Ir para o portfólio” permite pular.
 A sessão memoriza a entrada para não interromper a volta dos cases.
 O botão “Tela inicial” e a URL `/?entrada=1` permitem rever a abertura.
 Links diretos para cases e seções não exigem passar pela abertura.
@@ -40,6 +42,15 @@ a interface de entrada não usa preto ou branco puros. O logo personalizado envi
 pelo usuário e o ícone de reinício são arquivos locais. A instrução de login usa
 20 px em peso medium (exceção explícita à escala de 8), em off-white (#F5F7FB), conforme a escolha visual mais recente.
 As fontes de origem estão em [docs/XP_WELCOME.md](docs/XP_WELCOME.md).
+
+## Som de login
+
+O som clássico de login do XP é um MP3 local de aproximadamente 4,1 segundos,
+iniciado apenas pelo clique/ativação do perfil. Nunca toca ao abrir o site.
+O volume inicial é 35%; o botão de som na entrada, transição e cabeçalho permite
+silenciar e salva a preferência. Falhas ou bloqueios de reprodução não impedem
+a entrada. A opção “Tocar som” permite tentar novamente durante a transição.
+A Home não espera o áudio terminar e não o repete em loop.
 
 ## Design system
 
@@ -65,7 +76,8 @@ abertura e a experiência XP, sem animação ou bloqueio de cliques.
 
 - `src/App.jsx`: seleção de modo, persistência e resolução de rotas.
 - `src/components/`: cabeçalho, janela, ícone retrô, card e seções preservadas da Home.
-- `src/pages/`: Home editorial, desktop XP e página compartilhada dos cases.
+- `src/pages/`: entrada, transição “Bem-vindo”, Home editorial, desktop XP e cases.
+- `src/hooks/useXPLogin.js`: fases da entrada, temporizador, áudio e preferência de som.
 - `src/data/cases.js`: conteúdo dos projetos, separado das interfaces.
 - `src/styles/`: base, tokens, layout e camada XP.
 - `public/assets/retro/`: dez SVGs locais criados para esta implementação.

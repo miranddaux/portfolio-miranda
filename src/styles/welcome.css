@@ -427,3 +427,92 @@
 html[data-screen="welcome"] body {
   background: var(--color-blue-900);
 }
+/* The welcome message is a short, skippable transition, never a loading gate. */
+.xp-entry {
+  grid-template-rows:
+    var(--entry-band-height) minmax(calc(var(--space-unit) * 50), 1fr)
+    minmax(var(--entry-band-height), auto);
+}
+.xp-entry-footer-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.xp-sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-size: var(--text-16);
+  line-height: var(--space-3);
+  min-height: var(--space-5);
+  padding: var(--space-1);
+  white-space: nowrap;
+}
+.xp-sound-toggle.is-compact {
+  width: var(--space-4);
+  padding-inline: 0;
+}
+.xp-entry .xp-sound-toggle:hover {
+  color: var(--color-highlight-amber);
+}
+.xp-entry .xp-sound-toggle:focus-visible {
+  outline-color: var(--color-highlight-amber);
+}
+.xp-greeting-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+.xp-greeting-center::before,
+.xp-greeting-center::after {
+  display: none;
+}
+.xp-greeting h1 {
+  font-family: var(--font-ui);
+  font-size: var(--text-48);
+  font-style: italic;
+  font-weight: 700;
+  line-height: var(--space-8);
+  letter-spacing: 0;
+  color: var(--color-neutral-50);
+  text-shadow: 1px 2px 2px var(--color-xp-deep);
+  margin: 0;
+  outline: none;
+  animation: xp-welcome-in 240ms ease-out both;
+}
+@keyframes xp-welcome-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (width < 768px) {
+  .xp-entry-footer-actions {
+    justify-content: center;
+    gap: var(--space-2);
+  }
+  .xp-greeting h1 {
+    font-size: var(--text-40);
+    line-height: var(--space-6);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xp-greeting h1 {
+    animation: none;
+  }
+}
+.xp-greeting {
+  grid-template-rows: var(--entry-band-height) minmax(
+      var(--space-16),
+      1fr
+    ) minmax(var(--entry-band-height), auto);
+}

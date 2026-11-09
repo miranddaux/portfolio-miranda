@@ -4,6 +4,8 @@ import Home from "./pages/Home";
 import XPDesktop from "./pages/XPDesktop";
 import CasePage from "./pages/CasePage";
 import XPWelcome from "./pages/XPWelcome";
+import XPGreeting from "./pages/XPGreeting";
+import useXPLogin from "./hooks/useXPLogin";
 import { CASES } from "./data/cases";
 const modes = ["rapido", "noite", "xp"];
 function initialMode() {
@@ -25,7 +27,8 @@ function initialWelcome() {
 }
 export default function App() {
   const [mode, setMode] = useState(initialMode);
-  const [showWelcome, setShowWelcome] = useState(initialWelcome);
+  const login = useXPLogin(initialWelcome);
+  const showWelcome = login.phase !== "portfolio";
   const path = location.pathname.replace(/\/$/, "") || "/";
   const project = CASES.find((c) => path === `/cases/${c.id}`);
   useEffect(() => {
@@ -46,16 +49,8 @@ export default function App() {
   }, [mode, showWelcome]);
 
   function enterPortfolio() {
-    try {
-      sessionStorage.setItem("miranda-entered", "true");
-    } catch {}
     setMode("xp");
-    setShowWelcome(false);
-    requestAnimationFrame(() => {
-      const main = document.getElementById("conteudo");
-      main?.setAttribute("tabindex", "-1");
-      main?.focus({ preventScroll: true });
-    });
+    login.start();
   }
 
   function showEntry() {
@@ -63,18 +58,41 @@ export default function App() {
       location.assign("/?entrada=1");
       return;
     }
-    setShowWelcome(true);
+    login.reset();
     window.scrollTo({ top: 0 });
   }
 
-  if (showWelcome) return <XPWelcome onEnter={enterPortfolio} />;
+  if (login.phase === "welcome")
+    return (
+      <XPGreeting
+        onContinue={login.finish}
+        soundEnabled={login.soundEnabled}
+        onToggleSound={login.toggleSound}
+        audioBlocked={login.audioBlocked}
+        onRetrySound={login.playLogonSound}
+      />
+    );
+  if (login.phase === "profile")
+    return (
+      <XPWelcome
+        onEnter={enterPortfolio}
+        soundEnabled={login.soundEnabled}
+        onToggleSound={login.toggleSound}
+      />
+    );
   return (
     <>
       <a className="skip-link" href="#conteudo">
         Pular para o conteúdo
       </a>
       <div className="site-shell">
-        <Header mode={mode} setMode={setMode} onShowWelcome={showEntry} />
+        <Header
+          mode={mode}
+          setMode={setMode}
+          onShowWelcome={showEntry}
+          soundEnabled={login.soundEnabled}
+          onToggleSound={login.toggleSound}
+        />
         {project ? (
           <CasePage project={project} />
         ) : path === "/" ? (

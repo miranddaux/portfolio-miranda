@@ -1,7 +1,8 @@
 import { useRef, useState } from "react";
+import SoundToggle from "../components/SoundToggle";
 
 /** A welcome screen only; entering never asks for credentials. */
-export default function XPWelcome({ onEnter }) {
+export default function XPWelcome({ onEnter, soundEnabled, onToggleSound }) {
   const profileRef = useRef(null);
   const [resetVersion, setResetVersion] = useState(0);
 
@@ -49,10 +50,13 @@ export default function XPWelcome({ onEnter }) {
         </div>
       </section>
       <footer className="xp-entry-bottom">
-        <button className="xp-entry-restart" onClick={restart}>
-          <img src="/assets/xp/restart.webp" width="32" height="32" alt="" />
-          <span>Reiniciar Portfólio Miranda</span>
-        </button>
+        <div className="xp-entry-footer-actions">
+          <button className="xp-entry-restart" onClick={restart}>
+            <img src="/assets/xp/restart.webp" width="32" height="32" alt="" />
+            <span>Reiniciar Portfólio Miranda</span>
+          </button>
+          <SoundToggle enabled={soundEnabled} onToggle={onToggleSound} />
+        </div>
         <p className="xp-entry-note">
           <span>
             Depois de entrar, explore meus projetos e conheça meu trabalho.

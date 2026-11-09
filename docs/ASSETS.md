@@ -67,3 +67,20 @@ baseado no anexo personalizado enviado pelo usuário nesta conversa: bandeira XP
 com edição de imagem para compor o logo sobre o fundo azul. Não é um screenshot
 de uma página nem uma imagem que substitui texto ou interação da interface.
 O logo anterior `windows-xp-logo.webp` deixa de ser usado na tela de entrada.
+
+
+## Som de login XP — 09/11
+
+Arquivo: `public/assets/audio/windows-xp-logon.mp3`.
+Origem: https://mitchivin.com/assets/sounds/08bd8dbd83b0f63f.mp3
+
+O recurso foi identificado como o cue `login` no módulo público de áudio da
+referência e baixado localmente por pedido explícito do usuário. MP3 estéreo,
+44,1 kHz, 4,127 s e 66.499 bytes. Não é uma trilha inventada ou sintetizada.
+O som do Windows é material associado à Microsoft; não é classificado aqui
+como composição original de Miranda nem como recurso com licença aberta.
+A atribuição acompanha a origem e os créditos já registrados para os recursos XP.
+
+Uso: uma reprodução a partir do clique no perfil, com volume de 35%, controle
+para silenciar e preferência persistida. Sem hotlink, reprodução automática ao
+carregar a página ou loop.
