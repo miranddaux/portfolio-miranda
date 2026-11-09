@@ -1,37 +1,106 @@
-# Portfólio Miranda · v0.1
+# Portfólio Miranda
 
-Implementação inicial em React + Vite + CSS + GSAP, inspirada nas telas **Home · Modo Rápido · Desktop 1440** e **Home · Modo Noite · Desktop 1440** do Figma, e nas decisões de 03/11 registradas no Notion.
+Portfólio de Thiago Miranda, Product Designer pleno, em React + Vite + CSS + GSAP.
+Esta rodada aproxima a experiência da linguagem Windows XP e usa Tahoma em todo o site.
 
-## Rodar localmente
+## Rodar
 
 ```bash
-npm install
+npm ci
 npm run dev
+npm run build
 ```
 
-Acesse o endereço local exibido pelo Vite. Para gerar versão de produção: `npm run build`.
+Se o cache padrão do npm não for gravável, configure `npm_config_cache` para um
+subdiretório gravável do ambiente antes de instalar.
 
-## O que funciona
+## Modos
 
-- Três modos de interface: Rápido, Noite e XP (o último é uma interpretação inicial, não uma cópia pixel-perfect do Windows XP).
-- Navegação por seções, resumo de 60 segundos, 3 cases principais e filtro de todos os trabalhos.
-- Leitura dos cases em modal, com Escape para fechar e aviso de conteúdo editorial provisório.
-- GSAP na entrada do hero, respeitando `prefers-reduced-motion`.
-- Layout desktop-first e quebras responsivas para tablet/celular.
+- **XP:** experiência inicial com janelas de perfil/projetos, menu Iniciar, atalhos,
+  filtros por pasta, minimizar, restaurar, maximizar e fechar. Os três cases ficam
+  visíveis ao entrar na Home. A abertura agora tem uma tela de boas-vindas XP,
+  sem senha, formulário de autenticação ou animação de boot.
+- **Rápido:** Home editorial clara com resumo de 60 segundos.
+- **Noite:** versão escura do modo editorial.
 
-## Faltando antes de publicar
+O seletor salva a preferência localmente. Tahoma usa Verdana/Arial como fallback;
+nenhum arquivo proprietário de fonte é distribuído.
 
-- Trocar arte abstrata dos cases pelos screenshots reais exportados do Figma (e confirmar permissões dos materiais de clientes).
-- Confirmar e-mail público, URL do LinkedIn e anexar CV revisado. Não foram inventados links de contato.
-- Substituir resumos iniciais por evidências detalhadas e resultados comprovados de cada case.
-- Conferir texto final da Oficina do Tenista e do ANIMAE com as fichas do Notion.
-- Testar acessibilidade, desempenho, metadados sociais e deploy.
+## Tela de entrada — rodada 09/11
 
-## Fontes de conteúdo e decisões
+A primeira visita à raiz abre a tela de boas-vindas inspirada no XP. Selecione
+**Thiago Miranda · Product Designer** para entrar.
+O espaço do avatar permanece vazio. Hover e foco usam azul escuro e amarelo.
+Após o clique, uma tela “Bem-vindo” em Tahoma itálico aparece por 2,4 segundos
+antes da Home; “Ir para o portfólio” permite pular.
+A sessão memoriza a entrada para não interromper a volta dos cases.
+O botão “Tela inicial” e a URL `/?entrada=1` permitem rever a abertura.
+Links diretos para cases e seções não exigem passar pela abertura.
 
-- Notion: `Curadoria final de referências e escrita (03/11)`, `Estrutura UX do portfólio (v1)`, `Portfólio v1: discovery e decisões`.
-- Figma: https://www.figma.com/design/xAoPbyHrtEQ4VjGZ7ZvYO6/Portf%C3%B3lio-v1-%E2%80%94-Miranda?node-id=113-2
+As novas escalas de azul, neutros e destaque ficam em `src/styles/tokens.css`;
+a interface de entrada não usa preto ou branco puros. O logo personalizado enviado
+pelo usuário e o ícone de reinício são arquivos locais. A instrução de login usa
+20 px em peso medium (exceção explícita à escala de 8), em off-white (#F5F7FB), conforme a escolha visual mais recente.
+As fontes de origem estão em [docs/XP_WELCOME.md](docs/XP_WELCOME.md).
 
-## Nota de implementação
+## Som de login
 
-O arquivo de Figma possui duas telas de Home visíveis e uma instância de código. O modo XP aqui é um tema inicial sobre o mesmo layout para manter legibilidade e foco do recrutador. Os elementos gráficos dos cases são placeholders desenhados por CSS, não assets finais.
+O som clássico de login do XP é um MP3 local de aproximadamente 4,1 segundos,
+iniciado apenas pelo clique/ativação do perfil. Nunca toca ao abrir o site.
+O volume inicial é 35%; o botão de som na entrada, transição e cabeçalho permite
+silenciar e salva a preferência. Falhas ou bloqueios de reprodução não impedem
+a entrada. A opção “Tocar som” permite tentar novamente durante a transição.
+A Home não espera o áudio terminar e não o repete em loop.
+
+## Design system
+
+Layout, grids, medidas fixas, espaçamentos e tipografia seguem a escala de 8 pontos
+nos três modos e nos cases. Textos começam em 16 px. A única exceção tipográfica
+é a instrução da abertura, em 20 px/medium, conforme solicitado.
+Execute `npm run check:design` para verificar a escala.
+Detalhes: [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md).
+
+## Paleta XP
+
+As cores-base solicitadas são `#002697` (azul profundo) e `#5179E1` (azul central),
+centralizadas nos tokens `--color-xp-deep` e `--color-xp-mid`. Janelas, botões,
+links, filtros e foco usam essas cores ou tonalidades derivadas. Os modos claro
+e escuro preservam suas superfícies neutras.
+
+A abertura tem faixas planas nas cores exatas, logo com 280 px no desktop/224 px
+no celular, nome de perfil em 24 px e avatar
+vazio de 64 px (56 px no celular). Uma textura CRT estática e discreta cobre a
+abertura e a experiência XP, sem animação ou bloqueio de cliques.
+
+## Arquitetura
+
+- `src/App.jsx`: seleção de modo, persistência e resolução de rotas.
+- `src/components/`: cabeçalho, janela, ícone retrô, card e seções preservadas da Home.
+- `src/pages/`: entrada, transição “Bem-vindo”, Home editorial, desktop XP e cases.
+- `src/hooks/useXPLogin.js`: fases da entrada, temporizador, áudio e preferência de som.
+- `src/data/cases.js`: conteúdo dos projetos, separado das interfaces.
+- `src/styles/`: base, tokens, layout e camada XP.
+- `public/assets/retro/`: dez SVGs locais criados para esta implementação.
+
+Rotas: `/cases/animae`, `/cases/navaja`, `/cases/oficina-do-tenista` e
+`/cases/ultragrip`. A hospedagem deve servir `index.html` para rotas da aplicação
+que não correspondam a arquivos estáticos. Vite já faz isso no desenvolvimento.
+
+## Validação e pendências
+
+Build e testes de interação no DOM passaram. A prévia visual está indisponível
+nesta sessão, portanto desktop 1440 px e mobile ainda precisam de avaliação no
+navegador. Detalhes em [docs/AUDIT.md](docs/AUDIT.md).
+
+Ainda faltam screenshots reais/autorizados dos cases, curadoria editorial detalhada,
+e-mail público, LinkedIn e CV revisado. As interfaces indicam essas pendências;
+nenhum contato ou resultado foi inventado.
+
+A direção visual usa Mitch Ivin como referência. A rodada inicial usou assets originais; na rodada de 09/11, o logo personalizado fornecido pelo usuário e o ícone de
+reinício foram incorporados com origem e atribuição registradas. Origem dos
+assets e alternativas avaliadas: [docs/ASSETS.md](docs/ASSETS.md).
+
+## Fontes oficiais
+
+- [Figma — Portfólio v1](https://www.figma.com/design/xAoPbyHrtEQ4VjGZ7ZvYO6)
+- [Notion — Curadoria final de 03/11](https://app.notion.com/p/40d34785429b81f48205ed2d6dc28fdb)

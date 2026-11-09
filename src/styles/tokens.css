@@ -1,0 +1,204 @@
+/* Foundations: system Tahoma UI; blue, neutral and focus scales for the XP UI. */
+:root {
+  /* Fixed layout and typography use the 8px scale. */
+  --space-unit: 8px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 72px;
+  --space-10: 80px;
+  --space-11: 88px;
+  --space-12: 96px;
+  --space-13: 104px;
+  --space-14: 112px;
+  --space-15: 120px;
+  --space-16: 128px;
+  --text-16: 16px;
+  --text-24: 24px;
+  --text-32: 32px;
+  --text-40: 40px;
+  --text-48: 48px;
+  --text-56: 56px;
+  --text-64: 64px;
+  --text-72: 72px;
+  --text-80: 80px;
+  /* Explicit user exception for the welcome instruction. */
+  --text-welcome: 20px;
+  --color-xp-deep: #002697;
+  --color-xp-mid: #5179e1;
+  --color-entry-ink: #070e1a;
+  --color-blue-50: #eef2fa;
+  --color-blue-100: #dbe3f7;
+  --color-blue-200: #c1cff3;
+  --color-blue-300: #a0b5ed;
+  --color-blue-400: #7897e7;
+  --color-blue-500: var(--color-xp-mid);
+  --color-blue-600: #4168d2;
+  --color-blue-700: #2950bc;
+  --color-blue-800: #1037a6;
+  --color-blue-850: #062d9d;
+  --color-blue-900: var(--color-xp-deep);
+  --color-blue-950: #022384;
+  --color-neutral-50: #f5f7fb;
+  --color-neutral-100: #e9edf4;
+  --color-neutral-200: #d7dde8;
+  --color-neutral-300: #bac3d2;
+  --color-neutral-400: #929eb1;
+  --color-neutral-500: #6f7c92;
+  --color-neutral-600: #536078;
+  --color-neutral-700: #39445a;
+  --color-neutral-800: #283247;
+  --color-neutral-900: #1b2436;
+  --color-neutral-950: #0d1422;
+  --color-highlight-amber: #ffdf7d;
+  --font-ui: Tahoma, Verdana, Arial, sans-serif;
+  --bg: #f5f0ea;
+  --paper: var(--color-neutral-50);
+  --ink: #1b1818;
+  --muted: #5e5853;
+  --line: #e4ddd3;
+  --sunken: #ede6dd;
+  --accent: var(--color-blue-900);
+  --link: var(--color-blue-900);
+  --casebg: #f5f0ea;
+  --focus: var(--color-blue-900);
+  font-family: var(--font-ui);
+}
+html[data-mode="noite"] {
+  --bg: #191817;
+  --paper: #262221;
+  --ink: #f5f0ea;
+  --muted: #c0b7ae;
+  --line: #453d38;
+  --sunken: #22201e;
+  --accent: var(--color-blue-200);
+  --link: var(--color-blue-200);
+  --casebg: #191817;
+  --focus: var(--color-blue-200);
+}
+html[data-mode="xp"] {
+  --bg: var(--color-xp-mid);
+  --paper: var(--color-neutral-50);
+  --ink: #172434;
+  --muted: #4b5563;
+  --line: #a9b4c7;
+  --sunken: #ece9d8;
+  --accent: var(--color-blue-900);
+  --casebg: var(--color-neutral-50);
+  --shadow: 2px 4px 16px #10235455;
+  --xp-blue: var(--color-blue-900);
+  --xp-surface: #ece9d8;
+  --focus: var(--color-blue-900);
+}
+html,
+body,
+button,
+a,
+input,
+textarea,
+h1,
+h2,
+h3,
+h4,
+.brand,
+.eyebrow,
+.tiny-caption,
+.micro-note,
+.quick-row > span,
+.section-counter,
+.art-top,
+.art-bottom,
+.compact-id,
+.profile-top,
+.role-label,
+.case-facts span,
+.modal-banner > span,
+.playground-tile > span:nth-child(2),
+.window-shadow-decoration span,
+.case-title-row > span {
+  font-family: var(--font-ui);
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+button:disabled {
+  opacity: 0.65;
+}
+.retro-icon {
+  display: inline-block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.skip-link {
+  position: fixed;
+  top: calc(var(--space-unit) * -13);
+  left: var(--space-3);
+  padding: var(--space-2);
+  background: var(--color-neutral-50);
+  color: #14213d;
+  z-index: 100;
+}
+.skip-link:focus {
+  top: var(--space-1);
+}
+.cv-unavailable {
+  font-size: var(--text-16);
+  color: var(--muted);
+  white-space: nowrap;
+  line-height: var(--space-3);
+}
+.brand-edition {
+  display: none;
+}
+html[data-mode="rapido"],
+html[data-mode="xp"] {
+  color-scheme: light;
+}
+html[data-mode="noite"] {
+  color-scheme: dark;
+}
+body {
+  font-size: var(--text-16);
+  line-height: var(--space-3);
+}
+/* Shared static CRT texture: optical 1–3px details, never animated. */
+html[data-mode="xp"] body::after,
+html[data-screen="welcome"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgb(7 14 26 / 2.5%) 2px 3px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgb(245 247 251 / 1%) 0 1px,
+      transparent 1px 3px
+    );
+}
+@media (forced-colors: active) {
+  html[data-mode="xp"] body::after,
+  html[data-screen="welcome"] body::after {
+    display: none;
+  }
+}

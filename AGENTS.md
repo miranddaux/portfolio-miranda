@@ -11,6 +11,13 @@ Build a polished, recruiter-first Product Designer portfolio for Thiago Miranda,
 4. Notion UX structure: https://app.notion.com/p/3fe34785429b810b984bea054c22588f
 5. This repository's existing code.
 
+## Latest explicit user direction — 2026-11-09
+- Refine one screen at a time, starting with the XP welcome screen before the Home.
+- Recreate the supplied XP welcome layout. Use the latest user-supplied Thiago Miranda XP logo, at a smaller size, and the restart artwork requested from mitchivin.com. Attribute sources accurately.
+- Welcome screen copy: Thiago Miranda, Product Designer. Leave the avatar empty. Hover/focus: darker blue background, yellow avatar border and name.
+- Use system Tahoma UI. Apply an 8px fixed layout and typography scale across all modes and case pages, minimum text 16px. The welcome instruction is the explicit exception: 20px, weight 500, line-height 32px. Keep borders/focus strokes thin. Use the exact user palette: #002697 for top/bottom bands and #5179E1 for the center. Standardize UI blues on those anchors with derived tints. Apply a subtle static CRT texture to welcome/XP, without flicker. Profile name is 24px and avatar 64px desktop/56px mobile. Latest explicit color request: welcome instruction and Product Designer subtitle use off-white #F5F7FB. Keep the yellow hover. Logo width is 280px desktop/224px mobile. See docs/DESIGN_SYSTEM.md.
+- Welcome is presentational, never authentication. After the profile click, show “Bem-vindo” in italic Tahoma for 2.4 seconds, with a skip control. Play the Windows XP logon cue directly from the click; provide persistent mute and do not block navigation on audio errors. Preserve direct access to cases and existing modes.
+
 ## Key product decisions
 - Featured three: ANIMAE, Navaja, Oficina do Tenista, in that order. UltraGrip belongs to `Mais trabalhos`, NOT to featured trio.
 - Navigation: Cases, Playground, Sobre, Contato; CV one click from home when valid asset exists.
