@@ -38,8 +38,16 @@ Links diretos para cases e seções não exigem passar pela abertura.
 As novas escalas de azul, neutros e destaque ficam em `src/styles/tokens.css`;
 a interface de entrada não usa preto ou branco puros. O logo personalizado enviado
 pelo usuário e o ícone de reinício são arquivos locais. A instrução de login usa
-15 px sem negrito, com contraste mínimo calculado acima de 4,5:1.
+20 px em peso medium (exceção explícita à escala de 8), com contraste calculado de 4,74:1.
 As fontes de origem estão em [docs/XP_WELCOME.md](docs/XP_WELCOME.md).
+
+## Design system
+
+Layout, grids, medidas fixas, espaçamentos e tipografia seguem a escala de 8 pontos
+nos três modos e nos cases. Textos começam em 16 px. A única exceção tipográfica
+é a instrução da abertura, em 20 px/medium, conforme solicitado.
+Execute `npm run check:design` para verificar a escala.
+Detalhes: [docs/DESIGN_SYSTEM.md](docs/DESIGN_SYSTEM.md).
 
 ## Arquitetura
 

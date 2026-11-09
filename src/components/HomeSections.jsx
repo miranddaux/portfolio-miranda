@@ -44,12 +44,12 @@ export default function HomeSections() {
               UI ao design system e ao código, com apoio de IA.
             </p>
             <a className="btn btn-outline" href="#contato">
-              Vamos conversar <ArrowUpRight size={17} />
+              Vamos conversar <ArrowUpRight size={16} />
             </a>
           </div>
           <div className="profile-card">
             <div className="profile-top">
-              <Folder size={21} />
+              <Folder size={24} />
               <span>perfil-do-jogador.txt</span>
               <span>✳</span>
             </div>

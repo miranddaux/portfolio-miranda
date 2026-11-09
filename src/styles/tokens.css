@@ -1,5 +1,35 @@
 /* Foundations: system Tahoma UI; blue, neutral and focus scales for the XP UI. */
 :root {
+  /* Fixed layout and typography use the 8px scale. */
+  --space-unit: 8px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 72px;
+  --space-10: 80px;
+  --space-11: 88px;
+  --space-12: 96px;
+  --space-13: 104px;
+  --space-14: 112px;
+  --space-15: 120px;
+  --space-16: 128px;
+  --text-16: 16px;
+  --text-24: 24px;
+  --text-32: 32px;
+  --text-40: 40px;
+  --text-48: 48px;
+  --text-56: 56px;
+  --text-64: 64px;
+  --text-72: 72px;
+  --text-80: 80px;
+  /* Explicit user exception for the welcome instruction. */
+  --text-welcome: 20px;
+  --color-entry-muted: #4c6bbb;
   --color-blue-50: #e8f0fc;
   --color-blue-100: #bad7f8;
   --color-blue-200: #a8c8f4;
@@ -112,20 +142,21 @@ button:disabled {
 }
 .skip-link {
   position: fixed;
-  top: -100px;
-  left: 20px;
-  padding: 12px;
+  top: calc(var(--space-unit) * -13);
+  left: var(--space-3);
+  padding: var(--space-2);
   background: #fff;
   color: #14213d;
   z-index: 100;
 }
 .skip-link:focus {
-  top: 8px;
+  top: var(--space-1);
 }
 .cv-unavailable {
-  font-size: 12px;
+  font-size: var(--text-16);
   color: var(--muted);
   white-space: nowrap;
+  line-height: var(--space-3);
 }
 .brand-edition {
   display: none;
@@ -136,4 +167,8 @@ html[data-mode="xp"] {
 }
 html[data-mode="noite"] {
   color-scheme: dark;
+}
+body {
+  font-size: var(--text-16);
+  line-height: var(--space-3);
 }

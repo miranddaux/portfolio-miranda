@@ -51,15 +51,14 @@ A foto do Mitch não foi usada. O espaço de foto de Miranda está vazio.
   clique para entrar, persistência na sessão, replay e acesso direto a quatro cases.
 - Regressão DOM dos três modos, filtros e janelas passou.
 - Os dois WebPs são válidos e não vazios; nenhuma URL remota de imagem no componente.
-- Refinamento: logo com 176 px no desktop/160 px no celular; instrução em 15 px,
-  peso 400, com o texto “Para começar, clique em Thiago Miranda para fazer login.”.
+- Refinamento: logo com 256 px no desktop/208 px no celular; instrução em 20 px,
+  peso 500 (exceção explícita à escala de 8 pontos), com o texto “Para começar, clique em Thiago Miranda para fazer login.”.
 - Rodapé contém somente “Depois de entrar, explore meus projetos e conheça meu trabalho.”.
-- Azuis mais saturados: plano central `#2359D5`, faixa `#073AC0` e azul luminoso
-  `#0646DA`; hover amarelo mantido. Cargo normal usa neutro claro para manter contraste.
-- Contrastes calculados: texto claro/plano central ≈5,66:1, cargo/plano central
-  ≈5,18:1, texto claro/faixas ≥6,76:1, amarelo/fundo mais claro do hover ≥4,65:1.
-  Essas combinações atendem AA para texto pequeno; não equivalem a uma auditoria
-  completa de acessibilidade no navegador.
+- Azuis superior e inferior preservados; plano central fosco `#4C6BBB`.
+- Contraste do texto claro sobre o centro ≈4,74:1, atendendo AA para texto pequeno.
+- Espaçamentos, ícones, entrelinhas e medidas fixas seguem os tokens de 8 pontos.
+- `npm run check:design` e regressão DOM dos modos, janelas e abertura passaram.
+- Guia completo e exceções ópticas: `docs/DESIGN_SYSTEM.md`.
 
 Limite: a ferramenta de navegador compartilhado não foi oferecida e o preview relay
 continua indisponível. Não se afirma validação visual de hover ou geometria desktop/

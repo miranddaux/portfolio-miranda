@@ -113,7 +113,7 @@ export default function XPDesktop() {
       <nav className="desktop-shortcuts" aria-label="Atalhos do portfólio">
         {APPS.map((a) => (
           <button key={a.id} id={`shortcut-${a.id}`} onClick={() => open(a.id)}>
-            <RetroIcon name={a.icon} size={42} />
+            <RetroIcon name={a.icon} size={40} />
             <span>{a.name}</span>
           </button>
         ))}
@@ -122,7 +122,7 @@ export default function XPDesktop() {
           href="/#contato"
           onClick={() => open("contato")}
         >
-          <RetroIcon name="document" size={42} />
+          <RetroIcon name="document" size={40} />
           <span>
             Currículo<small>em breve</small>
           </span>
@@ -170,7 +170,7 @@ export default function XPDesktop() {
                   acompanha anime, com apoio de IA.
                 </p>
                 <div className="xp-fact">
-                  <RetroIcon name="medal" size={30} />
+                  <RetroIcon name="medal" size={32} />
                   <p>
                     Designer e mentor do squad vencedor do hackathon SouJunior,
                     entre 30 equipes.
@@ -212,7 +212,7 @@ export default function XPDesktop() {
               <div className="xp-address">
                 <span>Endereço</span>
                 <div>
-                  <RetroIcon name="folder" size={18} /> C:\Miranda\Portfólio\
+                  <RetroIcon name="folder" size={16} /> C:\Miranda\Portfólio\
                   {filter}
                 </div>
                 <button
@@ -238,7 +238,7 @@ export default function XPDesktop() {
                           onClick={() => setFilter(f)}
                           aria-pressed={filter === f}
                         >
-                          <RetroIcon name="folder" size={18} />
+                          <RetroIcon name="folder" size={16} />
                           {f}
                         </button>
                       ))}
@@ -382,7 +382,7 @@ export default function XPDesktop() {
                 }
                 aria-pressed={windows[a.id] === "open"}
               >
-                <RetroIcon name={a.icon} size={19} />
+                <RetroIcon name={a.icon} size={16} />
                 <span>{a.name}</span>
               </button>
             ),

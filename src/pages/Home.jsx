@@ -104,7 +104,7 @@ export default function Home() {
               onClick={() => setExpanded(!expanded)}
             >
               {expanded ? "Ocultar trabalhos" : "Mais trabalhos"}{" "}
-              <ArrowRight size={17} />
+              <ArrowRight size={16} />
             </button>
           </div>
           {expanded && (
@@ -139,7 +139,7 @@ export default function Home() {
                       <span>{c.number}</span>
                       <strong>{c.title}</strong>
                       <span>{c.type}</span>
-                      <ArrowRight size={18} />
+                      <ArrowRight size={16} />
                     </a>
                   ))}
               </div>

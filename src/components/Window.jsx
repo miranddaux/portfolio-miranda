@@ -18,7 +18,7 @@ export default function Window({
     >
       <div className="xp-titlebar">
         <div className="xp-window-title">
-          <RetroIcon name={icon} size={18} />
+          <RetroIcon name={icon} size={16} />
           <h2 id={`${id}-title`} tabIndex={-1}>
             {title}
           </h2>
