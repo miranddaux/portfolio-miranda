@@ -29,19 +29,21 @@
   --text-80: 80px;
   /* Explicit user exception for the welcome instruction. */
   --text-welcome: 20px;
-  --color-entry-muted: #4c6bbb;
-  --color-blue-50: #e8f0fc;
-  --color-blue-100: #bad7f8;
-  --color-blue-200: #a8c8f4;
-  --color-blue-300: #91b4ee;
-  --color-blue-400: #7799e8;
-  --color-blue-500: #2359d5;
-  --color-blue-600: #1e50c7;
-  --color-blue-700: #174ad0;
-  --color-blue-800: #0c33aa;
-  --color-blue-850: #0646da;
-  --color-blue-900: #073ac0;
-  --color-blue-950: #06236d;
+  --color-xp-deep: #002697;
+  --color-xp-mid: #5179e1;
+  --color-entry-ink: #070e1a;
+  --color-blue-50: #eef2fa;
+  --color-blue-100: #dbe3f7;
+  --color-blue-200: #c1cff3;
+  --color-blue-300: #a0b5ed;
+  --color-blue-400: #7897e7;
+  --color-blue-500: var(--color-xp-mid);
+  --color-blue-600: #4168d2;
+  --color-blue-700: #2950bc;
+  --color-blue-800: #1037a6;
+  --color-blue-850: #062d9d;
+  --color-blue-900: var(--color-xp-deep);
+  --color-blue-950: #022384;
   --color-neutral-50: #f5f7fb;
   --color-neutral-100: #e9edf4;
   --color-neutral-200: #d7dde8;
@@ -61,9 +63,10 @@
   --muted: #5e5853;
   --line: #e4ddd3;
   --sunken: #ede6dd;
-  --accent: #a64436;
+  --accent: var(--color-blue-900);
+  --link: var(--color-blue-900);
   --casebg: #f5f0ea;
-  --focus: #174bb9;
+  --focus: var(--color-blue-900);
   font-family: var(--font-ui);
 }
 html[data-mode="noite"] {
@@ -73,23 +76,24 @@ html[data-mode="noite"] {
   --muted: #c0b7ae;
   --line: #453d38;
   --sunken: #22201e;
-  --accent: #df8d82;
+  --accent: var(--color-blue-200);
+  --link: var(--color-blue-200);
   --casebg: #191817;
-  --focus: #a9c9ff;
+  --focus: var(--color-blue-200);
 }
 html[data-mode="xp"] {
-  --bg: #236cc4;
+  --bg: var(--color-xp-mid);
   --paper: var(--color-neutral-50);
   --ink: #172434;
   --muted: #4b5563;
   --line: #a9b4c7;
   --sunken: #ece9d8;
-  --accent: #245edb;
+  --accent: var(--color-blue-900);
   --casebg: var(--color-neutral-50);
   --shadow: 2px 4px 16px #10235455;
-  --xp-blue: #0058e6;
+  --xp-blue: var(--color-blue-900);
   --xp-surface: #ece9d8;
-  --focus: #143c96;
+  --focus: var(--color-blue-900);
 }
 html,
 body,
@@ -145,7 +149,7 @@ button:disabled {
   top: calc(var(--space-unit) * -13);
   left: var(--space-3);
   padding: var(--space-2);
-  background: #fff;
+  background: var(--color-neutral-50);
   color: #14213d;
   z-index: 100;
 }
@@ -171,4 +175,30 @@ html[data-mode="noite"] {
 body {
   font-size: var(--text-16);
   line-height: var(--space-3);
+}
+/* Shared static CRT texture: optical 1–3px details, never animated. */
+html[data-mode="xp"] body::after,
+html[data-screen="welcome"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 2px,
+      rgb(7 14 26 / 2.5%) 2px 3px
+    ),
+    repeating-linear-gradient(
+      to right,
+      rgb(245 247 251 / 1%) 0 1px,
+      transparent 1px 3px
+    );
+}
+@media (forced-colors: active) {
+  html[data-mode="xp"] body::after,
+  html[data-screen="welcome"] body::after {
+    display: none;
+  }
 }

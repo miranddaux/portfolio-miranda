@@ -3,15 +3,14 @@
   --entry-band-height: var(--space-12);
   --entry-gap: var(--space-6);
   --entry-divider-width: 2px;
-  --entry-background: var(--color-entry-muted);
-  --entry-band: var(--color-blue-900);
+  --entry-background: var(--color-xp-mid);
+  --entry-band: var(--color-xp-deep);
   --entry-text: var(--color-neutral-50);
   min-height: 100svh;
   display: grid;
-  grid-template-rows: var(--entry-band-height) minmax(
-      calc(var(--space-unit) * 50),
-      1fr
-    ) var(--entry-band-height);
+  grid-template-rows:
+    var(--entry-band-height) minmax(calc(var(--space-unit) * 50), 1fr)
+    var(--entry-band-height);
   background: var(--entry-band);
   color: var(--entry-text);
   font-family: var(--font-ui);
@@ -20,25 +19,9 @@
 }
 
 /* Static display texture: no flicker, animation or pointer interception. */
-.xp-entry::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0 2px,
-    rgb(13 20 34 / 3%) 2px 3px
-  );
-}
 
 .xp-entry-top {
-  background: linear-gradient(
-    110deg,
-    var(--color-blue-850),
-    var(--entry-band) 65%
-  );
+  background: var(--entry-band);
 }
 
 .xp-entry-center {
@@ -120,7 +103,8 @@
   font-weight: 500;
   line-height: var(--space-4);
   white-space: nowrap;
-  text-shadow: 0 1px 1px var(--color-blue-600);
+  text-shadow: none;
+  color: var(--color-entry-ink);
 }
 
 .xp-entry-account {
@@ -139,10 +123,10 @@
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-1) var(--space-2);
-  width: calc(var(--space-unit) * 44);
-  min-height: var(--space-12);
+  width: calc(var(--space-unit) * 40);
+  min-height: var(--space-10);
   background: transparent;
-  border: 1px solid transparent;
+  border: 0;
   border-radius: 6px;
   color: var(--entry-text);
   text-align: left;
@@ -160,9 +144,9 @@
   border-radius: inherit;
   background: linear-gradient(
     90deg,
-    var(--color-blue-800),
-    var(--color-blue-700) 80%,
-    var(--entry-background)
+    var(--color-xp-deep) 0%,
+    var(--color-xp-deep) 80%,
+    var(--color-xp-mid) 100%
   );
   opacity: 0;
   transition: opacity 90ms linear;
@@ -181,8 +165,8 @@
 }
 
 .xp-entry-avatar {
-  width: var(--space-10);
-  height: var(--space-10);
+  width: var(--space-8);
+  height: var(--space-8);
   flex-shrink: 0;
   background: linear-gradient(
     145deg,
@@ -204,9 +188,9 @@
 
 .xp-entry-name {
   display: block;
-  font-size: var(--text-32);
+  font-size: var(--text-24);
   font-weight: 400;
-  line-height: var(--space-5);
+  line-height: var(--space-4);
   letter-spacing: 0.1px;
   text-shadow: 0 1px 1px rgb(13 20 34 / 16%);
 }
@@ -215,7 +199,7 @@
   font-size: var(--text-16);
   font-weight: 700;
   line-height: var(--space-3);
-  color: var(--entry-text);
+  color: var(--color-entry-ink);
 }
 
 .xp-entry-profile:focus-visible {
@@ -246,11 +230,7 @@
   justify-content: space-between;
   gap: var(--space-4);
   padding: var(--space-2) var(--space-6);
-  background: linear-gradient(
-    110deg,
-    var(--color-blue-850),
-    var(--entry-band) 65%
-  );
+  background: var(--entry-band);
 }
 
 .xp-entry-restart {
@@ -322,7 +302,7 @@
     margin-right: 0;
   }
   .xp-entry-profile {
-    width: min(calc(var(--space-unit) * 44), calc(50vw - var(--space-5)));
+    width: min(calc(var(--space-unit) * 40), calc(50vw - var(--space-5)));
   }
   .xp-entry-bottom {
     padding-inline: var(--space-4);
@@ -337,10 +317,9 @@
 @media (width < 768px) {
   .xp-entry {
     --entry-band-height: var(--space-8);
-    grid-template-rows: var(--entry-band-height) minmax(
-        calc(var(--space-unit) * 54),
-        1fr
-      ) auto;
+    grid-template-rows:
+      var(--entry-band-height) minmax(calc(var(--space-unit) * 54), 1fr)
+      auto;
   }
   .xp-entry-center {
     display: flex;
@@ -391,8 +370,9 @@
     opacity: 0.6;
   }
   .xp-entry-profile {
-    width: min(calc(var(--space-unit) * 44), calc(100vw - var(--space-6)));
+    width: min(calc(var(--space-unit) * 40), calc(100vw - var(--space-6)));
     padding: var(--space-1);
+    min-height: var(--space-9);
   }
   .xp-entry-name {
     font-size: var(--text-24);
@@ -414,18 +394,17 @@
     display: none;
   }
   .xp-entry-avatar {
-    width: var(--space-8);
-    height: var(--space-8);
+    width: var(--space-7);
+    height: var(--space-7);
   }
 }
 
 @media (height < 560px) and (width >= 768px) {
   .xp-entry {
     --entry-band-height: var(--space-7);
-    grid-template-rows: var(--space-7) minmax(
-        calc(var(--space-unit) * 35),
-        1fr
-      ) var(--space-9);
+    grid-template-rows:
+      var(--space-7) minmax(calc(var(--space-unit) * 35), 1fr)
+      var(--space-9);
   }
   .xp-entry-logo {
     width: calc(var(--space-unit) * 24);

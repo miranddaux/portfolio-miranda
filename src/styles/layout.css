@@ -147,6 +147,7 @@
 .case-link {
   font-size: var(--text-16);
   line-height: var(--space-3);
+  color: var(--link);
 }
 .case-content .case-link {
   margin-top: var(--space-1);
@@ -220,6 +221,7 @@
 .case-index a {
   text-decoration: underline;
   text-underline-offset: 5px;
+  color: var(--link);
 }
 .case-page .case-disclaimer {
   font-size: var(--text-16);

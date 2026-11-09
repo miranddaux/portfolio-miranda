@@ -34,9 +34,9 @@ export default function App() {
       ? "welcome"
       : "portfolio";
     document.querySelector('meta[name="theme-color"]').content = showWelcome
-      ? "#073ac0"
+      ? "#002697"
       : mode === "xp"
-        ? "#245edb"
+        ? "#002697"
         : mode === "noite"
           ? "#191817"
           : "#f5f0ea";

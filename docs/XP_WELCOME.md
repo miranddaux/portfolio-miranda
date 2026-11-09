@@ -54,8 +54,13 @@ A foto do Mitch não foi usada. O espaço de foto de Miranda está vazio.
 - Refinamento: logo com 256 px no desktop/208 px no celular; instrução em 20 px,
   peso 500 (exceção explícita à escala de 8 pontos), com o texto “Para começar, clique em Thiago Miranda para fazer login.”.
 - Rodapé contém somente “Depois de entrar, explore meus projetos e conheça meu trabalho.”.
-- Azuis superior e inferior preservados; plano central fosco `#4C6BBB`.
-- Contraste do texto claro sobre o centro ≈4,74:1, atendendo AA para texto pequeno.
+- Paleta final exata: faixas planas `#002697` e centro `#5179E1`. Os azuis da
+  interface foram unificados nesses dois tokens e em suas tonalidades derivadas.
+- Textura leve e estática de monitor antigo compartilhada com a Home XP.
+- Perfil menor: nome 24 px, avatar vazio 64 px no desktop e 56 px no celular.
+- Instrução e cargo usam tom escuro sobre o centro para atender ao contraste de
+  texto pequeno: ≈4,76:1 (mínimo ≈4,57:1 com a textura). Nome claro de 24 px usa
+  o critério para texto grande. Hover amarelo sobre o azul profundo preservado.
 - Espaçamentos, ícones, entrelinhas e medidas fixas seguem os tokens de 8 pontos.
 - `npm run check:design` e regressão DOM dos modos, janelas e abertura passaram.
 - Guia completo e exceções ópticas: `docs/DESIGN_SYSTEM.md`.
