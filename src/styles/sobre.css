@@ -1,0 +1,43 @@
+/* Janela "Sobre mim": aberta e centralizada ao entrar no desktop. */
+.xp-desktop .desktop-workspace {
+  position: static;
+  display: block;
+  margin: 0;
+  padding: 0;
+  min-height: 0;
+}
+.xp-desktop .desktop-app {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: var(--space-5);
+  width: min(calc(var(--space-unit) * 112), calc(100% - var(--space-unit) * 38));
+  margin: 0;
+}
+.xp-desktop .projects-app {
+  top: var(--space-9);
+  margin-top: 0;
+}
+.xp-desktop .utility-app {
+  top: var(--space-14);
+}
+.xp-desktop .desktop-app:has(.is-maximized) {
+  left: 0;
+  transform: none;
+}
+@media (width < 1000px) {
+  .xp-desktop .desktop-workspace {
+    display: block;
+    margin-left: var(--space-15);
+    margin-right: var(--space-3);
+    padding: var(--space-3) 0 var(--space-10);
+  }
+  .xp-desktop .desktop-app {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: auto;
+    margin: 0 0 var(--space-3);
+  }
+}

@@ -1,7 +1,7 @@
 # Portfólio Miranda
 
 Portfólio de Thiago Miranda, Product Designer pleno, em React + Vite + CSS + GSAP.
-Esta rodada aproxima a experiência da linguagem Windows XP e usa Tahoma em todo o site.
+Esta rodada aproxima a experiência da linguagem Windows XP e usa Segoe UI em todo o site.
 
 ## Rodar
 
@@ -23,7 +23,7 @@ subdiretório gravável do ambiente antes de instalar.
 - **Rápido:** Home editorial clara com resumo de 60 segundos.
 - **Noite:** versão escura do modo editorial.
 
-O seletor salva a preferência localmente. Tahoma usa Verdana/Arial como fallback;
+O seletor salva a preferência localmente. Segoe UI usa system-ui/Roboto/Arial como fallback;
 nenhum arquivo proprietário de fonte é distribuído.
 
 ## Tela de entrada — rodada 09/11
@@ -31,7 +31,7 @@ nenhum arquivo proprietário de fonte é distribuído.
 A primeira visita à raiz abre a tela de boas-vindas inspirada no XP. Selecione
 **Thiago Miranda · Product Designer** para entrar.
 O espaço do avatar permanece vazio. Hover e foco usam azul escuro e amarelo.
-Após o clique, uma tela “Bem-vindo” em Tahoma itálico aparece por 2,4 segundos
+Após o clique, uma tela “Bem-vindo” em Segoe UI itálico aparece por 2,4 segundos
 antes da Home; “Ir para o portfólio” permite pular.
 A sessão memoriza a entrada para não interromper a volta dos cases.
 O botão “Tela inicial” e a URL `/?entrada=1` permitem rever a abertura.

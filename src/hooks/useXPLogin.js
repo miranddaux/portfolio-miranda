@@ -3,20 +3,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const LOGON_SOUND = "/assets/audio/windows-xp-logon.mp3";
 export const WELCOME_DURATION = 2400;
 
-function readSoundPreference() {
-  try {
-    return localStorage.getItem("miranda-sound") !== "off";
-  } catch {
-    return true;
-  }
-}
-
 export default function useXPLogin(shouldShowEntry) {
   const [phase, setPhase] = useState(() =>
     shouldShowEntry() ? "profile" : "portfolio",
   );
-  const [soundEnabled, setSoundEnabled] = useState(readSoundPreference);
-  const [audioBlocked, setAudioBlocked] = useState(false);
   const phaseRef = useRef(phase);
   const audioRef = useRef(null);
   const timerRef = useRef(null);
@@ -66,24 +56,14 @@ export default function useXPLogin(shouldShowEntry) {
   }, [phase, finish]);
 
   function playLogonSound() {
-    if (!soundEnabled) return;
-    setAudioBlocked(false);
     try {
       const audio = getAudio();
-      if (!audio) {
-        setAudioBlocked(true);
-        return;
-      }
+      if (!audio) return;
       audio.muted = false;
       audio.currentTime = 0;
       // Called directly by a click/keyboard activation, before any await.
-      const playing = audio.play();
-      playing?.catch(() => {
-        if (phaseRef.current === "welcome") setAudioBlocked(true);
-      });
-    } catch {
-      setAudioBlocked(true);
-    }
+      audio.play()?.catch(() => {});
+    } catch {}
   }
 
   function start() {
@@ -99,33 +79,19 @@ export default function useXPLogin(shouldShowEntry) {
     if (audioRef.current) audioRef.current.currentTime = 0;
     phaseRef.current = "profile";
     setPhase("profile");
-    setAudioBlocked(false);
     try {
       sessionStorage.removeItem("miranda-entered");
+      sessionStorage.removeItem("miranda-desktop-alerts");
     } catch {}
     requestAnimationFrame(() =>
       document.querySelector(".xp-entry-profile")?.focus(),
     );
   }
 
-  function toggleSound() {
-    const next = !soundEnabled;
-    setSoundEnabled(next);
-    if (audioRef.current) audioRef.current.muted = !next;
-    if (!next) setAudioBlocked(false);
-    try {
-      localStorage.setItem("miranda-sound", next ? "on" : "off");
-    } catch {}
-  }
-
   return {
     phase,
-    soundEnabled,
-    audioBlocked,
     start,
     finish,
     reset,
-    toggleSound,
-    playLogonSound,
   };
 }

@@ -11,7 +11,7 @@ README: https://github.com/mitchivin/mitchIvin-xp
 O HTML público usa JavaScript em módulos (`src/scripts/main.js`) e CSS dividido
 em arquivos importados (`src/styles/main.css`). A tela é composta de HTML real;
 `src/styles/gui/boot.css` define faixas, posicionamento, divisor e hover.
-O `fonts.css` declara Tahoma regular/bold com webfonts; não copiamos esses arquivos
+O `fonts.css` declara Tahoma com webfonts (referência; usamos Segoe UI); não copiamos esses arquivos
 de fonte. XP.css é uma base creditada no README, mas a abertura tem estilos próprios.
 
 A referência em desktop usa faixas de aproximadamente 100 px, plano central azul,
@@ -73,7 +73,7 @@ mobile nesta sessão. A publicação permite a avaliação visual pelo usuário.
 ## Transição “Bem-vindo” e som de login
 
 Ao selecionar o perfil, a aplicação mostra `XPGreeting` entre a entrada e a Home.
-A mensagem usa Tahoma itálico, 48 px no desktop/40 px no celular, as mesmas cores
+A mensagem usa Segoe UI itálico, 48 px no desktop/40 px no celular, as mesmas cores
 e a textura estática já aprovadas. Dura 2,4 s e pode ser pulada a qualquer momento.
 Movimento reduzido desativa o fade de entrada; nenhuma animação controla navegação.
 

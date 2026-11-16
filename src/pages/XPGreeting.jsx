@@ -1,13 +1,6 @@
 import { useEffect, useRef } from "react";
-import SoundToggle from "../components/SoundToggle";
 
-export default function XPGreeting({
-  onContinue,
-  soundEnabled,
-  onToggleSound,
-  audioBlocked,
-  onRetrySound,
-}) {
+export default function XPGreeting() {
   const titleRef = useRef(null);
   useEffect(() => {
     titleRef.current?.focus({ preventScroll: true });
@@ -21,19 +14,7 @@ export default function XPGreeting({
           Bem-vindo
         </h1>
       </section>
-      <footer className="xp-entry-bottom">
-        <div className="xp-entry-footer-actions">
-          <SoundToggle enabled={soundEnabled} onToggle={onToggleSound} />
-          {audioBlocked && soundEnabled && (
-            <button className="xp-entry-restart" onClick={onRetrySound}>
-              Tocar som
-            </button>
-          )}
-        </div>
-        <button className="xp-entry-restart" onClick={onContinue}>
-          Ir para o portfólio →
-        </button>
-      </footer>
+      <footer className="xp-entry-bottom" aria-hidden="true" />
     </main>
   );
 }

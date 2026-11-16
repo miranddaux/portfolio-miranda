@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
-import SoundToggle from "../components/SoundToggle";
 
 /** A welcome screen only; entering never asks for credentials. */
-export default function XPWelcome({ onEnter, soundEnabled, onToggleSound }) {
+export default function XPWelcome({ onEnter }) {
   const profileRef = useRef(null);
   const [resetVersion, setResetVersion] = useState(0);
 
@@ -41,7 +40,15 @@ export default function XPWelcome({ onEnter, soundEnabled, onToggleSound }) {
             onClick={onEnter}
             aria-label="Entrar no portfólio de Thiago Miranda, Product Designer"
           >
-            <span className="xp-entry-avatar" aria-hidden="true" />
+            <span className="xp-entry-avatar" aria-hidden="true">
+              <img
+                src="/assets/xp/foto-thiago-rosto.webp"
+                alt=""
+                width="96"
+                height="96"
+                draggable="false"
+              />
+            </span>
             <span className="xp-entry-identity">
               <span className="xp-entry-name">Thiago Miranda</span>
               <span className="xp-entry-role">Product Designer</span>
@@ -55,7 +62,6 @@ export default function XPWelcome({ onEnter, soundEnabled, onToggleSound }) {
             <img src="/assets/xp/restart.webp" width="32" height="32" alt="" />
             <span>Reiniciar Portfólio Miranda</span>
           </button>
-          <SoundToggle enabled={soundEnabled} onToggle={onToggleSound} />
         </div>
         <p className="xp-entry-note">
           <span>

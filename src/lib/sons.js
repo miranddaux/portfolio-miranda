@@ -1,0 +1,57 @@
+// Sons no estilo do MSN, sintetizados no navegador (sem arquivo de áudio de terceiros).
+let ctx;
+function contexto() {
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return null;
+  ctx = ctx || new AC();
+  if (ctx.state === "suspended") ctx.resume().catch(() => {});
+  return ctx;
+}
+
+function tocar(notas, { tipo = "sine", volume = 0.16, duracao = 0.35 } = {}) {
+  try {
+    const c = contexto();
+    if (!c) return;
+    const t0 = c.currentTime + 0.02;
+    notas.forEach(([freq, em, dur = duracao]) => {
+      const osc = c.createOscillator();
+      const ganho = c.createGain();
+      osc.type = tipo;
+      osc.frequency.value = freq;
+      ganho.gain.setValueAtTime(0.0001, t0 + em);
+      ganho.gain.exponentialRampToValueAtTime(volume, t0 + em + 0.015);
+      ganho.gain.exponentialRampToValueAtTime(0.0001, t0 + em + dur);
+      osc.connect(ganho).connect(c.destination);
+      osc.start(t0 + em);
+      osc.stop(t0 + em + dur + 0.05);
+    });
+  } catch {}
+}
+
+// Mensagem recebida: "plim-plom" curto e brilhante.
+export const somMensagem = () =>
+  tocar([
+    [1046.5, 0, 0.18],
+    [1568, 0.09, 0.3],
+    [2093, 0.09, 0.3],
+  ], { tipo: "triangle", volume: 0.12 });
+
+// Mensagem enviada: clique suave.
+export const somEnviar = () => tocar([[660, 0, 0.08]], { tipo: "sine", volume: 0.06 });
+
+// Aviso / contato ficou online: três notas subindo.
+export const somAviso = () =>
+  tocar([
+    [784, 0, 0.22],
+    [988, 0.12, 0.22],
+    [1318.5, 0.24, 0.4],
+  ], { tipo: "triangle", volume: 0.12 });
+
+// Chamar a atenção: zumbido curto.
+export const somChamar = () =>
+  tocar([
+    [196, 0, 0.12],
+    [220, 0.12, 0.12],
+    [196, 0.24, 0.12],
+    [220, 0.36, 0.12],
+  ], { tipo: "square", volume: 0.05 });

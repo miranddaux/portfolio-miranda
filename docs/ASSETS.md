@@ -32,9 +32,9 @@ As referências ToyFight e Brand Appart não tiveram assets importados nesta rod
 
 ## Fontes e bibliotecas
 
-Tahoma é solicitada do sistema com `Tahoma, Verdana, Arial, sans-serif`.
+Segoe UI é solicitada do sistema com `"Segoe UI", system-ui, sans-serif`.
 A aparência exata depende das fontes instaladas no dispositivo. Não há download ou
-redistribuição de Tahoma. lucide-react e GSAP já faziam parte da base.
+redistribuição de Segoe UI. lucide-react e GSAP já faziam parte da base.
 XP.css foi avaliado (MIT), mas não foi instalado nem copiado.
 
 
@@ -55,7 +55,7 @@ classifica como MIT nem presume transferência de direitos. O uso segue o pedido
 explícito de reproduzir a interface XP e trazer esses recursos. A foto, a marca
 pessoal, o currículo e os projetos do Mitch não foram incorporados.
 
-O avatar de Miranda permanece vazio. Nenhum arquivo de Tahoma foi baixado:
+O avatar de Miranda permanece vazio. Nenhum arquivo de Segoe UI foi baixado:
 a família continua sendo solicitada do sistema, com os fallbacks já documentados.
 
 

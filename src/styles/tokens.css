@@ -1,4 +1,4 @@
-/* Foundations: system Tahoma UI; blue, neutral and focus scales for the XP UI. */
+/* Foundations: Segoe UI; blue, neutral and focus scales for the XP UI. */
 :root {
   /* Fixed layout and typography use the 8px scale. */
   --space-unit: 8px;
@@ -18,6 +18,8 @@
   --space-14: 112px;
   --space-15: 120px;
   --space-16: 128px;
+  --text-12: 12px;
+  --text-14: 14px;
   --text-16: 16px;
   --text-24: 24px;
   --text-32: 32px;
@@ -56,7 +58,30 @@
   --color-neutral-900: #1b2436;
   --color-neutral-950: #0d1422;
   --color-highlight-amber: #ffdf7d;
-  --font-ui: Tahoma, Verdana, Arial, sans-serif;
+  /* Desktop XP: variáveis espelhadas do Figma (coleção Cores, xp/*). */
+  --xp-barra-fundo: #245ddb;
+  --xp-botao-padrao: #3980f4;
+  --xp-botao-pressionado-topo: #164dbc;
+  --xp-botao-pressionado-base: #1e53bb;
+  --xp-botao-borda: #234b9d;
+  --xp-bandeja-fundo: #0d9bef;
+  --xp-iniciar-verde-topo: #4cae4c;
+  --xp-iniciar-verde-base: #2f7d2f;
+  --xp-iniciar-verde-pressionado: #236b23;
+  --xp-menu-cabecalho-topo: #408ae3;
+  --xp-menu-cabecalho-base: #0d5cc9;
+  --xp-menu-fundo-programas: #ffffff;
+  --xp-menu-fundo-sistema: #d3e5fa;
+  --xp-menu-item-hover: #316ac5;
+  --xp-menu-divisor: #c5d7f0;
+  --xp-texto-escuro: #1a1a1a;
+  --xp-texto-claro: #ffffff;
+  --xp-texto-menu-sistema: #0b2f78;
+  --barra-altura: 30px;
+  --raio-pequeno: 4px;
+  --raio-medio: 8px;
+  --raio-grande: 16px;
+  --font-ui: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
   --bg: #f5f0ea;
   --paper: var(--color-neutral-50);
   --ink: #1b1818;

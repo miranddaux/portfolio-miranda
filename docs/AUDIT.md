@@ -20,10 +20,10 @@ um diretório gravável do workspace.
 
 ## Decisões aplicadas
 
-- Pedido mais recente: direção Windows XP próxima de Mitch Ivin e Tahoma no site.
+- Pedido mais recente: direção Windows XP próxima de Mitch Ivin e Segoe UI no site (atualizado).
 - XP passa a ser a experiência inicial; o seletor mantém Rápido e Noite e salva a escolha.
 - Conteúdo e sequência dos três destaques preservados. UltraGrip continua em Mais trabalhos.
-- Fontes externas removidas. Tahoma é uma fonte do sistema, com fallback Verdana/Arial;
+- Fontes externas removidas. Segoe UI é uma fonte do sistema, com fallback system-ui/Arial;
   nenhum arquivo de fonte proprietário é distribuído.
 - Janelas, atalhos, menu Iniciar, barra de tarefas, filtros e controles de janela implementados
   com React/CSS próprios. Não há boot ou login bloqueando a leitura.

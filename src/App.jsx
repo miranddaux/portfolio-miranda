@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import XPDesktop from "./pages/XPDesktop";
+import { useAtalhoTelaCheia } from "./hooks/useTelaCheia";
 import CasePage from "./pages/CasePage";
 import XPWelcome from "./pages/XPWelcome";
 import XPGreeting from "./pages/XPGreeting";
@@ -26,11 +27,13 @@ function initialWelcome() {
   }
 }
 export default function App() {
+  useAtalhoTelaCheia();
   const [mode, setMode] = useState(initialMode);
   const login = useXPLogin(initialWelcome);
   const showWelcome = login.phase !== "portfolio";
   const path = location.pathname.replace(/\/$/, "") || "/";
   const project = CASES.find((c) => path === `/cases/${c.id}`);
+  const xpHome = mode === "xp" && path === "/";
   useEffect(() => {
     document.documentElement.dataset.mode = mode;
     document.documentElement.dataset.screen = showWelcome
@@ -63,41 +66,25 @@ export default function App() {
   }
 
   if (login.phase === "welcome")
-    return (
-      <XPGreeting
-        onContinue={login.finish}
-        soundEnabled={login.soundEnabled}
-        onToggleSound={login.toggleSound}
-        audioBlocked={login.audioBlocked}
-        onRetrySound={login.playLogonSound}
-      />
-    );
+    return <XPGreeting />;
   if (login.phase === "profile")
     return (
-      <XPWelcome
-        onEnter={enterPortfolio}
-        soundEnabled={login.soundEnabled}
-        onToggleSound={login.toggleSound}
-      />
+      <XPWelcome onEnter={enterPortfolio} />
     );
   return (
     <>
       <a className="skip-link" href="#conteudo">
         Pular para o conteúdo
       </a>
-      <div className="site-shell">
-        <Header
-          mode={mode}
-          setMode={setMode}
-          onShowWelcome={showEntry}
-          soundEnabled={login.soundEnabled}
-          onToggleSound={login.toggleSound}
-        />
+      <div className={`site-shell ${xpHome ? "is-xp-desktop" : ""}`}>
+        {!xpHome && (
+          <Header mode={mode} setMode={setMode} onShowWelcome={showEntry} />
+        )}
         {project ? (
           <CasePage project={project} />
         ) : path === "/" ? (
           mode === "xp" ? (
-            <XPDesktop />
+            <XPDesktop setMode={setMode} onShowWelcome={showEntry} />
           ) : (
             <Home />
           )

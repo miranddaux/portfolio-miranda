@@ -47,3 +47,19 @@ reorganizam-se em coluna e suas alturas crescem com o conteúdo.
 `npm run check:design` verifica as declarações CSS de layout/tipografia e os
 atributos de tamanho de ícones JSX. O verificador aceita apenas a exceção de 20 px
 e as espessuras técnicas de 1–3 px. Ele não substitui a avaliação visual no navegador.
+
+## Regra de tipografia e grade (atualizada em 12/11/2026)
+
+- Fonte única: **Segoe UI** (`--font-ui`), com fallback `system-ui, Roboto, Arial`.
+- Texto nunca abaixo de **12 px**. Escala: `--text-12`, `--text-14`, `--text-16` e, acima, a escala de 8 px (24…80).
+- Layout em múltiplos de 8 px (`--space-*`); `npm run check:design` valida.
+- Barra de tarefas e Menu Iniciar: `BarraDeTarefas.jsx`, `MenuIniciar.jsx`, `src/styles/replica-figma.css`,
+  espelhando a seção **Sistema de Design · Desktop XP** do Figma (variáveis `xp/*`, `espaco/*`, `raio/*`).
+- Exceções vigentes: instrução da tela de boas-vindas (20 px) e `src/styles/replica-figma.css` (barra de tarefas e Menu Iniciar com as medidas exatas do Figma, fora da grade de 8 px e da escala 12/14/16, a pedido do Miranda em 12/11/2026).
+
+## Janela XP e Painel "Sobre mim" (`painel-xp.css`)
+
+- Réplica do Figma `Control Panel` (135:2065): `JanelaXP.jsx` (mover, redimensionar pelas 8 alças, maximizar, setas do teclado) e `PainelSobre.jsx` (barras, painel lateral, abas que trocam o conteúdo no mesmo componente).
+- Limite do conteúdo: `--limite-conteudo` (720px) em `.janela-xp`. Abaixo de 760px de largura a janela esconde o painel lateral (container query).
+- `painel-xp.css` é exceção à grade de 8 px, como `replica-figma.css`; os textos seguem Segoe UI e só 12/14/16 (título grande: 24).
+- Ícones extraídos do Figma em `public/assets/xp/painel/`. A foto vai em `public/assets/xp/foto-thiago.webp` (sem o arquivo, aparece "TM").

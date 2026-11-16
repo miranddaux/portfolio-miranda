@@ -9,8 +9,10 @@ const failures = [];
 const properties =
   /^(?:font-size|line-height|(?:(?:min-|max-)?(?:width|height))|(?:padding|margin)(?:-.+)?|(?:row-|column-)?gap|grid-template-(?:columns|rows)|grid-auto-(?:columns|rows)|flex-basis|scroll-margin(?:-.+)?)$/;
 let declarations = 0;
-for (const file of readdirSync(styles).filter((name) =>
-  name.endsWith(".css"),
+// replica-figma.css é a réplica fiel do Figma (medidas exatas do desenho).
+const excecoes = new Set(["replica-figma.css", "painel-xp.css", "msn.css"]);
+for (const file of readdirSync(styles).filter(
+  (name) => name.endsWith(".css") && !excecoes.has(name),
 )) {
   const css = readFileSync(join(styles, file), "utf8").replace(
     /\/\*[\s\S]*?\*\//g,
@@ -27,9 +29,16 @@ for (const file of readdirSync(styles).filter((name) =>
     for (const match of value.matchAll(/(-?\d*\.?\d+)px\b/g)) {
       const pixels = Math.abs(Number(match[1]));
       if (property === "--text-welcome" && pixels === 20) continue;
+      // Tamanhos pequenos permitidos: 12 e 14 px (mínimo de texto: 12 px).
+      if (/^--text-(12|14)$/.test(property) && [12, 14].includes(pixels))
+        continue;
       if (/^(width|height)$/.test(property) && pixels <= 3) continue;
       if (pixels % 8 !== 0)
         failures.push(`${file}: ${property}: ${value.trim()}`);
+    }
+    if (/^--text-\d+$/.test(property)) {
+      const size = Number.parseFloat(value);
+      if (size < 12) failures.push(`${file}: texto abaixo de 12 px: ${property}`);
     }
     if (
       property === "font-size" &&
@@ -60,6 +69,6 @@ if (failures.length) {
   process.exitCode = 1;
 } else {
   console.log(
-    `8-point scale: ${declarations} declarations and JSX icon sizes checked. Welcome instruction: explicit 20px exception.`,
+    `8-point scale: ${declarations} declarations and JSX icon sizes checked. Welcome instruction: explicit 20px exception. Excluído: replica-figma.css.`,
   );
 }

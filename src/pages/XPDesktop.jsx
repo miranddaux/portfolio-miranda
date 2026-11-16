@@ -1,7 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { CASES } from "../data/cases";
-import Window from "../components/Window";
 import RetroIcon from "../components/RetroIcon";
+import DesktopAlerts from "../components/DesktopAlerts";
+import BarraDeTarefas from "../components/BarraDeTarefas";
+import MenuIniciar from "../components/MenuIniciar";
+import AvisoTelaCheia from "../components/AvisoTelaCheia";
+import JanelaXP from "../components/JanelaXP";
+import PainelSobre from "../components/PainelSobre";
+import JanelaCurriculo, { CURRICULOS } from "../components/JanelaCurriculo";
+import { MsnAviso, MsnContatos, MsnConversa } from "../components/Msn";
+import JanelaEmail from "../components/JanelaEmail";
 const APPS = [
   {
     id: "sobre",
@@ -15,37 +23,38 @@ const APPS = [
     title: "Meus projetos",
     icon: "folder",
   },
-  { id: "contato", name: "Contato", title: "Contato — Miranda", icon: "mail" },
+  { id: "contato", name: "Entre em contato", title: "Entre em contato comigo", icon: "mail" },
   {
     id: "playground",
     name: "Playground",
     title: "Playground",
     icon: "computer",
   },
+  { id: "curriculo", name: "Meu currículo", title: "Meu currículo", icon: "document" },
+  { id: "msn", name: "Messenger", title: "Messenger", icon: "mail" },
+  { id: "msnchat", name: "ThiagoBot", title: "Conversa com ThiagoBot", icon: "mail" },
 ];
-function Clock() {
-  const [now, setNow] = useState(new Date());
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 30000);
-    return () => clearInterval(t);
-  }, []);
-  return (
-    <time dateTime={now.toISOString()} title="Horário em São Paulo">
-      {now.toLocaleTimeString("pt-BR", {
-        timeZone: "America/Sao_Paulo",
-        hour: "2-digit",
-        minute: "2-digit",
-      })}
-    </time>
-  );
-}
-export default function XPDesktop() {
-  const [windows, setWindows] = useState({ sobre: "open", cases: "open" }),
-    [active, setActive] = useState("cases"),
+const APPS_JANELAS = [
+  { ...APPS[0], janelaIcone: "/assets/xp/painel/painel-icone.png", largura: 1000, altura: 704, cascata: 0 },
+  { ...APPS[1], janelaIcone: "/assets/xp/area/projetos.png", largura: 960, altura: 600, cascata: 1 },
+  { ...APPS[2], janelaIcone: "/assets/xp/area/contato.png", largura: 560, altura: 464, cascata: 2, minLargura: 400, semStatus: true },
+  { ...APPS[3], janelaIcone: "/assets/xp/painel/programas.png", largura: 640, altura: 440, cascata: 3 },
+  { ...APPS[4], janelaIcone: "/assets/xp/area/curriculo.png", largura: 600, altura: 768, cascata: 1 },
+  { ...APPS[5], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 656, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
+  { ...APPS[6], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 576, altura: 560, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
+];
+export default function XPDesktop({ setMode, onShowWelcome }) {
+  const [windows, setWindows] = useState({ sobre: "open" }),
+    [active, setActive] = useState("sobre"),
     [start, setStart] = useState(false),
     [filter, setFilter] = useState("Destaques");
   const menuRef = useRef(null),
-    startRef = useRef(null);
+    startRef = useRef(null),
+    infoRef = useRef(null);
+  const [reabrir, setReabrir] = useState(0);
+  const [linguaCv, setLinguaCv] = useState("pt");
+  const [avisoMsn, setAvisoMsn] = useState(false);
+  const [tremer, setTremer] = useState(0);
   const open = (id, focus = true) => {
     setWindows((w) => ({ ...w, [id]: "open" }));
     setActive(id);
@@ -106,104 +115,92 @@ export default function XPDesktop() {
       <h1 className="sr-only">
         Thiago Miranda · Product Designer pleno · Portfólio
       </h1>
-      <div className="desktop-watermark" aria-hidden="true">
-        Miranda<span>XP</span>
-        <small>PRODUCT DESIGNER · PORTFOLIO EDITION</small>
-      </div>
       <nav className="desktop-shortcuts" aria-label="Atalhos do portfólio">
-        {APPS.map((a) => (
-          <button key={a.id} id={`shortcut-${a.id}`} onClick={() => open(a.id)}>
-            <RetroIcon name={a.icon} size={40} />
-            <span>{a.name}</span>
+        {[
+          { id: "sobre", nome: "Sobre mim", img: "sobre", src: "/assets/xp/area/sobre.png" },
+          { id: "curriculo", nome: "Meu currículo", img: "curriculo", src: "/assets/xp/area/curriculo.png" },
+          { id: "cases", nome: "Projetos", img: "projetos", src: "/assets/xp/area/projetos.png" },
+          { id: "contato", nome: "Entre em contato", img: "contato", src: "/assets/xp/area/contato.png" },
+        ].map((a) => (
+          <button
+            key={a.id}
+            id={`shortcut-${a.id}`}
+            className="desktop-shortcut"
+            onClick={() => open(a.id)}
+          >
+            <img
+              src={a.src}
+              alt=""
+              width="64"
+              height="64"
+              draggable="false"
+            />
+            <span>{a.nome}</span>
           </button>
         ))}
-        <a
-          className="desktop-shortcut cv-shortcut"
-          href="/#contato"
-          onClick={() => open("contato")}
-        >
-          <RetroIcon name="document" size={40} />
-          <span>
-            Currículo<small>em breve</small>
-          </span>
-        </a>
       </nav>
       <div className="desktop-workspace">
-        {windows.sobre === "open" && (
-          <div
-            className={`desktop-app profile-app ${active === "sobre" ? "is-active" : ""}`}
-            onPointerDown={() => setActive("sobre")}
-          >
-            <Window
-              id="sobre"
-              icon="profile"
-              title={APPS[0].title}
-              onClose={() => hide("sobre", "closed")}
-              onMinimize={() => hide("sobre", "minimized")}
+        {APPS_JANELAS.map((app) =>
+          windows[app.id] === "open" || windows[app.id] === "minimized" ? (
+            <JanelaXP
+              key={app.id}
+              id={app.id}
+              titulo={app.title}
+              icone={app.janelaIcone}
+              ativa={active === app.id}
+              oculta={windows[app.id] === "minimized"}
+              largura={app.largura}
+              altura={app.altura}
+              cascata={app.cascata}
+              alinhar={app.alinhar}
+              topo={app.topo}
+              minLargura={app.minLargura}
+              minAltura={app.minAltura}
+              semStatus={app.semStatus}
+              classe={app.id === "msnchat" && tremer % 2 === 1 ? "is-tremendo" : ""}
+              onFocar={() => setActive(app.id)}
+              onFechar={() => hide(app.id, "closed")}
+              onMinimizar={() => hide(app.id, "minimized")}
+              statusEsquerda={
+                app.id === "curriculo"
+                  ? "Clique para ampliar e arraste para visualizar outras áreas."
+                  : undefined
+              }
+              statusDireita={
+                app.id === "curriculo" ? (
+                  <span className="cv-linguas" role="group" aria-label="Idioma do currículo">
+                    {Object.entries(CURRICULOS).map(([k, c]) => (
+                      <button key={k} type="button" aria-pressed={linguaCv === k} onClick={() => setLinguaCv(k)}>
+                        {c.rotulo}
+                      </button>
+                    ))}
+                  </span>
+                ) : (
+                <span className="janela-xp-status-dir">
+                  <img src={app.janelaIcone} alt="" width="16" height="16" />
+                  {app.name}
+                </span>
+                )
+              }
             >
-              <div className="xp-menubar">
-                <span>Arquivo</span>
-                <span>Editar</span>
-                <span>Exibir</span>
-              </div>
-              <div className="xp-profile-content">
-                <div className="xp-profile-heading">
-                  <div className="xp-avatar">TM</div>
-                  <div>
-                    <strong>Thiago Miranda</strong>
-                    <span>Product Designer pleno</span>
-                  </div>
-                </div>
-                <div className="xp-status">
-                  <span className="status-dot" />
-                  Aberto a vagas remotas
-                </div>
-                <h3>Do Figma ao código.</h3>
-                <p>
-                  Eu desenho apps, SaaS e e-commerce, com foco em UI craft e
-                  design systems.
-                </p>
-                <p>
-                  Hoje desenho experiências de compra na{" "}
-                  <strong>Agência Disco</strong> e construo o{" "}
-                  <strong>ANIMAE</strong>, meu app de comunidade para quem
-                  acompanha anime, com apoio de IA.
-                </p>
-                <div className="xp-fact">
-                  <RetroIcon name="medal" size={32} />
-                  <p>
-                    Designer e mentor do squad vencedor do hackathon SouJunior,
-                    entre 30 equipes.
-                  </p>
-                </div>
-                <div className="xp-location">
-                  São José do Rio Preto, SP · Remoto
-                </div>
-                <div className="xp-profile-actions">
-                  <button className="xp-button" onClick={() => open("cases")}>
-                    Ver meus projetos →
-                  </button>
-                  <button className="xp-button" onClick={() => open("contato")}>
-                    Contato
-                  </button>
-                </div>
-              </div>
-              <div className="xp-statusbar">UI Craft · Design Systems · UX</div>
-            </Window>
-          </div>
-        )}
-        {windows.cases === "open" && (
-          <div
-            className={`desktop-app projects-app ${active === "cases" ? "is-active" : ""}`}
-            onPointerDown={() => setActive("cases")}
-          >
-            <Window
-              id="cases"
-              title="Meus projetos"
-              onClose={() => hide("cases", "closed")}
-              onMinimize={() => hide("cases", "minimized")}
-            >
-              <div className="xp-menubar">
+              {app.id === "msn" && <MsnContatos aoConversar={() => open("msnchat")} />}
+              {app.id === "msnchat" && (
+                <MsnConversa
+                  ativa={active === "msnchat"}
+                  aoAbrir={open}
+                  aoChamar={() => {
+                    setTremer((n) => n + 1);
+                    setTimeout(() => setTremer((n) => n + 1), 520);
+                  }}
+                />
+              )}
+              {app.id === "curriculo" && (
+                <JanelaCurriculo lingua={linguaCv} aoContato={() => open("contato")} />
+              )}
+              {app.id === "sobre" && <PainelSobre aoAbrir={open} />}
+              {app.id === "cases" && (
+                <>
+                  <div className="xp-menubar">
                 <span>Arquivo</span>
                 <span>Editar</span>
                 <span>Exibir</span>
@@ -288,43 +285,14 @@ export default function XPDesktop() {
                   </p>
                 </div>
               </div>
-              <div className="xp-statusbar">
-                <span>{projects.length} projetos</span>
-                <span>Portfólio Miranda · 2026</span>
-              </div>
-            </Window>
-          </div>
-        )}
-        {["contato", "playground"].map(
-          (id) =>
-            windows[id] === "open" && (
-              <div
-                key={id}
-                className={`desktop-app utility-app ${active === id ? "is-active" : ""}`}
-                onPointerDown={() => setActive(id)}
-              >
-                <Window
-                  id={id}
-                  title={APPS.find((a) => a.id === id).title}
-                  icon={id === "contato" ? "mail" : "computer"}
-                  onClose={() => hide(id, "closed")}
-                  onMinimize={() => hide(id, "minimized")}
-                >
+              
+                </>
+              )}
+              {app.id === "contato" && <JanelaEmail />}
+              {app.id === "playground" && (
+                <div className="janela-xp-rolagem">
                   <div className="xp-utility-content">
-                    {id === "contato" ? (
-                      <>
-                        <RetroIcon name="mail" size={56} />
-                        <h3>Vamos conversar?</h3>
-                        <p>
-                          Estou aberto a vagas remotas de Product Designer pleno
-                          em empresas de produto.
-                        </p>
-                        <p className="xp-notice">
-                          E-mail público, LinkedIn e currículo revisado ainda
-                          serão adicionados.
-                        </p>
-                      </>
-                    ) : (
+                    {(
                       <>
                         <RetroIcon name="computer" size={56} />
                         <h3>Playground em construção</h3>
@@ -334,95 +302,72 @@ export default function XPDesktop() {
                         </p>
                         <p>Enquanto isso, conheça meu trabalho no ANIMAE.</p>
                         <a className="xp-button" href="/cases/animae">
-                          Conhecer ANIMAE →
+                          Conhecer ANIMAE
                         </a>
                       </>
                     )}
                   </div>
-                </Window>
-              </div>
-            ),
-        )}
-        {!Object.values(windows).includes("open") && (
-          <div className="desktop-empty">
-            <strong>Seu próximo clique pode ser um bom começo.</strong>
-            <button className="xp-button" onClick={() => open("cases")}>
-              Abrir meus projetos
-            </button>
-          </div>
+                </div>
+              )}
+            </JanelaXP>
+          ) : null,
         )}
       </div>
-      <footer className="xp-taskbar">
-        <button
-          className="xp-start"
-          ref={startRef}
-          onClick={() => setStart(!start)}
-          aria-expanded={start}
-          aria-controls="start-menu"
-        >
-          <span className="start-symbol" aria-hidden="true">
-            ✳
-          </span>{" "}
-          iniciar
-        </button>
-        <div className="xp-tasks" aria-label="Janelas abertas">
-          {APPS.filter((a) => windows[a.id] && windows[a.id] !== "closed").map(
-            (a) => (
-              <button
-                key={a.id}
-                id={`task-${a.id}`}
-                aria-label={`${a.name} — ${windows[a.id] === "open" ? "minimizar ou ativar" : "restaurar"}`}
-                className={
-                  active === a.id && windows[a.id] === "open" ? "active" : ""
-                }
-                onClick={() =>
-                  windows[a.id] === "open" && active === a.id
-                    ? hide(a.id, "minimized")
-                    : open(a.id)
-                }
-                aria-pressed={windows[a.id] === "open"}
-              >
-                <RetroIcon name={a.icon} size={16} />
-                <span>{a.name}</span>
-              </button>
-            ),
-          )}
-        </div>
-        <div className="xp-tray">
-          <span
-            className="tray-status"
-            title="Aberto a vagas remotas"
-            aria-label="Aberto a vagas remotas"
-          >
-            ●
-          </span>
-          <Clock />
-          <span className="tray-zone">BRT</span>
-        </div>
-      </footer>
+      <AvisoTelaCheia />
+      <div className="ruido-tv" aria-hidden="true">
+        <span className="ruido-tv-grao" />
+        <span className="ruido-tv-faixa" />
+      </div>
+      <BarraDeTarefas
+        apps={APPS}
+        janelas={windows}
+        ativo={active}
+        menuAberto={start}
+        iniciarRef={startRef}
+        infoRef={infoRef}
+        aoClicarInfo={() => setReabrir((n) => n + 1)}
+        aoAlternarMenu={() => setStart(!start)}
+        aoClicarMsn={() => open("msn")}
+        aoClicarTarefa={(a) =>
+          windows[a.id] === "open" && active === a.id
+            ? hide(a.id, "minimized")
+            : open(a.id)
+        }
+      />
       {start && (
-        <nav
-          className="xp-start-menu"
-          ref={menuRef}
-          id="start-menu"
-          aria-label="Menu Iniciar"
-        >
-          <div className="xp-start-profile">
-            <div className="xp-avatar">TM</div>
-            <strong>Thiago Miranda</strong>
-          </div>
-          <div className="xp-start-links">
-            {APPS.map((a) => (
-              <button key={a.id} onClick={() => open(a.id)}>
-                <RetroIcon name={a.icon} size={32} />
-                <span>{a.name}</span>
-              </button>
-            ))}
-          </div>
-          <div className="xp-start-footer">
-            Portfólio Miranda · Inspirado no Windows XP
-          </div>
-        </nav>
+        <MenuIniciar
+          menuRef={menuRef}
+          aoAbrir={(id) => open(id)}
+          aoTrocarModo={(modo) => {
+            setStart(false);
+            setMode(modo);
+          }}
+          aoFazerLogoff={() => {
+            setStart(false);
+            onShowWelcome();
+          }}
+          aoDesligar={() => {
+            setStart(false);
+            setMode("rapido");
+          }}
+        />
+      )}
+      <DesktopAlerts
+        ancoraRef={infoRef}
+        reabrir={reabrir}
+        onFim={() => {
+          setAvisoMsn(true);
+          setWindows((w) => (w.msnchat === "open" || w.msnchat === "minimized" ? w : { ...w, msnchat: "alerta" }));
+        }}
+      />
+      {avisoMsn && (
+        <MsnAviso
+          aoAbrir={() => {
+            setAvisoMsn(false);
+            open("msnchat");
+          }}
+          aoFechar={() => setAvisoMsn(false)}
+        />
       )}
     </main>
   );
