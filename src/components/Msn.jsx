@@ -14,7 +14,7 @@ const EMO = (n) => `/assets/xp/msn/emoticons/${n}.png`;
 
 // Imagens de exibição do visitante (Figma "MSN Assets"), como no "Minha imagem de exibição".
 const FOTOS_VISITANTE = [
-  { id: "thiago", nome: "Thiago (retrô)", src: "/assets/xp/msn/fotos/thiago-retro.webp" },
+  { id: "thiago", nome: "Thiago Miranda", src: "/assets/xp/msn/fotos/thiago-retro.webp" },
   { id: "pato", nome: "Patinho", src: "/assets/xp/msn/fotos/pato.webp" },
   { id: "flor", nome: "Flor laranja", src: "/assets/xp/msn/fotos/flor.webp" },
   { id: "cachorro", nome: "Cachorro amigo", src: "/assets/xp/msn/fotos/cachorro.webp" },
@@ -180,9 +180,11 @@ export function MsnContatos({ aoConversar }) {
               </a>
               <a href={CONTATO.dribbble} target="_blank" rel="noreferrer" aria-label="Dribbble do Thiago" title="Dribbble">
                 <img src="/assets/xp/painel/dribbble.png" alt="" width="16" height="16" />
+                <span className="msn-atalho-nome">Dribbble</span>
               </a>
               <a href={CONTATO.behance} target="_blank" rel="noreferrer" aria-label="Behance do Thiago" title="Behance">
                 <img src="/assets/xp/painel/behance.png" alt="" width="16" height="16" />
+                <span className="msn-atalho-nome">Behance</span>
               </a>
             </div>
           </div>

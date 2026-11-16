@@ -36,7 +36,7 @@ export default function MenuIniciar({
       <div className="menu-cabecalho">
         <img
           className="menu-avatar"
-          src={`${A}/avatar.png`}
+          src="/assets/xp/msn/fotos/thiago-retro.webp"
           alt=""
           width="54"
           height="54"
