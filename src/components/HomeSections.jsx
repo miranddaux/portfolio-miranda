@@ -1,4 +1,6 @@
-import { ArrowUpRight, ExternalLink, Mail, Folder } from "lucide-react";
+import SocialLink from "./SocialLink.jsx";
+import { REDES_PRINCIPAIS } from "../data/social.js";
+import { ArrowUpRight, Folder } from "lucide-react";
 export default function HomeSections() {
   return (
     <>
@@ -95,24 +97,9 @@ export default function HomeSections() {
             </p>
           </div>
           <div className="contact-buttons">
-            <button
-              className="btn btn-dark"
-              disabled
-              title="URL do perfil ainda nao configurada"
-            >
-              LinkedIn a configurar <ExternalLink size={16} />
-            </button>
-            <button
-              className="btn btn-outline"
-              disabled
-              title="E-mail profissional ainda não configurado"
-            >
-              E-mail a configurar <Mail size={16} />
-            </button>
-            <p className="contact-note">
-              Os links definitivos de e-mail e currículo serão conectados antes
-              da publicação.
-            </p>
+            {[...REDES_PRINCIPAIS, "email"].map((rede) => (
+              <SocialLink key={rede} rede={rede} variante="tile" />
+            ))}
           </div>
         </div>
       </section>

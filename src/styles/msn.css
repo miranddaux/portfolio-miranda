@@ -1105,16 +1105,6 @@ button.msn-aba-x:hover {
   opacity: 1;
 }
 
-/* Dribbble e Behance: só o ícone na janela estreita; nome completo quando a janela expande */
-.msn-atalho-nome {
-  display: none;
-}
-@container janela (min-width: 520px) {
-  .msn-atalho-nome {
-    display: inline;
-  }
-}
-
 /* Banner não cresce com a janela: altura limitada, a lista de contatos ganha o espaço */
 .msn-banner {
   flex: none;

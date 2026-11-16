@@ -108,3 +108,24 @@ Pedido explícito do Thiago: usar os assets do MSN do Figma para chegar mais per
 - `public/assets/xp/msn/thiago-bot.webp` — retrato do Thiago Bot, reduzido para 256×256.
 - `public/assets/xp/msn/banner.webp` — banner "Portfólio Thiago Live Messenger", reduzido para 660×221 (tem a bandeira do Windows e os bonecos do MSN).
 - `public/assets/audio/msn-chamar.mp3` — som de chamar a atenção, cortado do arquivo enviado (1,6 s).
+
+## Links sociais — 16/11
+
+Os anexos de LinkedIn e WhatsApp orientam as marcas e cores desta rodada.
+Como os anexos não estavam disponíveis como arquivos no ambiente, foram usadas
+versões das marcas disponibilizadas no Wikimedia Commons, salvas localmente:
+
+| Arquivo | Origem |
+| --- | --- |
+| `public/assets/social/linkedin.png` | https://commons.wikimedia.org/wiki/File:LinkedIn_logo_initials.png |
+| `public/assets/social/whatsapp.svg` | https://commons.wikimedia.org/wiki/File:WhatsApp.svg |
+
+São marcas de LinkedIn e WhatsApp/Meta, usadas para identificar os respectivos
+destinos de contato. Não são desenhos originais do portfólio. As cores dos assets
+são preservadas; não há filtros de recoloração nem hotlink. Dribbble e Behance
+mantêm os PNGs existentes no projeto.
+
+O componente `SocialLink` compartilha ícone, nome, foco e destinos entre MSN,
+Sobre mim, Contato, janela de e-mail e modos editoriais. O nome de nenhuma rede
+fica oculto em janelas estreitas. Ícones usam caixas de 16 px nos links compactos
+e 24 px nos cards, com `object-fit: contain` para preservar a proporção.

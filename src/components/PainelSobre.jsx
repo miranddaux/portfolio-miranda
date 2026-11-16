@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import FotoXP from "./FotoXP.jsx";
+import SocialLink from "./SocialLink.jsx";
+import { REDES_PRINCIPAIS } from "../data/social.js";
 import { ADICIONAL, CERTIFICACOES, CONTATO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "../data/perfil.js";
 
 const P = "/assets/xp/painel";
@@ -15,13 +17,7 @@ const ABAS = [
 ];
 
 const LISTA_HABILIDADES = HABILIDADES.map((h) => h.nome);
-// Medium ainda sem URL: sem href o item aparece como "a configurar" (sem inventar links).
-const LINKS_SOCIAIS = [
-  { nome: "LinkedIn", icone: "linkedin", href: CONTATO.linkedin },
-  { nome: "Dribbble", icone: "dribbble", href: CONTATO.dribbble },
-  { nome: "Behance", icone: "behance", href: CONTATO.behance },
-  { nome: "Medium", icone: "medium", href: "" },
-];
+const LINKS_SOCIAIS = [...REDES_PRINCIPAIS, "medium"];
 
 function Tags({ titulo, itens }) {
   return (
@@ -200,21 +196,9 @@ export default function PainelSobre({ aoAbrir }) {
               <Expansor aberto={secoes.social} rotulo="Recolher ou expandir Links sociais" aoAlternar={() => setSecoes((s) => ({ ...s, social: !s.social }))} />
             </header>
             {secoes.social && (
-              <ul className="painel-corpo-sec painel-lista-sec">
-                {LINKS_SOCIAIS.map((l) => (
-                  <li key={l.nome}>
-                    {l.href ? (
-                      <a className="painel-link" href={l.href} target="_blank" rel="noreferrer">
-                        <img src={`${P}/${l.icone}.png`} alt="" width="16" height="16" />
-                        {l.nome}
-                      </a>
-                    ) : (
-                      <span className="painel-link is-pendente" title="Link a configurar">
-                        <img src={`${P}/${l.icone}.png`} alt="" width="16" height="16" />
-                        {l.nome}
-                      </span>
-                    )}
-                  </li>
+              <ul className="painel-corpo-sec painel-lista-sec painel-social-lista">
+                {LINKS_SOCIAIS.map((rede) => (
+                  <li key={rede}><SocialLink rede={rede} /></li>
                 ))}
               </ul>
             )}
@@ -314,65 +298,15 @@ export default function PainelSobre({ aoAbrir }) {
   );
 }
 
-function IconeWhatsApp({ tamanho = 16 }) {
-  return (
-    <svg width={tamanho} height={tamanho} viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="12" cy="12" r="11" fill="#25d366" />
-      <path d="M8.6 6.8c.3-.3.8-.3 1 .1l1.1 2c.2.3.1.7-.1 1l-.6.6c.5 1.2 1.4 2.2 2.6 2.8l.6-.6c.3-.3.7-.3 1-.1l2 1.1c.4.2.5.7.2 1l-.9 1c-.6.6-1.5.8-2.3.4-2.6-1.2-4.6-3.3-5.7-5.8-.3-.8-.1-1.7.5-2.3z" fill="#fff" />
-    </svg>
-  );
-}
-
-function IconeEmail({ tamanho = 24 }) {
-  return (
-    <svg width={tamanho} height={tamanho} viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="2" y="5" width="20" height="14" rx="2" fill="#fff" stroke="#3a6fc4" strokeWidth="1.5" />
-      <path d="M3 6.5l9 6.5 9-6.5" fill="none" stroke="#3a6fc4" strokeWidth="1.5" />
-    </svg>
-  );
-}
-
 export function ContatoConteudo({ aoEscrever }) {
   return (
     <div className="painel-contato">
-      <ul className="painel-redes">
-        <li>
-          <a className="painel-rede is-linkedin" href={CONTATO.linkedin} target="_blank" rel="noreferrer">
-            <img src={`${P}/linkedin.png`} alt="" width="24" height="24" />
-            LinkedIn
-          </a>
-        </li>
-        <li>
-          {aoEscrever ? (
-            <button type="button" className="painel-rede" onClick={aoEscrever}>
-              <IconeEmail />
-              E-mail
-            </button>
-          ) : (
-            <a className="painel-rede" href={`mailto:${CONTATO.email}`}>
-              <IconeEmail />
-              E-mail
-            </a>
-          )}
-        </li>
-        <li>
-          <a className="painel-rede is-whatsapp" href={CONTATO.whatsapp} target="_blank" rel="noreferrer">
-            <IconeWhatsApp tamanho={24} />
-            WhatsApp
-          </a>
-        </li>
-        <li>
-          <a className="painel-rede" href={CONTATO.dribbble} target="_blank" rel="noreferrer">
-            <img src={`${P}/dribbble.png`} alt="" width="24" height="24" />
-            Dribbble
-          </a>
-        </li>
-        <li>
-          <a className="painel-rede" href={CONTATO.behance} target="_blank" rel="noreferrer">
-            <img src={`${P}/behance.png`} alt="" width="24" height="24" />
-            Behance
-          </a>
-        </li>
+      <ul className="painel-redes painel-redes--social">
+        {["linkedin", "email", "whatsapp", "dribbble", "behance"].map((rede) => (
+          <li key={rede}>
+            <SocialLink rede={rede} variante="tile" onClick={rede === "email" ? aoEscrever : undefined} />
+          </li>
+        ))}
       </ul>
       <p className="painel-local">{CONTATO.local}</p>
       <h4 className="painel-subtitulo">Adicione-me ao</h4>

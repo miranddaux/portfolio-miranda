@@ -18,7 +18,7 @@ export const EXPERIENCIAS = [
     empresa: "Agência Disco",
     periodo: "mar 2025 – atual",
     texto:
-      "Desenho e-commerces em Shopify de ponta a ponta, da estratégia ao handoff. Estruturo design systems com tokens no Figma, otimizo páginas de produto e checkout com foco em conversão (CRO) e reduzi o tempo de layout de 2–3 semanas para 4–5 dias.",
+      "Desenho e-commerces em Shopify de ponta a ponta, da estratégia ao handoff. Estruturo design systems com tokens no Figma, otimizo páginas de produto e checkout com foco em conversão (CRO).",
   },
   {
     cargo: "Visual Designer",

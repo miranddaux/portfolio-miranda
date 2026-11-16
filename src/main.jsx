@@ -10,4 +10,5 @@ import "./styles/sobre.css";
 import "./styles/painel-xp.css";
 import "./styles/msn.css";
 import "./styles/welcome.css";
+import "./styles/social.css";
 createRoot(document.getElementById("root")).render(<App />);
