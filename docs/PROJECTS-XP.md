@@ -1,81 +1,61 @@
-# Projetos e cases — rodada de 16/11/2026
+# Projetos XP — refinamento de 16/11/2026
 
-## Escopo e curadoria
+## Navegação e escopo
 
-Janela Projetos com pastas, baseada no anexo do Thiago. Só ANIMAE, Navaja e
-Oficina do Tenista abrem cases. UltraGrip, CIAO, FreshLink, ARENA e XP ZONE
-aparecem em cinza, com “Em construção” no hover/foco e indicação permanente em
-dispositivos sem hover. Não foram copiados os projetos das referências.
+Projetos abre ao entrar no desktop XP. A aba Projetos do Sobre Mim mostra o mesmo
+explorador diretamente, sem uma etapa intermediária. A busca pode ser aberta nas
+duas áreas; cada instância tem IDs próprios. ANIMAE, Navaja e Oficina do Tenista
+abrem cases reais dentro da janela XP. UltraGrip e CIAO permanecem em construção.
+Playground, ARENA, XP ZONE e FreshLink foram retirados da navegação desta versão.
+O rodapé do explorador mostra apenas Meus Projetos.
 
-O e-commerce escolhido é Oficina do Tenista, conforme a seleção de três destaques.
-Pastas abrem com um clique/ativação do teclado; os links também permitem nova aba.
+## Hierarquia editorial e componentes
 
-## Referências e decisões de UX
+`CaseDocument` compartilha conteúdo entre XP, Rápido e Noite. A ordem é categorias,
+título, descrição, ficha (Função, Ferramentas, Ano), ações, visão do produto,
+resumo rápido, contexto, módulos visuais, pesquisa, decisões, jornada, estado,
+indicadores propostos e aprendizados. O texto usa primeira pessoa, sem copiar os
+fatos dos cases de referência. `caseStudies.js` separa módulos, imagens e fontes.
 
-- Screenshot fornecido: explorador com grade de pastas e estados indisponíveis.
-- Dex: https://www.gabrielvaldivia.com/work/dex — coluna central, imagens amplas,
-  ficha e blocos por decisão. O conteúdo e as imagens do Dex não foram importados.
-- Cashbud: https://omaruiux.com/#/project/cashbud — resumo e processo enxutos.
-- E-commerce: https://omaruiux.com/#/project/hm-mena — ritmo da apresentação visual.
-- Figma do portfólio: `xAoPbyHrtEQ4VjGZ7ZvYO6`, case v2 `78:2` e explorador `153:3747`.
-  Ambos foram lidos com contexto de design e screenshot. Os placeholders e os
-  textos antigos do wireframe não substituem a curadoria editorial de 03/11.
+Categorias são uma lista informativa com rótulo visível, caixa plana e sem relevo.
+Botões têm relevo XP e rótulos objetivos: Visitar LP, Ver no Figma, Ver no Behance.
+O botão da LP do ANIMAE é verde e aponta para https://animaeapp.com.br/.
+O Behance antigo do ANIMAE permanece como link de arquivo, separado dos CTAs.
+O período out/2025–out/2026 foi confirmado por Thiago nesta conversa.
 
-A nova solicitação das pastas substitui a lista lateral do explorador anterior.
-A linguagem de janela continua usando `JanelaXP`, barra de tarefas e tokens locais.
+As telas mobile do ANIMAE usam molduras de celular em CSS, com prévias em proporção
+fixa e link para ampliar a tela original completa. A abertura tem uma grade de três
+mockups; os módulos combinam telas individuais e pares, com quebra responsiva.
+Navaja ganhou seleção de rosto e catálogo de cortes. Oficina ganhou o guia por
+nível de jogo e a vitrine da Home, além de produto e comparador.
 
-Cada case contém ficha, links disponíveis, índice, resumo de 60 segundos,
-problema, pesquisa, decisões e trocas, jornada proposta, solução, resultado,
-plano de medição e aprendizados. A leitura fica numa coluna central dentro da
-janela XP; não exige ir a um site externo. Behance é uma saída complementar.
+A LP tem espaço reservado no final do ANIMAE. O HTML publicado foi acessível, mas
+não há ferramenta de navegador disponível para capturar sua aparência atual. A
+página de apresentação no Figma é material anterior, não uma captura verificada
+da LP atual. O print real deve ser inserido depois, sem simular uma imagem final.
+Protótipos navegáveis no Figma ficam para a segunda fase, conforme Thiago pediu.
 
-## Conteúdo e limites
+## Contenção de rolagem
 
-Textos condensados das páginas de revisão do Notion:
+O índice de âncoras do case foi removido. No layout desktop, html/body/root não
+rolam e o desktop fica fixado ao viewport com overflow recortado. A rolagem é
+interna às janelas e tem overscroll-behavior: contain. A busca do perfil calcula
+a posição no próprio painel, sem scrollIntoView sobre todos os ancestrais. Foco
+no título/pasta usa preventScroll. Os modos editoriais continuam com rolagem normal.
 
-- ANIMAE: https://app.notion.com/p/40a34785429b814da1b9cc829c60f378
-- Navaja: https://app.notion.com/p/40a34785429b81c48f04ee72051d71ba
-- Oficina: https://app.notion.com/p/40a34785429b814c8dcdc411a8a50b32
+## Verificação
 
-Os achados “2 de 3” do Navaja são apresentados como amostra qualitativa, não
-como porcentagens do mercado nem KPIs. Indicadores de negócio aparecem como
-“A medir”, separados das entregas. Não foram reaproveitados 30%, 3x ou a métrica
-de redução de prazo sem confirmação. Não foram publicados comentários internos.
+- Build de produção passou; escala de 8 pontos: 1.157 declarações verificadas.
+- `node --test tests/*.test.mjs`: 9 testes passaram, incluindo mídia de cada módulo.
+- Testes em DOM: Projetos direto e na aba, IDs únicos, busca, vazio, duas pastas
+  pendentes, três cases, categorias não interativas, CTAs, mockups, minimizar/
+  restaurar, fechar/próximo, histórico, três modos e acesso direto sem login.
+- Regressão do perfil: setas, seletor, busca, foco/rolagem interna, Medium inativo,
+  banner MSN e favicon passaram.
+- Contraste calculado: botão azul 6,60:1; verde 6,08:1; etiquetas 10,86:1;
+  texto secundário na superfície azul 5,65:1; texto principal 14,48:1.
+- Nenhuma dependência adicionada.
 
-O link do Behance do ANIMAE mostra a versão antiga de streaming e está
-explicitamente identificado como apresentação v1. A imagem v1 tem legenda de
-arquivo, separada da tela do MVP social. Navaja tem link confirmado de Behance.
-Protótipos navegáveis e Behance da Oficina não foram inferidos. O arquivo Figma
-é rotulado como arquivo de design, não como protótipo. A web do ANIMAE vem do
-registro de ferramentas do próprio projeto. Sem resultados de uso publicados.
-
-## Arquitetura
-
-- `ProjectsExplorer`: pastas, estados, busca e chrome do explorador.
-- `CaseDocument`: documento compartilhado pelos três modos, com mídia e jornada.
-- `caseStudies.js`: narrativa, fontes, links, mídia e indicadores separados da UI.
-- `App`: resolve rotas e acompanha `popstate`; links reais preservam deep links.
-- `XPDesktop`: abre o documento em `JanelaXP` e mantém tarefa/minimizar/restaurar.
-- `CasePage`: usa o mesmo documento nos modos editoriais. O antigo endereço de
-  UltraGrip permanece com uma indicação de case em construção.
-
-Fechar o case volta às pastas e devolve o foco à pasta correspondente. Os três
-cases se encadeiam na ordem definida. Busca de pastas não depende de servidor.
-Em telas pequenas, janelas usam o comportamento compacto existente; grade,
-ficha, índice e narrativa se reorganizam por largura de container.
-
-## Validação
-
-- Build de produção e escala de 8 pontos: 1.074 declarações verificadas.
-- `node --test tests/*.test.mjs`: 8 testes passaram.
-- Integridade de mídia: PNGs locais, não vazios, com dimensões declaradas iguais
-  ao arquivo; fontes e slots listados em `ASSETS.md`.
-- Testes em DOM: grade, busca, sem resultados, pastas pendentes, navegação dos
-  três cases, índice, mídia, minimizar/restaurar, próximo/fechar, histórico,
-  três modos e link direto sem passar pelo login.
-- Nenhuma dependência de produção adicionada.
-
-A ferramenta de navegador não está disponível nesta sessão. Revisão visual de
-desktop 1440 px e overflow mobile permanece pendente no endereço publicado;
-os testes de DOM não substituem essa avaliação. A composição final ainda pode
-ser refinada com Thiago a partir da prévia.
+A ferramenta de navegador permanece indisponível. DOM e contratos CSS não
+verificam geometria renderizada; revisão visual de desktop/mobile e reprodução
+manual do bug de rolagem devem ser feitas na versão publicada.

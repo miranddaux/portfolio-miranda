@@ -55,6 +55,7 @@ export default function App() {
   }, [path]);
   useEffect(() => {
     document.documentElement.dataset.mode = mode;
+    document.documentElement.dataset.layout = xpHome && !showWelcome ? "desktop" : "document";
     document.documentElement.dataset.screen = showWelcome
       ? "welcome"
       : "portfolio";
@@ -68,7 +69,7 @@ export default function App() {
     try {
       localStorage.setItem("miranda-mode", mode);
     } catch {}
-  }, [mode, showWelcome]);
+  }, [mode, showWelcome, xpHome]);
 
   function enterPortfolio() {
     setMode("xp");

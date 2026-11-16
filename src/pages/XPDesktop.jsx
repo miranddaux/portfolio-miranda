@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import RetroIcon from "../components/RetroIcon";
 import DesktopAlerts from "../components/DesktopAlerts";
 import BarraDeTarefas from "../components/BarraDeTarefas";
 import MenuIniciar from "../components/MenuIniciar";
@@ -20,35 +19,28 @@ const APPS = [
   },
   {
     id: "cases",
-    name: "Meus projetos",
-    title: "Meus projetos",
+    name: "Meus Projetos",
+    title: "Meus Projetos",
     icon: "folder",
   },
   { id: "contato", name: "Entre em contato", title: "Entre em contato comigo", icon: "mail" },
-  {
-    id: "playground",
-    name: "Playground",
-    title: "Playground",
-    icon: "computer",
-  },
   { id: "curriculo", name: "Meu currículo", title: "Meu currículo", icon: "document" },
   { id: "msn", name: "Messenger", title: "Messenger", icon: "mail" },
   { id: "msnchat", name: "Thiago Bot", title: "Conversa com Thiago Bot", icon: "mail" },
   { id: "case", name: "Case", title: "Case", icon: "document" },
 ];
 const APPS_JANELAS = [
-  { ...APPS[0], janelaIcone: "/assets/xp/painel/painel-icone.png", largura: 1000, altura: 704, cascata: 0 },
-  { ...APPS[1], janelaIcone: "/assets/xp/area/projetos.png", largura: 960, altura: 600, cascata: 1 },
-  { ...APPS[2], janelaIcone: "/assets/xp/area/contato.png", largura: 560, altura: 464, cascata: 2, minLargura: 400, semStatus: true },
-  { ...APPS[3], janelaIcone: "/assets/xp/painel/programas.png", largura: 640, altura: 440, cascata: 3 },
-  { ...APPS[4], janelaIcone: "/assets/xp/area/curriculo.png", largura: 600, altura: 768, cascata: 1 },
-  { ...APPS[5], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 728, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
-  { ...APPS[6], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
-  { ...APPS[7], janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
+  { ...APPS.find(a => a.id === "sobre"), janelaIcone: "/assets/xp/painel/painel-icone.png", largura: 1000, altura: 704, cascata: 0 },
+  { ...APPS.find(a => a.id === "cases"), janelaIcone: "/assets/xp/area/projetos.png", largura: 960, altura: 600, cascata: 1 },
+  { ...APPS.find(a => a.id === "contato"), janelaIcone: "/assets/xp/area/contato.png", largura: 560, altura: 464, cascata: 2, minLargura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "curriculo"), janelaIcone: "/assets/xp/area/curriculo.png", largura: 600, altura: 768, cascata: 1 },
+  { ...APPS.find(a => a.id === "msn"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 728, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "msnchat"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
 export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {
-  const [windows, setWindows] = useState({ sobre: "open" }),
-    [active, setActive] = useState("sobre"),
+  const [windows, setWindows] = useState({ cases: "open" }),
+    [active, setActive] = useState("cases"),
     [start, setStart] = useState(false);
   const previousProject = useRef(null);
   const apps = APPS.map((a) => a.id === "case" && project ? { ...a, name: project.title, title: `${project.title} — Case` } : a);
@@ -63,7 +55,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
       setWindows((w) => ({ ...w, case: "closed", cases: "open" }));
       setActive("cases");
       previousProject.current = null;
-      requestAnimationFrame(() => (document.querySelector(`.project-folder[href="/cases/${lastProject}"]`) || document.getElementById("cases-title"))?.focus());
+      requestAnimationFrame(() => (document.querySelector(`[aria-labelledby="cases-title"] .project-folder[href="/cases/${lastProject}"]`) || document.getElementById("cases-title"))?.focus({ preventScroll: true }));
     }
   }, [project?.id]);
   const menuRef = useRef(null),
@@ -79,7 +71,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
     setStart(false);
     if (focus)
       requestAnimationFrame(() =>
-        document.getElementById(`${id}-title`)?.focus(),
+        document.getElementById(`${id}-title`)?.focus({ preventScroll: true }),
       );
   };
   const hide = (id, state) => {
@@ -89,7 +81,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
         state === "closed"
           ? document.getElementById(`shortcut-${id}`)
           : document.getElementById(`task-${id}`);
-      target?.focus();
+      target?.focus({ preventScroll: true });
     });
   };
   useEffect(() => {
@@ -103,11 +95,11 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   }, []);
   useEffect(() => {
     if (!start) return;
-    menuRef.current?.querySelector("button")?.focus();
+    menuRef.current?.querySelector("button")?.focus({ preventScroll: true });
     const close = (e) => {
       if (e.type === "keydown" && e.key === "Escape") {
         setStart(false);
-        startRef.current?.focus();
+        startRef.current?.focus({ preventScroll: true });
       } else if (
         e.type === "pointerdown" &&
         !menuRef.current?.contains(e.target) &&
@@ -176,7 +168,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               statusEsquerda={
                 app.id === "curriculo"
                   ? "Clique para ampliar e arraste para visualizar outras áreas."
-                  : app.id === "cases" ? "3 cases disponíveis · 5 em construção"
+                  : app.id === "cases" ? ""
                     : app.id === "case" ? "Case de Product Design · Thiago Miranda" : undefined
               }
               statusDireita={
@@ -211,33 +203,13 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               {app.id === "curriculo" && (
                 <JanelaCurriculo lingua={linguaCv} aoContato={() => open("contato")} />
               )}
-              {app.id === "sobre" && <PainelSobre aoAbrir={open} />}
+              {app.id === "sobre" && <PainelSobre aoAbrir={open} onNavigate={onNavigate} />}
               {app.id === "cases" && <ProjectsExplorer onNavigate={onNavigate} />}
               {app.id === "case" && project && <>
                 <ProjectsToolbar title={project.title} onBack={() => onNavigate("/#cases")} />
                 <div className="case-document-scroll"><CaseDocument project={project} onNavigate={onNavigate} /></div>
               </>}
               {app.id === "contato" && <JanelaEmail />}
-              {app.id === "playground" && (
-                <div className="janela-xp-rolagem">
-                  <div className="xp-utility-content">
-                    {(
-                      <>
-                        <RetroIcon name="computer" size={56} />
-                        <h3>Playground em construção</h3>
-                        <p>
-                          Um espaço para protótipos e experiências entre design
-                          e código.
-                        </p>
-                        <p>Enquanto isso, conheça meu trabalho no ANIMAE.</p>
-                        <a className="xp-button" href="/cases/animae">
-                          Conhecer ANIMAE
-                        </a>
-                      </>
-                    )}
-                  </div>
-                </div>
-              )}
             </JanelaXP>
           ) : null,
         )}

@@ -6,7 +6,7 @@ import { CASE_STUDIES, FEATURED_IDS, PENDING_PROJECTS, getCaseStudy, nextCaseStu
 test("somente os três projetos definidos têm case disponível", () => {
   assert.deepEqual(CASE_STUDIES.map((p) => p.id), ["animae", "navaja", "oficina-do-tenista"]);
   assert.equal(getCaseStudy("ultragrip"), undefined);
-  assert(PENDING_PROJECTS.some((p) => p.id === "ultragrip"));
+  assert.deepEqual(PENDING_PROJECTS.map(p => p.id), ["ultragrip", "ciao"]);
   assert(PENDING_PROJECTS.every((p) => !FEATURED_IDS.includes(p.id)));
   assert.equal(nextCaseStudy("animae").id, "navaja");
   assert.equal(nextCaseStudy("navaja").id, "oficina-do-tenista");
@@ -15,7 +15,7 @@ test("somente os três projetos definidos têm case disponível", () => {
 
 test("mídias são locais, não vazias e preservam as dimensões do PNG original", () => {
   for (const project of CASE_STUDIES) {
-    for (const image of [project.cover, ...project.gallery].filter((m) => m.src)) {
+    for (const image of [project.cover, ...project.gallery, ...project.modules.flatMap(m => m.images)].filter((m) => m.src)) {
       const path = new URL(`../public${image.src}`, import.meta.url);
       assert(existsSync(path), image.src);
       const bytes = readFileSync(path);
@@ -53,5 +53,17 @@ test("navegação interna preserva abrir em nova aba e cliques modificados", () 
     prevented = false;
     projectLinkAction({ ...click, ...extra }, () => assert.fail("não deve interceptar"), "/cases/navaja");
     assert.equal(prevented, false);
+  }
+});
+
+ test("ANIMAE usa o período confirmado e os módulos têm conteúdo e categorias descritivas", () => {
+  const animae = getCaseStudy("animae");
+  assert.equal(animae.period, "Out/2025 — out/2026 · 1 ano");
+  assert.equal(animae.links.site, "https://animaeapp.com.br/");
+  assert.equal(animae.modules.length, 5);
+  for (const project of CASE_STUDIES) {
+    assert(project.categories.length >= 2);
+    assert(project.categories.every(c => c === c.toUpperCase()));
+    assert(project.modules.every(m => m.title && m.text && Array.isArray(m.images)));
   }
 });

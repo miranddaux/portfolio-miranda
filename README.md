@@ -13,10 +13,13 @@ O favicon usa o retrato do Thiago. Detalhes e validação:
 [docs/REFINEMENT-2026-11-16.md](docs/REFINEMENT-2026-11-16.md).
 Teste da busca: `node --test tests/perfil-search.test.mjs`.
 
-A rodada seguinte implementa Projetos como um explorador XP com oito pastas:
-três cases disponíveis e cinco em construção. Os cases abrem dentro de uma
-janela XP, com URL própria, documento centralizado, resumo rápido, pesquisa,
-decisões, jornada, telas reais, resultados e plano de medição. Os modos editoriais
+Projetos abre diretamente no desktop e na aba do Sobre Mim, como um explorador XP
+com três cases disponíveis e duas pastas em construção (UltraGrip e CIAO).
+Playground foi removido desta versão. Os cases abrem dentro de uma
+janela XP, com URL própria, documento centralizado, resumo rápido, módulos visuais com mockups de celular em CSS, pesquisa,
+decisões, jornada, telas reais, resultados e plano de medição.
+Categorias informativas e botões de ação têm tratamentos distintos. O índice de
+âncoras foi removido e a rolagem é contida dentro das janelas. Os modos editoriais
 usam o mesmo conteúdo. Veja [docs/PROJECTS-XP.md](docs/PROJECTS-XP.md).
 Testes: `node --test tests/*.test.mjs`.
 

@@ -6,23 +6,22 @@ export const FEATURED_IDS = ["animae", "navaja", "oficina-do-tenista"];
 export const PENDING_PROJECTS = [
   { id: "ultragrip", title: "UltraGrip", category: "E-commerce" },
   { id: "ciao", title: "CIAO", category: "E-commerce" },
-  { id: "freshlink", title: "FreshLink", category: "Estudo · SaaS" },
-  { id: "arena", title: "ARENA", category: "Estudo · Game UI" },
-  { id: "xp-zone", title: "XP ZONE", category: "Estudo · Web" },
 ];
 
 const STORIES = {
   animae: {
-    question: "De uma ideia de streaming a uma comunidade para fãs de anime.",
-    roleShort: "Produto, UX/UI, DS e código com IA",
+    question: "Uma comunidade para quem vive o universo dos animes.",
+    categories: ["APP / WEB APP SOCIAL", "PRODUTO PRÓPRIO"],
+    roleShort: "UX, UI, design system e código com auxílio de IA",
     team: "Projeto solo",
-    period: "Out/2025 — em desenvolvimento",
+    period: "Out/2025 — out/2026 · 1 ano",
     tools: ["Figma", "Illustrator", "Expo", "React Native", "Supabase"],
     status: "Produto próprio · web disponível",
     accent: "animae",
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
     links: {
-      site: "https://animae-plus-main.vercel.app",
+      site: "https://animaeapp.com.br/",
+      siteLabel: "Visitar LP",
       design: "https://www.figma.com/design/Sdyl9kTkLtCZaIN13yvIgd",
       behance: "https://www.behance.net/gallery/243377867/ANIMAE-Social-Streaming-Gamification",
       behanceLabel: "Apresentação v1 no Behance",
@@ -61,7 +60,8 @@ const STORIES = {
     learning: "Mudar de direção não significa necessariamente começar de novo. Deixar o streaming de lado preservou o problema que eu queria resolver e tornou possível continuar construindo o produto.",
   },
   navaja: {
-    question: "A pesquisa mudou a pergunta: da agenda para a comunicação do corte.",
+    question: "Um aplicativo para ajudar barbeiro e cliente a se entenderem sobre o corte.",
+    categories: ["APLICATIVO", "UX RESEARCH", "PROJETO CONCEITO"],
     roleShort: "Discovery, pesquisa, UX/UI e DS",
     team: "Projeto solo",
     period: "Mar — jun/2026",
@@ -108,7 +108,8 @@ const STORIES = {
     learning: "Se eu tivesse seguido só a hipótese inicial, teria desenhado mais um aplicativo de agenda. A pesquisa me ajudou a encontrar uma pergunta mais relevante: como barbeiro e cliente se entendem sobre o corte?",
   },
   "oficina-do-tenista": {
-    question: "Transformar uma conversa de balcão em uma compra mais guiada.",
+    question: "Uma compra de raquetes tão orientada quanto uma conversa na loja.",
+    categories: ["E-COMMERCE", "SHOPIFY", "AGÊNCIA DISCO"],
     roleShort: "UX/UI, wireframes e handoff",
     team: "Agência Disco",
     period: "2026 · projeto de 90 dias",
@@ -135,7 +136,7 @@ const STORIES = {
       ],
     },
     decisions: [
-      { title: "Começar pelo nível de jogo", choice: "Estruturei o guia de escolha com entradas para iniciante, intermediário e avançado, explicando a ficha técnica no momento certo.", tradeoff: "Acrescentei uma etapa de orientação antes da escolha do modelo." },
+      { title: "Começar pelo nível de jogo", choice: "Estruturei o guia de escolha com entradas para iniciante, intermediário, avançado e competição, explicando a ficha técnica no momento certo.", tradeoff: "Acrescentei uma etapa de orientação antes da escolha do modelo." },
       { title: "Uma página de produto", choice: "Propus uma estrutura única, em vez de três páginas separadas por nível.", tradeoff: "A página precisa atender perfis diferentes, mas evita fragmentar a comparação e a manutenção." },
       { title: "Comparar lado a lado", choice: "Desenhei um comparador de três raquetes com características e preço, no guia e na página de produto.", tradeoff: "Organizei os atributos para facilitar a decisão sem sobrecarregar a primeira leitura." },
     ],
@@ -152,7 +153,76 @@ const STORIES = {
   },
 };
 
-export const CASE_STUDIES = FEATURED_IDS.map((id) => ({ ...CASES.find((c) => c.id === id), ...STORIES[id] }));
+const MODULES = {
+  animae: [
+    {
+      title: "Descobrir o próximo anime",
+      text: "Quis deixar a descoberta mais simples: buscar um título, explorar gêneros e retomar buscas recentes. A pessoa pode conhecer o catálogo antes de criar uma conta. Esse primeiro contato precisava mostrar o valor do produto sem pedir compromisso logo de cara.",
+      layout: "phones",
+      images: [{ src: "/assets/cases/animae-busca.png", width: 430, height: 932, alt: "Busca do ANIMAE com histórico, gêneros e títulos mais buscados", caption: "Busca e descoberta · interface do MVP no Figma." }],
+    },
+    {
+      title: "Uma lista que acompanha o ritmo de cada fã",
+      text: "Organizei os títulos por intenção: assistindo, quero ver e concluídos. O progresso fica junto de cada anime, para a pessoa retomar de onde parou sem procurar essa informação em outra tela. Trabalhei contraste, hierarquia e estados para manter a lista fácil de percorrer.",
+      layout: "phones",
+      images: [{ src: "/assets/cases/animae-lista.png", width: 428, height: 1024, alt: "Minha Lista com filtros de acompanhamento e progresso dos episódios", caption: "Minha Lista · estados e progresso de episódios." }],
+    },
+    {
+      title: "O que eu assisto também vira conversa",
+      text: "No feed, o acompanhamento ganha um lado social. Conclusões, avaliações e animes em comum ajudam a começar uma conversa. No perfil, reuni favoritos, estatísticas e conquistas. A ideia é que a identidade da pessoa apareça no que ela acompanha e compartilha.",
+      layout: "phones",
+      images: [
+        { src: "/assets/cases/animae-feed.png", width: 253, height: 1024, alt: "Feed social do ANIMAE com atividades de amigos e recomendação por interesses em comum", caption: "Feed · atividades, interações e interesses em comum." },
+        { src: "/assets/cases/animae-perfil.png", width: 272, height: 1024, alt: "Perfil do ANIMAE com favoritos, nível, progresso de XP e conquistas", caption: "Perfil · favoritos e progressão. Números ilustrativos do layout." },
+      ],
+    },
+    {
+      title: "Apresentar o universo sem atrasar a entrada",
+      text: "Desenhei o onboarding para apresentar descoberta, organização e comunidade em etapas curtas, com a opção de pular. A identidade visual participa dessa apresentação, mas o caminho para começar continua à vista.",
+      layout: "phones",
+      images: [{ src: "/assets/cases/animae-onboarding.png", width: 430, height: 932, alt: "Onboarding do ANIMAE com apresentação do universo otaku, opção de pular e botão Próximo", caption: "Onboarding · primeira etapa desenhada no Figma." }],
+    },
+    {
+      title: "Do Figma ao produto",
+      text: "Como o projeto é solo, também preciso cuidar do que acontece depois do layout. Estruturei variáveis, componentes e tokens no Figma e levei essa base para o código com auxílio de IA. A landing page apresenta a proposta; o aplicativo concentra a experiência de acompanhar e conversar.",
+      images: [],
+    },
+  ],
+  navaja: [
+    {
+      title: "Escolher o corte começa pela conversa",
+      text: "Parti de referências que o barbeiro já usa no atendimento. A seleção manual do formato do rosto orienta as sugestões; o profissional continua conduzindo a conversa. Na tela de estilos, organizei os cortes em um catálogo visual com filtros para aproximar a ideia do cliente de uma referência concreta.",
+      images: [
+        { src: "/assets/cases/navaja-rosto.png", width: 1024, height: 597, alt: "Navaja: seleção manual do formato do rosto e comprimento desejado", caption: "Sugestão por rosto · seleção manual, sem captura de fotografia." },
+        { src: "/assets/cases/navaja-estilos.png", width: 1024, height: 597, alt: "Catálogo de estilos do Navaja com filtros de comprimento e referências de cortes", caption: "Estilos · catálogo visual para apoiar a conversa no atendimento." },
+      ],
+    },
+    {
+      title: "Uma entrada com identidade própria",
+      text: "Trabalhei a linguagem visual do Navaja para aproximar o aplicativo do universo da barbearia. Contraste, tipografia e componentes dão unidade às telas. O design system serviu de base para o conceito e para o handoff.",
+      images: [STORIES.navaja.gallery[0]],
+    },
+  ],
+  "oficina-do-tenista": [
+    {
+      title: "Primeiro, como você joga?",
+      text: "Comecei o guia pelo nível de jogo, antes das especificações. As entradas vão de iniciante a competição e explicam o que priorizar em cada momento. Quis transformar a orientação da loja em uma sequência que a pessoa conseguisse seguir sozinha.",
+      images: [{ src: "/assets/cases/oficina-guia.png", width: 1024, height: 329, alt: "Guia da Oficina do Tenista com quatro níveis: iniciante, intermediário, avançado e competição", caption: "Guia de raquetes · orientação por nível no Figma da Disco." }],
+    },
+    {
+      title: "A vitrine também orienta a descoberta",
+      text: "Na Home, trabalhei a relação entre campanha, imagem e ação para apresentar as linhas de produto com clareza. O projeto precisava manter a força visual das marcas e dar continuidade à experiência de compra, do primeiro contato até a escolha da raquete.",
+      images: [{ src: "/assets/cases/oficina-home.png", width: 1024, height: 461, alt: "Vitrine da Home Oficina do Tenista, com campanha de tênis e acesso à linha de produtos", caption: "Home · carrossel de campanhas no layout real da Disco." }],
+    },
+    {
+      title: "Comparar para escolher com mais segurança",
+      text: "Coloquei três raquetes lado a lado para que as diferenças aparecessem no mesmo contexto. Peso, equilíbrio, características e preço ajudam a comparar sem alternar entre várias páginas. Esse componente faz parte da proposta do guia e da página de produto.",
+      images: [STORIES["oficina-do-tenista"].gallery[0]],
+    },
+  ],
+};
+
+export const CASE_STUDIES = FEATURED_IDS.map((id) => ({ ...CASES.find((c) => c.id === id), ...STORIES[id], modules: MODULES[id] }));
 export const getCaseStudy = (id) => CASE_STUDIES.find((c) => c.id === id);
 export const nextCaseStudy = (id) => CASE_STUDIES[(FEATURED_IDS.indexOf(id) + 1) % FEATURED_IDS.length];
 

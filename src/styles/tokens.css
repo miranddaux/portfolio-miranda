@@ -57,6 +57,9 @@
   --color-neutral-800: #283247;
   --color-neutral-900: #1b2436;
   --color-neutral-950: #0d1422;
+  --color-success-700: #286b26;
+  --color-success-900: #1d571d;
+  --color-success-border: #164516;
   --color-highlight-amber: #ffdf7d;
   /* Desktop XP: variáveis espelhadas do Figma (coleção Cores, xp/*). */
   --xp-barra-fundo: #245ddb;

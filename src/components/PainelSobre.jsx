@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import ProjectsExplorer from "./ProjectsExplorer.jsx";
 import FotoXP from "./FotoXP.jsx";
 import SocialLink from "./SocialLink.jsx";
 import ResultadosPerfil from "./ResultadosPerfil.jsx";
-import { ABAS_PERFIL as ABAS, BIO_PERFIL, RESUMO_PROJETOS, abaVizinha, buscarNoPerfil } from "../data/perfilSearch.js";
+import { ABAS_PERFIL as ABAS, BIO_PERFIL, abaVizinha, buscarNoPerfil } from "../data/perfilSearch.js";
 import { REDES_PRINCIPAIS } from "../data/social.js";
 import { ADICIONAL, CERTIFICACOES, CONTATO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "../data/perfil.js";
 
@@ -84,7 +85,7 @@ function BotaoBarra({ icone, rotulo, desativado, aoClicar, seta, nomeAcessivel, 
 }
 
 // Conteúdo da janela "Sobre mim" no layout do Painel de Controle (Figma 135:2065).
-export default function PainelSobre({ aoAbrir }) {
+export default function PainelSobre({ aoAbrir, onNavigate }) {
   const [aba, setAba] = useState("sobre");
   const [buscaAberta, setBuscaAberta] = useState(false);
   const [consulta, setConsulta] = useState("");
@@ -119,7 +120,8 @@ export default function PainelSobre({ aoAbrir }) {
     if (!alvoBusca) return;
     const quadro = requestAnimationFrame(() => {
       const item = document.getElementById(alvoBusca);
-      item?.scrollIntoView?.({ block: "center", behavior: "auto" });
+      const scroller = rolagemRef.current;
+      if (item && scroller) scroller.scrollTo?.({ top: item.getBoundingClientRect().top - scroller.getBoundingClientRect().top + scroller.scrollTop - 24, behavior: "auto" });
       item?.focus({ preventScroll: true });
     });
     return () => cancelAnimationFrame(quadro);
@@ -251,10 +253,10 @@ export default function PainelSobre({ aoAbrir }) {
               </button>
             ))}
           </div>
-          <div className="painel-rolagem" ref={rolagemRef}>
+          <div className={`painel-rolagem ${aba === "projetos" && !buscando ? "is-projects" : ""}`} ref={rolagemRef}>
             <div className="painel-limite" id="painel-conteudo" role="tabpanel" aria-labelledby={buscando ? "perfil-resultados-titulo" : `aba-${aba}`}>
               {buscando ? <ResultadosPerfil consulta={consulta} resultados={resultados} aoSelecionar={selecionarResultado} /> : <>
-              <h3 className="painel-titulo">{atual.endereco}</h3>
+              {aba !== "projetos" && <h3 className="painel-titulo">{atual.endereco}</h3>}
 
               {aba === "sobre" && (
                 <div className="painel-cartao painel-perfil" id="perfil-sobre" tabIndex={-1}>
@@ -308,12 +310,8 @@ export default function PainelSobre({ aoAbrir }) {
               )}
 
               {aba === "projetos" && (
-                <div className="painel-cartao" id="perfil-projetos" tabIndex={-1}>
-                  <p>{RESUMO_PROJETOS}</p>
-                  <div className="painel-acoes">
-                    <button type="button" className="xp-button" onClick={() => aoAbrir("cases")}>Abrir projetos</button>
-                    <button type="button" className="xp-button" onClick={() => aoAbrir("playground")}>Abrir playground</button>
-                  </div>
+                <div className="perfil-projects" id="perfil-projetos" tabIndex={-1}>
+                  <ProjectsExplorer onNavigate={onNavigate} embedded />
                 </div>
               )}
 

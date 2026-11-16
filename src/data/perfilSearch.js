@@ -6,12 +6,12 @@ export const ABAS_PERFIL = [
   { id: "experiencia", nome: "Experiência", endereco: "Experiência" },
   { id: "educacao", nome: "Educação", endereco: "Educação" },
   { id: "habilidades", nome: "Habilidades", endereco: "Habilidades" },
-  { id: "projetos", nome: "Projetos", endereco: "Projetos e playground" },
+  { id: "projetos", nome: "Projetos", endereco: "Projetos" },
   { id: "contato", nome: "Contato", endereco: "Entre em contato" },
 ];
 
 export const BIO_PERFIL = "Sou Product Designer em São José do Rio Preto. De dia, desenho e-commerces na Shopify pela Agência Disco. À noite, crio pequenos projetos na interseção entre design e código.";
-export const RESUMO_PROJETOS = "Cases de e-commerce, apps e design systems, com contexto, decisões e resultado. No playground ficam experimentos entre design e código.";
+export const RESUMO_PROJETOS = "ANIMAE, Navaja e Oficina do Tenista: produto próprio, aplicativo e e-commerce, com contexto, decisões e interfaces.";
 
 const experiencias = (itens, prefixo) => itens.map((item, i) => ({
   id: `perfil-${prefixo}-${i}`,
@@ -36,7 +36,7 @@ const INDICE = [
   ...HABILIDADES.map((item, i) => ({ id: `perfil-habilidade-${i}`, aba: "habilidades", titulo: item.nome, texto: "Habilidades" })),
   { id: "perfil-ferramentas", aba: "habilidades", titulo: "Ferramentas", texto: FERRAMENTAS.join(" · ") },
   { id: "perfil-linguas", aba: "habilidades", titulo: "Línguas", texto: LINGUAS.join(" · ") },
-  { id: "perfil-projetos", aba: "projetos", titulo: "Projetos e playground", texto: RESUMO_PROJETOS },
+  { id: "perfil-projetos", aba: "projetos", titulo: "Projetos", texto: RESUMO_PROJETOS },
   { id: "perfil-contato", aba: "contato", titulo: "Entre em contato", texto: `${Object.values(CONTATO).join(" · ")} · ${Object.values(REDES_SOCIAIS).map((r) => r.nome).join(" · ")}` },
 ];
 

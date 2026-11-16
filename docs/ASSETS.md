@@ -154,3 +154,24 @@ O componente `SocialLink` compartilha ícone, nome, foco e destinos entre MSN,
 Sobre mim, Contato, janela de e-mail e modos editoriais. O nome de nenhuma rede
 fica oculto em janelas estreitas. Ícones usam caixas de 16 px nos links compactos
 e 24 px nos cards, com `object-fit: contain` para preservar a proporção.
+
+## Novas telas dos cases — 16/11/2026
+
+Imagens preservadas como PNG, sem retoques. As molduras de celular são HTML/CSS.
+As capturas dos projetos contêm dados ilustrativos de UI, não métricas de resultado.
+
+| Arquivo em public/assets/cases | Origem |
+| --- | --- |
+| animae-busca.png | Figma Sdyl9kTkLtCZaIN13yvIgd, nó 1514:8703 |
+| animae-feed.png | Mesmo arquivo, nó 1399:2221 |
+| animae-perfil.png | Mesmo arquivo, nó 1394:4346 |
+| animae-onboarding.png | Mesmo arquivo, nó 1351:6756 |
+| oficina-home.png | Figma zPqNhCbwO8DDnnouXZfa5a, nó 4001:58593 |
+| oficina-guia.png | Mesmo arquivo, nó 4001:59029 |
+| navaja-estilos.png | Portfólio publicado de Thiago; Framer 1uIKFSwW7MVym1mgLMhyoJrHxc.png, variante 1024 |
+| navaja-rosto.png | Mesmo portfólio; Framer VKfRNDhIpmbBZ4hFSZAlpSkCV7U.png, variante 1024 |
+
+As imagens Navaja vêm de https://thiagomirandaux.framer.website/work/navaja.
+A captura atual da LP https://animaeapp.com.br/ continua pendente; o espaço no case
+é identificado como captura em preparação. Nenhum print de referência foi usado
+como se fosse uma tela do ANIMAE.

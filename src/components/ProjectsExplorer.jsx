@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { CASE_STUDIES, PENDING_PROJECTS, projectLinkAction } from "../data/caseStudies.js";
 
 const FOLDER = "/assets/xp/figma/pasta.png";
 const normalize = (s) => s.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
 
-export function ProjectsToolbar({ title = "Projetos", onBack, onSearch, searchOpen }) {
+export function ProjectsToolbar({ title = "Projetos", onBack, onSearch, searchOpen, searchId = "projects" }) {
   return (
     <div className="projects-chrome">
       <div className="projects-menubar" aria-hidden="true">
@@ -15,7 +15,7 @@ export function ProjectsToolbar({ title = "Projetos", onBack, onSearch, searchOp
         <button type="button" onClick={onBack} disabled={!onBack} aria-label="Voltar às pastas">
           <img src="/assets/xp/painel/voltar.png" alt="" width="24" height="24" /> Voltar
         </button>
-        {onSearch && <button id="projects-search-toggle" type="button" onClick={onSearch} aria-expanded={searchOpen} aria-controls={searchOpen ? "projects-search-form" : undefined}>
+        {onSearch && <button id={`${searchId}-toggle`} type="button" onClick={onSearch} aria-expanded={searchOpen} aria-controls={searchOpen ? `${searchId}-form` : undefined}>
           <img src="/assets/xp/painel/busca.png" alt="" width="24" height="24" /> Buscar
         </button>}
         <span className="projects-toolbar-label">Portfólio Miranda</span>
@@ -28,27 +28,28 @@ export function ProjectsToolbar({ title = "Projetos", onBack, onSearch, searchOp
   );
 }
 
-export default function ProjectsExplorer({ onNavigate }) {
+export default function ProjectsExplorer({ onNavigate, embedded = false }) {
+  const searchId = useId();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [notice, setNotice] = useState("3 cases disponíveis. Selecione uma pasta para conhecer o projeto.");
+  const [notice, setNotice] = useState("");
   const searchRef = useRef(null);
   const items = [...CASE_STUDIES.map((c) => ({ ...c, category: c.type, available: true })), ...PENDING_PROJECTS];
-  const visible = items.filter((p) => normalize(`${p.title} ${p.category}`).includes(normalize(query.trim())));
+  const visible = items.filter((p) => normalize(`${p.title} ${p.category} ${(p.categories || []).join(" ")}`).includes(normalize(query.trim())));
   function toggleSearch() {
     setSearchOpen(!searchOpen);
     setQuery("");
-    if (!searchOpen) requestAnimationFrame(() => searchRef.current?.focus());
-    else requestAnimationFrame(() => document.getElementById("projects-search-toggle")?.focus());
+    if (!searchOpen) requestAnimationFrame(() => searchRef.current?.focus({ preventScroll: true }));
+    else requestAnimationFrame(() => document.getElementById(`${searchId}-toggle`)?.focus({ preventScroll: true }));
   }
   return (
-    <div className="projects-explorer">
-      <ProjectsToolbar onSearch={toggleSearch} searchOpen={searchOpen} />
-      {searchOpen && <form id="projects-search-form" className="projects-search" role="search" aria-label="Buscar projetos" onSubmit={(e) => e.preventDefault()} onKeyDown={(e) => {
+    <div className={`projects-explorer ${embedded ? "is-embedded" : ""}`}>
+      {!embedded ? <ProjectsToolbar onSearch={toggleSearch} searchOpen={searchOpen} searchId={searchId} /> : <div className="projects-embedded-heading"><h3>Meus Projetos</h3><button id={`${searchId}-toggle`} type="button" className="xp-button" onClick={toggleSearch} aria-expanded={searchOpen} aria-controls={searchOpen ? `${searchId}-form` : undefined}>Buscar projetos</button></div>}
+      {searchOpen && <form id={`${searchId}-form`} className="projects-search" role="search" aria-label="Buscar projetos" onSubmit={(e) => e.preventDefault()} onKeyDown={(e) => {
         if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); toggleSearch(); }
       }}>
-        <label htmlFor="projects-search">Nome ou categoria</label>
-        <input ref={searchRef} id="projects-search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ANIMAE, Navaja, e-commerce…" />
+        <label htmlFor={`${searchId}-input`}>Nome ou categoria</label>
+        <input ref={searchRef} id={`${searchId}-input`} type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ANIMAE, Navaja, e-commerce…" />
         <button type="button" className="xp-button" onClick={toggleSearch}>Fechar busca</button>
       </form>}
       <div className="projects-folders-scroll">
@@ -74,7 +75,7 @@ export default function ProjectsExplorer({ onNavigate }) {
         </ul>
         {!visible.length && <p className="projects-empty" role="status">Nenhum projeto encontrado. Tente outro nome ou categoria.</p>}
       </div>
-      <p className="projects-notice" role="status">{query ? `${visible.length} pastas encontradas.` : notice}</p>
+      <p className="projects-notice sr-only" role="status">{query ? `${visible.length} pastas encontradas.` : notice}</p>
     </div>
   );
 }

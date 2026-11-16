@@ -944,3 +944,17 @@ html[data-mode="xp"] .case-page .case-page-lead {
     opacity: 1;
   }
 }
+/* O desktop ocupa o viewport. Somente o conteúdo das janelas pode rolar. */
+html[data-layout="desktop"],
+html[data-layout="desktop"] body,
+html[data-layout="desktop"] #root { height: 100%; overflow: hidden; overscroll-behavior: none; }
+html[data-layout="desktop"] .site-shell.is-xp-desktop { position: fixed; inset: 0; height: 100dvh; overflow: clip; }
+html[data-layout="desktop"] .xp-desktop { height: 100%; min-height: 0; overflow: clip; }
+html[data-layout="desktop"] .painel-rolagem { overscroll-behavior: contain; }
+/* Mesmo relevo XP, com contraste AA do rótulo em todo o gradiente. */
+.xp-button { background: linear-gradient(var(--color-blue-700), var(--color-blue-900)); color: var(--color-neutral-50); }
+.xp-button:hover { filter: none; background: var(--color-blue-800); }
+.xp-button::before { border-left-color: var(--color-neutral-50); }
+.xp-button--success { border-color: var(--color-success-border); background: linear-gradient(var(--color-success-700), var(--color-success-900)); text-shadow: 0 1px 1px var(--color-success-border); }
+.xp-button--success:hover { background: var(--color-success-900); }
+.xp-button--success:active { background: var(--color-success-border); }
