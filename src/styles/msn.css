@@ -1091,9 +1091,6 @@ button.msn-aba-x:hover {
   flex-wrap: wrap;
   gap: 4px;
 }
-.msn-quadro img[src*="thiago-retro"] {
-  image-rendering: pixelated;
-}
 
 /* Ícones da barra da conversa: mesma opacidade; o Bloquear fica sem opacidade */
 .msn-ferramenta img {
