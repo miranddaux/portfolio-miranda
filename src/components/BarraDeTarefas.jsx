@@ -57,7 +57,7 @@ export default function BarraDeTarefas({
       </span>
       <div className="bandeja">
         <button className="bandeja-msn" onClick={aoClicarMsn} aria-label="Abrir Messenger" title="Messenger">
-          <img src="/assets/xp/msn/logo-32.png" alt="" width="20" height="20" />
+          <img src="/assets/xp/msn/logo-32.png" alt="" width="16" height="16" />
         </button>
         <span className="bandeja-info-caixa">
         <button

@@ -102,3 +102,9 @@ Pedido explícito do Thiago: usar os assets do MSN do Figma para chegar mais per
 - Esses emoticons, ícones e o som são material associado à Microsoft (MSN Messenger). Não são
   criações originais do Miranda nem recursos com licença aberta. Ficam documentados aqui para
   a decisão de publicação.
+
+### Rodada 15/11 (noite) — arquivos enviados pelo Thiago
+- `public/assets/xp/msn/moldura.png` — moldura da imagem de exibição (185×185, original).
+- `public/assets/xp/msn/thiago-bot.webp` — retrato do Thiago Bot, reduzido para 256×256.
+- `public/assets/xp/msn/banner.webp` — banner "Portfólio Thiago Live Messenger", reduzido para 660×221 (tem a bandeira do Windows e os bonecos do MSN).
+- `public/assets/audio/msn-chamar.mp3` — som de chamar a atenção, cortado do arquivo enviado (1,6 s).

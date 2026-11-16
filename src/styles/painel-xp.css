@@ -1239,3 +1239,12 @@ button.painel-rede {
   font-size: 12px;
   line-height: 16px;
 }
+
+/* Foto já carregada nesta visita: sem repetir o efeito */
+.foto-xp.is-vista img,
+.foto-xp.is-vista::after {
+  animation: none;
+}
+.foto-xp.is-vista::after {
+  display: none;
+}

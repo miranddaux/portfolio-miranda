@@ -32,7 +32,7 @@ const APPS = [
   },
   { id: "curriculo", name: "Meu currículo", title: "Meu currículo", icon: "document" },
   { id: "msn", name: "Messenger", title: "Messenger", icon: "mail" },
-  { id: "msnchat", name: "ThiagoBot", title: "Conversa com ThiagoBot", icon: "mail" },
+  { id: "msnchat", name: "Thiago Bot", title: "Conversa com Thiago Bot", icon: "mail" },
 ];
 const APPS_JANELAS = [
   { ...APPS[0], janelaIcone: "/assets/xp/painel/painel-icone.png", largura: 1000, altura: 704, cascata: 0 },
@@ -40,7 +40,7 @@ const APPS_JANELAS = [
   { ...APPS[2], janelaIcone: "/assets/xp/area/contato.png", largura: 560, altura: 464, cascata: 2, minLargura: 400, semStatus: true },
   { ...APPS[3], janelaIcone: "/assets/xp/painel/programas.png", largura: 640, altura: 440, cascata: 3 },
   { ...APPS[4], janelaIcone: "/assets/xp/area/curriculo.png", largura: 600, altura: 768, cascata: 1 },
-  { ...APPS[5], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 656, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
+  { ...APPS[5], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 728, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
   { ...APPS[6], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
 ];
 export default function XPDesktop({ setMode, onShowWelcome }) {
@@ -187,6 +187,7 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
               {app.id === "msnchat" && (
                 <MsnConversa
                   ativa={active === "msnchat"}
+                  aoFechar={() => hide("msnchat", "closed")}
                   aoAbrir={open}
                   aoChamar={() => {
                     setTremer((n) => n + 1);

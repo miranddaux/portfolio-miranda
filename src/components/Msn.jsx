@@ -5,12 +5,12 @@ import { EMOTICONS, partesComEmoticons } from "../data/emoticons.js";
 import { CONTATO } from "../data/perfil.js";
 import { somChamar, somEnviar, somMensagem } from "../lib/sons";
 
+export const NOME_BOT = "Thiago Bot";
 const FOTO = "/assets/xp/foto-thiago-rosto.webp";
-const ROBO = "/assets/xp/msn/robo.svg";
+const FOTO_BOT = "/assets/xp/msn/thiago-bot.webp";
 const LOGO = "/assets/xp/msn/logo-32.png";
-const LOGO_GRANDE = "/assets/xp/msn/logo-64.png";
+const BANNER = "/assets/xp/msn/banner.webp";
 const EMO = (n) => `/assets/xp/msn/emoticons/${n}.png`;
-const BARRA = "/assets/xp/msn/barra";
 
 // Imagens de exibição do visitante (Figma "MSN Assets"), como no "Minha imagem de exibição".
 const FOTOS_VISITANTE = [
@@ -27,18 +27,19 @@ const lerFoto = () => {
   }
 };
 
-// Contatos fictícios só de enfeite (como no MSN); só o ThiagoBot abre conversa.
+// Contatos fictícios só de enfeite (como no MSN); só o Thiago Bot abre conversa.
+// As frases usam os emoticons do pack do Figma (códigos em src/data/emoticons.js).
 const CONTATOS = [
-  { nome: "ThiagoBot", status: "Thiago está disponível para conversar", online: true, bot: true },
-  { nome: "Ana Lopes", status: "auto layout salvou meu dia (*)", online: true },
-  { nome: "Rafa Mendes", status: "handoff enviado, agora é com o dev :P", online: true },
-  { nome: "Bia Torres", status: "raid às 21h, não me chama", online: true, ocupado: true },
-  { nome: "Léo Martins", status: "jantar (D)", online: true, ausente: true },
-  { nome: "Lucas Prado", status: "reiniciando o PC, 2 min", online: false },
-  { nome: "Carla Nunes", status: "fui pra faculdade", online: false },
-  { nome: "Pedro Alves", status: "", online: false },
-  { nome: "Júlia Reis", status: "fotos da festa no orkut (L)", online: false },
-  { nome: "Duda Lima", status: "revisão de matemática :(", online: false },
+  { nome: NOME_BOT, status: "pergunte qualquer coisa sobre o Thiago (I)", online: true, bot: true },
+  { nome: "Ana Lopes", status: "auto layout salvou meu dia (*) (H)", online: true },
+  { nome: "Rafa Mendes", status: "handoff enviado, agora é com o dev :D (B)", online: true },
+  { nome: "Bia Torres", status: "raid às 21h, não me chama :@", online: true, ocupado: true },
+  { nome: "Léo Martins", status: "jantar (D) volto já", online: true, ausente: true },
+  { nome: "Lucas Prado", status: "reiniciando o PC, 2 min |-)", online: false },
+  { nome: "Carla Nunes", status: "fui pra faculdade (8)", online: false },
+  { nome: "Pedro Alves", status: "(S) boa noite, galera", online: false },
+  { nome: "Júlia Reis", status: "fotos da festa no orkut (L) <:o)", online: false },
+  { nome: "Duda Lima", status: "revisão de matemática :'(", online: false },
 ];
 
 // Texto com emoticons do MSN no lugar dos códigos (:) ;) (L) ...).
@@ -68,6 +69,16 @@ export function Boneco({ online = true, ocupado, ausente, tamanho = 16 }) {
   );
 }
 
+// Moldura da imagem de exibição (arquivo enviado pelo Thiago: public/assets/xp/msn/moldura.png).
+function Moldura({ src, alt = "", tamanho = 120, className = "", ...resto }) {
+  const Tag = resto.onClick ? "button" : "span";
+  return (
+    <Tag className={`msn-quadro ${className}`} style={{ "--quadro": `${tamanho}px` }} {...(Tag === "button" ? { type: "button" } : {})} {...resto}>
+      <img src={src} alt={alt} width={tamanho} height={tamanho} />
+    </Tag>
+  );
+}
+
 function MenuJanela({ itens }) {
   return (
     <div className="painel-menu msn-menu" aria-hidden="true">
@@ -78,6 +89,54 @@ function MenuJanela({ itens }) {
         </span>
       ))}
     </div>
+  );
+}
+
+/* Ícones da barra da conversa, desenhados no estilo do MSN (traço azul-acinzentado). */
+const ICONES = {
+  convidar: (
+    <>
+      <circle cx="9" cy="7" r="3.5" />
+      <path d="M2.5 19c.5-4 3-6 6.5-6s6 2 6.5 6" />
+      <path d="M18 6v6M15 9h6" />
+    </>
+  ),
+  arquivos: (
+    <>
+      <path d="M3 7h6l2 2h8v9H3z" />
+      <path d="M8 13h8M12 11v5" />
+    </>
+  ),
+  voz: (
+    <>
+      <path d="M6 3l3 4-2 2c1 2 3 4 5 5l2-2 4 3-2 3c-6 0-13-7-13-13z" />
+    </>
+  ),
+  video: (
+    <>
+      <rect x="2.5" y="6" width="12" height="11" rx="1.5" />
+      <path d="M14.5 10l6-3.5v10l-6-3.5" />
+    </>
+  ),
+  pincel: (
+    <>
+      <path d="M20 3c-4 3-7 6-9 9l2 2c3-2 6-5 9-9z" />
+      <path d="M10 13c-3 0-4 2-4 4s-2 3-3 3c3 1 8 0 8-4z" />
+    </>
+  ),
+  pesquisar: (
+    <>
+      <circle cx="10" cy="10" r="5.5" />
+      <path d="M14 14l6 6" />
+    </>
+  ),
+  caneta: <path d="M4 20l1-4L16 5l3 3L8 19zM14 7l3 3" />,
+};
+function Icone({ nome, tamanho = 24 }) {
+  return (
+    <svg className="msn-svg" width={tamanho} height={tamanho} viewBox="0 0 24 24" aria-hidden="true">
+      {ICONES[nome]}
+    </svg>
   );
 }
 
@@ -99,9 +158,7 @@ export function MsnContatos({ aoConversar }) {
           <img src={LOGO} alt="" width="16" height="16" /> <b>Portfólio</b> Messenger
         </p>
         <div className="msn-perfil">
-          <span className="msn-moldura">
-            <img src={FOTO} alt="Foto de Thiago Miranda" width="56" height="56" />
-          </span>
+          <Moldura src={FOTO} alt="Foto de Thiago Miranda" tamanho={64} />
           <div className="msn-perfil-texto">
             <p className="msn-nome">
               <strong>Thiago Miranda</strong> <span>(Disponível para trabalho)</span> <span aria-hidden="true" className="msn-seta-menu">▾</span>
@@ -126,100 +183,85 @@ export function MsnContatos({ aoConversar }) {
       </div>
 
       <div className="msn-meio">
-        <div className="msn-abas-lat" aria-hidden="true">
-          <span className="is-ativa"><img src="/assets/xp/msn/online-32.png" alt="" width="24" height="24" /></span>
-          <span><img src={EMO(1)} alt="" width="24" height="24" /></span>
-          <span><img src={EMO(31)} alt="" width="24" height="24" /></span>
-          <span><img src={EMO(23)} alt="" width="24" height="24" /></span>
-          <span><img src={EMO(40)} alt="" width="24" height="24" /></span>
+        <a className="msn-adicionar" href={CONTATO.linkedin} target="_blank" rel="noreferrer" title="Adicionar o Thiago no LinkedIn">
+          <span aria-hidden="true" className="msn-mais">+</span> Adicionar um contato
+        </a>
+        <div className="msn-busca">
+          <label className="sr-only" htmlFor="msn-busca">Procurar um contato</label>
+          <input id="msn-busca" type="search" placeholder="Procurar um contato..." value={busca} onChange={(e) => setBusca(e.target.value)} />
         </div>
-        <div className="msn-meio-lista">
-          <a className="msn-adicionar" href={CONTATO.linkedin} target="_blank" rel="noreferrer" title="Adicionar o Thiago no LinkedIn">
-            <span aria-hidden="true" className="msn-mais">+</span> Adicionar um contato
-          </a>
-          <div className="msn-busca">
-            <label className="sr-only" htmlFor="msn-busca">Procurar um contato</label>
-            <input id="msn-busca" type="search" placeholder="Procurar um contato..." value={busca} onChange={(e) => setBusca(e.target.value)} />
-          </div>
-          <ul className="msn-lista">
-            {grupos.map((g) => (
-              <li key={g.id}>
-                <button type="button" className="msn-grupo" aria-expanded={abertos[g.id]} onClick={() => setAbertos((a) => ({ ...a, [g.id]: !a[g.id] }))}>
-                  <span aria-hidden="true" className="msn-caixa">{abertos[g.id] ? "−" : "+"}</span>
-                  <strong>{g.titulo} ({g.itens.length})</strong>
-                </button>
-                {abertos[g.id] && (
-                  <ul>
-                    {g.itens.map((c) => {
-                      const conteudo = (
-                        <>
-                          <Boneco online={c.online} ocupado={c.ocupado} ausente={c.ausente} />
-                          <strong>{c.nome}</strong>
-                          {(c.ocupado || c.ausente || c.status) && (
-                            <span className="msn-st">
-                              {(c.ocupado || c.ausente) && ` (${c.ocupado ? "Ocupado" : "Ausente"})`}
-                              {c.status && (
-                                <>
-                                  {" "}- <ComEmoticons texto={c.status} tamanho={16} />
-                                </>
-                              )}
-                            </span>
-                          )}
-                        </>
-                      );
-                      return (
-                        <li key={c.nome}>
-                          {c.bot ? (
-                            <button type="button" className="msn-contato is-bot" onClick={aoConversar}>
-                              {conteudo}
-                            </button>
-                          ) : (
-                            <span className={`msn-contato ${c.online ? "" : "is-off"}`} title="Contato de enfeite">
-                              {conteudo}
-                            </span>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="msn-lista">
+          {grupos.map((g) => (
+            <li key={g.id}>
+              <button type="button" className="msn-grupo" aria-expanded={abertos[g.id]} onClick={() => setAbertos((a) => ({ ...a, [g.id]: !a[g.id] }))}>
+                <span aria-hidden="true" className="msn-caixa">{abertos[g.id] ? "−" : "+"}</span>
+                <strong>{g.titulo} ({g.itens.length})</strong>
+              </button>
+              {abertos[g.id] && (
+                <ul>
+                  {g.itens.map((c) => {
+                    const conteudo = (
+                      <>
+                        <Boneco online={c.online} ocupado={c.ocupado} ausente={c.ausente} />
+                        <strong>{c.nome}</strong>
+                        {(c.ocupado || c.ausente || c.status) && (
+                          <span className="msn-st">
+                            {(c.ocupado || c.ausente) && ` (${c.ocupado ? "Ocupado" : "Ausente"})`}
+                            {c.status && (
+                              <>
+                                {" "}- <ComEmoticons texto={c.status} tamanho={16} />
+                              </>
+                            )}
+                          </span>
+                        )}
+                      </>
+                    );
+                    return (
+                      <li key={c.nome}>
+                        {c.bot ? (
+                          <button type="button" className="msn-contato is-bot" onClick={aoConversar}>
+                            {conteudo}
+                          </button>
+                        ) : (
+                          <span className={`msn-contato ${c.online ? "" : "is-off"}`} title="Contato de enfeite">
+                            {conteudo}
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="msn-rodape">
-        <button type="button" className="msn-banner" onClick={aoConversar}>
-          <img src={LOGO_GRANDE} alt="" width="40" height="40" />
-          <span className="msn-banner-txt">
-            <span>
-              <b>Portfólio</b> Messenger
-            </span>
-            <small>Converse com o ThiagoBot</small>
-          </span>
+        <button type="button" className="msn-banner" onClick={aoConversar} title={`Conversar com o ${NOME_BOT}`}>
+          <img src={BANNER} alt={`Portfólio Thiago Live Messenger — conversar com o ${NOME_BOT}`} width="330" height="110" />
         </button>
       </div>
     </div>
   );
 }
 
-/* ---------- Conversa ---------- */
+/* ---------- Conversa (layout da referência MitchBot + benchmark MSN) ---------- */
 const agora = () => {
   const d = new Date();
   const p = (n) => String(n).padStart(2, "0");
   return `${p(d.getDate())}/${p(d.getMonth() + 1)}/${d.getFullYear()} às ${p(d.getHours())}:${p(d.getMinutes())}`;
 };
 
-function BotaoBarra({ img, rotulo, onClick }) {
+function BotaoIcone({ icone, rotulo, onClick, children }) {
   return (
-    <button type="button" className="msn-ferramenta" onClick={onClick} title={rotulo}>
-      <img src={`${BARRA}/${img}.png`} alt="" width="32" height="32" />
-      <span>{rotulo}</span>
+    <button type="button" className="msn-ferramenta" onClick={onClick} title={rotulo} aria-label={rotulo}>
+      <Icone nome={icone} />
+      {children}
     </button>
   );
 }
 
-export function MsnConversa({ aoAbrir, ativa, aoChamar }) {
+export function MsnConversa({ aoAbrir, ativa, aoChamar, aoFechar }) {
   const [msgs, setMsgs] = useState([]);
   const [texto, setTexto] = useState("");
   const [digitando, setDigitando] = useState(false);
@@ -297,42 +339,59 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar }) {
   const chamarAtencao = () => {
     somChamar();
     aoChamar?.();
-    setMsgs((m) => [...m, { de: "sistema", texto: "Você chamou a atenção de ThiagoBot." }]);
+    setMsgs((m) => [...m, { de: "sistema", texto: `Você chamou a atenção de ${NOME_BOT}.` }]);
     falarBot(["Opa! Não precisa chamar a atenção, eu já estou aqui. :D"]);
   };
 
   const bloquear = () => falarBot(["Poxa, não me bloqueia! :'( Se preferir, fale direto com o Thiago no LinkedIn."], { acao: { rotulo: "Abrir LinkedIn", link: CONTATO.linkedin } });
   const chamada = () => falarBot(["Por aqui é só texto. :) Para uma conversa por vídeo ou voz, chame o Thiago no LinkedIn."], { acao: { rotulo: "Abrir LinkedIn", link: CONTATO.linkedin } });
-  const jogos = () => falarBot(["Os jogos ainda estão sendo montados no Playground. (*) Enquanto isso, que tal ver os projetos?"], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
-  const atividades = () => falarBot(["Uma boa atividade: conhecer os 3 cases em destaque. (I)"], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
+  const arquivos = () => falarBot(["O arquivo mais útil daqui é o currículo do Thiago, em português e inglês. (I)"], { acao: { rotulo: "Abrir Meu currículo", abrir: "curriculo" } });
+  const convidar = () => falarBot(["Quer chamar alguém do seu time? Mande um e-mail para o Thiago e ele responde todo mundo. ({)(})"], { acao: { rotulo: "Abrir Contato", abrir: "contato" } });
+  const tema = () => falarBot(["O visual desta janela é uma homenagem ao MSN. (H) O design system do portfólio está nos projetos."], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
 
   return (
     <div className="msn-conversa">
-      <MenuJanela itens={["Arquivo", "Editar", "Ações", "Ferramentas", "Ajuda"]} />
+      <div className="msn-abas" role="presentation">
+        <span className="msn-aba is-ativa">
+          <Boneco /> {NOME_BOT}
+          {aoFechar ? (
+            <button type="button" className="msn-aba-x" onClick={aoFechar} aria-label="Fechar conversa">×</button>
+          ) : (
+            <span aria-hidden="true" className="msn-aba-x">×</span>
+          )}
+        </span>
+      </div>
+      <div className="msn-cab">
+        <Boneco tamanho={20} />
+        <div>
+          <strong>{NOME_BOT}</strong>
+          <span>Thiago está disponível para projetos</span>
+        </div>
+      </div>
       <div className="msn-barra">
-        <BotaoBarra img="video" rotulo="Vídeo" onClick={chamada} />
-        <BotaoBarra img="voz" rotulo="Voz" onClick={chamada} />
-        <BotaoBarra img="atividades" rotulo="Atividades" onClick={atividades} />
-        <BotaoBarra img="jogos" rotulo="Jogos" onClick={jogos} />
-        <span className="msn-barra-sep" aria-hidden="true" />
-        <BotaoBarra img="bloquear" rotulo="Bloquear" onClick={bloquear} />
-        <img className="msn-barra-logo" src={LOGO} alt="" width="24" height="24" />
+        <BotaoIcone icone="convidar" rotulo="Convidar alguém para a conversa" onClick={convidar} />
+        <BotaoIcone icone="arquivos" rotulo="Enviar arquivos" onClick={arquivos} />
+        <BotaoIcone icone="voz" rotulo="Chamada de voz" onClick={chamada} />
+        <BotaoIcone icone="video" rotulo="Chamada de vídeo" onClick={chamada} />
+        <button type="button" className="msn-bloquear" onClick={bloquear}>
+          <Boneco ocupado /> Bloquear
+        </button>
+        <span className="msn-barra-dir">
+          <BotaoIcone icone="pincel" rotulo="Tema da janela" onClick={tema} />
+        </span>
       </div>
       <div className="msn-corpo">
         <div className="msn-chat">
-          <p className="msn-para">
-            Para: <strong>ThiagoBot</strong> <span>&lt;assistente do portfólio&gt;</span>
-          </p>
           <div className="msn-mensagens" ref={rolagem} role="log" aria-live="polite" aria-label="Conversa">
             <p className="msn-info">
-              <img src="/assets/xp/figma/informacao.png" alt="" width="16" height="16" /> Thiago está disponível para conversar. As respostas são automáticas.
+              <img src="/assets/xp/figma/informacao.png" alt="" width="16" height="16" /> Thiago está disponível para projetos
             </p>
             {msgs.map((m, i) =>
               m.de === "sistema" ? (
                 <p key={i} className="msn-sistema">{m.texto}</p>
               ) : (
                 <div key={i} className={`msn-msg ${m.de === "bot" ? "is-bot" : "is-voce"}`}>
-                  {(i === 0 || msgs[i - 1].de !== m.de) && <p className="msn-diz">{m.de === "bot" ? "ThiagoBot diz:" : "Você diz:"}</p>}
+                  {(i === 0 || msgs[i - 1].de !== m.de) && <p className="msn-diz">{m.de === "bot" ? `${NOME_BOT} diz:` : "Você diz:"}</p>}
                   <p className="msn-texto">
                     <ComEmoticons texto={m.texto} />
                   </p>
@@ -360,7 +419,6 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar }) {
           <div className="msn-divisor" aria-hidden="true" />
           <div className="msn-escrever">
             <div className="msn-formatar">
-              <span className="msn-fonte" aria-hidden="true" title="Fonte">A</span>
               <button
                 type="button"
                 className="msn-formatar-btn"
@@ -370,11 +428,12 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar }) {
                 title="Emoticons"
               >
                 <img src={EMO(1)} alt="" width="20" height="20" />
-                <span aria-hidden="true">▾</span>
+                <span aria-hidden="true" className="msn-seta-mini">▾</span>
                 <span className="sr-only">Escolher um emoticon</span>
               </button>
               <button type="button" className="msn-formatar-btn" onClick={() => inserir(";)")} title="Enviar uma piscadela">
                 <img src={EMO(3)} alt="" width="20" height="20" />
+                <span aria-hidden="true" className="msn-seta-mini">▾</span>
                 <span className="sr-only">Piscadela</span>
               </button>
               <button type="button" className="msn-formatar-btn msn-chamar" onClick={chamarAtencao} title="Chamar a atenção">
@@ -383,6 +442,11 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar }) {
                 <span aria-hidden="true">))</span>
                 <span className="sr-only">Chamar a atenção</span>
               </button>
+              <button type="button" className="msn-formatar-btn" onClick={chamada} title="Clipe de voz">
+                <Icone nome="voz" tamanho={20} />
+                <span className="sr-only">Clipe de voz</span>
+              </button>
+              <span className="msn-ab" aria-hidden="true">AB</span>
               {painel === "emoticons" && (
                 <div className="msn-popup msn-emoticons" role="dialog" aria-label="Emoticons">
                   <p className="msn-popup-titulo">Seus emoticons</p>
@@ -417,22 +481,33 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar }) {
                   }
                 }}
               />
-              <button type="submit" className="msn-enviar" disabled={!texto.trim()}>
-                Enviar
-              </button>
+              <div className="msn-escrever-rodape">
+                <span className="msn-fonte is-ativa" aria-hidden="true">A</span>
+                <span className="msn-caneta" aria-hidden="true">
+                  <Icone nome="caneta" tamanho={16} />
+                </span>
+                <button type="submit" className="msn-enviar" disabled={!texto.trim()}>
+                  Enviar
+                </button>
+                <span className="msn-pesquisar" aria-hidden="true">
+                  <Icone nome="pesquisar" tamanho={16} />
+                </span>
+              </div>
             </form>
           </div>
           <p className="msn-status">
-            {digitando ? "ThiagoBot está digitando uma mensagem..." : ultima ? `Última mensagem recebida em ${ultima}.` : " "}
+            {digitando ? `${NOME_BOT} está digitando uma mensagem...` : ultima ? `Última mensagem recebida em ${ultima}.` : " "}
           </p>
         </div>
         <div className="msn-avatares">
-          <div>
-            <span className="msn-moldura grande">
-              <img src={ROBO} alt="" width="96" height="96" />
+          <div className="msn-avatar-bloco">
+            <Moldura src={FOTO_BOT} alt={`Imagem de exibição do ${NOME_BOT}`} tamanho={112} />
+            <span className="msn-sob-foto" aria-hidden="true">
+              <img src="/assets/xp/msn/online-32.png" alt="" width="16" height="16" />
+              <span>▾</span>
             </span>
           </div>
-          <div className="msn-minha-foto">
+          <div className="msn-avatar-bloco msn-minha-foto">
             {painel === "foto" && (
               <div className="msn-popup msn-fotos" role="dialog" aria-label="Minha imagem de exibição">
                 <p className="msn-popup-titulo">Minha imagem de exibição</p>
@@ -447,16 +522,19 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar }) {
                 </ul>
               </div>
             )}
-            <button
-              type="button"
-              className="msn-moldura grande msn-moldura-btn"
+            <Moldura
+              src={foto.src}
+              alt={`Sua imagem: ${foto.nome}`}
+              tamanho={112}
+              className="msn-quadro-btn"
               aria-haspopup="dialog"
               aria-expanded={painel === "foto"}
               onClick={() => setPainel((p) => (p === "foto" ? null : "foto"))}
               title="Trocar minha imagem de exibição"
-            >
-              <img src={foto.src} alt={`Sua imagem: ${foto.nome}`} width="96" height="96" />
-            </button>
+            />
+            <span className="msn-sob-foto" aria-hidden="true">
+              <span>▾</span>
+            </span>
           </div>
         </div>
       </div>
@@ -479,18 +557,16 @@ export function MsnAviso({ aoAbrir, aoFechar }) {
         <button type="button" onClick={aoFechar} aria-label="Fechar aviso do Messenger">×</button>
       </div>
       <button type="button" className="msn-aviso-corpo" onClick={aoAbrir}>
-        <span className="msn-moldura">
-          <img src={ROBO} alt="" width="48" height="48" />
-        </span>
+        <Moldura src={FOTO_BOT} alt="" tamanho={48} />
         <span>
-          <strong>ThiagoBot diz:</strong>
+          <strong>{NOME_BOT} diz:</strong>
           <span>
-            <ComEmoticons texto="Oi, eu sou o ThiagoBot! :) Quer saber mais sobre o Thiago? Clique para conversar." tamanho={16} />
+            <ComEmoticons texto={`Oi, eu sou o ${NOME_BOT}! :) Quer saber mais sobre o Thiago? Clique para conversar.`} tamanho={16} />
           </span>
         </span>
       </button>
       <button type="button" className="msn-aviso-link" onClick={aoFechar}>
-        Bloquear ThiagoBot
+        Bloquear {NOME_BOT}
       </button>
     </div>,
     document.body,

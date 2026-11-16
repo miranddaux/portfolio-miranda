@@ -46,6 +46,14 @@ Branch: `claude/modo-xp-desktop`. Prévia privada: https://claude.ai/artifact/9z
   - "Minha imagem de exibição": o visitante escolhe Patinho, Flor, Cachorro ou Avião (lembrado no navegador).
   - Som de mensagem: arquivo enviado pelo Thiago (`public/assets/audio/msn-mensagem.mp3`), um toque por resposta; os outros sons continuam sintetizados.
   - Celular: o balão de boas-vindas não vaza mais da tela.
+- 15/11 (noite), pedidos do Thiago:
+  - Nome do bot: "Thiago Bot" (`NOME_BOT` em Msn.jsx), foto `public/assets/xp/msn/thiago-bot.webp` (enviada por ele).
+  - Moldura das imagens de exibição: `public/assets/xp/msn/moldura.png` (enviada por ele), componente `Moldura`.
+  - Lista de contatos sem as abas laterais; frases dos contatos com mais emoticons do pack do Figma; banner do rodapé trocado pela imagem `banner.webp` (enviada por ele).
+  - Conversa no layout da referência MitchBot: aba, cabeçalho, barra compacta de ícones (convidar, arquivos, voz, vídeo, Bloquear, tema), Enviar pequeno, pesquisar, avatares com moldura. Os ícones da barra são desenhados em SVG; trocar pelos originais se o Thiago enviar.
+  - Som de chamar a atenção: `public/assets/audio/msn-chamar.mp3` (enviado por ele, cortado para 1,6 s).
+  - Foto do "Sobre mim" carrega de cima para baixo só na primeira vez da visita (sessionStorage).
+  - Ícone do MSN na bandeja em 16 px, proporcional aos outros.
 
 ## Pendências
 1. URL do Medium (o item aparece como "a configurar").

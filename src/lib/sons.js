@@ -65,8 +65,20 @@ export const somAviso = () =>
     [1318.5, 0.24, 0.4],
   ], { tipo: "triangle", volume: 0.12 });
 
-// Chamar a atenção: zumbido curto.
-export const somChamar = () =>
+// Chamar a atenção: som enviado pelo Thiago (public/assets/audio/msn-chamar.mp3).
+let audioChamar;
+export const somChamar = () => {
+  try {
+    audioChamar = audioChamar || new Audio("/assets/audio/msn-chamar.mp3");
+    audioChamar.volume = 0.6;
+    audioChamar.currentTime = 0;
+    const p = audioChamar.play();
+    if (p && p.catch) p.catch(somChamarSintetizado);
+  } catch {
+    somChamarSintetizado();
+  }
+};
+const somChamarSintetizado = () =>
   tocar([
     [196, 0, 0.12],
     [220, 0.12, 0.12],

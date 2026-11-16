@@ -1,4 +1,4 @@
-// Respostas prontas do ThiagoBot (sem IA de verdade: procura palavras-chave na pergunta).
+// Respostas prontas do Thiago Bot (sem IA de verdade: procura palavras-chave na pergunta).
 // Só usar fatos confirmados pelo Thiago. Nada de números ou promessas inventadas.
 
 export const SUGESTOES = [
@@ -11,7 +11,7 @@ export const SUGESTOES = [
 ];
 
 export const BOAS_VINDAS = [
-  "Oi! :) Eu sou o ThiagoBot, o assistente do Thiago aqui no portfólio.",
+  "Oi! :) Eu sou o Thiago Bot, o assistente do Thiago aqui no portfólio.",
   "Pode perguntar sobre experiência, projetos, ferramentas, currículo ou contato. Ou escolha um assunto abaixo.",
 ];
 

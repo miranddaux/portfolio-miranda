@@ -158,35 +158,6 @@
   border: 1px solid #b8cfe8;
   border-top: 0;
 }
-.msn-abas-lat {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  width: 40px;
-  padding-top: 8px;
-  background: linear-gradient(90deg, #e7f0fb, #d3e3f5);
-  border-right: 1px solid #b8cfe8;
-}
-.msn-abas-lat span {
-  display: grid;
-  place-items: center;
-  height: 40px;
-  margin-left: 4px;
-  border: 1px solid transparent;
-  border-right: 0;
-  border-radius: 12px 0 0 12px;
-}
-.msn-abas-lat span.is-ativa {
-  border-color: #b8cfe8;
-  background: #fff;
-  margin-right: -1px;
-}
-.msn-meio-lista {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
 .msn-adicionar {
   display: flex;
   align-items: center;
@@ -831,4 +802,288 @@ button.msn-contato:focus-visible {
 }
 .msn-boneco i.is-ocupado {
   background: #e0301e;
+}
+
+/* ===== Rodada 15/11 (noite): moldura do Thiago, layout da conversa como a referência MitchBot ===== */
+
+/* Moldura da imagem de exibição (public/assets/xp/msn/moldura.png, 185 px com miolo de 151 px) */
+.msn-quadro {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: var(--quadro);
+  height: var(--quadro);
+  padding: calc(var(--quadro) * 0.092);
+  border: 0;
+  background: url("/assets/xp/msn/moldura.png") center / 100% 100% no-repeat;
+  font: inherit;
+}
+.msn-quadro img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--quadro) * 0.045);
+  object-fit: cover;
+}
+button.msn-quadro {
+  cursor: pointer;
+}
+button.msn-quadro:hover,
+button.msn-quadro:focus-visible {
+  filter: brightness(1.04) saturate(1.1);
+}
+
+/* Lista de contatos sem abas laterais */
+.msn-meio {
+  flex-direction: column;
+}
+.msn-perfil {
+  align-items: center;
+}
+
+/* Banner do rodapé: imagem enviada pelo Thiago */
+.msn-banner {
+  display: block;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+.msn-banner::after {
+  display: none;
+}
+.msn-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+.msn-banner:hover img,
+.msn-banner:focus-visible img {
+  filter: brightness(1.08);
+}
+
+/* Conversa: fundo claro com faixa azul, como a referência */
+.msn-conversa {
+  background: linear-gradient(#ffffff 0, #eef5fc 112px, #f7fbff 60%, #e6f0fa);
+}
+.msn-abas {
+  display: flex;
+  gap: 2px;
+  padding: 4px 4px 0;
+  border-bottom: 1px solid #a9c1e0;
+  background: linear-gradient(#f4f8fd, #e4eef9);
+}
+.msn-aba {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 144px;
+  padding: 4px 8px;
+  border: 1px solid #a9c1e0;
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(#ffffff, #f1f6fc);
+  font-weight: 700;
+}
+.msn-aba-x {
+  margin-left: auto;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: #555;
+  font: inherit;
+  font-weight: 400;
+  line-height: 16px;
+  cursor: pointer;
+}
+button.msn-aba-x:hover {
+  color: #c4321d;
+}
+.msn-cab {
+  display: flex;
+  gap: 4px;
+  align-items: flex-start;
+  padding: 8px 8px 4px;
+  background: linear-gradient(#e4f1fc, #cfe6f8);
+}
+.msn-cab strong {
+  display: block;
+  font-size: 12px;
+}
+.msn-cab span {
+  display: block;
+  color: #5b6f88;
+}
+.msn-barra {
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-bottom: 1px solid #b9d2ec;
+  background: linear-gradient(#cfe6f8, #e6f2fc);
+}
+.msn-ferramenta {
+  display: inline-grid;
+  place-items: center;
+  min-width: 0;
+  width: 36px;
+  height: 32px;
+  padding: 0;
+}
+.msn-svg {
+  fill: none;
+  stroke: #7d9bbd;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.msn-ferramenta:hover .msn-svg,
+.msn-formatar-btn:hover .msn-svg {
+  stroke: #2f62a8;
+}
+.msn-bloquear {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 4px;
+  padding: 4px 8px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: none;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.msn-bloquear:hover,
+.msn-bloquear:focus-visible {
+  border-color: #9fbbe6;
+  background: rgba(255, 255, 255, 0.8);
+}
+.msn-barra-dir {
+  margin-left: auto;
+}
+.msn-corpo {
+  grid-template-columns: minmax(0, 1fr) 136px;
+  gap: 12px;
+  padding: 8px 8px 8px 12px;
+}
+.msn-mensagens {
+  border-color: #b5cde6;
+  border-radius: 2px;
+}
+.msn-info {
+  margin: 0 -8px 4px;
+  padding: 2px 8px;
+  border: 0;
+  border-bottom: 1px solid #dfe8f3;
+  border-radius: 0;
+  background: none;
+}
+.msn-texto {
+  padding-left: 0;
+}
+.msn-links {
+  padding-left: 0;
+}
+.msn-acao {
+  margin-left: 0;
+}
+.msn-escrever {
+  border-color: #b5cde6;
+  border-radius: 2px;
+}
+.msn-formatar {
+  gap: 4px;
+  border-radius: 0;
+  background: linear-gradient(#f8fbfe, #edf4fb);
+}
+.msn-seta-mini {
+  color: #7d9bbd;
+  font-size: 12px;
+}
+.msn-ab {
+  margin-left: 4px;
+  color: #9db3cc;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+.msn-form {
+  display: block;
+  padding: 0;
+}
+.msn-form textarea {
+  display: block;
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+}
+.msn-escrever-rodape {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 4px 4px 0;
+}
+.msn-fonte {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 24px;
+}
+.msn-fonte.is-ativa {
+  border-right: 1px solid #dfe8f3;
+}
+.msn-caneta,
+.msn-pesquisar {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 24px;
+}
+.msn-enviar {
+  align-self: auto;
+  width: 64px;
+  height: 24px;
+  margin-left: auto;
+  border: 1px solid #a8bcd6;
+  border-radius: 3px;
+  background: linear-gradient(#ffffff, #e6eef8);
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 400;
+}
+.msn-pesquisar {
+  border: 1px solid #c7d6ea;
+  border-radius: 3px;
+  background: linear-gradient(#ffffff, #eef4fb);
+}
+.msn-status {
+  margin-top: 8px;
+  border: 1px solid #c7d6ea;
+  background: #fff;
+}
+.msn-avatares {
+  justify-content: space-between;
+}
+.msn-avatar-bloco {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.msn-sob-foto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 112px;
+  padding: 0 8px;
+  color: #7d9bbd;
+  font-size: 12px;
+}
+.msn-sob-foto > span:only-child {
+  margin-left: auto;
+}
+.msn-aviso-corpo .msn-quadro {
+  align-self: flex-start;
 }
