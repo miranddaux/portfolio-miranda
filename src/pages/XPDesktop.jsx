@@ -41,7 +41,7 @@ const APPS_JANELAS = [
   { ...APPS[3], janelaIcone: "/assets/xp/painel/programas.png", largura: 640, altura: 440, cascata: 3 },
   { ...APPS[4], janelaIcone: "/assets/xp/area/curriculo.png", largura: 600, altura: 768, cascata: 1 },
   { ...APPS[5], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 656, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
-  { ...APPS[6], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 576, altura: 560, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
+  { ...APPS[6], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
 ];
 export default function XPDesktop({ setMode, onShowWelcome }) {
   const [windows, setWindows] = useState({ sobre: "open" }),

@@ -28,13 +28,31 @@ function tocar(notas, { tipo = "sine", volume = 0.16, duracao = 0.35 } = {}) {
   } catch {}
 }
 
-// Mensagem recebida: "plim-plom" curto e brilhante.
-export const somMensagem = () =>
+// Mensagem recebida: arquivo enviado pelo Thiago (public/assets/audio/msn-mensagem.mp3).
+// Um toque por resposta (não sobrepõe). Se o navegador bloquear o áudio, usa o som sintetizado.
+let audioMsg;
+let ultimoToque = 0;
+const somMensagemSintetizado = () =>
   tocar([
     [1046.5, 0, 0.18],
     [1568, 0.09, 0.3],
     [2093, 0.09, 0.3],
   ], { tipo: "triangle", volume: 0.12 });
+
+export const somMensagem = () => {
+  const agora = Date.now();
+  if (agora - ultimoToque < 700) return;
+  ultimoToque = agora;
+  try {
+    audioMsg = audioMsg || new Audio("/assets/audio/msn-mensagem.mp3");
+    audioMsg.volume = 0.6;
+    audioMsg.currentTime = 0;
+    const p = audioMsg.play();
+    if (p && p.catch) p.catch(somMensagemSintetizado);
+  } catch {
+    somMensagemSintetizado();
+  }
+};
 
 // Mensagem enviada: clique suave.
 export const somEnviar = () => tocar([[660, 0, 0.08]], { tipo: "sine", volume: 0.06 });

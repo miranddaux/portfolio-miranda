@@ -1,5 +1,6 @@
-/* MSN Messenger — layout fiel ao print de referência, desenhado em CSS próprio.
-   Arquivo de exceção da escala de 8 px (geometria de réplica); texto só 12/14/16. */
+/* MSN Messenger — visual do MSN 7 (benchmark enviado pelo Thiago em 15/11) com os assets
+   do Figma "MSN Assets" (144:10160). Arquivo de exceção da escala de 8 px (geometria de
+   réplica); texto só 12/14/16. */
 
 .msn,
 .msn-conversa {
@@ -11,15 +12,34 @@
   font-size: 12px;
   line-height: 16px;
 }
+.msn-menu {
+  padding: 0 4px;
+  border-bottom: 1px solid #d6d2c2;
+  background: #ece9d8;
+}
+.msn-menu span {
+  padding: 2px 8px;
+  font-size: 12px;
+  line-height: 20px;
+}
+.janela-xp .msn-menu {
+  display: flex !important;
+}
+.janela-xp .msn-menu span {
+  display: inline-block !important;
+}
+.msn-menu u {
+  text-decoration: underline;
+}
 .msn-moldura {
   display: inline-grid;
   place-items: center;
   flex: none;
   padding: 3px;
-  border: 1px solid #7fa6cf;
+  border: 1px solid #8fb1d8;
   border-radius: 6px;
-  background: linear-gradient(#ffffff, #cfe2f5 60%, #eaf3fc);
-  box-shadow: 0 1px 2px rgba(20, 60, 110, 0.35), inset 0 0 0 1px #fff;
+  background: linear-gradient(#ffffff, #d5e6f7 60%, #eef5fc);
+  box-shadow: 0 1px 2px rgba(20, 60, 110, 0.3), inset 0 0 0 1px #fff;
 }
 .msn-moldura img {
   display: block;
@@ -27,121 +47,181 @@
   object-fit: cover;
 }
 .msn-moldura.grande {
-  padding: 5px;
-  border-radius: 10px;
+  padding: 6px;
+  border-radius: 12px;
 }
 .msn-moldura.grande img {
   width: 104px;
   height: 104px;
   border-radius: 6px;
 }
+.msn-emo {
+  display: inline-block;
+  vertical-align: -4px;
+  margin: 0 1px;
+}
 
-/* Lista de contatos */
+/* ---------- Lista de contatos ---------- */
 .msn {
   background: #fff;
 }
 .msn-topo {
-  color: #fff;
-  background: linear-gradient(#3b88cc, #2a6fb3);
+  margin: 4px 4px 0;
+  border: 1px solid #b8cfe8;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(#fbfdff, #e3eefa 70%, #d6e6f7);
 }
 .msn-marca {
   display: flex;
   align-items: center;
   gap: 4px;
   margin: 0;
-  padding: 2px 8px;
-  background: linear-gradient(#bfe0f8, #7fb7e6 60%, #5d9fd8);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
+  padding: 4px 8px 0;
+  color: #1c4f96;
+  font-size: 14px;
+  line-height: 20px;
+}
+.msn-marca b {
   font-style: italic;
-  text-shadow: 0 1px 1px rgba(10, 60, 120, 0.6);
+  font-weight: 700;
+  color: #0d3d86;
 }
 .msn-perfil {
   display: flex;
   gap: 8px;
-  align-items: center;
+  align-items: flex-start;
   padding: 8px;
-  background: linear-gradient(#2f80c4, #1d64a6 55%, #2b78bd);
 }
 .msn-perfil-texto {
   min-width: 0;
+  flex: 1;
 }
 .msn-nome {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 4px;
   margin: 0;
   font-size: 14px;
   line-height: 20px;
   white-space: nowrap;
+  overflow: hidden;
+}
+.msn-nome strong {
+  flex: none;
 }
 .msn-nome span {
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #c7dcf3;
+  color: #6c7a8c;
   font-size: 12px;
 }
+.msn-seta-menu {
+  flex: none;
+  color: #1a1a1a !important;
+}
 .msn-frase {
-  margin: 2px 0 0;
-  color: #f2f7ff;
+  margin: 0;
+  color: #6c7a8c;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .msn-atalhos {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 4px 8px;
-  border-top: 1px solid #5c9ad3;
-  background: linear-gradient(#245d99, #1a4a80);
+  gap: 12px;
+  margin-top: 4px;
 }
 .msn-atalhos a {
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  border: 1px solid transparent;
   border-radius: 3px;
+  color: #1c4f96;
+  text-decoration: none;
 }
 .msn-atalhos a:hover,
-.msn-fale:hover {
-  background: rgba(255, 255, 255, 0.18);
+.msn-atalhos a:focus-visible {
+  border-color: #9fbbe6;
+  background: #fff;
+  text-decoration: underline;
 }
-.msn-fale {
+
+.msn-meio {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  margin: 0 4px;
+  border: 1px solid #b8cfe8;
+  border-top: 0;
+}
+.msn-abas-lat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 40px;
+  padding-top: 8px;
+  background: linear-gradient(90deg, #e7f0fb, #d3e3f5);
+  border-right: 1px solid #b8cfe8;
+}
+.msn-abas-lat span {
+  display: grid;
+  place-items: center;
+  height: 40px;
+  margin-left: 4px;
+  border: 1px solid transparent;
+  border-right: 0;
+  border-radius: 12px 0 0 12px;
+}
+.msn-abas-lat span.is-ativa {
+  border-color: #b8cfe8;
+  background: #fff;
+  margin-right: -1px;
+}
+.msn-meio-lista {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.msn-adicionar {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-left: auto;
-  padding: 2px 8px;
-  border: 0;
+  margin: 8px 8px 0;
+  padding: 2px 4px;
+  border: 1px solid transparent;
   border-radius: 3px;
-  background: none;
-  color: #fff;
-  font: inherit;
-  font-size: 12px;
-  cursor: pointer;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+.msn-adicionar:hover,
+.msn-adicionar:focus-visible {
+  border-color: #9fbbe6;
+  background: #eef5fd;
+}
+.msn-mais {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  color: #2e9a12;
+  font-size: 16px;
+  font-weight: 700;
 }
 .msn-busca {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   padding: 8px;
 }
 .msn-busca input {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   height: 24px;
   padding: 0 8px;
   border: 1px solid #a5b9d6;
   font: inherit;
   font-size: 12px;
-}
-.msn-busca-icones {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.msn-ordenar {
-  color: #2e9a12;
-  font-weight: 700;
 }
 .msn-lista {
   flex: 1;
@@ -149,18 +229,17 @@
   overflow: auto;
   margin: 0;
   padding: 0 8px 8px;
-  border-top: 1px solid #e3e9f1;
   list-style: none;
 }
 .msn-lista ul {
   margin: 0;
-  padding: 0 0 0 8px;
+  padding: 0 0 0 16px;
   list-style: none;
 }
 .msn-grupo {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   padding: 4px 0;
   border: 0;
   background: none;
@@ -169,8 +248,16 @@
   font-size: 12px;
   cursor: pointer;
 }
-.msn-seta {
-  color: #4b6a92;
+.msn-caixa {
+  display: grid;
+  place-items: center;
+  width: 11px;
+  height: 11px;
+  border: 1px solid #8a9bb3;
+  background: linear-gradient(#fff, #e3e9f1);
+  color: #33465f;
+  font-size: 12px;
+  line-height: 10px;
 }
 .msn-contato {
   display: flex;
@@ -184,6 +271,7 @@
   color: #1a1a1a;
   font: inherit;
   font-size: 12px;
+  line-height: 20px;
   text-align: left;
   white-space: nowrap;
   overflow: hidden;
@@ -195,10 +283,7 @@
 .msn-st {
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #9aa6b6;
-}
-.msn-emoji {
-  flex: none;
+  color: #8592a3;
 }
 .msn-contato.is-off strong {
   color: #4d5866;
@@ -212,101 +297,107 @@ button.msn-contato:focus-visible {
   background: #e6effc;
 }
 .msn-rodape {
-  padding: 8px 16px 12px;
-  border-top: 1px solid #e3e9f1;
+  padding: 8px;
 }
 .msn-banner {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
   width: 100%;
-  height: 56px;
-  border: 1px solid #1b4f8a;
-  background: linear-gradient(#5fa6e6, #2a6fc0 50%, #1f5aa6 51%, #3b84d0);
-  color: #fff;
+  height: 64px;
+  padding: 0 16px;
+  border: 1px solid #b8cfe8;
+  background: linear-gradient(#ffffff, #e8f1fb);
+  color: #0d3d86;
   font: inherit;
-  font-size: 14px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+  text-align: left;
   cursor: pointer;
+  position: relative;
+}
+.msn-banner::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 6px;
+  height: 3px;
+  background: linear-gradient(90deg, #f6b818, #e8641c 50%, #5bb446);
+}
+.msn-banner-txt {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  line-height: 20px;
+}
+.msn-banner b {
+  font-style: italic;
+}
+.msn-banner small {
+  color: #4b6a92;
+  font-size: 12px;
+  line-height: 16px;
+}
+.msn-banner:hover small {
+  text-decoration: underline;
 }
 
-/* Conversa */
+/* ---------- Conversa ---------- */
 .msn-conversa {
-  background: linear-gradient(#f4f9fe, #e4effa);
-}
-.msn-abas {
-  padding: 4px 4px 0;
-  border-bottom: 1px solid #a9c1e0;
-  background: #fff;
-}
-.msn-aba {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border: 1px solid #a9c1e0;
-  border-bottom: 0;
-  border-radius: 3px 3px 0 0;
-  background: linear-gradient(#ffffff, #eef5fc);
-  font-weight: 700;
-}
-.msn-aba-x {
-  margin-left: 24px;
-  color: #555;
-  font-weight: 400;
-}
-.msn-cab {
-  display: flex;
-  gap: 4px;
-  align-items: flex-start;
-  padding: 8px 8px 4px;
-  background: linear-gradient(#dff0fc, #cfe6f8);
-}
-.msn-cab strong {
-  display: block;
-  font-size: 12px;
-}
-.msn-cab span {
-  display: block;
-  color: #5b6f88;
+  background: linear-gradient(#f3f8fe, #e2eefa);
 }
 .msn-barra {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-end;
+  gap: 4px;
   padding: 4px 12px;
   border-bottom: 1px solid #b9d2ec;
-  background: linear-gradient(#cfe6f8, #e6f2fc);
+  background: linear-gradient(#ffffff, #dbe9f8);
 }
-.msn-ico {
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 24px;
-}
-.msn-bloquear {
+.msn-ferramenta {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
+  min-width: 56px;
   padding: 2px 4px;
   border: 1px solid transparent;
-  border-radius: 3px;
+  border-radius: 4px;
   background: none;
+  color: #1a1a1a;
   font: inherit;
   font-size: 12px;
+  line-height: 16px;
   cursor: pointer;
 }
-.msn-bloquear:hover {
+.msn-ferramenta:hover,
+.msn-ferramenta:focus-visible {
   border-color: #9fbbe6;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.8);
+}
+.msn-ferramenta span {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+}
+.msn-ferramenta:hover span {
+  text-decoration-color: currentColor;
+}
+.msn-barra-sep {
+  align-self: center;
+  width: 1px;
+  height: 32px;
+  margin: 0 4px;
+  background: #b9d2ec;
+}
+.msn-barra-logo {
+  align-self: flex-start;
+  margin: 4px 0 0 auto;
 }
 .msn-corpo {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 128px;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) 136px;
+  gap: 12px;
   padding: 8px 8px 8px 12px;
 }
 .msn-chat {
@@ -319,20 +410,41 @@ button.msn-contato:focus-visible {
   min-height: 120px;
   overflow: auto;
   padding: 0 8px 8px;
-  border: 1px solid #b5cde6;
+  border: 1px solid #a9c3e2;
+  border-radius: 4px;
   background: #fff;
   font-size: 14px;
   line-height: 20px;
 }
+.msn-para {
+  margin: 0 0 4px;
+  padding: 4px 8px;
+  border: 1px solid #a9c3e2;
+  border-radius: 4px;
+  background: linear-gradient(#ffffff, #f2f7fd);
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.msn-para span {
+  color: #6c7a8c;
+}
 .msn-info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4px;
-  margin: 0 -8px 4px;
-  padding: 2px 8px;
-  border-bottom: 1px solid #dfe8f3;
+  margin: 8px 0 4px;
+  border-radius: 2px;
+  padding: 4px 8px;
+  border: 1px solid #e3d48f;
+  background: #fffbd6;
   font-size: 12px;
   line-height: 16px;
+}
+.msn-info img {
+  flex: none;
 }
 .msn-msg p {
   margin: 0;
@@ -341,7 +453,10 @@ button.msn-contato:focus-visible {
   margin-top: 8px !important;
   color: #8592a3;
 }
-.msn-msg.is-voce p:not(.msn-diz) {
+.msn-texto {
+  padding-left: 8px;
+}
+.msn-msg.is-voce .msn-texto {
   color: #1a3e78;
 }
 .msn-sistema {
@@ -355,6 +470,7 @@ button.msn-contato:focus-visible {
   flex-wrap: wrap;
   gap: 4px 12px;
   margin-top: 4px !important;
+  padding-left: 8px;
 }
 .msn-links button,
 .msn-acao {
@@ -369,55 +485,76 @@ button.msn-contato:focus-visible {
 }
 .msn-acao {
   display: inline-block;
-  margin-top: 4px;
+  margin: 4px 0 0 8px;
 }
 .msn-divisor {
-  height: 8px;
-  background: radial-gradient(circle, #7f9cbf 1px, transparent 1.5px) center / 4px 4px repeat-x;
-  background-size: 4px 8px;
-  margin: 0 auto;
   width: 40px;
+  height: 8px;
+  margin: 0 auto;
+  background: radial-gradient(circle, #7f9cbf 1px, transparent 1.5px) center / 4px 8px repeat-x;
 }
 .msn-escrever {
-  border: 1px solid #b5cde6;
+  position: relative;
+  border: 1px solid #a9c3e2;
+  border-radius: 4px;
   background: #fff;
 }
+.msn-escrever:focus-within {
+  border-color: #6f9fd8;
+}
 .msn-formatar {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
   padding: 2px 8px;
-  border-bottom: 1px solid #e3ebf5;
-  background: linear-gradient(#f8fbfe, #edf4fb);
-  font-size: 14px;
-  line-height: 20px;
+  border-bottom: 1px solid #dde7f3;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(#fbfdff, #e9f2fb);
 }
-.msn-formatar span {
-  filter: grayscale(0.2);
+.msn-fonte {
+  width: 24px;
+  color: #1a4fa8;
+  font-family: Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
 }
-.msn-formatar button {
-  padding: 0 2px;
+.msn-formatar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 28px;
+  padding: 0 4px;
   border: 1px solid transparent;
   border-radius: 3px;
   background: none;
-  font-size: 14px;
-  line-height: 20px;
+  color: #4b6a92;
+  font: inherit;
+  font-size: 12px;
   cursor: pointer;
 }
-.msn-formatar button:hover {
+.msn-formatar-btn:hover,
+.msn-formatar-btn:focus-visible,
+.msn-formatar-btn[aria-expanded="true"] {
   border-color: #9fbbe6;
   background: #e6effc;
 }
-.msn-ab {
+.msn-chamar {
   color: #7f9cbf;
-  font-size: 12px;
-  text-decoration: line-through;
+  font-weight: 700;
+  letter-spacing: -2px;
 }
-.msn-escrever textarea {
-  display: block;
-  width: 100%;
-  height: 72px;
+.msn-form {
+  display: flex;
+  gap: 8px;
   padding: 8px;
+}
+.msn-form textarea {
+  flex: 1;
+  min-width: 0;
+  height: 64px;
+  padding: 0;
   border: 0;
   resize: none;
   font: inherit;
@@ -425,35 +562,24 @@ button.msn-contato:focus-visible {
   line-height: 20px;
   outline: none;
 }
-.msn-escrever:focus-within {
-  border-color: #6f9fd8;
-}
-.msn-escrever-rodape {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 8px;
-}
-.msn-fonte {
-  color: #1a4fa8;
-  font-family: Georgia, serif;
-  font-size: 16px;
-  font-weight: 700;
-}
-.msn-caneta {
-  color: #7f9cbf;
-  font-size: 14px;
-}
 .msn-enviar {
-  margin-left: auto;
-  min-width: 72px;
-  height: 24px;
+  flex: none;
+  align-self: flex-end;
+  width: 72px;
+  height: 56px;
   border: 1px solid #7f9db9;
-  border-radius: 3px;
-  background: linear-gradient(#ffffff, #dfe8f3);
+  border-radius: 4px;
+  background: linear-gradient(#ffffff, #e3ecf7 55%, #d2e0f1);
+  box-shadow: inset 0 0 0 1px #fff;
+  color: #1a1a1a;
   font: inherit;
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
+}
+.msn-enviar:hover:not(:disabled) {
+  border-color: #e3a83b;
+  box-shadow: inset 0 0 0 2px #f8d58d;
 }
 .msn-enviar:disabled {
   color: #a6afbb;
@@ -462,31 +588,113 @@ button.msn-contato:focus-visible {
 .msn-status {
   margin: 8px 0 0;
   padding: 2px 8px;
-  border: 1px solid #c7d6ea;
-  background: #fff;
+  color: #33465f;
   font-size: 12px;
 }
+
+/* Janelinhas que abrem acima (emoticons e imagem de exibição) */
+.msn-popup {
+  position: absolute;
+  z-index: 5;
+  padding: 8px;
+  border: 1px solid #7fa6cf;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 2px 3px 8px rgba(10, 40, 90, 0.3);
+}
+.msn-popup-titulo {
+  margin: 0 0 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e3e9f1;
+  font-size: 12px;
+  font-weight: 700;
+}
+.msn-emoticons {
+  left: 0;
+  bottom: calc(100% + 4px);
+  width: 320px;
+}
+.msn-emo-grade {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+}
+.msn-emo-grade button {
+  display: grid;
+  place-items: center;
+  height: 28px;
+  padding: 0;
+  border: 1px solid #e3e9f1;
+  border-radius: 2px;
+  background: #fff;
+  cursor: pointer;
+}
+.msn-emo-grade button:hover,
+.msn-emo-grade button:focus-visible {
+  border-color: #316ac5;
+  background: #e6effc;
+}
+
 .msn-avatares {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.msn-avatares > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
+.msn-minha-foto {
+  position: relative;
 }
-.msn-webcam {
-  color: #7f9cbf;
+.msn-moldura-btn {
+  cursor: pointer;
+}
+.msn-moldura-btn:hover,
+.msn-moldura-btn:focus-visible {
+  border-color: #316ac5;
+}
+.msn-fotos {
+  right: 0;
+  bottom: calc(100% + 4px);
+  width: 200px;
+}
+.msn-fotos ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.msn-fotos button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 2px 4px;
+  border: 1px solid transparent;
+  background: none;
+  font: inherit;
   font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+.msn-fotos button img {
+  border-radius: 2px;
+  object-fit: cover;
+}
+.msn-fotos button:hover,
+.msn-fotos button[aria-pressed="true"] {
+  border-color: #316ac5;
+  background: #316ac5;
+  color: #fff;
 }
 @container janela (max-width: 560px) {
   .msn-corpo {
     grid-template-columns: 1fr;
   }
   .msn-avatares {
+    display: none;
+  }
+  .msn-ferramenta {
+    min-width: 40px;
+  }
+  .msn-ferramenta span {
     display: none;
   }
 }
@@ -623,7 +831,4 @@ button.msn-contato:focus-visible {
 }
 .msn-boneco i.is-ocupado {
   background: #e0301e;
-}
-.msn-boneco i.is-ausente {
-  background: #f2b51c;
 }

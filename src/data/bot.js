@@ -11,7 +11,7 @@ export const SUGESTOES = [
 ];
 
 export const BOAS_VINDAS = [
-  "Oi! Eu sou o ThiagoBot, o assistente do Thiago aqui no portfólio.",
+  "Oi! :) Eu sou o ThiagoBot, o assistente do Thiago aqui no portfólio.",
   "Pode perguntar sobre experiência, projetos, ferramentas, currículo ou contato. Ou escolha um assunto abaixo.",
 ];
 

@@ -84,3 +84,21 @@ A atribuição acompanha a origem e os créditos já registrados para os recurso
 Uso: uma reprodução a partir do clique no perfil, com volume de 35%, controle
 para silenciar e preferência persistida. Sem hotlink, reprodução automática ao
 carregar a página ou loop.
+
+
+## MSN Messenger — 15/11
+
+Pedido explícito do Thiago: usar os assets do MSN do Figma para chegar mais perto do MSN 7.
+
+- Origem: Figma "Portfólio v1 — Miranda", frame `MSN Assets` (144:10160), colado pelo Thiago.
+  Recortes feitos a partir de capturas do Figma (tamanho 1x):
+  - `public/assets/xp/msn/emoticons/1.png` a `40.png` — conjunto `Emote` (144:5307), 48×48.
+  - `public/assets/xp/msn/fotos/{pato,flor,cachorro}.webp` — imagens de exibição (144:13537, 144:13535, 144:13534), 200×200.
+  - `public/assets/xp/msn/barra/{video,voz,jogos,atividades,bloquear}.png` — componente `Icons` (144:6675), 36×36.
+  - `public/assets/xp/msn/status-ausente.png` — `User-Active` / Variant3 (144:5410), 40×40.
+- Som de mensagem: `public/assets/audio/msn-mensagem.mp3`, arquivo enviado pelo Thiago em 15/11
+  (`MSN_Messenger_sound_1.mp3`). O original repetia o toque 3 vezes; ficou só o primeiro toque
+  (0,8 s), convertido para MP3 64 kbps.
+- Esses emoticons, ícones e o som são material associado à Microsoft (MSN Messenger). Não são
+  criações originais do Miranda nem recursos com licença aberta. Ficam documentados aqui para
+  a decisão de publicação.

@@ -405,3 +405,18 @@
     width: 100%;
   }
 }
+
+/* Celular: o balão fica inteiro na tela (antes vazava para a esquerda). */
+@media (max-width: 480px) {
+  .balao {
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    bottom: calc(var(--barra-altura, 30px) + 16px);
+    width: auto;
+    max-width: none;
+  }
+  .balao-cauda {
+    display: none;
+  }
+}

@@ -38,11 +38,19 @@ Branch: `claude/modo-xp-desktop`. Prévia privada: https://claude.ai/artifact/9z
 **MSN** (`Msn.jsx`, `msn.css`, `src/data/bot.js`, `src/lib/sons.js`)
 - Ícone na bandeja abre a lista de contatos; aviso "ThiagoBot diz:" sobe depois do balão, com som; botão "ThiagoBot" pisca laranja na barra.
 - Conversa com ThiagoBot: respostas prontas por palavra-chave (sem IA), links de assunto, botões que abrem janelas, "chamar a atenção" (janela treme), Bloquear.
-- Ícones online/offline/logo enviados pelo Thiago em `public/assets/xp/msn/`. Sons sintetizados (não são os arquivos originais da Microsoft).
+- Ícones online/offline/logo enviados pelo Thiago em `public/assets/xp/msn/`.
+- 15/11 (rodada MSN 7, benchmark e assets do Figma 144:10160):
+  - Lista de contatos: barra de menu, cabeçalho claro com foto, status e frase, abas laterais, "Adicionar um contato" (abre o LinkedIn), grupos com caixas +/−, status "Ausente" com relógio, banner no rodapé.
+  - Conversa: barra de menu, barra grande (Vídeo, Voz, Atividades, Jogos, Bloquear — cada um responde no chat), campo "Para:", aviso amarelo, seletor com os 40 emoticons, piscadela, chamar a atenção, botão Enviar grande.
+  - Emoticons por código (`:)`, `;)`, `(L)`...) viram imagem no chat, nos status e no aviso (`src/data/emoticons.js`).
+  - "Minha imagem de exibição": o visitante escolhe Patinho, Flor, Cachorro ou Avião (lembrado no navegador).
+  - Som de mensagem: arquivo enviado pelo Thiago (`public/assets/audio/msn-mensagem.mp3`), um toque por resposta; os outros sons continuam sintetizados.
+  - Celular: o balão de boas-vindas não vaza mais da tela.
 
 ## Pendências
 1. URL do Medium (o item aparece como "a configurar").
-2. Print final do MSN aberto que o Thiago vai reenviar, para ajuste fino da interface.
+2. MSN: revisar com o Thiago a rodada de 15/11 (benchmark MSN 7). Os assets do MSN são da Microsoft (ver docs/ASSETS.md).
+7. `src/data/bot.js` (Experiência) cita "de 2–3 semanas para 4–5 dias". Em 29/10 o Thiago pediu para tirar essa frase (não sabia a origem). Confirmar com ele antes de publicar.
 3. Aba Projetos e textos dos cases: o Thiago vai detalhar depois.
 4. Ícone de disquete (Salvar) é desenho próprio; trocar se ele mandar o original.
 5. Fonte do PDF do currículo saiu em Inter (Segoe UI não estava disponível no ambiente).
