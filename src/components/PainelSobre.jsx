@@ -18,6 +18,8 @@ const LISTA_HABILIDADES = HABILIDADES.map((h) => h.nome);
 // Medium ainda sem URL: sem href o item aparece como "a configurar" (sem inventar links).
 const LINKS_SOCIAIS = [
   { nome: "LinkedIn", icone: "linkedin", href: CONTATO.linkedin },
+  { nome: "Dribbble", icone: "dribbble", href: CONTATO.dribbble },
+  { nome: "Behance", icone: "behance", href: CONTATO.behance },
   { nome: "Medium", icone: "medium", href: "" },
 ];
 
@@ -357,6 +359,18 @@ export function ContatoConteudo({ aoEscrever }) {
           <a className="painel-rede is-whatsapp" href={CONTATO.whatsapp} target="_blank" rel="noreferrer">
             <IconeWhatsApp tamanho={24} />
             WhatsApp
+          </a>
+        </li>
+        <li>
+          <a className="painel-rede" href={CONTATO.dribbble} target="_blank" rel="noreferrer">
+            <img src={`${P}/dribbble.png`} alt="" width="24" height="24" />
+            Dribbble
+          </a>
+        </li>
+        <li>
+          <a className="painel-rede" href={CONTATO.behance} target="_blank" rel="noreferrer">
+            <img src={`${P}/behance.png`} alt="" width="24" height="24" />
+            Behance
           </a>
         </li>
       </ul>

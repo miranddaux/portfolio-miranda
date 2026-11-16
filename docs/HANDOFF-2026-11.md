@@ -54,6 +54,12 @@ Branch: `claude/modo-xp-desktop`. Prévia privada: https://claude.ai/artifact/9z
   - Som de chamar a atenção: `public/assets/audio/msn-chamar.mp3` (enviado por ele, cortado para 1,6 s).
   - Foto do "Sobre mim" carrega de cima para baixo só na primeira vez da visita (sessionStorage).
   - Ícone do MSN na bandeja em 16 px, proporcional aos outros.
+- 15/11 (fim da noite):
+  - Ícones da barra da conversa trocados pelos PNGs enviados pelo Thiago (`public/assets/xp/msn/barra/`: convidar, arquivos, voz, video, midia, bloquear). O de bloquear veio com xadrez falso no fundo; o fundo foi removido.
+  - Foto nova do Thiago Bot; imagem padrão do visitante = foto do Thiago em pixel (`fotos/thiago-retro.png`), com as outras para trocar.
+  - Som de chamar a atenção mais alto (pico em -0,8 dB, volume 100%).
+  - Dribbble e Behance em `CONTATO` (perfil.js): Links sociais e aba Contato do Sobre mim, atalhos do MSN e resposta do Thiago Bot.
+  - Currículo "Salvar": no site baixa pelo link; na prévia do Claude usa o recurso `downloads` (pede confirmação). Publicar a prévia com `capabilities: {downloads: true}`.
 
 ## Pendências
 1. URL do Medium (o item aparece como "a configurar").

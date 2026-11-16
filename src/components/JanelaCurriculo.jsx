@@ -1,5 +1,31 @@
 import { useRef, useState } from "react";
 
+// Salvar: no site, o link baixa o PDF direto. Dentro da prévia do Claude (artifact) o download
+// direto é bloqueado; ali o arquivo é entregue pelo recurso "downloads", que pede confirmação.
+async function salvarCurriculo(e, cv) {
+  const use = typeof window !== "undefined" && window.claude && window.claude.use;
+  if (!use) return; // site normal: o navegador baixa pelo link
+  e.preventDefault();
+  try {
+    const downloads = await window.claude.use("downloads");
+    const blob = await (await fetch(cv.pdf)).blob();
+    if (downloads) {
+      await downloads.save({ filename: cv.arquivo, data: blob });
+      return;
+    }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = cv.arquivo;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  } catch {
+    // Pessoa recusou ou o recurso não está disponível: nada a fazer.
+  }
+}
+
 export const CURRICULOS = {
   pt: { rotulo: "Português", img: "/assets/cv/cv-pt.webp", pdf: "/assets/cv/thiago-miranda-curriculo-pt.pdf", arquivo: "Thiago-Miranda_Curriculo_PT.pdf" },
   en: { rotulo: "English", img: "/assets/cv/cv-en.webp", pdf: "/assets/cv/thiago-miranda-resume-en.pdf", arquivo: "Thiago-Miranda_Resume_EN.pdf" },
@@ -76,7 +102,7 @@ export default function JanelaCurriculo({ lingua, aoContato }) {
             <img src="/assets/xp/painel/busca.png" alt="" width="24" height="24" draggable="false" />
             <span>Zoom</span>
           </button>
-          <a className="painel-botao" href={cv.pdf} download={cv.arquivo}>
+          <a className="painel-botao" href={cv.pdf} download={cv.arquivo} onClick={(e) => salvarCurriculo(e, cv)}>
             <Disquete />
             <span>Salvar</span>
           </a>

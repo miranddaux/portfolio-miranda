@@ -1087,3 +1087,10 @@ button.msn-aba-x:hover {
 .msn-aviso-corpo .msn-quadro {
   align-self: flex-start;
 }
+.msn-atalhos {
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.msn-quadro img[src*="thiago-retro"] {
+  image-rendering: pixelated;
+}

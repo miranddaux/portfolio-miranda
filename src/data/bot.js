@@ -38,6 +38,11 @@ const INTENCOES = [
     acao: { rotulo: "Ver currículo", abrir: "curriculo" },
   },
   {
+    chaves: ["dribbble", "behance", "dribble"],
+    respostas: ["Os trabalhos visuais do Thiago estão no Dribbble (dribbble.com/thiagouidesign) e no Behance (behance.net/thiagomiranda38). (*)"],
+    acao: { rotulo: "Abrir Dribbble", link: "https://dribbble.com/thiagouidesign" },
+  },
+  {
     chaves: ["projet", "case", "portfolio", "trabalhos", "navaja", "oficina", "tenista", "ultragrip"],
     respostas: ["Os destaques são ANIMAE, Navaja e Oficina do Tenista. Cada case mostra o contexto, as decisões e o resultado."],
     acao: { rotulo: "Abrir Meus projetos", abrir: "cases" },

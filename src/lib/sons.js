@@ -70,7 +70,7 @@ let audioChamar;
 export const somChamar = () => {
   try {
     audioChamar = audioChamar || new Audio("/assets/audio/msn-chamar.mp3");
-    audioChamar.volume = 0.6;
+    audioChamar.volume = 1;
     audioChamar.currentTime = 0;
     const p = audioChamar.play();
     if (p && p.catch) p.catch(somChamarSintetizado);

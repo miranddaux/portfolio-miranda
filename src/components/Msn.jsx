@@ -14,6 +14,7 @@ const EMO = (n) => `/assets/xp/msn/emoticons/${n}.png`;
 
 // Imagens de exibição do visitante (Figma "MSN Assets"), como no "Minha imagem de exibição".
 const FOTOS_VISITANTE = [
+  { id: "thiago", nome: "Thiago (retrô)", src: "/assets/xp/msn/fotos/thiago-retro.png" },
   { id: "pato", nome: "Patinho", src: "/assets/xp/msn/fotos/pato.webp" },
   { id: "flor", nome: "Flor laranja", src: "/assets/xp/msn/fotos/flor.webp" },
   { id: "cachorro", nome: "Cachorro amigo", src: "/assets/xp/msn/fotos/cachorro.webp" },
@@ -177,6 +178,12 @@ export function MsnContatos({ aoConversar }) {
                 </svg>
                 WhatsApp
               </a>
+              <a href={CONTATO.dribbble} target="_blank" rel="noreferrer" aria-label="Dribbble do Thiago" title="Dribbble">
+                <img src="/assets/xp/painel/dribbble.png" alt="" width="16" height="16" />
+              </a>
+              <a href={CONTATO.behance} target="_blank" rel="noreferrer" aria-label="Behance do Thiago" title="Behance">
+                <img src="/assets/xp/painel/behance.png" alt="" width="16" height="16" />
+              </a>
             </div>
           </div>
         </div>
@@ -252,10 +259,11 @@ const agora = () => {
   return `${p(d.getDate())}/${p(d.getMonth() + 1)}/${d.getFullYear()} às ${p(d.getHours())}:${p(d.getMinutes())}`;
 };
 
-function BotaoIcone({ icone, rotulo, onClick, children }) {
+const BARRA = "/assets/xp/msn/barra";
+function BotaoIcone({ icone, img, rotulo, onClick, children }) {
   return (
     <button type="button" className="msn-ferramenta" onClick={onClick} title={rotulo} aria-label={rotulo}>
-      <Icone nome={icone} />
+      {img ? <img src={`${BARRA}/${img}.png`} alt="" width="28" height="28" /> : <Icone nome={icone} />}
       {children}
     </button>
   );
@@ -347,6 +355,7 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar, aoFechar }) {
   const chamada = () => falarBot(["Por aqui é só texto. :) Para uma conversa por vídeo ou voz, chame o Thiago no LinkedIn."], { acao: { rotulo: "Abrir LinkedIn", link: CONTATO.linkedin } });
   const arquivos = () => falarBot(["O arquivo mais útil daqui é o currículo do Thiago, em português e inglês. (I)"], { acao: { rotulo: "Abrir Meu currículo", abrir: "curriculo" } });
   const convidar = () => falarBot(["Quer chamar alguém do seu time? Mande um e-mail para o Thiago e ele responde todo mundo. ({)(})"], { acao: { rotulo: "Abrir Contato", abrir: "contato" } });
+  const atividades = () => falarBot(["Uma boa atividade: conhecer os 3 cases em destaque. (I)"], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
   const tema = () => falarBot(["O visual desta janela é uma homenagem ao MSN. (H) O design system do portfólio está nos projetos."], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
 
   return (
@@ -369,12 +378,13 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar, aoFechar }) {
         </div>
       </div>
       <div className="msn-barra">
-        <BotaoIcone icone="convidar" rotulo="Convidar alguém para a conversa" onClick={convidar} />
-        <BotaoIcone icone="arquivos" rotulo="Enviar arquivos" onClick={arquivos} />
-        <BotaoIcone icone="voz" rotulo="Chamada de voz" onClick={chamada} />
-        <BotaoIcone icone="video" rotulo="Chamada de vídeo" onClick={chamada} />
+        <BotaoIcone img="convidar" rotulo="Convidar alguém para a conversa" onClick={convidar} />
+        <BotaoIcone img="arquivos" rotulo="Enviar arquivos" onClick={arquivos} />
+        <BotaoIcone img="voz" rotulo="Chamada de voz" onClick={chamada} />
+        <BotaoIcone img="video" rotulo="Chamada de vídeo" onClick={chamada} />
+        <BotaoIcone img="midia" rotulo="Atividades e mídia" onClick={atividades} />
         <button type="button" className="msn-bloquear" onClick={bloquear}>
-          <Boneco ocupado /> Bloquear
+          <img src={`${BARRA}/bloquear.png`} alt="" width="24" height="24" /> Bloquear
         </button>
         <span className="msn-barra-dir">
           <BotaoIcone icone="pincel" rotulo="Tema da janela" onClick={tema} />
@@ -443,7 +453,7 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar, aoFechar }) {
                 <span className="sr-only">Chamar a atenção</span>
               </button>
               <button type="button" className="msn-formatar-btn" onClick={chamada} title="Clipe de voz">
-                <Icone nome="voz" tamanho={20} />
+                <img src={`${BARRA}/voz.png`} alt="" width="20" height="20" />
                 <span className="sr-only">Clipe de voz</span>
               </button>
               <span className="msn-ab" aria-hidden="true">AB</span>

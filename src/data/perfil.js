@@ -7,6 +7,8 @@ export const CONTATO = {
   linkedinTexto: "linkedin.com/in/thiagomirandaui",
   telefone: "+55 17 99255-6714",
   whatsapp: "https://wa.me/5517992556714",
+  dribbble: "https://dribbble.com/thiagouidesign",
+  behance: "https://www.behance.net/thiagomiranda38",
   local: "São José do Rio Preto, São Paulo, Brasil",
 };
 
