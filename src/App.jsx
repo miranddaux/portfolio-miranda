@@ -8,6 +8,7 @@ import XPWelcome from "./pages/XPWelcome";
 import XPGreeting from "./pages/XPGreeting";
 import useXPLogin from "./hooks/useXPLogin";
 import { CASES } from "./data/cases";
+import { irParaEntrada, rota } from "./lib/rota.js";
 const modes = ["rapido", "noite", "xp"];
 function initialMode() {
   try {
@@ -18,7 +19,7 @@ function initialMode() {
   }
 }
 function initialWelcome() {
-  if (location.pathname !== "/" || location.hash) return false;
+  if (rota() !== "/" || location.hash) return false;
   if (new URLSearchParams(location.search).get("entrada") === "1") return true;
   try {
     return sessionStorage.getItem("miranda-entered") !== "true";
@@ -31,7 +32,7 @@ export default function App() {
   const [mode, setMode] = useState(initialMode);
   const login = useXPLogin(initialWelcome);
   const showWelcome = login.phase !== "portfolio";
-  const path = location.pathname.replace(/\/$/, "") || "/";
+  const path = rota();
   const project = CASES.find((c) => path === `/cases/${c.id}`);
   const xpHome = mode === "xp" && path === "/";
   useEffect(() => {
@@ -58,7 +59,7 @@ export default function App() {
 
   function showEntry() {
     if (path !== "/") {
-      location.assign("/?entrada=1");
+      irParaEntrada();
       return;
     }
     login.reset();
