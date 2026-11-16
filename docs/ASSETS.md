@@ -125,6 +125,31 @@ destinos de contato. Não são desenhos originais do portfólio. As cores dos as
 são preservadas; não há filtros de recoloração nem hotlink. Dribbble e Behance
 mantêm os PNGs existentes no projeto.
 
+## Cases em janela XP — 16/11
+
+| Asset local | Origem e uso |
+| --- | --- |
+| `cases/animae-lista.png` | Figma ANIMAE `Sdyl9kTkLtCZaIN13yvIgd`, tela `1372:11482`, 428×1024: Minha Lista do MVP social, capa do case. Dados na interface são demonstrativos. |
+| `cases/animae-v1.png` | Imagem já publicada por Thiago em `thiagomirandaux.framer.website/work/animae`, asset Framer `tNm4OIUdzzLa5jBbtbSMGPipgE.png`, 1024×427. Exibida somente com legenda de versão 1/streaming. |
+| `cases/navaja-capa.png` | Portfólio publicado de Thiago, `/work/navaja`, asset Framer `LKsO3FHoUaXsTu2yPXGsDaG9I.png`, 1024×768. Mockup do conceito, capa do case. |
+| `cases/navaja-telas.png` | Mesma página, asset `QcIT7fKS34KUGLUj55B29jt1q8.png`, 1024×569. Estudo da entrada do app, na solução. |
+| `cases/oficina-produto.png` | Figma DISCO Cases `zPqNhCbwO8DDnnouXZfa5a`, Oficina do Tenista, `4001:58688` (pdp-detail), 1024×536. Capa do case. |
+| `cases/oficina-comparador.png` | Mesmo arquivo, `4001:58692` (section-comparador), 1024×420. Evidência da comparação lado a lado, na solução. |
+
+Os renders do Figma foram obtidos pelo conector. O endpoint de download retornou
+403; usou-se a resposta inline de screenshot para salvar o PNG, sem retocar o
+conteúdo. URLs temporárias não fazem parte do código. As imagens do Framer são
+variantes disponibilizadas pelo próprio CDN, salvas localmente e verificadas.
+
+Os PNGs representam telas dos projetos do próprio Thiago, não prints dos sites
+de referência Dex/Omar. O layout do portfólio continua sendo HTML/CSS interativo;
+as imagens não substituem o documento. As figuras preservam proporção e podem
+ser abertas em nova aba para ampliar. Ilustrações e fotos dentro das interfaces
+pertencem aos respectivos projetos/fontes; não são fotografias originais do portfólio.
+
+As pastas usam o asset XP local `xp/figma/pasta.png`, já existente no projeto.
+Os marcadores A/N/OT são rótulos em texto, não logotipos inventados.
+
 O componente `SocialLink` compartilha ícone, nome, foco e destinos entre MSN,
 Sobre mim, Contato, janela de e-mail e modos editoriais. O nome de nenhuma rede
 fica oculto em janelas estreitas. Ícones usam caixas de 16 px nos links compactos

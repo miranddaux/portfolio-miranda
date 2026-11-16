@@ -13,4 +13,6 @@ import "./styles/welcome.css";
 import "./styles/social.css";
 import "./styles/perfil-busca.css";
 import "./styles/msn-banner.css";
+import "./styles/projects.css";
+import "./styles/case-document.css";
 createRoot(document.getElementById("root")).render(<App />);

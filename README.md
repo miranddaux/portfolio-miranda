@@ -13,6 +13,13 @@ O favicon usa o retrato do Thiago. Detalhes e validação:
 [docs/REFINEMENT-2026-11-16.md](docs/REFINEMENT-2026-11-16.md).
 Teste da busca: `node --test tests/perfil-search.test.mjs`.
 
+A rodada seguinte implementa Projetos como um explorador XP com oito pastas:
+três cases disponíveis e cinco em construção. Os cases abrem dentro de uma
+janela XP, com URL própria, documento centralizado, resumo rápido, pesquisa,
+decisões, jornada, telas reais, resultados e plano de medição. Os modos editoriais
+usam o mesmo conteúdo. Veja [docs/PROJECTS-XP.md](docs/PROJECTS-XP.md).
+Testes: `node --test tests/*.test.mjs`.
+
 ## Rodar
 
 ```bash
