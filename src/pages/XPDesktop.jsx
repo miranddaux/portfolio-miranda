@@ -63,7 +63,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
       setWindows((w) => ({ ...w, case: "closed", cases: "open" }));
       setActive("cases");
       previousProject.current = null;
-      requestAnimationFrame(() => document.querySelector(`.project-folder[href="/cases/${lastProject}"]`)?.focus());
+      requestAnimationFrame(() => (document.querySelector(`.project-folder[href="/cases/${lastProject}"]`) || document.getElementById("cases-title"))?.focus());
     }
   }, [project?.id]);
   const menuRef = useRef(null),
