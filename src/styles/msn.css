@@ -1094,3 +1094,16 @@ button.msn-aba-x:hover {
 .msn-quadro img[src*="thiago-retro"] {
   image-rendering: pixelated;
 }
+
+/* Ícones da barra da conversa: mesma opacidade; o Bloquear fica sem opacidade */
+.msn-ferramenta img {
+  opacity: 0.72;
+  transition: opacity 0.15s;
+}
+.msn-ferramenta:hover img,
+.msn-ferramenta:focus-visible img {
+  opacity: 1;
+}
+.msn-bloquear img {
+  opacity: 1;
+}
