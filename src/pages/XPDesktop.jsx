@@ -14,7 +14,7 @@ const APPS = [
   {
     id: "sobre",
     name: "Sobre mim",
-    title: "Sobre mim — Miranda.txt",
+    title: "Sobre Mim - Miranda",
     icon: "profile",
   },
   {

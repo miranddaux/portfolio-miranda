@@ -48,13 +48,13 @@ export const ADICIONAL = [
     cargo: "Fundador do ANIMAE",
     empresa: "Projeto próprio",
     periodo: "atual",
-    texto: "Aplicativo social para quem acompanha animes, que estou construindo do começo ao fim.",
+    texto: "Aplicativo social para quem acompanha animes.",
   },
   {
-    cargo: "Hackathon SouJunior",
-    empresa: "Designer mentor",
+    cargo: "Vencedor do Hackathon SouJunior — 1º lugar",
+    empresa: "Designer e mentor",
     periodo: "set 2026",
-    texto: "1º lugar entre 30 squads com a landing page do Apoia.se.",
+    texto: "Atuei como designer e mentor da equipe que conquistou o 1º lugar entre 30 squads, com a landing page do Apoia.se.",
   },
 ];
 

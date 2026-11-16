@@ -16,12 +16,21 @@
   line-height: var(--space-3);
   text-decoration: none;
 }
-.social-link__icon {
+.social-link__icon-frame {
   display: block;
   flex: none;
   width: var(--space-2);
   height: var(--space-2);
+}
+.social-link__icon {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+}
+/* O SVG tem margem interna: correção óptica sem aumentar a caixa do layout. */
+.social-link__icon-frame--whatsapp .social-link__icon {
+  transform: scale(1.18);
 }
 .social-link__name {
   white-space: nowrap;
@@ -44,6 +53,10 @@
 .social-link[aria-disabled="true"] {
   flex-wrap: wrap;
   cursor: default;
+  color: var(--color-neutral-600);
+}
+.social-link[aria-disabled="true"] .social-link__icon {
+  filter: grayscale(1);
 }
 .social-link--tile {
   justify-content: flex-start;
@@ -54,7 +67,7 @@
   background: linear-gradient(var(--color-neutral-50), var(--color-blue-100));
   box-shadow: inset 0 1px 0 var(--color-neutral-50);
 }
-.social-link--tile .social-link__icon {
+.social-link--tile .social-link__icon-frame {
   width: var(--space-3);
   height: var(--space-3);
 }

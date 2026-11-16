@@ -4,6 +4,7 @@ import { BOAS_VINDAS, SUGESTOES, responder } from "../data/bot.js";
 import { EMOTICONS, partesComEmoticons } from "../data/emoticons.js";
 import { CONTATO } from "../data/perfil.js";
 import SocialLink from "./SocialLink.jsx";
+import MsnBanner from "./MsnBanner.jsx";
 import { REDES_PRINCIPAIS } from "../data/social.js";
 import { somChamar, somEnviar, somMensagem } from "../lib/sons";
 
@@ -11,7 +12,6 @@ export const NOME_BOT = "Thiago Bot";
 const FOTO = "/assets/xp/foto-thiago-rosto.webp";
 const FOTO_BOT = "/assets/xp/msn/thiago-bot.webp";
 const LOGO = "/assets/xp/msn/logo-32.png";
-const BANNER = "/assets/xp/msn/banner.webp";
 const EMO = (n) => `/assets/xp/msn/emoticons/${n}.png`;
 
 // Imagens de exibição do visitante (Figma "MSN Assets"), como no "Minha imagem de exibição".
@@ -231,9 +231,7 @@ export function MsnContatos({ aoConversar }) {
         </ul>
       </div>
       <div className="msn-rodape">
-        <button type="button" className="msn-banner" onClick={aoConversar} title={`Conversar com o ${NOME_BOT}`}>
-          <img src={BANNER} alt={`Portfólio Thiago Live Messenger — conversar com o ${NOME_BOT}`} width="330" height="110" />
-        </button>
+        <MsnBanner aoConversar={aoConversar} />
       </div>
     </div>
   );

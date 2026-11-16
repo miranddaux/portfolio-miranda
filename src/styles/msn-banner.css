@@ -1,0 +1,70 @@
+/* Banner em HTML/CSS. Só as duas marcas decorativas usam assets individuais. */
+.msn-banner {
+  display: grid;
+  width: 100%;
+  max-width: 480px;
+  min-height: 112px;
+  aspect-ratio: 3 / 1;
+  margin-inline: auto;
+  padding: var(--space-1);
+  border: 1px solid var(--color-blue-800);
+  border-radius: 8px;
+  background:
+    radial-gradient(ellipse at 16% 45%, #8ee5d7, transparent 60%),
+    linear-gradient(110deg, #3aa2b2, #0755a1 70%, #063e8e);
+  box-shadow: inset 0 1px 0 #a4e4e8, inset 0 -1px 0 #0d357c;
+  color: var(--color-neutral-50);
+  font-family: var(--font-ui);
+  cursor: pointer;
+}
+.msn-banner-moldura {
+  display: grid;
+  grid-template-columns: var(--space-4) minmax(0, 1fr) var(--space-10);
+  gap: var(--space-1);
+  align-items: center;
+  padding: var(--space-1);
+  border: 2px solid #91d5e8;
+  border-radius: 8px;
+  background: linear-gradient(105deg, #23647d, #125497 55%, #033786);
+  box-shadow: inset 1px 1px 1px #1b5286, inset -1px -1px 1px #092b69, 0 1px 2px #072f69;
+  text-align: left;
+}
+.msn-banner-texto {
+  font-size: var(--text-16);
+  font-weight: 500;
+  line-height: var(--space-3);
+  text-shadow: 0 1px 1px #236b8d;
+  text-wrap: balance;
+}
+.msn-banner-windows {
+  display: block;
+  width: var(--space-4);
+  height: var(--space-4);
+  object-fit: contain;
+}
+.msn-banner-pessoas {
+  display: block;
+  width: var(--space-10);
+  height: var(--space-10);
+  object-fit: contain;
+}
+.msn-banner:hover .msn-banner-moldura {
+  border-color: var(--color-neutral-50);
+}
+.msn-banner:focus-visible {
+  outline: 2px solid var(--color-blue-900);
+  outline-offset: 2px;
+}
+@container janela (max-width: 400px) {
+  .msn-banner-moldura {
+    grid-template-columns: var(--space-3) minmax(0, 1fr) var(--space-7);
+  }
+  .msn-banner-windows {
+    width: var(--space-3);
+    height: var(--space-3);
+  }
+  .msn-banner-pessoas {
+    width: var(--space-7);
+    height: var(--space-7);
+  }
+}

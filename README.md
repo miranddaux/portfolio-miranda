@@ -3,6 +3,16 @@
 Portfólio de Thiago Miranda, Product Designer pleno, em React + Vite + CSS + GSAP.
 Esta rodada aproxima a experiência da linguagem Windows XP e usa Segoe UI em todo o site.
 
+## Atualização de 16/11
+
+O desktop atual inclui Sobre Mim, currículo PT/EN, contato e MSN. Os links sociais
+compartilham ícone e nome; Medium fica inativo. No Sobre Mim, as setas e o seletor
+Endereço navegam pelas abas; Buscar pesquisa os conteúdos reais e leva ao item
+selecionado. O banner do MSN usa texto e layout em HTML/CSS, com marcas individuais.
+O favicon usa o retrato do Thiago. Detalhes e validação:
+[docs/REFINEMENT-2026-11-16.md](docs/REFINEMENT-2026-11-16.md).
+Teste da busca: `node --test tests/perfil-search.test.mjs`.
+
 ## Rodar
 
 ```bash

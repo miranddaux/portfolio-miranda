@@ -62,7 +62,7 @@ Branch: `claude/modo-xp-desktop`. Prévia privada: https://claude.ai/artifact/9z
   - Currículo "Salvar": no site baixa pelo link; na prévia do Claude usa o recurso `downloads` (pede confirmação). Publicar a prévia com `capabilities: {downloads: true}`.
 
 ## Pendências
-1. URL do Medium (o item aparece como "a configurar").
+1. URL do Medium (o item aparece como "inativo", conforme pedido de 16/11).
 2. MSN: revisar com o Thiago a rodada de 15/11 (benchmark MSN 7). Os assets do MSN são da Microsoft (ver docs/ASSETS.md).
 7. Resolvido em 16/11: retirada a afirmação de prazo sem origem confirmada do bot, perfil e currículos PT/EN, incluindo as prévias. Ver `REFINEMENT-2026-11-16.md`.
 3. Aba Projetos e textos dos cases: o Thiago vai detalhar depois.

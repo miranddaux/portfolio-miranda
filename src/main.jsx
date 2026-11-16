@@ -11,4 +11,6 @@ import "./styles/painel-xp.css";
 import "./styles/msn.css";
 import "./styles/welcome.css";
 import "./styles/social.css";
+import "./styles/perfil-busca.css";
+import "./styles/msn-banner.css";
 createRoot(document.getElementById("root")).render(<App />);

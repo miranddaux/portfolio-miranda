@@ -270,48 +270,6 @@ button.msn-contato:focus-visible {
 .msn-rodape {
   padding: 8px;
 }
-.msn-banner {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  height: 64px;
-  padding: 0 16px;
-  border: 1px solid #b8cfe8;
-  background: linear-gradient(#ffffff, #e8f1fb);
-  color: #0d3d86;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  position: relative;
-}
-.msn-banner::after {
-  content: "";
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: 6px;
-  height: 3px;
-  background: linear-gradient(90deg, #f6b818, #e8641c 50%, #5bb446);
-}
-.msn-banner-txt {
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  line-height: 20px;
-}
-.msn-banner b {
-  font-style: italic;
-}
-.msn-banner small {
-  color: #4b6a92;
-  font-size: 12px;
-  line-height: 16px;
-}
-.msn-banner:hover small {
-  text-decoration: underline;
-}
-
 /* ---------- Conversa ---------- */
 .msn-conversa {
   background: linear-gradient(#f3f8fe, #e2eefa);
@@ -842,28 +800,6 @@ button.msn-quadro:focus-visible {
   align-items: center;
 }
 
-/* Banner do rodapé: imagem enviada pelo Thiago */
-.msn-banner {
-  display: block;
-  height: auto;
-  padding: 0;
-  border: 0;
-  background: none;
-}
-.msn-banner::after {
-  display: none;
-}
-.msn-banner img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-.msn-banner:hover img,
-.msn-banner:focus-visible img {
-  filter: brightness(1.08);
-}
-
 /* Conversa: fundo claro com faixa azul, como a referência */
 .msn-conversa {
   background: linear-gradient(#ffffff 0, #eef5fc 112px, #f7fbff 60%, #e6f0fa);
@@ -1103,11 +1039,4 @@ button.msn-aba-x:hover {
 }
 .msn-bloquear img {
   opacity: 1;
-}
-
-/* Banner não cresce com a janela: altura limitada, a lista de contatos ganha o espaço */
-.msn-banner {
-  flex: none;
-  max-width: 480px;
-  margin-inline: auto;
 }

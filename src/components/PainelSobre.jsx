@@ -1,27 +1,20 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FotoXP from "./FotoXP.jsx";
 import SocialLink from "./SocialLink.jsx";
+import ResultadosPerfil from "./ResultadosPerfil.jsx";
+import { ABAS_PERFIL as ABAS, BIO_PERFIL, RESUMO_PROJETOS, abaVizinha, buscarNoPerfil } from "../data/perfilSearch.js";
 import { REDES_PRINCIPAIS } from "../data/social.js";
 import { ADICIONAL, CERTIFICACOES, CONTATO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "../data/perfil.js";
 
 const P = "/assets/xp/painel";
 const FOTO = "/assets/xp/foto-thiago.webp";
 
-const ABAS = [
-  { id: "sobre", nome: "Sobre", endereco: "Sobre mim" },
-  { id: "experiencia", nome: "Experiência", endereco: "Experiência" },
-  { id: "educacao", nome: "Educação", endereco: "Educação" },
-  { id: "habilidades", nome: "Habilidades", endereco: "Habilidades" },
-  { id: "projetos", nome: "Projetos", endereco: "Projetos e playground" },
-  { id: "contato", nome: "Contato", endereco: "Entre em contato" },
-];
-
 const LISTA_HABILIDADES = HABILIDADES.map((h) => h.nome);
 const LINKS_SOCIAIS = [...REDES_PRINCIPAIS, "medium"];
 
-function Tags({ titulo, itens }) {
+function Tags({ titulo, itens, id }) {
   return (
-    <section className="painel-tags-sec">
+    <section className="painel-tags-sec" id={id} tabIndex={-1}>
       <h4 className="painel-subtitulo">{titulo}</h4>
       <ul className="painel-tags">
         {itens.map((t) => (
@@ -32,11 +25,11 @@ function Tags({ titulo, itens }) {
   );
 }
 
-function ListaExp({ itens }) {
+function ListaExp({ itens, prefixo }) {
   return (
     <div className="painel-exp">
-      {itens.map((x) => (
-        <article key={x.cargo + x.empresa} className="painel-exp-item">
+      {itens.map((x, i) => (
+        <article key={x.cargo + x.empresa} className="painel-exp-item" id={`perfil-${prefixo}-${i}`} tabIndex={-1}>
           <h4>{x.cargo}</h4>
           <p className="painel-exp-meta">
             {x.empresa} · {x.periodo}
@@ -48,11 +41,11 @@ function ListaExp({ itens }) {
   );
 }
 
-function Linhas({ itens }) {
+function Linhas({ itens, prefixo }) {
   return (
     <ul className="painel-linhas">
-      {itens.map((x) => (
-        <li key={x.periodo + x.curso}>
+      {itens.map((x, i) => (
+        <li key={x.periodo + x.curso} id={`perfil-${prefixo}-${i}`} tabIndex={-1}>
           <span className="painel-data">{x.periodo}</span>
           <div>
             <strong>{x.instituicao}</strong>
@@ -80,9 +73,9 @@ function Expansor({ aberto, aoAlternar, rotulo, primario }) {
   );
 }
 
-function BotaoBarra({ icone, rotulo, desativado, aoClicar, seta }) {
+function BotaoBarra({ icone, rotulo, desativado, aoClicar, seta, nomeAcessivel, ...atributos }) {
   return (
-    <button type="button" className="painel-botao" disabled={desativado} onClick={aoClicar}>
+    <button type="button" className="painel-botao" disabled={desativado} onClick={aoClicar} aria-label={nomeAcessivel || rotulo} title={nomeAcessivel || rotulo} {...atributos}>
       <img src={`${P}/${icone}.png`} alt="" width="24" height="24" draggable="false" />
       {rotulo && <span>{rotulo}</span>}
       {seta && <i aria-hidden="true" className="painel-seta" />}
@@ -93,30 +86,44 @@ function BotaoBarra({ icone, rotulo, desativado, aoClicar, seta }) {
 // Conteúdo da janela "Sobre mim" no layout do Painel de Controle (Figma 135:2065).
 export default function PainelSobre({ aoAbrir }) {
   const [aba, setAba] = useState("sobre");
-  const [historico, setHistorico] = useState([]);
-  const [futuro, setFuturo] = useState([]);
+  const [buscaAberta, setBuscaAberta] = useState(false);
+  const [consulta, setConsulta] = useState("");
+  const [alvoBusca, setAlvoBusca] = useState(null);
+  const buscaRef = useRef(null);
+  const rolagemRef = useRef(null);
   const [secoes, setSecoes] = useState({ hab: true, soft: true, social: true });
   const [semFoto, setSemFoto] = useState(false);
   const abasRef = useRef([]);
 
   const ir = (id) => {
-    if (id === aba) return;
-    setHistorico((h) => [...h, aba]);
-    setFuturo([]);
+    if (!ABAS.some((item) => item.id === id)) return;
     setAba(id);
+    setConsulta("");
+    setAlvoBusca(null);
+    if (rolagemRef.current) rolagemRef.current.scrollTop = 0;
   };
-  const voltar = () => {
-    if (!historico.length) return;
-    setFuturo((f) => [aba, ...f]);
-    setAba(historico[historico.length - 1]);
-    setHistorico((h) => h.slice(0, -1));
+  const fecharBusca = () => {
+    setBuscaAberta(false);
+    setConsulta("");
+    requestAnimationFrame(() => document.getElementById("perfil-botao-buscar")?.focus());
   };
-  const avancar = () => {
-    if (!futuro.length) return;
-    setHistorico((h) => [...h, aba]);
-    setAba(futuro[0]);
-    setFuturo((f) => f.slice(1));
+  const selecionarResultado = (item) => {
+    ir(item.aba);
+    setBuscaAberta(false);
+    setAlvoBusca(item.id);
   };
+  useEffect(() => {
+    if (buscaAberta) buscaRef.current?.focus();
+  }, [buscaAberta]);
+  useEffect(() => {
+    if (!alvoBusca) return;
+    const quadro = requestAnimationFrame(() => {
+      const item = document.getElementById(alvoBusca);
+      item?.scrollIntoView?.({ block: "center", behavior: "auto" });
+      item?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(quadro);
+  }, [alvoBusca]);
   const teclasAbas = (e) => {
     const i = ABAS.findIndex((a) => a.id === aba);
     const novo = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: ABAS.length - 1 }[e.key];
@@ -127,6 +134,9 @@ export default function PainelSobre({ aoAbrir }) {
     requestAnimationFrame(() => abasRef.current[ABAS.indexOf(alvo)]?.focus());
   };
   const atual = ABAS.find((a) => a.id === aba);
+  const indiceAba = ABAS.indexOf(atual);
+  const buscando = buscaAberta && Boolean(consulta.trim());
+  const resultados = buscando ? buscarNoPerfil(consulta) : [];
 
   return (
     <div className="painel">
@@ -142,8 +152,9 @@ export default function PainelSobre({ aoAbrir }) {
             <label htmlFor="painel-endereco">Endereço</label>
             <div className="painel-combo">
               <img src={`${P}/painel-icone.png`} alt="" width="16" height="16" />
-              <input id="painel-endereco" readOnly value={atual.endereco} />
-              <span className="painel-drop" aria-hidden="true" />
+              <select id="painel-endereco" value={aba} onChange={(e) => ir(e.target.value)}>
+                {ABAS.map((a) => <option key={a.id} value={a.id}>{a.endereco}</option>)}
+              </select>
             </div>
             <button type="button" className="painel-ok" onClick={() => document.getElementById(`aba-${aba}`)?.focus()}>
               <img src={`${P}/avancar.png`} alt="" width="20" height="20" draggable="false" />
@@ -153,14 +164,30 @@ export default function PainelSobre({ aoAbrir }) {
           <span className="painel-adesivo"><img src={`${P}/adesivo.png`} alt="" width="36" height="18" draggable="false" /></span>
         </div>
         <div className="painel-linha painel-ferramentas" role="toolbar" aria-label="Navegação">
-          <BotaoBarra icone="voltar" rotulo="Voltar" desativado={!historico.length} aoClicar={voltar} seta />
-          <BotaoBarra icone="avancar" desativado={!futuro.length} aoClicar={avancar} seta />
-          <BotaoBarra icone="acima" aoClicar={() => ir("sobre")} />
+          <BotaoBarra icone="voltar" rotulo="Voltar" nomeAcessivel="Voltar para a aba anterior" desativado={indiceAba === 0} aoClicar={() => ir(abaVizinha(aba, -1))} seta />
+          <BotaoBarra icone="avancar" nomeAcessivel="Próxima aba" desativado={indiceAba === ABAS.length - 1} aoClicar={() => ir(abaVizinha(aba, 1))} seta />
+          <BotaoBarra icone="acima" nomeAcessivel="Ir para Sobre" aoClicar={() => ir("sobre")} />
           <span className="painel-sep alto" aria-hidden="true" />
-          <BotaoBarra icone="busca" rotulo="Buscar" aoClicar={() => ir("habilidades")} />
+          <BotaoBarra icone="busca" rotulo="Buscar" id="perfil-botao-buscar" aria-expanded={buscaAberta} aria-controls="perfil-busca" aoClicar={() => buscaAberta ? fecharBusca() : setBuscaAberta(true)} />
           <BotaoBarra icone="pastas" rotulo="Projetos" aoClicar={() => aoAbrir("cases")} />
         </div>
       </div>
+
+      {buscaAberta && (
+        <form className="perfil-busca" id="perfil-busca" role="search" aria-label="Buscar no perfil" onSubmit={(e) => e.preventDefault()} onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            e.preventDefault();
+            e.stopPropagation();
+            fecharBusca();
+          }
+        }}>
+          <label htmlFor="perfil-consulta">Buscar no perfil</label>
+          <input ref={buscaRef} id="perfil-consulta" type="search" value={consulta} onChange={(e) => setConsulta(e.target.value)} placeholder="Ex.: Figma, Shopify ou SouJunior" aria-describedby="perfil-busca-ajuda" />
+          <button type="button" className="xp-button" onClick={() => { setConsulta(""); buscaRef.current?.focus(); }} disabled={!consulta}>Limpar</button>
+          <button type="button" className="xp-button" onClick={fecharBusca}>Fechar busca</button>
+          <p id="perfil-busca-ajuda">Pesquise em todas as abas. Selecione um resultado para ir até o item.</p>
+        </form>
+      )}
 
       <div className="painel-principal">
         <aside className="painel-lateral" aria-label="Resumo">
@@ -224,12 +251,13 @@ export default function PainelSobre({ aoAbrir }) {
               </button>
             ))}
           </div>
-          <div className="painel-rolagem">
-            <div className="painel-limite" id="painel-conteudo" role="tabpanel" aria-labelledby={`aba-${aba}`}>
+          <div className="painel-rolagem" ref={rolagemRef}>
+            <div className="painel-limite" id="painel-conteudo" role="tabpanel" aria-labelledby={buscando ? "perfil-resultados-titulo" : `aba-${aba}`}>
+              {buscando ? <ResultadosPerfil consulta={consulta} resultados={resultados} aoSelecionar={selecionarResultado} /> : <>
               <h3 className="painel-titulo">{atual.endereco}</h3>
 
               {aba === "sobre" && (
-                <div className="painel-cartao painel-perfil">
+                <div className="painel-cartao painel-perfil" id="perfil-sobre" tabIndex={-1}>
                   <div className="painel-foto">
                     {semFoto ? (
                       <span aria-hidden="true">TM</span>
@@ -242,7 +270,7 @@ export default function PainelSobre({ aoAbrir }) {
                     <p className="painel-cargo">Product Designer pleno</p>
                     <p className="painel-destaque">São José do Rio Preto, SP</p>
                     <p>
-                      Sou Product Designer em São José do Rio Preto. De dia, desenho e-commerces na Shopify pela <strong>Agência Disco</strong>. À noite, crio pequenos projetos na interseção entre design e código.
+                      {BIO_PERFIL}
                     </p>
                   </div>
                 </div>
@@ -250,38 +278,38 @@ export default function PainelSobre({ aoAbrir }) {
 
               {aba === "experiencia" && (
                 <>
-                  <ListaExp itens={EXPERIENCIAS} />
+                  <ListaExp itens={EXPERIENCIAS} prefixo="experiencia" />
                   <h4 className="painel-subtitulo">Adicional</h4>
-                  <ListaExp itens={ADICIONAL} />
+                  <ListaExp itens={ADICIONAL} prefixo="adicional" />
                 </>
               )}
 
               {aba === "educacao" && (
                 <>
-                  <Linhas itens={EDUCACAO} />
+                  <Linhas itens={EDUCACAO} prefixo="educacao" />
                   <h4 className="painel-subtitulo">Certificações</h4>
-                  <Linhas itens={CERTIFICACOES} />
+                  <Linhas itens={CERTIFICACOES} prefixo="certificacao" />
                 </>
               )}
 
               {aba === "habilidades" && (
                 <>
                   <ul className="painel-mosaico">
-                    {HABILIDADES.map((h) => (
-                      <li key={h.nome} className="painel-item">
+                    {HABILIDADES.map((h, i) => (
+                      <li key={h.nome} className="painel-item" id={`perfil-habilidade-${i}`} tabIndex={-1}>
                         <img src={`${P}/${h.icone}.png`} alt="" width="40" height="40" draggable="false" />
                         <strong>{h.nome}</strong>
                       </li>
                     ))}
                   </ul>
-                  <Tags titulo="Ferramentas" itens={FERRAMENTAS} />
-                  <Tags titulo="Línguas" itens={LINGUAS} />
+                  <Tags titulo="Ferramentas" itens={FERRAMENTAS} id="perfil-ferramentas" />
+                  <Tags titulo="Línguas" itens={LINGUAS} id="perfil-linguas" />
                 </>
               )}
 
               {aba === "projetos" && (
-                <div className="painel-cartao">
-                  <p>Cases de e-commerce, apps e design systems, com contexto, decisões e resultado. No playground ficam experimentos entre design e código.</p>
+                <div className="painel-cartao" id="perfil-projetos" tabIndex={-1}>
+                  <p>{RESUMO_PROJETOS}</p>
                   <div className="painel-acoes">
                     <button type="button" className="xp-button" onClick={() => aoAbrir("cases")}>Abrir projetos</button>
                     <button type="button" className="xp-button" onClick={() => aoAbrir("playground")}>Abrir playground</button>
@@ -290,6 +318,7 @@ export default function PainelSobre({ aoAbrir }) {
               )}
 
               {aba === "contato" && <ContatoConteudo aoEscrever={() => aoAbrir("contato")} />}
+              </>}
             </div>
           </div>
         </div>
@@ -300,7 +329,7 @@ export default function PainelSobre({ aoAbrir }) {
 
 export function ContatoConteudo({ aoEscrever }) {
   return (
-    <div className="painel-contato">
+    <div className="painel-contato" id="perfil-contato" tabIndex={-1}>
       <ul className="painel-redes painel-redes--social">
         {["linkedin", "email", "whatsapp", "dribbble", "behance"].map((rede) => (
           <li key={rede}>
