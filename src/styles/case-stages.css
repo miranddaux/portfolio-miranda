@@ -141,7 +141,7 @@
 .case-story-text h3 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); }
 .case-story-text p { margin: 0; font-size: var(--text-16); line-height: var(--space-3); color: var(--case-ink); }
 .case-story-index { font-size: var(--text-12); font-weight: 700; letter-spacing: 0.12em; color: var(--case-accent); }
-.case-story-index::before { content: "MÓDULO "; }
+.case-story-index::before { content: "SOLUÇÃO "; }
 .case-frame.is-story { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: var(--space-3); padding: var(--space-5) var(--space-3); background: linear-gradient(180deg, var(--case-surface), #dfe8fb); }
 .case-frame.is-story .case-media { flex: 0 0 auto; }
 .case-note { padding: var(--space-3); background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); max-width: var(--case-measure); }
@@ -154,8 +154,6 @@
 }
 
 /* Indicadores com a pastinha do XP em segundo plano */
-.case-kpis li { position: relative; overflow: hidden; }
-.case-kpi-folder { position: absolute; top: var(--space-2); right: var(--space-2); width: var(--space-4); height: var(--space-4); opacity: 0.28; pointer-events: none; }
 
 /* Landing page: imagem inteira, a rolagem é a da própria página */
 .case-browser img { display: block; width: 100%; height: auto; }
@@ -165,3 +163,21 @@
 .case-frame.is-trio, .case-frame.is-pair, .case-frame-row { grid-template-columns: repeat(auto-fit, minmax(min(100%, 192px), var(--shot, 264px))); }
 .case-story.is-reverse { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
 @media (max-width: 860px) { .case-story.is-reverse { grid-template-columns: 1fr; } }
+
+/* Revisão 17/11 (17h) */
+.case-chips li { padding: var(--space-1) var(--space-2); font-size: var(--text-14); line-height: var(--space-3); }
+.case-overview-card { justify-content: space-between; flex-wrap: nowrap; gap: var(--space-4); }
+.case-overview-card > div:last-child { margin-left: 0; }
+.case-year { font-size: var(--text-16); }
+.case-year small { font-size: var(--text-14); }
+@media (max-width: 960px) { .case-overview-card { flex-wrap: wrap; justify-content: flex-start; } }
+
+/* Número e nome da etapa centralizados na mesma linha */
+.case-stage-kicker { display: flex; align-items: center; gap: var(--space-1); height: var(--space-4); }
+.case-stage-kicker > span { display: inline-flex; align-items: center; height: var(--space-4); line-height: var(--space-4); }
+
+/* Dois celulares: um cortado embaixo, o outro cortado em cima */
+.case-frame.is-story.is-stagger { flex-wrap: nowrap; align-items: flex-start; height: 560px; padding: 0 var(--space-3); overflow: hidden; gap: var(--space-3); }
+.case-frame.is-stagger .case-media:nth-child(1) { margin-top: var(--space-5); }
+.case-frame.is-stagger .case-media:nth-child(2) { margin-top: -160px; }
+@media (max-width: 560px) { .case-frame.is-story.is-stagger { height: 480px; } .case-frame.is-stagger .case-device { width: 160px; } .case-frame.is-stagger .case-media:nth-child(2) { margin-top: -96px; } }

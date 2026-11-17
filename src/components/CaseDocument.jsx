@@ -45,8 +45,9 @@ function Frame({ layout, items, phone, label }) {
       {rows.map((row, i) => <div key={i} className="case-frame-row">{row.map((m) => <Shot key={m.src} media={m} phone={phone} />)}</div>)}
     </div>;
   }
-  const shot = layout === "story" ? (items.length > 1 ? "200px" : "264px") : undefined;
-  return <div className={`case-frame is-${layout}`} style={shot ? { "--shot": shot } : undefined} role="group" aria-label={label}>
+  const shot = layout === "story" ? "264px" : undefined;
+  const stagger = layout === "story" && items.length === 2 ? " is-stagger" : "";
+  return <div className={`case-frame is-${layout}${stagger}`} style={shot ? { "--shot": shot } : undefined} role="group" aria-label={label}>
     {items.map((m) => <Shot key={m.src} media={m} phone={phone} />)}
   </div>;
 }
@@ -153,7 +154,7 @@ export default function CaseDocument({ project, onNavigate }) {
       {textOnly.map((m) => <div key={m.title} className="case-note"><h3>{m.title}</h3><p>{m.text}</p></div>)}
     </Stage>
 
-    <Stage id={id("solucao")} number="04" label="Solução" title="O produto, tela por tela">
+    <Stage id={id("solucao")} number="04" label="Solução" title="Como a solução funciona">
       <div className="case-stories">
         {withImages.map((module, index) => <Story key={module.title} index={index} module={module} phone={phones} />)}
       </div>
@@ -164,7 +165,6 @@ export default function CaseDocument({ project, onNavigate }) {
       <p>{project.learning}</p>
       <p>{project.outcome}</p>
       <ul className="case-kpis" aria-label="Indicadores propostos, ainda sem resultados publicados">{project.kpis.map(([label, definition]) => <li key={label}>
-        <img className="case-kpi-folder" src="/assets/xp/figma/pasta.png" alt="" width="32" height="32" draggable="false" />
         <span className="case-kpi-status">A medir</span><strong>{label}</strong><span>{definition}</span>
       </li>)}</ul>
     </Stage>
@@ -174,7 +174,7 @@ export default function CaseDocument({ project, onNavigate }) {
         <p className="case-stage-kicker"><span className="case-section-label">Landing page</span></p>
         <h2 id={id("lp-title")}>A porta de entrada para o produto</h2>
       </header>
-      <p>A landing page apresenta a proposta e convida para a versão Android. {project.landing.note}</p>
+      <p>A landing page apresenta a proposta e convida para a versão Android.</p>
       {project.links.site && <div className="case-document-actions"><a className="xp-button" href={project.links.site} target="_blank" rel="noopener noreferrer">Ver landing page<span className="sr-only"> (abre em nova aba)</span></a></div>}
       <figure className="case-browser">
         <div className="case-browser-bar"><span>{project.landing.address}</span></div>
