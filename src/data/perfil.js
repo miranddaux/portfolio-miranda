@@ -18,7 +18,7 @@ export const EXPERIENCIAS = [
     empresa: "Agência Disco",
     periodo: "mar 2025 – atual",
     texto:
-      "Desenho e-commerces em Shopify de ponta a ponta, da estratégia ao handoff. Estruturo design systems com tokens no Figma, otimizo páginas de produto e checkout com foco em conversão (CRO) e reduzi o tempo de layout de 2–3 semanas para 4–5 dias.",
+      "Desenho e-commerces em Shopify de ponta a ponta, da estratégia ao handoff. Estruturo design systems com tokens no Figma, otimizo páginas de produto e checkout com foco em conversão (CRO).",
   },
   {
     cargo: "Visual Designer",
@@ -48,13 +48,13 @@ export const ADICIONAL = [
     cargo: "Fundador do ANIMAE",
     empresa: "Projeto próprio",
     periodo: "atual",
-    texto: "Aplicativo social para quem acompanha animes, que estou construindo do começo ao fim.",
+    texto: "Aplicativo social para quem acompanha animes.",
   },
   {
-    cargo: "Hackathon SouJunior",
-    empresa: "Designer mentor",
+    cargo: "Vencedor do Hackathon SouJunior — 1º lugar",
+    empresa: "Designer e mentor",
     periodo: "set 2026",
-    texto: "1º lugar entre 30 squads com a landing page do Apoia.se.",
+    texto: "Atuei como designer e mentor da equipe que conquistou o 1º lugar entre 30 squads, com a landing page do Apoia.se.",
   },
 ];
 

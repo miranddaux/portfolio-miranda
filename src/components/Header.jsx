@@ -15,7 +15,6 @@ export default function Header({ mode, setMode, onShowWelcome }) {
       >
         {[
           ["cases", "Cases"],
-          ["playground", "Playground"],
           ["sobre", "Sobre"],
           ["contato", "Contato"],
         ].map(([id, label]) => (

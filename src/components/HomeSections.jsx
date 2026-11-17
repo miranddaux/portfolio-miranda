@@ -1,31 +1,9 @@
-import { ArrowUpRight, ExternalLink, Mail, Folder } from "lucide-react";
+import SocialLink from "./SocialLink.jsx";
+import { REDES_PRINCIPAIS } from "../data/social.js";
+import { ArrowUpRight, Folder } from "lucide-react";
 export default function HomeSections() {
   return (
     <>
-      {" "}
-      <section id="playground" className="playground section-width">
-        <div className="playground-inner">
-          <div className="playground-sticker">✦</div>
-          <div>
-            <span className="eyebrow">/ EXPERIMENTOS & CURIOSIDADE</span>
-            <h2>
-              O laboratório está <em>aberto.</em>
-            </h2>
-            <p>
-              Um espaço para protótipos, design systems, interfaces de games e
-              experiências que misturam design e código. Conteúdo em evolução.
-            </p>
-          </div>
-          <div className="playground-tile">
-            <span className="pixel-icon">▣</span>
-            <span>PLAYGROUND.EXE</span>
-            <strong>Em construção</strong>
-            <span className="progress-track">
-              <i />
-            </span>
-          </div>
-        </div>
-      </section>
       <section className="about-section" id="sobre">
         <div className="section-width about-grid">
           <div>
@@ -95,24 +73,9 @@ export default function HomeSections() {
             </p>
           </div>
           <div className="contact-buttons">
-            <button
-              className="btn btn-dark"
-              disabled
-              title="URL do perfil ainda nao configurada"
-            >
-              LinkedIn a configurar <ExternalLink size={16} />
-            </button>
-            <button
-              className="btn btn-outline"
-              disabled
-              title="E-mail profissional ainda não configurado"
-            >
-              E-mail a configurar <Mail size={16} />
-            </button>
-            <p className="contact-note">
-              Os links definitivos de e-mail e currículo serão conectados antes
-              da publicação.
-            </p>
+            {[...REDES_PRINCIPAIS, "email"].map((rede) => (
+              <SocialLink key={rede} rede={rede} variante="tile" />
+            ))}
           </div>
         </div>
       </section>

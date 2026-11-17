@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CONTATO } from "../data/perfil.js";
+import SocialLink from "./SocialLink.jsx";
 
 function Icone({ tipo }) {
   const s = { width: 24, height: 24, viewBox: "0 0 24 24", "aria-hidden": true };
@@ -96,9 +97,7 @@ export default function JanelaEmail() {
             </button>
           ))}
           <span className="painel-sep alto" aria-hidden="true" />
-          <a className="painel-botao" href={CONTATO.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
-            <img src="/assets/xp/painel/linkedin.png" alt="" width="24" height="24" />
-          </a>
+          <SocialLink rede="linkedin" />
         </div>
       </div>
       <form

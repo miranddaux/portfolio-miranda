@@ -33,7 +33,7 @@ const INTENCOES = [
     chaves: ["experien", "trabalh", "disco", "empresa", "carreira", "anos", "historico"],
     respostas: [
       "São 6 anos de design: 4 em design gráfico e 2 em produto.",
-      "Hoje ele é Product Designer na Agência Disco: e-commerces em Shopify do briefing ao handoff, com design systems no Figma. Isso reduziu o tempo de um layout completo de 2–3 semanas para 4–5 dias.",
+      "Hoje ele é Product Designer na Agência Disco: e-commerces em Shopify do briefing ao handoff, com design systems no Figma.",
     ],
     acao: { rotulo: "Ver currículo", abrir: "curriculo" },
   },

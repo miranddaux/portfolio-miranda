@@ -1,0 +1,127 @@
+/* Um padrão de marca + nome, com tamanhos de 16/24 px e espaçamentos de 8 px. */
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  min-height: var(--space-4);
+  padding: 0 var(--space-1);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: none;
+  color: var(--color-blue-900);
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+  font-weight: 500;
+  line-height: var(--space-3);
+  text-decoration: none;
+}
+.social-link__icon-frame {
+  display: block;
+  flex: none;
+  width: var(--space-2);
+  height: var(--space-2);
+}
+.social-link__icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* O SVG tem margem interna: correção óptica sem aumentar a caixa do layout. */
+.social-link__icon-frame--whatsapp .social-link__icon {
+  transform: scale(1.18);
+}
+.social-link__name {
+  white-space: nowrap;
+}
+.social-link__pending {
+  color: var(--color-neutral-600);
+  font-size: var(--text-12);
+}
+.social-link:is(a, button):hover {
+  border-color: var(--color-blue-300);
+  background: var(--color-neutral-50);
+  color: var(--color-blue-900);
+  text-decoration: underline;
+}
+.social-link:focus-visible {
+  outline: 2px solid var(--color-blue-900);
+  outline-offset: 2px;
+  background: var(--color-neutral-50);
+}
+.social-link[aria-disabled="true"] {
+  flex-wrap: wrap;
+  cursor: default;
+  color: var(--color-neutral-600);
+}
+.social-link[aria-disabled="true"] .social-link__icon {
+  filter: grayscale(1);
+}
+.social-link--tile {
+  justify-content: flex-start;
+  width: 100%;
+  min-height: var(--space-6);
+  padding: var(--space-1) var(--space-2);
+  border-color: var(--color-blue-200);
+  background: linear-gradient(var(--color-neutral-50), var(--color-blue-100));
+  box-shadow: inset 0 1px 0 var(--color-neutral-50);
+}
+.social-link--tile .social-link__icon-frame {
+  width: var(--space-3);
+  height: var(--space-3);
+}
+.painel-social-lista {
+  display: grid;
+  gap: var(--space-1);
+}
+.painel-social-lista > li {
+  min-width: 0;
+}
+.painel-social-lista .social-link {
+  width: 100%;
+}
+.painel-contato .painel-redes--social {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+  gap: var(--space-2);
+}
+.painel-redes--social > li {
+  min-width: 0;
+}
+/* Reage à largura da janela, inclusive quando o visitante a redimensiona. */
+.msn-atalhos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 112px), 1fr));
+  gap: var(--space-1);
+  margin-top: var(--space-1);
+}
+.msn-atalhos .social-link {
+  display: inline-flex;
+  gap: var(--space-1);
+  min-height: var(--space-4);
+  padding: 0 var(--space-1);
+  border-radius: 8px;
+  color: var(--color-blue-900);
+  font-size: var(--text-14);
+  line-height: var(--space-3);
+}
+.msn-atalhos .social-link:focus-visible {
+  outline: 2px solid var(--color-blue-900);
+  outline-offset: 2px;
+}
+@media (pointer: coarse) {
+  .social-link,
+  .msn-atalhos .social-link {
+    min-height: var(--space-6);
+  }
+}
+
+.email-xp .painel-ferramentas {
+  flex-wrap: wrap;
+}
+.contact-buttons .social-link--tile {
+  background: var(--paper);
+  border-color: var(--line);
+  color: var(--ink);
+}

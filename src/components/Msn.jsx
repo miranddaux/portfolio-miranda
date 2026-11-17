@@ -3,13 +3,15 @@ import { createPortal } from "react-dom";
 import { BOAS_VINDAS, SUGESTOES, responder } from "../data/bot.js";
 import { EMOTICONS, partesComEmoticons } from "../data/emoticons.js";
 import { CONTATO } from "../data/perfil.js";
+import SocialLink from "./SocialLink.jsx";
+import MsnBanner from "./MsnBanner.jsx";
+import { REDES_PRINCIPAIS } from "../data/social.js";
 import { somChamar, somEnviar, somMensagem } from "../lib/sons";
 
 export const NOME_BOT = "Thiago Bot";
 const FOTO = "/assets/xp/foto-thiago-rosto.webp";
 const FOTO_BOT = "/assets/xp/msn/thiago-bot.webp";
 const LOGO = "/assets/xp/msn/logo-32.png";
-const BANNER = "/assets/xp/msn/banner.webp";
 const EMO = (n) => `/assets/xp/msn/emoticons/${n}.png`;
 
 // Imagens de exibição do visitante (Figma "MSN Assets"), como no "Minha imagem de exibição".
@@ -167,26 +169,9 @@ export function MsnContatos({ aoConversar }) {
             <p className="msn-frase">
               <ComEmoticons texto="Precisa de um designer? Me chama (H)" tamanho={16} />
             </p>
-            <div className="msn-atalhos">
-              <a href={CONTATO.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn do Thiago" title="LinkedIn">
-                <img src="/assets/xp/painel/linkedin.png" alt="" width="16" height="16" /> LinkedIn
-              </a>
-              <a href={CONTATO.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp do Thiago" title="WhatsApp">
-                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="11" fill="#25d366" />
-                  <path d="M8.6 6.8c.3-.3.8-.3 1 .1l1.1 2c.2.3.1.7-.1 1l-.6.6c.5 1.2 1.4 2.2 2.6 2.8l.6-.6c.3-.3.7-.3 1-.1l2 1.1c.4.2.5.7.2 1l-.9 1c-.6.6-1.5.8-2.3.4-2.6-1.2-4.6-3.3-5.7-5.8-.3-.8-.1-1.7.5-2.3z" fill="#fff" />
-                </svg>
-                WhatsApp
-              </a>
-              <a href={CONTATO.dribbble} target="_blank" rel="noreferrer" aria-label="Dribbble do Thiago" title="Dribbble">
-                <img src="/assets/xp/painel/dribbble.png" alt="" width="16" height="16" />
-                <span className="msn-atalho-nome">Dribbble</span>
-              </a>
-              <a href={CONTATO.behance} target="_blank" rel="noreferrer" aria-label="Behance do Thiago" title="Behance">
-                <img src="/assets/xp/painel/behance.png" alt="" width="16" height="16" />
-                <span className="msn-atalho-nome">Behance</span>
-              </a>
-            </div>
+            <nav className="msn-atalhos" aria-label="Redes sociais de Thiago Miranda">
+              {REDES_PRINCIPAIS.map((rede) => <SocialLink key={rede} rede={rede} />)}
+            </nav>
           </div>
         </div>
       </div>
@@ -246,9 +231,7 @@ export function MsnContatos({ aoConversar }) {
         </ul>
       </div>
       <div className="msn-rodape">
-        <button type="button" className="msn-banner" onClick={aoConversar} title={`Conversar com o ${NOME_BOT}`}>
-          <img src={BANNER} alt={`Portfólio Thiago Live Messenger — conversar com o ${NOME_BOT}`} width="330" height="110" />
-        </button>
+        <MsnBanner aoConversar={aoConversar} />
       </div>
     </div>
   );
