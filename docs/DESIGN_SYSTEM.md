@@ -63,3 +63,9 @@ e as espessuras técnicas de 1–3 px. Ele não substitui a avaliação visual n
 - Limite do conteúdo: `--limite-conteudo` (720px) em `.janela-xp`. Abaixo de 760px de largura a janela esconde o painel lateral (container query).
 - `painel-xp.css` é exceção à grade de 8 px, como `replica-figma.css`; os textos seguem Segoe UI e só 12/14/16 (título grande: 24).
 - Ícones extraídos do Figma em `public/assets/xp/painel/`. A foto vai em `public/assets/xp/foto-thiago.webp` (sem o arquivo, aparece "TM").
+
+## Passada de UI (17/11/2026)
+
+- Auditoria no navegador (desktop, Messenger, Contato, Currículo e case): todo texto renderiza em Segoe UI e nenhum texto computado fica abaixo de 12 px.
+- Corrigido: `.msn-fonte` usava Georgia (agora `--font-ui`) e três textos da barra de tarefas/Iniciar usavam 11,591 px (agora 12 px, mínimo do projeto).
+- Botões de ação no conteúdo seguem `.xp-button` (azul com ▸; verde só em "Visitar LP"). Botões de barra de ferramentas com ícone (`.painel-botao`, do Control Panel do Figma), atalhos do desktop e controles de janela são componentes próprios e ficam fora dessa regra.
