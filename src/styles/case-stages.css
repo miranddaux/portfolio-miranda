@@ -1,69 +1,116 @@
-/* Case em etapas (17/11/2026): tags, hero, overview, 5 etapas, grid modular, LP e vídeo.
-   Grade de 8 px: 32 entre cabeçalho e hero, 80 entre etapas, 16/24 dentro dos blocos. */
-.case-document { --case-gap-section: var(--space-10); --case-gap-block: var(--space-4); }
+/* Case em etapas (17/11/2026). Grade de 8 px. Caixa de texto padrão: 704 px. */
+.case-document { --case-measure: 704px; --case-gap-section: var(--space-10); --case-gap-block: var(--space-4); }
 .case-document > * + * { margin-top: var(--case-gap-section); }
-.case-document > .case-hero-frame { margin-top: var(--space-4); }
+.case-document > .case-overview { margin-top: var(--space-4); }
 
-/* Tags */
-.case-tags { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-1); padding: 0; margin: 0 0 var(--space-3); list-style: none; }
-.case-tags li { padding: var(--space-1) var(--space-2); background: var(--case-surface); color: var(--case-accent); font-size: var(--text-12); font-weight: 700; line-height: var(--space-2); letter-spacing: 0.08em; text-transform: uppercase; border-left: 2px solid var(--case-accent); }
+/* Cabeçalho: tags, título, descrição curta */
+.case-tags { display: flex; flex-wrap: wrap; gap: var(--space-1); padding: 0; margin: 0 0 var(--space-3); list-style: none; }
+.case-tags li { padding: var(--space-1) var(--space-2); background: var(--case-surface); color: var(--case-accent); font-size: var(--text-12); font-weight: 700; line-height: var(--space-2); letter-spacing: 0.08em; text-transform: uppercase; border: 0; border-radius: 4px; }
 .case-document-header h1 { margin: 0 0 var(--space-2); }
-.case-document-header .case-document-question { margin: 0; max-width: 64ch; }
+.case-document-header .case-document-question { margin: 0; max-width: var(--case-measure); }
 
 /* Subhead sempre em maiúsculas */
-.case-section-label { display: block; margin-bottom: var(--space-1); text-transform: uppercase; letter-spacing: 0.12em; font-size: var(--text-12); font-weight: 700; }
+.case-section-label { display: inline-block; text-transform: uppercase; letter-spacing: 0.12em; font-size: var(--text-12); font-weight: 700; color: var(--case-accent); }
 
-/* Botões do case: todos .xp-button padrão, sem override de tamanho */
+/* Overview: Função, Ferramentas, Ano */
+.case-overview { display: grid; gap: var(--space-3); }
+.case-overview-card { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) auto; gap: var(--space-4); padding: var(--space-3); margin: 0; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-overview-card dt { margin-bottom: var(--space-1); font-size: var(--text-12); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--case-muted); }
+.case-overview-card dd { margin: 0; }
+.case-chips { display: flex; flex-wrap: wrap; gap: var(--space-1); padding: 0; margin: 0; list-style: none; }
+.case-chips li { padding: var(--space-1) var(--space-2); background: #fff; border: 1px solid var(--case-line); border-radius: 4px; font-size: var(--text-14); line-height: var(--space-3); }
+.case-year { display: grid; gap: 0; white-space: nowrap; font-size: var(--text-16); line-height: var(--space-3); }
+.case-year small { font-size: var(--text-14); color: var(--case-muted); }
+@media (max-width: 720px) { .case-overview-card { grid-template-columns: 1fr; gap: var(--space-3); } }
+
+/* Botões do case: todos .xp-button padrão */
 .case-document-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; }
 .case-document-actions .xp-button { min-height: var(--space-4); padding: var(--space-1) var(--space-2); }
+.xp-button.is-disabled { opacity: 0.56; cursor: not-allowed; pointer-events: none; }
+.xp-button.xp-button--back { display: inline-flex; align-items: center; gap: var(--space-1); background: linear-gradient(var(--color-neutral-50, #fff), var(--color-neutral-100, #eee)); color: var(--color-blue-900, #002697); border: 1px solid var(--color-neutral-300, #c5c5c5); box-shadow: none; }
+.xp-button.xp-button--back::before { display: none; }
+.xp-button.xp-button--back:hover { background: var(--case-surface); }
 
-/* Hero */
-.case-hero-frame { margin-inline: 0; }
-.case-hero-frame .case-visual-grid { margin: 0; }
+/* Hero: sub-heading, título e descrição antes das telas */
+.case-hero { display: grid; gap: var(--space-2); }
+.case-hero > h2 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); max-width: var(--case-measure); }
+.case-hero > p { margin: 0; max-width: var(--case-measure); }
+.case-hero .case-frame { margin-top: var(--space-2); }
 
-/* Overview */
-.case-overview { display: grid; gap: var(--space-3); }
-.case-overview .case-document-facts { margin: 0; }
-
-/* Etapas */
-.case-stage-head { display: grid; grid-template-columns: auto 1fr; column-gap: var(--space-2); align-items: baseline; margin-bottom: var(--case-gap-block); }
-.case-stage-number { grid-row: 1 / span 2; font-size: var(--text-32); font-weight: 700; line-height: var(--space-5); color: var(--case-accent); }
-.case-stage-head h2 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); max-width: 40ch; }
-.case-stage-body { display: grid; gap: var(--case-gap-block); }
-.case-stage-body > p { margin: 0; max-width: 68ch; }
+/* Etapas: número e nome na mesma linha; título embaixo, alinhado à esquerda */
+.case-stage-head { display: grid; gap: var(--space-1); margin-bottom: var(--space-4); }
+.case-stage-kicker { display: flex; align-items: baseline; gap: var(--space-1); margin: 0; }
+.case-stage-number { font-size: var(--text-24); font-weight: 700; line-height: var(--space-4); color: var(--case-accent); }
+.case-stage-head h2 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); max-width: var(--case-measure); }
+.case-stage-body { display: grid; gap: var(--space-4); }
+.case-stage-body > p, .case-landing > p, .case-state-lead { margin: 0; max-width: var(--case-measure); }
 .case-stage-body h3 { margin: 0 0 var(--space-1); }
 
-/* Grid editorial modular: 1 grande + até 3 pequenas */
-.case-modular { display: grid; gap: var(--space-3); }
-.case-modular-lead { display: flex; justify-content: center; padding: var(--space-4); background: var(--case-surface); }
-.case-modular-lead .case-media { max-width: 360px; width: 100%; margin: 0; }
-.case-modular-row { display: grid; grid-template-columns: repeat(var(--colunas, 3), minmax(0, 1fr)); gap: var(--space-3); }
-.case-modular-row .case-media { margin: 0; }
-.case-modular:not(.is-phones) .case-modular-lead { padding: 0; background: none; }
-.case-modular:not(.is-phones) .case-modular-lead .case-media { max-width: none; }
-.case-modular img { display: block; width: 100%; height: auto; }
+/* Método, oportunidade, limite: lado a lado */
+.case-research-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: var(--space-3); margin: 0; }
+.case-research-facts > div { padding: var(--space-2) var(--space-3); background: var(--case-surface); border: 1px solid var(--case-line); border-left: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-research-facts dt { margin-bottom: var(--space-1); font-size: var(--text-12); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--case-accent); }
+.case-research-facts dd { margin: 0; font-size: var(--text-14); line-height: var(--space-3); }
+
+/* Containers de imagem: wide, pair, trio, mosaic */
+.case-frame { display: grid; gap: var(--space-4); justify-content: stretch; padding: var(--space-5) var(--space-4); background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-frame.is-trio, .case-frame.is-pair, .case-frame-row { grid-template-columns: repeat(auto-fit, minmax(min(100%, 192px), var(--shot, 240px))); justify-content: center; gap: var(--space-4) var(--space-3); }
+.case-frame.is-pair { --shot: 280px; gap: var(--space-4) var(--space-5); }
+.case-frame.is-wide { padding: var(--space-3); }
+.case-frame-row { display: grid; }
+.case-frame-lead { display: flex; justify-content: center; --shot: 320px; }
+.case-frame .case-media { min-width: 0; margin: 0; }
+.case-frame .is-phone a { display: block; width: fit-content; max-width: 100%; margin-inline: auto; }
+.case-frame .is-phone .case-device { position: relative; width: var(--shot, 240px); padding: var(--space-1); border: 2px solid var(--color-neutral-700); border-radius: var(--space-4); background: var(--color-neutral-950); box-shadow: inset 0 0 0 1px var(--color-neutral-500), 0 8px 24px #1b243633; }
+.case-frame .case-device-screen { display: block; aspect-ratio: 9 / 19.5; overflow: hidden; border-radius: var(--space-3); }
+.case-frame .case-device-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.case-frame .case-shot { display: block; overflow: hidden; border-radius: var(--raio-medio); box-shadow: 0 8px 24px #1b243622; }
+.case-frame .case-shot img { display: block; width: 100%; height: auto; }
 
 /* Vídeo */
 .case-video { margin: 0; display: grid; gap: var(--space-1); }
-.case-video video { width: 100%; max-height: 560px; background: #000; border: 1px solid var(--case-border, #c5c5c5); }
+.case-video video { width: 100%; max-height: 560px; background: #000; border: 1px solid var(--case-line); }
 
-/* Landing page em moldura de navegador */
+/* Módulos da solução: textos curtos em cards */
+.case-modules { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 256px), 1fr)); gap: var(--space-3); }
+.case-module { padding: var(--space-3); background: #fff; border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-module h3 { margin: 0 0 var(--space-1); font-size: var(--text-16); }
+.case-module p { margin: 0; font-size: var(--text-14); line-height: var(--space-3); }
+
+/* Estado do projeto: indicadores finos */
+.case-state { display: grid; gap: var(--space-3); }
+.case-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 224px), 1fr)); gap: var(--space-2); padding: 0; margin: 0; list-style: none; }
+.case-kpis li { display: grid; gap: var(--space-1); align-content: start; padding: var(--space-2) var(--space-3); border: 1px solid var(--case-line); border-top: 3px solid var(--case-accent); border-radius: var(--raio-medio); background: #fff; }
+.case-kpis strong { font-size: var(--text-16); line-height: var(--space-3); color: var(--case-accent); }
+.case-kpis li > span:last-child { font-size: var(--text-14); line-height: var(--space-3); }
+.case-kpi-status { justify-self: start; padding: 0 var(--space-1); background: var(--case-surface); border: 1px solid var(--case-line); border-radius: 4px; font-size: var(--text-12); font-weight: 700; line-height: var(--space-3); letter-spacing: 0.08em; text-transform: uppercase; color: var(--case-muted); }
+
+/* Landing page inteira, no fim do case */
 .case-landing { display: grid; gap: var(--space-3); }
-.case-landing > p { margin: 0; max-width: 68ch; }
+.case-landing .case-stage-head { margin-bottom: 0; }
 .case-browser { margin: 0; border: 2px solid #0a246a; background: #fff; }
 .case-browser-bar { padding: var(--space-1) var(--space-2); background: linear-gradient(#245edb, #0a3fb8); color: #fff; font-size: var(--text-12); font-weight: 700; }
-.case-browser img { display: block; width: 100%; height: auto; }
-.case-browser figcaption { padding: var(--space-1) var(--space-2); font-size: var(--text-12); background: var(--case-surface); }
+.case-browser-scroll { height: 560px; overflow: auto; background: #12131c; }
+.case-browser-scroll img { display: block; width: 100%; height: auto; }
+.case-browser-scroll:focus-visible { outline: 2px solid var(--case-accent); outline-offset: -2px; }
 
-/* Rodapé */
-.case-document-footer { display: grid; gap: var(--space-3); padding-top: var(--space-4); border-top: 1px solid var(--case-border, #c5c5c5); }
-.case-document-pagination { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+/* Rodapé: voltar (discreto) e próximo (destaque) */
+.case-document-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); padding-top: var(--space-4); border-top: 1px solid var(--case-line); }
 
 @media (max-width: 640px) {
   .case-document { --case-gap-section: var(--space-8); --case-gap-block: var(--space-3); }
-  .case-modular-row { grid-template-columns: 1fr; }
-  .case-modular-lead { padding: var(--space-2); }
-  .case-stage-head { grid-template-columns: 1fr; }
-  .case-stage-number { grid-row: auto; }
-  .case-document-actions .xp-button { flex: 1 1 100%; }
+  .case-frame { padding: var(--space-3) var(--space-2); }
+  .case-document-actions .xp-button, .case-document-footer .xp-button { flex: 1 1 100%; justify-content: center; }
 }
+
+/* Tela em destaque logo abaixo da introdução: o celular "sai" pela base do quadro */
+.case-document > .case-hero-shot { margin-top: var(--space-5); }
+.case-document > .case-overview { margin-top: var(--space-5); }
+.case-hero-shot { display: flex; justify-content: center; align-items: flex-start; height: 480px; padding: var(--space-5) var(--space-4) 0; overflow: hidden; background: linear-gradient(180deg, var(--case-surface), #dfe8fb); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-hero-shot .case-media { margin: 0; }
+.case-hero-shot .is-phone a { display: block; width: 360px; max-width: 100%; padding: var(--space-1); border: 2px solid var(--color-neutral-700); border-bottom: 0; border-radius: var(--space-5) var(--space-5) 0 0; background: var(--color-neutral-950); box-shadow: 0 16px 40px #1b243644; position: relative; }
+.case-hero-shot .case-device-screen { display: block; aspect-ratio: 9 / 19.5; overflow: hidden; border-radius: var(--space-4) var(--space-4) 0 0; }
+.case-hero-shot .case-device-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.case-hero-shot .case-shot { display: block; width: 100%; }
+.case-hero-shot .case-shot img { display: block; width: 100%; height: auto; }
+@media (max-width: 640px) { .case-hero-shot { height: 400px; padding-inline: var(--space-2); } }

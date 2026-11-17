@@ -255,7 +255,7 @@ html[data-mode="noite"] .editorial-case-shell .case-document {
 .case-categories { margin-bottom: var(--space-3); }
 .case-metadata-label { display: block; margin-bottom: var(--space-1); color: var(--case-muted); font-size: var(--text-12); line-height: var(--space-2); }
 .case-categories ul { display: flex; flex-wrap: wrap; gap: var(--space-1); padding: 0; margin: 0; list-style: none; }
-.case-categories li { padding: var(--space-1) var(--space-2); background: var(--case-surface); color: var(--case-accent); font-size: var(--text-12); font-weight: 700; line-height: var(--space-2); letter-spacing: 0.06em; border-left: 2px solid var(--case-accent); cursor: text; }
+.case-categories li { padding: var(--space-1) var(--space-2); background: var(--case-surface); color: var(--case-accent); font-size: var(--text-12); font-weight: 700; line-height: var(--space-2); letter-spacing: 0.06em; border-radius: 4px; cursor: text; }
 .case-document-facts dt { text-transform: uppercase; letter-spacing: 0.06em; }
 .case-document-actions .xp-button { min-height: var(--space-5); padding: var(--space-1) var(--space-3); }
 .case-product-module { padding-block: var(--space-6); border-bottom: 1px solid var(--case-line); }

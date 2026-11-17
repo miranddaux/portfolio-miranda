@@ -44,7 +44,7 @@ export default function ProjectsExplorer({ onNavigate, embedded = false }) {
   }
   return (
     <div className={`projects-explorer ${embedded ? "is-embedded" : ""}`}>
-      {!embedded ? <ProjectsToolbar onSearch={toggleSearch} searchOpen={searchOpen} searchId={searchId} /> : <div className="projects-embedded-heading"><h3>Meus Projetos</h3><button id={`${searchId}-toggle`} type="button" className="xp-button" onClick={toggleSearch} aria-expanded={searchOpen} aria-controls={searchOpen ? `${searchId}-form` : undefined}>Buscar projetos</button></div>}
+      {!embedded ? <ProjectsToolbar onSearch={toggleSearch} searchOpen={searchOpen} searchId={searchId} /> : <div className="projects-embedded-heading"><h3>Meus Projetos</h3></div>}
       {searchOpen && <form id={`${searchId}-form`} className="projects-search" role="search" aria-label="Buscar projetos" onSubmit={(e) => e.preventDefault()} onKeyDown={(e) => {
         if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); toggleSearch(); }
       }}>

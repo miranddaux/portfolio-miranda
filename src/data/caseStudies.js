@@ -21,19 +21,25 @@ const STORIES = {
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
     links: {
       site: "https://animaeapp.com.br/",
-      siteLabel: "Visitar landing page",
+      siteLabel: "Ver landing page",
       behance: "https://www.behance.net/gallery/243377867/ANIMAE-Social-Streaming-Gamification",
       behanceLabel: "Ver case completo no Behance",
     },
     // Link do protótipo navegável: adicionar como `prototype` quando o Thiago enviar. Vídeo: `video: { src, poster, caption }`.
+    prototypePending: true,
+    heroShot: "animae-feed",
+    roles: ["Product Design", "Design System", "Mobile"],
     landing: {
       address: "animaeapp.com.br",
-      images: [
-        { src: "/assets/cases/animae-lp-hero.webp", width: 1440, height: 1216, alt: "Topo da landing page do ANIMAE: título, campo de e-mail e celular com o app", caption: "Landing page · abertura com proposta e convite para fundadores. Captura de 16/11/2026." },
-        { src: "/assets/cases/animae-lp-feed.webp", width: 1440, height: 867, alt: "Seção da landing page com abas Feed social, Seu diário e Perfil e badges", caption: "Landing page · tour pelas telas do app. Captura de 16/11/2026." },
-      ],
+      image: { src: "/assets/cases/animae-lp-completa.webp", width: 1440, height: 5311, alt: "Landing page completa do ANIMAE, do topo com o título e o app até o convite para a versão Android" },
+      note: "Captura de 16/11/2026.",
     },
-    showcase: ["animae-feed", "animae-perfil", "animae-onboarding", "animae-busca"],
+    // Imagens por etapa (layouts: wide, pair, trio, mosaic). Slugs apontam para arquivos em /assets/cases.
+    stageImages: {
+      problema: { layout: "wide", images: ["animae-v1"] },
+      ideacao: { layout: "pair", images: ["animae-onboarding", "animae-perfil"] },
+      solucao: { layout: "mosaic", images: ["animae-feed", "animae-busca", "animae-lista", "animae-perfil"] },
+    },
     quick: [
       ["Problema", "Acompanhar anime, organizar listas e conversar com amigos exige alternar entre plataformas."],
       ["Minha contribuição", "Defini o produto, pesquisei, desenhei a experiência e construí o app com apoio de IA."],
