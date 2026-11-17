@@ -1,9 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
+import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
 // Botões do topo: protótipo e case completo. Mesmo .xp-button (azul com ▸) em todo o case.
-export function CaseLinks({ links, prototypePending = false }) {
+export function CaseLinks({ links, projectTitle = "projeto", prototypePending = false }) {
+  const [open, setOpen] = useState(false);
+  const close = useCallback(() => setOpen(false), []);
+  const embed = links.prototype ? prototypeEmbedUrl(links.prototype) : null;
   const actions = [
     ["prototype", "Ver protótipo"],
     ["design", "Ver no Figma"],
@@ -11,9 +15,12 @@ export function CaseLinks({ links, prototypePending = false }) {
     ...(links.siteInTop ? [["site", links.siteLabel || "Visitar site"]] : []),
   ].filter(([key]) => links[key]);
   return <div className="case-document-actions">
-    {actions.map(([key, label]) => <a key={key} className="xp-button" href={links[key]} target="_blank" rel="noopener noreferrer">{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
+    {actions.map(([key, label]) => key === "prototype" && embed
+      ? <button key={key} type="button" className="xp-button" onClick={() => setOpen(true)} aria-haspopup="dialog">{label}</button>
+      : <a key={key} className="xp-button" href={links[key]} target="_blank" rel="noopener noreferrer">{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
     {prototypePending && !links.prototype && <span className="xp-button is-disabled" aria-disabled="true" role="link">Ver protótipo<span className="sr-only"> (link em breve)</span></span>}
     {!actions.length && !prototypePending && <span className="case-links-pending">Links públicos em curadoria.</span>}
+    {open && embed && <PrototypeModal title={projectTitle} url={links.prototype} embedUrl={embed} onClose={close} />}
   </div>;
 }
 
@@ -113,7 +120,7 @@ export default function CaseDocument({ project, onNavigate }) {
       <ul className="case-tags" aria-label="Categorias do projeto">{project.categories.map((category) => <li key={category}>{category}</li>)}</ul>
       <h1 ref={title} tabIndex={-1}>{project.title}</h1>
       <p className="case-document-question">{project.question}</p>
-      <CaseLinks links={project.links} prototypePending={project.prototypePending} />
+      <CaseLinks links={project.links} projectTitle={project.title} prototypePending={project.prototypePending} />
     </header>
 
     <div className="case-hero-shot" role="group" aria-label="Tela do aplicativo em destaque">
