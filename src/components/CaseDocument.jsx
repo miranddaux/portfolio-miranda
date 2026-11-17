@@ -4,10 +4,11 @@ import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
 // Botões do topo: protótipo e case completo. Mesmo .xp-button (azul com ▸) em todo o case.
-export function CaseLinks({ links, projectTitle = "projeto", prototypePending = false }) {
+export function CaseLinks({ links, projectTitle = "projeto", prototypePending = false, screens = [] }) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
   const embed = links.prototype ? prototypeEmbedUrl(links.prototype) : null;
+  const canOpen = Boolean(links.prototype) && (Boolean(embed) || screens.length > 0);
   const actions = [
     ["prototype", "Ver protótipo"],
     ["design", "Ver no Figma"],
@@ -15,12 +16,12 @@ export function CaseLinks({ links, projectTitle = "projeto", prototypePending = 
     ...(links.siteInTop ? [["site", links.siteLabel || "Visitar site"]] : []),
   ].filter(([key]) => links[key]);
   return <div className="case-document-actions">
-    {actions.map(([key, label]) => key === "prototype" && embed
+    {actions.map(([key, label]) => key === "prototype" && canOpen
       ? <button key={key} type="button" className="xp-button" onClick={() => setOpen(true)} aria-haspopup="dialog">{label}</button>
       : <a key={key} className="xp-button" href={links[key]} target="_blank" rel="noopener noreferrer">{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
     {prototypePending && !links.prototype && <span className="xp-button is-disabled" aria-disabled="true" role="link">Ver protótipo<span className="sr-only"> (link em breve)</span></span>}
     {!actions.length && !prototypePending && <span className="case-links-pending">Links públicos em curadoria.</span>}
-    {open && embed && <PrototypeModal title={projectTitle} url={links.prototype} embedUrl={embed} onClose={close} />}
+    {open && canOpen && <PrototypeModal title={projectTitle} url={links.prototype} embedUrl={embed} screens={screens} onClose={close} />}
   </div>;
 }
 
@@ -113,6 +114,7 @@ export default function CaseDocument({ project, onNavigate }) {
     root.current?.closest(".case-document-scroll")?.scrollTo?.({ top: 0 });
     title.current?.focus({ preventScroll: true });
   }, [project.id, project.title, project.summary]);
+  const tourScreens = project.modules.flatMap((m) => (m.images || []).map((img) => ({ ...img, label: m.title }))).filter((m, i, all) => all.findIndex((x) => x.src === m.src) === i);
   const withImages = project.modules.filter((m) => m.images?.length);
   const textOnly = project.modules.filter((m) => !m.images?.length);
   return <article ref={root} className={`case-document theme-${project.accent}`}>
@@ -120,7 +122,7 @@ export default function CaseDocument({ project, onNavigate }) {
       <ul className="case-tags" aria-label="Categorias do projeto">{project.categories.map((category) => <li key={category}>{category}</li>)}</ul>
       <h1 ref={title} tabIndex={-1}>{project.title}</h1>
       <p className="case-document-question">{project.question}</p>
-      <CaseLinks links={project.links} projectTitle={project.title} prototypePending={project.prototypePending} />
+      <CaseLinks links={project.links} projectTitle={project.title} prototypePending={project.prototypePending} screens={tourScreens} />
     </header>
 
     <div className="case-hero-shot" role="group" aria-label="Tela do aplicativo em destaque">

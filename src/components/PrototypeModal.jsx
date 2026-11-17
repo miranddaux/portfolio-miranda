@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import JanelaXP from "./JanelaXP.jsx";
 
@@ -25,7 +25,32 @@ export function prototypeEmbedUrl(url) {
   }
 }
 
-export default function PrototypeModal({ title, url, embedUrl, onClose }) {
+// Quando o navegador não deixa embutir o Figma (ex.: prévia hospedada), a janela navega pelas telas reais.
+function ScreenTour({ screens }) {
+  const [i, setI] = useState(0);
+  const go = (d) => setI((v) => (v + d + screens.length) % screens.length);
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "ArrowRight") go(1); if (e.key === "ArrowLeft") go(-1); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [screens.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  const cur = screens[i];
+  return (
+    <div className="proto-tour">
+      <div className="proto-phone">
+        <img src={cur.src} alt={cur.alt} width={cur.width} height={cur.height} draggable="false" />
+      </div>
+      <p className="proto-tour-label" aria-live="polite">{cur.label}</p>
+      <div className="proto-tour-controls">
+        <button type="button" className="xp-button xp-button--back" onClick={() => go(-1)} aria-label="Tela anterior">‹ Anterior</button>
+        <span className="proto-tour-dots" role="group" aria-label="Telas">{screens.map((s, n) => <button key={s.src} type="button" className={n === i ? "is-on" : ""} onClick={() => setI(n)} aria-label={`Tela ${n + 1} de ${screens.length}`} aria-current={n === i} />)}</span>
+        <button type="button" className="xp-button" onClick={() => go(1)} aria-label="Próxima tela">Próxima</button>
+      </div>
+    </div>
+  );
+}
+
+export default function PrototypeModal({ title, url, embedUrl, screens = [], onClose }) {
   useEffect(() => {
     const previous = document.activeElement;
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -51,13 +76,13 @@ export default function PrototypeModal({ title, url, embedUrl, onClose }) {
         minLargura={320}
         minAltura={480}
         topo={32}
-        statusEsquerda="Celular · 390 px · protótipo navegável do Figma"
+        statusEsquerda={embedUrl ? "Celular · 390 px · protótipo navegável do Figma" : "Celular · telas do Figma · use as setas do teclado"}
         statusDireita={<a className="proto-status-link" href={url} target="_blank" rel="noopener noreferrer">Abrir no Figma<span className="sr-only"> (abre em nova aba)</span></a>}
       >
         <div className="proto-stage">
-          <div className="proto-phone">
-            <iframe title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen loading="lazy" />
-          </div>
+          {embedUrl
+            ? <div className="proto-phone"><iframe title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen loading="lazy" /></div>
+            : <ScreenTour screens={screens} />}
         </div>
       </JanelaXP>
     </div>,
