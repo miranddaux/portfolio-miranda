@@ -1,0 +1,69 @@
+/* Case em etapas (17/11/2026): tags, hero, overview, 5 etapas, grid modular, LP e vídeo.
+   Grade de 8 px: 32 entre cabeçalho e hero, 80 entre etapas, 16/24 dentro dos blocos. */
+.case-document { --case-gap-section: var(--space-10); --case-gap-block: var(--space-4); }
+.case-document > * + * { margin-top: var(--case-gap-section); }
+.case-document > .case-hero-frame { margin-top: var(--space-4); }
+
+/* Tags */
+.case-tags { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-1); padding: 0; margin: 0 0 var(--space-3); list-style: none; }
+.case-tags li { padding: var(--space-1) var(--space-2); background: var(--case-surface); color: var(--case-accent); font-size: var(--text-12); font-weight: 700; line-height: var(--space-2); letter-spacing: 0.08em; text-transform: uppercase; border-left: 2px solid var(--case-accent); }
+.case-document-header h1 { margin: 0 0 var(--space-2); }
+.case-document-header .case-document-question { margin: 0; max-width: 64ch; }
+
+/* Subhead sempre em maiúsculas */
+.case-section-label { display: block; margin-bottom: var(--space-1); text-transform: uppercase; letter-spacing: 0.12em; font-size: var(--text-12); font-weight: 700; }
+
+/* Botões do case: todos .xp-button padrão, sem override de tamanho */
+.case-document-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; }
+.case-document-actions .xp-button { min-height: var(--space-4); padding: var(--space-1) var(--space-2); }
+
+/* Hero */
+.case-hero-frame { margin-inline: 0; }
+.case-hero-frame .case-visual-grid { margin: 0; }
+
+/* Overview */
+.case-overview { display: grid; gap: var(--space-3); }
+.case-overview .case-document-facts { margin: 0; }
+
+/* Etapas */
+.case-stage-head { display: grid; grid-template-columns: auto 1fr; column-gap: var(--space-2); align-items: baseline; margin-bottom: var(--case-gap-block); }
+.case-stage-number { grid-row: 1 / span 2; font-size: var(--text-32); font-weight: 700; line-height: var(--space-5); color: var(--case-accent); }
+.case-stage-head h2 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); max-width: 40ch; }
+.case-stage-body { display: grid; gap: var(--case-gap-block); }
+.case-stage-body > p { margin: 0; max-width: 68ch; }
+.case-stage-body h3 { margin: 0 0 var(--space-1); }
+
+/* Grid editorial modular: 1 grande + até 3 pequenas */
+.case-modular { display: grid; gap: var(--space-3); }
+.case-modular-lead { display: flex; justify-content: center; padding: var(--space-4); background: var(--case-surface); }
+.case-modular-lead .case-media { max-width: 360px; width: 100%; margin: 0; }
+.case-modular-row { display: grid; grid-template-columns: repeat(var(--colunas, 3), minmax(0, 1fr)); gap: var(--space-3); }
+.case-modular-row .case-media { margin: 0; }
+.case-modular:not(.is-phones) .case-modular-lead { padding: 0; background: none; }
+.case-modular:not(.is-phones) .case-modular-lead .case-media { max-width: none; }
+.case-modular img { display: block; width: 100%; height: auto; }
+
+/* Vídeo */
+.case-video { margin: 0; display: grid; gap: var(--space-1); }
+.case-video video { width: 100%; max-height: 560px; background: #000; border: 1px solid var(--case-border, #c5c5c5); }
+
+/* Landing page em moldura de navegador */
+.case-landing { display: grid; gap: var(--space-3); }
+.case-landing > p { margin: 0; max-width: 68ch; }
+.case-browser { margin: 0; border: 2px solid #0a246a; background: #fff; }
+.case-browser-bar { padding: var(--space-1) var(--space-2); background: linear-gradient(#245edb, #0a3fb8); color: #fff; font-size: var(--text-12); font-weight: 700; }
+.case-browser img { display: block; width: 100%; height: auto; }
+.case-browser figcaption { padding: var(--space-1) var(--space-2); font-size: var(--text-12); background: var(--case-surface); }
+
+/* Rodapé */
+.case-document-footer { display: grid; gap: var(--space-3); padding-top: var(--space-4); border-top: 1px solid var(--case-border, #c5c5c5); }
+.case-document-pagination { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+
+@media (max-width: 640px) {
+  .case-document { --case-gap-section: var(--space-8); --case-gap-block: var(--space-3); }
+  .case-modular-row { grid-template-columns: 1fr; }
+  .case-modular-lead { padding: var(--space-2); }
+  .case-stage-head { grid-template-columns: 1fr; }
+  .case-stage-number { grid-row: auto; }
+  .case-document-actions .xp-button { flex: 1 1 100%; }
+}

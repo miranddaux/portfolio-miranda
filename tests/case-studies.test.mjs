@@ -37,7 +37,7 @@ test("links conhecidos são HTTPS e a apresentação antiga do ANIMAE é identif
     assert(project.journeys.every((j) => j.steps.length >= 3));
     assert(project.kpis.every(([name, definition]) => name && definition));
   }
-  assert(getCaseStudy("animae").links.behanceLabel.includes("v1"));
+  assert.equal(getCaseStudy("animae").links.behanceLabel, "Ver case completo no Behance");
   assert.equal(getCaseStudy("navaja").links.prototype, undefined);
   assert.equal(getCaseStudy("oficina-do-tenista").links.site, undefined);
 });

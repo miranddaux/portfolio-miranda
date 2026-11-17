@@ -39,8 +39,8 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
 export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {
-  const [windows, setWindows] = useState({ cases: "open" }),
-    [active, setActive] = useState("cases"),
+  const [windows, setWindows] = useState({ sobre: "open" }),
+    [active, setActive] = useState("sobre"),
     [start, setStart] = useState(false);
   const previousProject = useRef(null);
   const apps = APPS.map((a) => a.id === "case" && project ? { ...a, name: project.title, title: `${project.title} — Case` } : a);

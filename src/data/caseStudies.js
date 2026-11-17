@@ -21,11 +21,19 @@ const STORIES = {
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
     links: {
       site: "https://animaeapp.com.br/",
-      siteLabel: "Visitar LP",
-      design: "https://www.figma.com/design/Sdyl9kTkLtCZaIN13yvIgd",
+      siteLabel: "Visitar landing page",
       behance: "https://www.behance.net/gallery/243377867/ANIMAE-Social-Streaming-Gamification",
-      behanceLabel: "Apresentação v1 no Behance",
+      behanceLabel: "Ver case completo no Behance",
     },
+    // Link do protótipo navegável: adicionar como `prototype` quando o Thiago enviar. Vídeo: `video: { src, poster, caption }`.
+    landing: {
+      address: "animaeapp.com.br",
+      images: [
+        { src: "/assets/cases/animae-lp-hero.webp", width: 1440, height: 1216, alt: "Topo da landing page do ANIMAE: título, campo de e-mail e celular com o app", caption: "Landing page · abertura com proposta e convite para fundadores. Captura de 16/11/2026." },
+        { src: "/assets/cases/animae-lp-feed.webp", width: 1440, height: 867, alt: "Seção da landing page com abas Feed social, Seu diário e Perfil e badges", caption: "Landing page · tour pelas telas do app. Captura de 16/11/2026." },
+      ],
+    },
+    showcase: ["animae-feed", "animae-perfil", "animae-onboarding", "animae-busca"],
     quick: [
       ["Problema", "Acompanhar anime, organizar listas e conversar com amigos exige alternar entre plataformas."],
       ["Minha contribuição", "Defini o produto, pesquisei, desenhei a experiência e construí o app com apoio de IA."],
