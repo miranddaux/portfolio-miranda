@@ -1249,9 +1249,3 @@ button.painel-rede {
   display: none;
 }
 
-/* Sobre mim (17/11/2026): cabeçalho centralizado e compacto */
-.painel-cartao.painel-perfil { grid-template-columns: 1fr; justify-items: center; gap: 16px; text-align: center; }
-.painel-perfil .painel-texto { display: grid; justify-items: center; max-width: 560px; }
-.painel-perfil .painel-cargo { margin-bottom: 0 !important; }
-.painel-cartao.painel-perfil .painel-destaque { margin: 0 0 16px; font-size: 14px; line-height: 24px; font-weight: 400; }
-.painel-perfil .painel-texto > p:last-child { margin-bottom: 0; }

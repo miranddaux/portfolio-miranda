@@ -114,3 +114,54 @@
 .case-hero-shot .case-shot { display: block; width: 100%; }
 .case-hero-shot .case-shot img { display: block; width: 100%; height: auto; }
 @media (max-width: 640px) { .case-hero-shot { height: 400px; padding-inline: var(--space-2); } }
+
+/* ===== Revisão 17/11 (tarde): mais largura, overview em uma linha, histórias com imagem ===== */
+.case-document { max-width: 1152px; --case-measure: 960px; }
+.editorial-case-shell { max-width: 1152px; }
+.case-document-header .case-document-actions { margin-top: var(--space-3); }
+.case-stage-kicker { align-items: center; }
+.case-stage-number { line-height: var(--space-3); }
+.case-section-label { line-height: var(--space-3); }
+
+/* Overview: Função, Ferramentas e Ano na mesma linha */
+.case-document > .case-hero-shot + .case-overview-card { margin-top: var(--space-4); }
+.case-overview-card { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-3) var(--space-5); padding: var(--space-2) var(--space-3); }
+.case-overview-card > div:last-child { margin-left: auto; }
+.case-chips { gap: var(--space-1); flex-wrap: wrap; }
+.case-chips li { padding: 0 var(--space-1); font-size: var(--text-12); line-height: var(--space-3); }
+.case-year { font-size: var(--text-14); }
+.case-year small { font-size: var(--text-12); }
+@media (max-width: 720px) { .case-overview-card > div:last-child { margin-left: 0; } }
+
+/* Histórias: texto + tela(s), alternando o lado */
+.case-stories { display: grid; gap: var(--space-8); }
+.case-story { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-6); align-items: center; }
+.case-story.is-reverse .case-story-text { order: 2; }
+.case-story-text { display: grid; gap: var(--space-1); max-width: 400px; }
+.case-story-text h3 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); }
+.case-story-text p { margin: 0; font-size: var(--text-16); line-height: var(--space-3); color: var(--case-ink); }
+.case-story-index { font-size: var(--text-12); font-weight: 700; letter-spacing: 0.12em; color: var(--case-accent); }
+.case-story-index::before { content: "MÓDULO "; }
+.case-frame.is-story { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: var(--space-3); padding: var(--space-5) var(--space-3); background: linear-gradient(180deg, var(--case-surface), #dfe8fb); }
+.case-frame.is-story .case-media { flex: 0 0 auto; }
+.case-note { padding: var(--space-3); background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); max-width: var(--case-measure); }
+.case-note h3 { margin: 0 0 var(--space-1); }
+.case-note p { margin: 0; }
+@media (max-width: 860px) {
+  .case-story { grid-template-columns: 1fr; gap: var(--space-3); }
+  .case-story.is-reverse .case-story-text { order: 0; }
+  .case-story-text { max-width: var(--case-measure); }
+}
+
+/* Indicadores com a pastinha do XP em segundo plano */
+.case-kpis li { position: relative; overflow: hidden; }
+.case-kpi-folder { position: absolute; top: var(--space-2); right: var(--space-2); width: var(--space-4); height: var(--space-4); opacity: 0.28; pointer-events: none; }
+
+/* Landing page: imagem inteira, a rolagem é a da própria página */
+.case-browser img { display: block; width: 100%; height: auto; }
+
+/* Conteúdo mais largo: aproveita a grade do site */
+.case-hero > p, .case-stage-body > p, .case-landing > p { max-width: var(--case-measure); }
+.case-frame.is-trio, .case-frame.is-pair, .case-frame-row { grid-template-columns: repeat(auto-fit, minmax(min(100%, 192px), var(--shot, 264px))); }
+.case-story.is-reverse { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+@media (max-width: 860px) { .case-story.is-reverse { grid-template-columns: 1fr; } }

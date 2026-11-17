@@ -42,12 +42,25 @@ function Frame({ layout, items, phone, label }) {
     for (let i = 0; i < rest.length; i += 3) rows.push(rest.slice(i, i + 3));
     return <div className="case-frame is-mosaic" role="group" aria-label={label}>
       <div className="case-frame-lead"><Shot media={lead} phone={phone} /></div>
-      {rows.map((row, i) => <div key={i} className="case-frame-row" style={{ "--colunas": row.length }}>{row.map((m) => <Shot key={m.src} media={m} phone={phone} />)}</div>)}
+      {rows.map((row, i) => <div key={i} className="case-frame-row">{row.map((m) => <Shot key={m.src} media={m} phone={phone} />)}</div>)}
     </div>;
   }
-  return <div className={`case-frame is-${layout}`} style={{ "--colunas": items.length }} role="group" aria-label={label}>
+  const shot = layout === "story" ? (items.length > 1 ? "200px" : "264px") : undefined;
+  return <div className={`case-frame is-${layout}`} style={shot ? { "--shot": shot } : undefined} role="group" aria-label={label}>
     {items.map((m) => <Shot key={m.src} media={m} phone={phone} />)}
   </div>;
+}
+
+// Um módulo do produto: texto de um lado, tela(s) do outro. Alterna o lado para guiar o olhar.
+function Story({ index, module, phone }) {
+  return <article className={`case-story ${index % 2 ? "is-reverse" : ""}`}>
+    <div className="case-story-text">
+      <span className="case-story-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+      <h3>{module.title}</h3>
+      <p>{module.text}</p>
+    </div>
+    <Frame layout="story" items={module.images} phone={phone} label={module.title} />
+  </article>;
 }
 
 function CaseVideo({ video }) {
@@ -84,8 +97,7 @@ export default function CaseDocument({ project, onNavigate }) {
   const [year, yearNote] = project.period.split(" · ");
   const heroShot = find(project.heroShot) || project.modules[0].images[0];
   const hero = phones ? [project.modules[0].images[0], project.modules[1].images[0], project.modules[2].images[0]] : [project.cover];
-  const problem = stage("problema"), ideation = stage("ideacao"), solution = stage("solucao");
-  const fallback = project.modules.flatMap((m) => m.images);
+  const problem = stage("problema"), ideation = stage("ideacao");
   useEffect(() => {
     document.title = `${project.title} · Case de Product Design · Thiago Miranda`;
     const meta = document.querySelector('meta[name="description"]');
@@ -93,25 +105,25 @@ export default function CaseDocument({ project, onNavigate }) {
     root.current?.closest(".case-document-scroll")?.scrollTo?.({ top: 0 });
     title.current?.focus({ preventScroll: true });
   }, [project.id, project.title, project.summary]);
+  const withImages = project.modules.filter((m) => m.images?.length);
+  const textOnly = project.modules.filter((m) => !m.images?.length);
   return <article ref={root} className={`case-document theme-${project.accent}`}>
     <header className="case-document-header">
       <ul className="case-tags" aria-label="Categorias do projeto">{project.categories.map((category) => <li key={category}>{category}</li>)}</ul>
       <h1 ref={title} tabIndex={-1}>{project.title}</h1>
       <p className="case-document-question">{project.question}</p>
+      <CaseLinks links={project.links} prototypePending={project.prototypePending} />
     </header>
 
     <div className="case-hero-shot" role="group" aria-label="Tela do aplicativo em destaque">
       {phones ? <Shot media={heroShot} phone /> : <Shot media={project.cover} phone={false} />}
     </div>
 
-    <section className="case-overview" aria-label="Visão geral do projeto">
-      <dl className="case-overview-card">
-        <div><dt>Função</dt><dd><ul className="case-chips">{roles.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>
-        <div><dt>Ferramentas</dt><dd><ul className="case-chips">{project.tools.map((t) => <li key={t}>{t}</li>)}</ul></dd></div>
-        <div><dt>Ano</dt><dd className="case-year"><span>{year}</span>{yearNote && <small>{yearNote}</small>}</dd></div>
-      </dl>
-      <CaseLinks links={project.links} prototypePending={project.prototypePending} />
-    </section>
+    <dl className="case-overview-card" aria-label="Visão geral do projeto">
+      <div><dt>Função</dt><dd><ul className="case-chips">{roles.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>
+      <div><dt>Ferramentas</dt><dd><ul className="case-chips">{project.tools.map((t) => <li key={t}>{t}</li>)}</ul></dd></div>
+      <div><dt>Ano</dt><dd className="case-year"><span>{year}</span>{yearNote && <small>{yearNote}</small>}</dd></div>
+    </dl>
 
     <section className="case-hero" aria-label="O produto em telas">
       <span className="case-section-label">O produto</span>
@@ -135,30 +147,26 @@ export default function CaseDocument({ project, onNavigate }) {
       {ideation && <Frame layout={ideation.layout} items={ideation.items} phone={phones} label="Telas das escolhas de produto" />}
     </Stage>
 
-    <Stage id={id("projetacao")} number="03" label="Projetação" title="Da hipótese à experiência">
+    <Stage id={id("prototipacao")} number="03" label="Prototipação" title="Da hipótese à experiência">
       <p>{project.solution}</p>
       <CaseJourney journeys={project.journeys} />
+      {textOnly.map((m) => <div key={m.title} className="case-note"><h3>{m.title}</h3><p>{m.text}</p></div>)}
     </Stage>
 
     <Stage id={id("solucao")} number="04" label="Solução" title="O produto, tela por tela">
-      <Frame layout={solution?.layout || "mosaic"} items={solution?.items || fallback} phone={phones} label="Telas do produto" />
-      <CaseVideo video={project.video} />
-      <div className="case-modules">
-        {project.modules.map((module, index) => <section className="case-module" key={module.title}>
-          <span className="case-module-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-          <h3>{module.title}</h3><p>{module.text}</p>
-        </section>)}
+      <div className="case-stories">
+        {withImages.map((module, index) => <Story key={module.title} index={index} module={module} phone={phones} />)}
       </div>
+      <CaseVideo video={project.video} />
     </Stage>
 
     <Stage id={id("aprendizado")} number="05" label="Aprendizado" title="O que levo para o próximo projeto">
       <p>{project.learning}</p>
-      <div className="case-state">
-        <p className="case-state-lead">{project.outcome}</p>
-        <ul className="case-kpis" aria-label="Indicadores propostos, ainda sem resultados publicados">{project.kpis.map(([label, definition]) => <li key={label}>
-          <span className="case-kpi-status">A medir</span><strong>{label}</strong><span>{definition}</span>
-        </li>)}</ul>
-      </div>
+      <p>{project.outcome}</p>
+      <ul className="case-kpis" aria-label="Indicadores propostos, ainda sem resultados publicados">{project.kpis.map(([label, definition]) => <li key={label}>
+        <img className="case-kpi-folder" src="/assets/xp/figma/pasta.png" alt="" width="32" height="32" draggable="false" />
+        <span className="case-kpi-status">A medir</span><strong>{label}</strong><span>{definition}</span>
+      </li>)}</ul>
     </Stage>
 
     {project.landing && <section className="case-landing" aria-labelledby={id("lp-title")}>
@@ -166,13 +174,11 @@ export default function CaseDocument({ project, onNavigate }) {
         <p className="case-stage-kicker"><span className="case-section-label">Landing page</span></p>
         <h2 id={id("lp-title")}>A porta de entrada para o produto</h2>
       </header>
-      <p>Role a página inteira abaixo: é a landing page que apresenta a proposta e convida para a versão Android. {project.landing.note}</p>
+      <p>A landing page apresenta a proposta e convida para a versão Android. {project.landing.note}</p>
       {project.links.site && <div className="case-document-actions"><a className="xp-button" href={project.links.site} target="_blank" rel="noopener noreferrer">Ver landing page<span className="sr-only"> (abre em nova aba)</span></a></div>}
       <figure className="case-browser">
         <div className="case-browser-bar"><span>{project.landing.address}</span></div>
-        <div className="case-browser-scroll" tabIndex={0} role="region" aria-label="Landing page completa, role para ver tudo">
-          <img src={project.landing.image.src} alt={project.landing.image.alt} width={project.landing.image.width} height={project.landing.image.height} loading="lazy" decoding="async" />
-        </div>
+        <img src={project.landing.image.src} alt={project.landing.image.alt} width={project.landing.image.width} height={project.landing.image.height} loading="lazy" decoding="async" />
       </figure>
     </section>}
 
