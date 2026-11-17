@@ -20,13 +20,13 @@ const STORIES = {
     accent: "animae",
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
     links: {
+      prototype: "https://www.figma.com/proto/Sdyl9kTkLtCZaIN13yvIgd/%F0%9F%93%B1-Projeto-ANIMAE--%7C-18-10-25?node-id=2083-5498&viewport=-728%2C217%2C0.4&t=2j3LQlrqLrdyODvw-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=2083%3A5498&page-id=2083%3A5497",
       site: "https://animaeapp.com.br/",
       siteLabel: "Ver landing page",
       behance: "https://www.behance.net/gallery/243377867/ANIMAE-Social-Streaming-Gamification",
       behanceLabel: "Ver case completo no Behance",
     },
-    // Link do protótipo navegável: adicionar como `prototype` quando o Thiago enviar. Vídeo: `video: { src, poster, caption }`.
-    prototypePending: true,
+    // Vídeo do protótipo funcionando: `video: { src, poster, caption }` quando o Thiago enviar.
     heroShot: "animae-perfil",
     roles: ["Product Design", "Design System", "Mobile"],
     landing: {
