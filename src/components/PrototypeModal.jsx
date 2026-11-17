@@ -8,7 +8,9 @@ export function prototypeEmbedUrl(url) {
   try {
     const u = new URL(url);
     if (!/(^|\.)figma\.com$/.test(u.hostname) || !u.pathname.startsWith("/proto/")) return null;
-    const e = new URL(`https://embed.figma.com${u.pathname}`);
+    const fileKey = u.pathname.split("/")[2];
+    if (!fileKey) return null;
+    const e = new URL(`https://embed.figma.com/proto/${fileKey}`);
     for (const key of ["node-id", "starting-point-node-id"]) {
       if (u.searchParams.has(key)) e.searchParams.set(key, u.searchParams.get(key));
     }
@@ -51,7 +53,6 @@ export default function PrototypeModal({ title, url, embedUrl, onClose }) {
         statusDireita={<a className="proto-status-link" href={url} target="_blank" rel="noopener noreferrer">Abrir no Figma<span className="sr-only"> (abre em nova aba)</span></a>}
       >
         <div className="proto-stage">
-          <p className="proto-hint">Toque e navegue como no aplicativo. Se o protótipo não carregar, <a href={url} target="_blank" rel="noopener noreferrer">abra no Figma</a>.</p>
           <div className="proto-phone">
             <iframe title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen loading="lazy" />
           </div>

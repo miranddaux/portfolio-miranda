@@ -204,3 +204,6 @@
 .case-overview-card dt, .case-overview-card dd { line-height: var(--space-3); }
 .case-chips { gap: var(--space-1); }
 .case-chips li { padding: 0 var(--space-2); line-height: var(--space-4); }
+.proto-stage { gap: 0; padding: var(--space-3); }
+.proto-status-link { opacity: 0.72; font-size: var(--text-12); }
+.proto-status-link:hover, .proto-status-link:focus-visible { opacity: 1; }
