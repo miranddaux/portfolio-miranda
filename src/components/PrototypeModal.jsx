@@ -9,12 +9,11 @@ export function prototypeEmbedUrl(url) {
     const u = new URL(url);
     if (!/(^|\.)figma\.com$/.test(u.hostname) || !u.pathname.startsWith("/proto/")) return null;
     const e = new URL(`https://embed.figma.com${u.pathname}`);
-    for (const key of ["node-id", "starting-point-node-id", "page-id", "viewport"]) {
+    for (const key of ["node-id", "starting-point-node-id"]) {
       if (u.searchParams.has(key)) e.searchParams.set(key, u.searchParams.get(key));
     }
     e.searchParams.set("scaling", "scale-down");
     e.searchParams.set("content-scaling", "fixed");
-    e.searchParams.set("hide-ui", "1");
     e.searchParams.set("embed-host", "portfolio-miranda");
     return e.toString();
   } catch {
@@ -41,8 +40,10 @@ export default function PrototypeModal({ title, url, embedUrl, onClose }) {
         titulo={`Protótipo · ${title}`}
         icone="/assets/xp/figma/pasta.png"
         onFechar={onClose}
-        largura={640}
-        altura={920}
+        largura={1056}
+        altura={880}
+        reserva={32}
+        centroVertical
         minLargura={320}
         minAltura={480}
         topo={32}
@@ -50,6 +51,7 @@ export default function PrototypeModal({ title, url, embedUrl, onClose }) {
         statusDireita={<a className="proto-status-link" href={url} target="_blank" rel="noopener noreferrer">Abrir no Figma<span className="sr-only"> (abre em nova aba)</span></a>}
       >
         <div className="proto-stage">
+          <p className="proto-hint">Toque e navegue como no aplicativo. Se o protótipo não carregar, <a href={url} target="_blank" rel="noopener noreferrer">abra no Figma</a>.</p>
           <div className="proto-phone">
             <iframe title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen loading="lazy" />
           </div>

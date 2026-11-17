@@ -190,3 +190,17 @@
 .proto-phone iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: var(--space-4); background: #fff; }
 .proto-status-link { color: inherit; text-decoration: underline; }
 .case-stage-kicker .case-section-label { margin: 0; }
+
+/* Janela do protótipo: larga, centralizada, celular no meio */
+.proto-stage { flex-direction: column; gap: var(--space-2); padding: var(--space-3) var(--space-3) var(--space-4); }
+.proto-hint { margin: 0; font-size: var(--text-14); line-height: var(--space-3); color: var(--color-blue-900); text-align: center; }
+.proto-hint a { color: inherit; font-weight: 700; }
+.proto-phone { flex: 1 1 0; min-height: 0; height: auto; max-height: 784px; }
+@media (max-width: 760px) { .proto-stage { padding: var(--space-2); } .proto-phone { border-radius: var(--space-4); } .proto-phone iframe { border-radius: var(--space-3); } }
+
+/* Overview: mesmo respiro em cima, embaixo e nas laterais */
+.case-overview-card { padding: var(--space-3); gap: var(--space-3) var(--space-4); align-items: flex-start; }
+.case-overview-card dt { margin: 0 0 var(--space-1); }
+.case-overview-card dt, .case-overview-card dd { line-height: var(--space-3); }
+.case-chips { gap: var(--space-1); }
+.case-chips li { padding: 0 var(--space-2); line-height: var(--space-4); }
