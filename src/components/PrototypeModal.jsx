@@ -5,6 +5,8 @@ import JanelaXP from "./JanelaXP.jsx";
 // Protótipo do Figma aberto na própria página, dentro de uma janela do Windows XP.
 // Só links figma.com/proto viram embed; qualquer outro link continua abrindo em nova aba.
 export function prototypeEmbedUrl(url) {
+  // A prévia hospedada bloqueia quadros de outros sites; nela o botão abre o Figma em nova aba.
+  if (import.meta.env.VITE_PREVIA) return null;
   try {
     const u = new URL(url);
     if (!/(^|\.)figma\.com$/.test(u.hostname) || !u.pathname.startsWith("/proto/")) return null;
