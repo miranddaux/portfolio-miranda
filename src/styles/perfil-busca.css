@@ -1,0 +1,110 @@
+.painel-combo select {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-900);
+  font-family: var(--font-ui);
+  font-size: var(--text-14);
+}
+.painel-combo select:focus-visible {
+  outline: 2px solid var(--color-blue-900);
+  outline-offset: -2px;
+}
+.perfil-busca {
+  display: flex;
+  flex: none;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--color-blue-200);
+  background: var(--color-blue-50);
+  color: var(--color-neutral-900);
+  font-size: var(--text-14);
+  line-height: var(--space-3);
+}
+.perfil-busca label {
+  font-weight: 600;
+}
+.perfil-busca input {
+  flex: 1 1 160px;
+  min-width: 0;
+  min-height: var(--space-5);
+  padding: var(--space-1);
+  border: 1px solid var(--color-blue-300);
+  border-radius: 8px;
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-900);
+  font: inherit;
+}
+.perfil-busca input::placeholder {
+  color: var(--color-neutral-600);
+}
+.perfil-busca input:focus-visible,
+.perfil-resultado:focus-visible {
+  outline: 2px solid var(--color-blue-900);
+  outline-offset: 2px;
+}
+.perfil-busca p {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: var(--text-12);
+}
+.perfil-busca-status {
+  margin: 0 var(--space-2) var(--space-2);
+  color: var(--color-neutral-700);
+  font-size: var(--text-14);
+  line-height: var(--space-3);
+}
+.perfil-resultados-lista {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0 var(--space-2);
+  list-style: none;
+}
+.perfil-resultado {
+  display: grid;
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-2);
+  border: 1px solid var(--color-blue-200);
+  border-radius: 8px;
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-900);
+  font: inherit;
+  font-size: var(--text-14);
+  line-height: var(--space-3);
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+.perfil-resultado:hover {
+  border-color: var(--color-blue-700);
+  background: var(--color-blue-50);
+}
+.perfil-resultado strong {
+  color: var(--color-blue-900);
+  font-size: var(--text-16);
+}
+.perfil-resultado-aba {
+  color: var(--color-neutral-600);
+  font-size: var(--text-12);
+}
+.perfil-resultado-acao {
+  color: var(--color-blue-900);
+  text-decoration: underline;
+}
+.painel-limite [id][tabindex="-1"]:focus {
+  outline: 2px solid var(--color-blue-700);
+  outline-offset: 2px;
+}
+@container janela (max-width: 600px) {
+  .perfil-busca label {
+    flex-basis: 100%;
+  }
+  .perfil-busca input {
+    flex-basis: 100%;
+  }
+}

@@ -1,0 +1,18 @@
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./styles/base.css";
+import "./styles/tokens.css";
+import "./styles/layout.css";
+import "./styles/xp.css";
+import "./styles/replica-figma.css";
+import "./styles/sobre.css";
+import "./styles/painel-xp.css";
+import "./styles/msn.css";
+import "./styles/welcome.css";
+import "./styles/social.css";
+import "./styles/perfil-busca.css";
+import "./styles/msn-banner.css";
+import "./styles/projects.css";
+import "./styles/case-document.css";
+createRoot(document.getElementById("root")).render(<App />);

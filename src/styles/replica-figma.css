@@ -1,0 +1,422 @@
+/* Réplica fiel do Figma (Home 125:36): barra de tarefas e Menu Iniciar.
+   Medidas, tamanhos de texto e cores vêm do desenho e NÃO seguem a grade de 8 px
+   nem a escala 12/14/16: esta é a exceção documentada em docs/DESIGN_SYSTEM.md.
+   O arquivo é ignorado por scripts/check-design-scale.mjs. */
+.barra-tarefas {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 33;
+  display: flex;
+  align-items: center;
+  height: var(--barra-altura);
+  background: url("/assets/xp/figma/barra-fundo.png") repeat-x left top / 1px var(--barra-altura);
+  color: #fff;
+  font-family: var(--font-ui);
+}
+.botao-iniciar {
+  position: relative;
+  flex: none;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  width: auto;
+  padding: 0 24px 0 12px;
+  border: 0;
+  background:
+    url("/assets/xp/figma/botao-iniciar-borda.png") right top / 22px 30px no-repeat,
+    url("/assets/xp/figma/botao-iniciar-meio.png") left top / calc(100% - 21px) var(--barra-altura) no-repeat;
+  color: #fff;
+  cursor: pointer;
+}
+.botao-iniciar img {
+  flex: none;
+  position: relative;
+  top: 0;
+}
+.botao-iniciar span {
+  position: relative;
+  top: 0;
+  font-size: 16px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 30px;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+}
+.botao-iniciar:active,
+.botao-iniciar[aria-expanded="true"] {
+  filter: brightness(0.92);
+}
+.barra-tarefas-botoes {
+  flex: 1;
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  height: var(--barra-altura);
+  overflow: hidden;
+}
+.botao-barra {
+  flex: 0 1 196px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 48px;
+  height: 24px;
+  padding: 0 11px;
+  border: 0;
+  background: url("/assets/xp/figma/botao-barra.png") no-repeat center / 100% 100%;
+  color: #fff;
+  font-size: 14px;
+  line-height: 22px;
+  text-align: left;
+  white-space: nowrap;
+}
+.botao-barra.is-pressionado {
+  background-image: url("/assets/xp/figma/botao-barra-pressionado.png");
+}
+.botao-barra img {
+  flex: none;
+}
+.botao-barra span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bandeja-idioma {
+  flex: none;
+  margin-right: 12px;
+  font-size: 14px;
+  line-height: 22px;
+}
+.bandeja {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--barra-altura);
+  padding: 0 12px;
+  background:
+    url("/assets/xp/figma/bandeja-borda.png") left top / 12px var(--barra-altura) no-repeat,
+    url("/assets/xp/figma/bandeja-meio.png") 12px 0 / calc(100% - 12px) var(--barra-altura) no-repeat;
+  font-size: 14px;
+  line-height: 22px;
+}
+.bandeja-info-caixa {
+  position: relative;
+  display: flex;
+}
+.bandeja-info {
+  display: flex;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.bandeja-info:hover img {
+  filter: brightness(1.15);
+}
+
+/* Balão de boas-vindas (Figma: Message 128:489). */
+.balao {
+  position: absolute;
+  right: -1px;
+  bottom: calc(100% + 28px);
+  box-sizing: border-box;
+  width: 432px;
+  max-width: calc(100vw - 8px);
+  padding: 8px 16px 12px;
+  border: 1px solid #000;
+  border-radius: 5.179px;
+  background: #ffffe1;
+  box-shadow: 2px 2px 0 rgba(128, 128, 112, 0.6);
+  color: #000;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  animation: xp-alert-in 0.2s ease-out both;
+}
+.balao p {
+  margin: 0;
+}
+.balao-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding-right: 32px;
+  font-size: 16px;
+  letter-spacing: 0;
+}
+.balao-titulo strong {
+  font-weight: 600;
+}
+.balao-dica {
+  margin-top: 8px !important;
+  font-size: 14px;
+  color: #6b6b5a;
+}
+.balao-fechar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  padding: 0;
+  border: 1px solid #b7b7a4;
+  border-radius: 3px;
+  background: transparent;
+  color: #8a8a78;
+  cursor: pointer;
+}
+.balao-fechar svg {
+  display: block;
+}
+.balao-fechar:hover {
+  background: #fff;
+  color: #333;
+}
+.balao-cauda {
+  position: absolute;
+  right: 10px;
+  top: calc(100% - 1px);
+  overflow: visible;
+}
+
+.menu-iniciar {
+  position: fixed;
+  left: 0;
+  bottom: 25px;
+  z-index: 32;
+  width: 558px;
+  max-width: 100vw;
+  overflow: hidden;
+  border-radius: 4.967px 4.967px 0 0;
+  background: #fff;
+  font-family: var(--font-ui);
+  color: #000;
+}
+.menu-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 8.72px;
+  height: 70.37px;
+  padding-left: 6.79px;
+  background: linear-gradient(#0d5cc9, #408ae3);
+  color: #fff;
+}
+.menu-avatar {
+  box-sizing: border-box;
+  width: 54.2px;
+  height: 54.2px;
+  border: 1.445px solid #ced5fe;
+  border-radius: 2.697px;
+  object-fit: cover;
+}
+.menu-cabecalho strong {
+  font-size: 14.902px;
+  font-weight: 600;
+  letter-spacing: -0.298px;
+  text-shadow: 1.088px 1.632px 1.632px rgba(0, 0, 0, 0.3);
+}
+.menu-colunas {
+  display: flex;
+  justify-content: space-between;
+}
+.menu-coluna {
+  display: flex;
+  flex-direction: column;
+  gap: 6.623px;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  min-height: 472px;
+  width: 274.2px;
+  padding: 11.591px;
+}
+.menu-coluna-sistema {
+  background: #d3e5fa;
+}
+.menu-coluna h2 {
+  margin: 0;
+  font-size: 14.902px;
+  font-weight: 600;
+  line-height: 20.868px;
+  color: #000;
+}
+.menu-lista {
+  width: 251.033px;
+}
+.menu-rotulo {
+  position: relative;
+  height: 41.736px;
+  padding-left: 16.7px;
+  font-size: 11.591px;
+  line-height: 16.685px;
+  box-sizing: border-box;
+  padding-top: calc(50% * 0 + 9.4px);
+}
+.menu-divisor {
+  width: 258.08px;
+  height: 0.881px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 22.943%,
+    #d3d3c8 49.359%,
+    rgba(255, 255, 255, 0) 121.66%
+  );
+}
+.menu-coluna-sistema .menu-divisor {
+  background: linear-gradient(
+    90deg,
+    #d3e5fa 22.943%,
+    #81b6ff 49.359%,
+    #d3e5fa 121.66%
+  );
+}
+.menu-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 41.736px;
+  padding: 0 0 0 50.54px;
+  border: 0;
+  border-radius: 4.174px;
+  background: transparent;
+  color: #000;
+  font-size: 13.246px;
+  line-height: 20.868px;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.menu-item img {
+  position: absolute;
+  left: 16.7px;
+  top: 8.35px;
+  width: 25.041px;
+  height: 25.041px;
+}
+.menu-item span {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.menu-item small {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11.591px;
+  opacity: 0.7;
+}
+.menu-item:hover:not(:disabled),
+.menu-item:focus-visible:not(:disabled) {
+  background: #316ac5;
+  color: #fff;
+}
+.menu-item:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.menu-todos {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 41.736px;
+  padding: 0;
+  border: 0;
+  border-radius: 4.174px;
+  background: transparent;
+  cursor: pointer;
+}
+.menu-todos span {
+  position: absolute;
+  right: 111px;
+  top: calc(50% + 4.53px);
+  transform: translateY(-50%);
+  font-size: 13.246px;
+  font-weight: 600;
+  line-height: 20.868px;
+  color: #000;
+  white-space: nowrap;
+}
+.menu-todos img {
+  position: absolute;
+  left: 146.64px;
+  top: 13.64px;
+  width: 25.041px;
+  height: 25.041px;
+}
+.menu-rodape {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  height: 50.5px;
+  padding-right: 30px;
+  background: linear-gradient(#408ae3, #0d5cc9);
+}
+.menu-rodape .menu-acao,
+.menu-rodape .menu-acao span,
+.menu-rodape .menu-acao u {
+  color: rgba(255, 255, 255, 0.89) !important;
+  font-family: var(--font-ui);
+}
+.menu-acao {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.89);
+  font-size: 11.591px;
+  font-weight: 600;
+  letter-spacing: -0.232px;
+  cursor: pointer;
+}
+.menu-acao:first-child {
+  gap: 14px;
+}
+.menu-acao:hover span {
+  text-decoration: underline;
+}
+
+@media (width < 640px) {
+  .botao-barra span,
+  .bandeja-idioma {
+    display: none;
+  }
+  .botao-barra {
+    flex-basis: 48px;
+    justify-content: center;
+    padding: 0;
+  }
+  .menu-colunas {
+    flex-direction: column;
+  }
+  .menu-coluna {
+    width: 100%;
+  }
+}
+
+/* Celular: o balão fica inteiro na tela (antes vazava para a esquerda). */
+@media (max-width: 480px) {
+  .balao {
+    position: fixed;
+    left: 8px;
+    right: 8px;
+    bottom: calc(var(--barra-altura, 30px) + 16px);
+    width: auto;
+    max-width: none;
+  }
+  .balao-cauda {
+    display: none;
+  }
+}

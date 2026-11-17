@@ -1,0 +1,254 @@
+/* Explorer XP: chrome compartilhado; os projetos permanecem links de verdade. */
+.projects-explorer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  color: var(--color-neutral-900);
+  background: var(--color-neutral-50);
+}
+.projects-chrome {
+  flex: none;
+  background: #ece9d8;
+  color: var(--color-neutral-900);
+  font-size: var(--text-14);
+  line-height: var(--space-3);
+}
+.projects-menubar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-1);
+  min-height: var(--space-4);
+  border-bottom: 1px solid #cac6af;
+}
+.projects-menubar img {
+  margin-left: auto;
+  object-fit: contain;
+}
+.projects-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background: linear-gradient(#f5f3e9, #e8e4d6);
+}
+.projects-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--space-4);
+  padding: 0 var(--space-1);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+.projects-toolbar button:not(:disabled):hover {
+  border-color: var(--color-blue-300);
+  background: var(--color-neutral-50);
+}
+.projects-toolbar button:disabled {
+  opacity: 0.55;
+}
+.projects-toolbar-label {
+  margin-left: auto;
+  color: var(--color-neutral-600);
+  font-size: var(--text-12);
+}
+.projects-address {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0 var(--space-1) var(--space-1);
+}
+.projects-address > div {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+  min-height: var(--space-4);
+  padding: 0 var(--space-1);
+  border: 1px solid #a5acb5;
+  background: var(--color-neutral-50);
+}
+.projects-address > div span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.projects-address img {
+  flex: none;
+}
+.projects-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--color-blue-200);
+  background: var(--color-blue-50);
+  font-size: var(--text-14);
+}
+.projects-search input {
+  flex: 1 1 160px;
+  min-width: 0;
+  min-height: var(--space-5);
+  padding: var(--space-1);
+  border: 1px solid var(--color-blue-300);
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-900);
+  font: inherit;
+}
+.projects-folders-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: var(--space-4) var(--space-2);
+}
+.projects-folders {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: start;
+  gap: var(--space-4) var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.projects-folders li {
+  min-width: 0;
+}
+.project-folder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: 144px;
+  padding: var(--space-2) var(--space-1);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: none;
+  color: var(--color-neutral-900);
+  font-family: var(--font-ui);
+  font-size: var(--text-16);
+  line-height: var(--space-3);
+  text-align: center;
+  text-decoration: none;
+}
+.project-folder:hover,
+.project-folder:focus-visible {
+  border-color: var(--color-blue-200);
+  background: var(--color-blue-50);
+  color: var(--color-blue-900);
+}
+.project-folder-icon {
+  position: relative;
+  display: block;
+  width: var(--space-8);
+  height: var(--space-8);
+}
+.project-folder-icon > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.project-folder-mark {
+  position: absolute;
+  right: 0;
+  bottom: var(--space-1);
+  display: grid;
+  place-items: center;
+  width: var(--space-4);
+  height: var(--space-4);
+  border: 1px solid var(--color-neutral-50);
+  border-radius: 8px;
+  background: var(--color-blue-900);
+  color: var(--color-neutral-50);
+  font-size: var(--text-14);
+  font-weight: 700;
+}
+.project-folder-mark.is-animae { background: #8c3505; }
+.project-folder-mark.is-navaja { background: #5f4327; }
+.project-folder-mark.is-oficina-do-tenista { background: #305a36; }
+.project-folder-caption {
+  position: relative;
+  display: grid;
+  place-items: start center;
+  width: 100%;
+}
+.project-folder-name,
+.project-folder-pending {
+  grid-area: 1 / 1;
+  overflow-wrap: anywhere;
+}
+.project-folder-category {
+  color: var(--color-neutral-600);
+  font-size: var(--text-12);
+  line-height: var(--space-2);
+}
+.project-folder.is-pending {
+  color: var(--color-neutral-600);
+  cursor: default;
+}
+.project-folder.is-pending .project-folder-icon {
+  filter: grayscale(1);
+  opacity: 0.65;
+}
+.project-folder-pending {
+  visibility: hidden;
+  color: var(--color-blue-900);
+}
+.project-folder.is-pending:is(:hover, :focus-visible) .project-folder-name { visibility: hidden; }
+.project-folder.is-pending:is(:hover, :focus-visible) .project-folder-pending { visibility: visible; }
+.projects-notice,
+.projects-empty {
+  margin: 0;
+  padding: var(--space-2);
+  color: var(--color-neutral-600);
+  font-size: var(--text-12);
+  line-height: var(--space-2);
+}
+.projects-notice {
+  border-top: 1px solid var(--color-neutral-200);
+}
+.project-folder:focus-visible,
+.projects-toolbar button:focus-visible,
+.projects-search input:focus-visible {
+  outline: 2px solid var(--color-blue-900);
+  outline-offset: -2px;
+}
+@container janela (max-width: 760px) {
+  .projects-folders { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@container janela (max-width: 520px) {
+  .projects-folders { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projects-menubar { gap: var(--space-1); font-size: var(--text-12); }
+  .projects-toolbar-label { display: none; }
+}
+@media (hover: none) {
+  .project-folder.is-pending .project-folder-name { visibility: visible; }
+  .project-folder.is-pending .project-folder-pending {
+    visibility: visible;
+    grid-area: auto;
+    font-size: var(--text-12);
+    color: var(--color-neutral-600);
+  }
+  .project-folder.is-pending:is(:hover, :focus-visible) .project-folder-name { visibility: visible; }
+}
+/* A área de projetos da aba reutiliza as pastas sem duplicar o chrome XP. */
+.painel-rolagem.is-projects { display: flex; padding: 0; overflow: hidden; }
+.painel-rolagem.is-projects .painel-limite { display: flex; flex: 1; min-width: 0; min-height: 0; width: 100%; max-width: none; }
+.perfil-projects { display: flex; flex: 1; min-width: 0; min-height: 0; }
+.projects-embedded-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2); padding: var(--space-3); border-bottom: 1px solid var(--color-neutral-200); }
+.projects-embedded-heading h3 { margin: 0; color: var(--color-blue-900); font-size: var(--text-24); line-height: var(--space-4); }
+.projects-folders-scroll { overscroll-behavior: contain; }
+/* Etiquetas do perfil mantêm a mesma aparência informativa das categorias. */
+.painel-tags { gap: var(--space-1); }
+.painel-tags li { padding: var(--space-1) var(--space-2); border: 0; border-left: 2px solid var(--color-blue-900); border-radius: 0; background: var(--color-blue-50); color: var(--color-blue-900); line-height: var(--space-2); cursor: text; }
