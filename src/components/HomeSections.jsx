@@ -4,30 +4,6 @@ import { ArrowUpRight, Folder } from "lucide-react";
 export default function HomeSections() {
   return (
     <>
-      {" "}
-      <section id="playground" className="playground section-width">
-        <div className="playground-inner">
-          <div className="playground-sticker">✦</div>
-          <div>
-            <span className="eyebrow">/ EXPERIMENTOS & CURIOSIDADE</span>
-            <h2>
-              O laboratório está <em>aberto.</em>
-            </h2>
-            <p>
-              Um espaço para protótipos, design systems, interfaces de games e
-              experiências que misturam design e código. Conteúdo em evolução.
-            </p>
-          </div>
-          <div className="playground-tile">
-            <span className="pixel-icon">▣</span>
-            <span>PLAYGROUND.EXE</span>
-            <strong>Em construção</strong>
-            <span className="progress-track">
-              <i />
-            </span>
-          </div>
-        </div>
-      </section>
       <section className="about-section" id="sobre">
         <div className="section-width about-grid">
           <div>

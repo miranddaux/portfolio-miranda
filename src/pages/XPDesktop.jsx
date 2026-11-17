@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { CASES } from "../data/cases";
-import RetroIcon from "../components/RetroIcon";
 import DesktopAlerts from "../components/DesktopAlerts";
 import BarraDeTarefas from "../components/BarraDeTarefas";
 import MenuIniciar from "../components/MenuIniciar";
@@ -10,6 +8,8 @@ import PainelSobre from "../components/PainelSobre";
 import JanelaCurriculo, { CURRICULOS } from "../components/JanelaCurriculo";
 import { MsnAviso, MsnContatos, MsnConversa } from "../components/Msn";
 import JanelaEmail from "../components/JanelaEmail";
+import ProjectsExplorer, { ProjectsToolbar } from "../components/ProjectsExplorer.jsx";
+import CaseDocument from "../components/CaseDocument.jsx";
 const APPS = [
   {
     id: "sobre",
@@ -19,35 +19,45 @@ const APPS = [
   },
   {
     id: "cases",
-    name: "Meus projetos",
-    title: "Meus projetos",
+    name: "Meus Projetos",
+    title: "Meus Projetos",
     icon: "folder",
   },
   { id: "contato", name: "Entre em contato", title: "Entre em contato comigo", icon: "mail" },
-  {
-    id: "playground",
-    name: "Playground",
-    title: "Playground",
-    icon: "computer",
-  },
   { id: "curriculo", name: "Meu currículo", title: "Meu currículo", icon: "document" },
   { id: "msn", name: "Messenger", title: "Messenger", icon: "mail" },
   { id: "msnchat", name: "Thiago Bot", title: "Conversa com Thiago Bot", icon: "mail" },
+  { id: "case", name: "Case", title: "Case", icon: "document" },
 ];
 const APPS_JANELAS = [
-  { ...APPS[0], janelaIcone: "/assets/xp/painel/painel-icone.png", largura: 1000, altura: 704, cascata: 0 },
-  { ...APPS[1], janelaIcone: "/assets/xp/area/projetos.png", largura: 960, altura: 600, cascata: 1 },
-  { ...APPS[2], janelaIcone: "/assets/xp/area/contato.png", largura: 560, altura: 464, cascata: 2, minLargura: 400, semStatus: true },
-  { ...APPS[3], janelaIcone: "/assets/xp/painel/programas.png", largura: 640, altura: 440, cascata: 3 },
-  { ...APPS[4], janelaIcone: "/assets/xp/area/curriculo.png", largura: 600, altura: 768, cascata: 1 },
-  { ...APPS[5], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 728, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
-  { ...APPS[6], janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "sobre"), janelaIcone: "/assets/xp/painel/painel-icone.png", largura: 1000, altura: 704, cascata: 0 },
+  { ...APPS.find(a => a.id === "cases"), janelaIcone: "/assets/xp/area/projetos.png", largura: 960, altura: 600, cascata: 1 },
+  { ...APPS.find(a => a.id === "contato"), janelaIcone: "/assets/xp/area/contato.png", largura: 560, altura: 464, cascata: 2, minLargura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "curriculo"), janelaIcone: "/assets/xp/area/curriculo.png", largura: 600, altura: 768, cascata: 1 },
+  { ...APPS.find(a => a.id === "msn"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 728, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "msnchat"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
-export default function XPDesktop({ setMode, onShowWelcome }) {
-  const [windows, setWindows] = useState({ sobre: "open" }),
-    [active, setActive] = useState("sobre"),
-    [start, setStart] = useState(false),
-    [filter, setFilter] = useState("Destaques");
+export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {
+  const [windows, setWindows] = useState({ cases: "open" }),
+    [active, setActive] = useState("cases"),
+    [start, setStart] = useState(false);
+  const previousProject = useRef(null);
+  const apps = APPS.map((a) => a.id === "case" && project ? { ...a, name: project.title, title: `${project.title} — Case` } : a);
+  const appWindows = APPS_JANELAS.map((a) => a.id === "case" && project ? { ...a, name: project.title, title: `${project.title} — Case` } : a);
+  useEffect(() => {
+    if (project) {
+      setWindows((w) => ({ ...w, case: "open" }));
+      setActive("case");
+      previousProject.current = project.id;
+    } else if (previousProject.current) {
+      const lastProject = previousProject.current;
+      setWindows((w) => ({ ...w, case: "closed", cases: "open" }));
+      setActive("cases");
+      previousProject.current = null;
+      requestAnimationFrame(() => (document.querySelector(`[aria-labelledby="cases-title"] .project-folder[href="/cases/${lastProject}"]`) || document.getElementById("cases-title"))?.focus({ preventScroll: true }));
+    }
+  }, [project?.id]);
   const menuRef = useRef(null),
     startRef = useRef(null),
     infoRef = useRef(null);
@@ -61,7 +71,7 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
     setStart(false);
     if (focus)
       requestAnimationFrame(() =>
-        document.getElementById(`${id}-title`)?.focus(),
+        document.getElementById(`${id}-title`)?.focus({ preventScroll: true }),
       );
   };
   const hide = (id, state) => {
@@ -71,7 +81,7 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
         state === "closed"
           ? document.getElementById(`shortcut-${id}`)
           : document.getElementById(`task-${id}`);
-      target?.focus();
+      target?.focus({ preventScroll: true });
     });
   };
   useEffect(() => {
@@ -85,11 +95,11 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
   }, []);
   useEffect(() => {
     if (!start) return;
-    menuRef.current?.querySelector("button")?.focus();
+    menuRef.current?.querySelector("button")?.focus({ preventScroll: true });
     const close = (e) => {
       if (e.type === "keydown" && e.key === "Escape") {
         setStart(false);
-        startRef.current?.focus();
+        startRef.current?.focus({ preventScroll: true });
       } else if (
         e.type === "pointerdown" &&
         !menuRef.current?.contains(e.target) &&
@@ -104,12 +114,6 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
       document.removeEventListener("pointerdown", close);
     };
   }, [start]);
-  const projects =
-    filter === "Destaques"
-      ? CASES.slice(0, 3)
-      : filter === "Mais trabalhos"
-        ? CASES.slice(3)
-        : CASES.filter((c) => c.group === filter);
   return (
     <main id="conteudo" className="xp-desktop">
       <h1 className="sr-only">
@@ -140,7 +144,7 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
         ))}
       </nav>
       <div className="desktop-workspace">
-        {APPS_JANELAS.map((app) =>
+        {appWindows.map((app) =>
           windows[app.id] === "open" || windows[app.id] === "minimized" ? (
             <JanelaXP
               key={app.id}
@@ -159,12 +163,13 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
               semStatus={app.semStatus}
               classe={app.id === "msnchat" && tremer % 2 === 1 ? "is-tremendo" : ""}
               onFocar={() => setActive(app.id)}
-              onFechar={() => hide(app.id, "closed")}
+              onFechar={() => app.id === "case" ? onNavigate("/#cases") : hide(app.id, "closed")}
               onMinimizar={() => hide(app.id, "minimized")}
               statusEsquerda={
                 app.id === "curriculo"
                   ? "Clique para ampliar e arraste para visualizar outras áreas."
-                  : undefined
+                  : app.id === "cases" ? ""
+                    : app.id === "case" ? "Case de Product Design · Thiago Miranda" : undefined
               }
               statusDireita={
                 app.id === "curriculo" ? (
@@ -198,118 +203,13 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
               {app.id === "curriculo" && (
                 <JanelaCurriculo lingua={linguaCv} aoContato={() => open("contato")} />
               )}
-              {app.id === "sobre" && <PainelSobre aoAbrir={open} />}
-              {app.id === "cases" && (
-                <>
-                  <div className="xp-menubar">
-                <span>Arquivo</span>
-                <span>Editar</span>
-                <span>Exibir</span>
-                <span>Favoritos</span>
-              </div>
-              <div className="xp-address">
-                <span>Endereço</span>
-                <div>
-                  <RetroIcon name="folder" size={16} /> C:\Miranda\Portfólio\
-                  {filter}
-                </div>
-                <button
-                  onClick={() => setFilter("Destaques")}
-                  aria-label="Ir para destaques"
-                >
-                  ➜
-                </button>
-              </div>
-              <div className="xp-explorer">
-                <aside className="xp-explorer-sidebar">
-                  <div className="xp-sidebar-group">
-                    <h3>Trabalhos selecionados</h3>
-                    <div role="group" aria-label="Filtrar projetos">
-                      {[
-                        "Destaques",
-                        "Apps",
-                        "E-commerce",
-                        "Mais trabalhos",
-                      ].map((f) => (
-                        <button
-                          key={f}
-                          onClick={() => setFilter(f)}
-                          aria-pressed={filter === f}
-                        >
-                          <RetroIcon name="folder" size={16} />
-                          {f}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="xp-sidebar-group">
-                    <h3>Sobre esta pasta</h3>
-                    <p>
-                      Escolhas, contexto e processo. Cada case abre em uma
-                      página própria.
-                    </p>
-                  </div>
-                </aside>
-                <div className="xp-project-list">
-                  <div className="xp-projects-heading">
-                    <h3>
-                      {filter === "Destaques" ? "3 cases em destaque" : filter}
-                    </h3>
-                    <span>Selecione um projeto para conhecer o processo.</span>
-                  </div>
-                  {projects.map((c) => (
-                    <article className="xp-project" key={c.id}>
-                      <RetroIcon
-                        name={
-                          c.id === "animae"
-                            ? "community"
-                            : c.id === "navaja"
-                              ? "research"
-                              : "shop"
-                        }
-                        size={48}
-                      />
-                      <div>
-                        <span className="xp-project-kind">{c.type}</span>
-                        <h4>
-                          <a href={`/cases/${c.id}`}>{c.title}</a>
-                        </h4>
-                        <p>{c.summary}</p>
-                        <a className="xp-read-case" href={`/cases/${c.id}`}>
-                          Ler o case →
-                        </a>
-                      </div>
-                    </article>
-                  ))}
-                  <p className="xp-media-note">
-                    Imagens dos projetos em curadoria.
-                  </p>
-                </div>
-              </div>
-              
-                </>
-              )}
+              {app.id === "sobre" && <PainelSobre aoAbrir={open} onNavigate={onNavigate} />}
+              {app.id === "cases" && <ProjectsExplorer onNavigate={onNavigate} />}
+              {app.id === "case" && project && <>
+                <ProjectsToolbar title={project.title} onBack={() => onNavigate("/#cases")} />
+                <div className="case-document-scroll"><CaseDocument project={project} onNavigate={onNavigate} /></div>
+              </>}
               {app.id === "contato" && <JanelaEmail />}
-              {app.id === "playground" && (
-                <div className="janela-xp-rolagem">
-                  <div className="xp-utility-content">
-                    {(
-                      <>
-                        <RetroIcon name="computer" size={56} />
-                        <h3>Playground em construção</h3>
-                        <p>
-                          Um espaço para protótipos e experiências entre design
-                          e código.
-                        </p>
-                        <p>Enquanto isso, conheça meu trabalho no ANIMAE.</p>
-                        <a className="xp-button" href="/cases/animae">
-                          Conhecer ANIMAE
-                        </a>
-                      </>
-                    )}
-                  </div>
-                </div>
-              )}
             </JanelaXP>
           ) : null,
         )}
@@ -320,7 +220,7 @@ export default function XPDesktop({ setMode, onShowWelcome }) {
         <span className="ruido-tv-faixa" />
       </div>
       <BarraDeTarefas
-        apps={APPS}
+        apps={apps}
         janelas={windows}
         ativo={active}
         menuAberto={start}

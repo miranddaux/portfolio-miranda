@@ -8,6 +8,7 @@ import XPWelcome from "./pages/XPWelcome";
 import XPGreeting from "./pages/XPGreeting";
 import useXPLogin from "./hooks/useXPLogin";
 import { CASES } from "./data/cases";
+import { getCaseStudy } from "./data/caseStudies.js";
 import { irParaEntrada, rota } from "./lib/rota.js";
 const modes = ["rapido", "noite", "xp"];
 function initialMode() {
@@ -32,11 +33,29 @@ export default function App() {
   const [mode, setMode] = useState(initialMode);
   const login = useXPLogin(initialWelcome);
   const showWelcome = login.phase !== "portfolio";
-  const path = rota();
+  const [path, setPath] = useState(rota);
+  useEffect(() => {
+    const sync = () => setPath(rota());
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
+  function navigate(href) {
+    if (location.pathname + location.hash !== href) history.pushState(null, "", href);
+    setPath(rota());
+  }
   const project = CASES.find((c) => path === `/cases/${c.id}`);
-  const xpHome = mode === "xp" && path === "/";
+  const study = getCaseStudy(project?.id);
+  const xpHome = mode === "xp" && (path === "/" || Boolean(study));
+  useEffect(() => {
+    if (path === "/") {
+      document.title = "Thiago Miranda · Product Designer pleno";
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) meta.content = "Portfólio de Thiago Miranda: UI craft, UX e design systems do Figma ao código.";
+    }
+  }, [path]);
   useEffect(() => {
     document.documentElement.dataset.mode = mode;
+    document.documentElement.dataset.layout = xpHome && !showWelcome ? "desktop" : "document";
     document.documentElement.dataset.screen = showWelcome
       ? "welcome"
       : "portfolio";
@@ -50,7 +69,7 @@ export default function App() {
     try {
       localStorage.setItem("miranda-mode", mode);
     } catch {}
-  }, [mode, showWelcome]);
+  }, [mode, showWelcome, xpHome]);
 
   function enterPortfolio() {
     setMode("xp");
@@ -81,20 +100,16 @@ export default function App() {
         {!xpHome && (
           <Header mode={mode} setMode={setMode} onShowWelcome={showEntry} />
         )}
-        {project ? (
+        {xpHome ? (
+          <XPDesktop setMode={setMode} onShowWelcome={showEntry} project={study} onNavigate={navigate} />
+        ) : project ? (
           <CasePage project={project} />
         ) : path === "/" ? (
-          mode === "xp" ? (
-            <XPDesktop setMode={setMode} onShowWelcome={showEntry} />
-          ) : (
-            <Home />
-          )
+          <Home />
         ) : (
           <main className="case-page section-width" id="conteudo">
             <h1>Página não encontrada</h1>
-            <a className="btn btn-outline" href="/">
-              Voltar ao portfólio
-            </a>
+            <a className="btn btn-outline" href="/">Voltar ao portfólio</a>
           </main>
         )}
         {mode !== "xp" && (

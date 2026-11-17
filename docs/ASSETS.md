@@ -125,7 +125,53 @@ destinos de contato. Não são desenhos originais do portfólio. As cores dos as
 são preservadas; não há filtros de recoloração nem hotlink. Dribbble e Behance
 mantêm os PNGs existentes no projeto.
 
+## Cases em janela XP — 16/11
+
+| Asset local | Origem e uso |
+| --- | --- |
+| `cases/animae-lista.png` | Figma ANIMAE `Sdyl9kTkLtCZaIN13yvIgd`, tela `1372:11482`, 428×1024: Minha Lista do MVP social, capa do case. Dados na interface são demonstrativos. |
+| `cases/animae-v1.png` | Imagem já publicada por Thiago em `thiagomirandaux.framer.website/work/animae`, asset Framer `tNm4OIUdzzLa5jBbtbSMGPipgE.png`, 1024×427. Exibida somente com legenda de versão 1/streaming. |
+| `cases/navaja-capa.png` | Portfólio publicado de Thiago, `/work/navaja`, asset Framer `LKsO3FHoUaXsTu2yPXGsDaG9I.png`, 1024×768. Mockup do conceito, capa do case. |
+| `cases/navaja-telas.png` | Mesma página, asset `QcIT7fKS34KUGLUj55B29jt1q8.png`, 1024×569. Estudo da entrada do app, na solução. |
+| `cases/oficina-produto.png` | Figma DISCO Cases `zPqNhCbwO8DDnnouXZfa5a`, Oficina do Tenista, `4001:58688` (pdp-detail), 1024×536. Capa do case. |
+| `cases/oficina-comparador.png` | Mesmo arquivo, `4001:58692` (section-comparador), 1024×420. Evidência da comparação lado a lado, na solução. |
+
+Os renders do Figma foram obtidos pelo conector. O endpoint de download retornou
+403; usou-se a resposta inline de screenshot para salvar o PNG, sem retocar o
+conteúdo. URLs temporárias não fazem parte do código. As imagens do Framer são
+variantes disponibilizadas pelo próprio CDN, salvas localmente e verificadas.
+
+Os PNGs representam telas dos projetos do próprio Thiago, não prints dos sites
+de referência Dex/Omar. O layout do portfólio continua sendo HTML/CSS interativo;
+as imagens não substituem o documento. As figuras preservam proporção e podem
+ser abertas em nova aba para ampliar. Ilustrações e fotos dentro das interfaces
+pertencem aos respectivos projetos/fontes; não são fotografias originais do portfólio.
+
+As pastas usam o asset XP local `xp/figma/pasta.png`, já existente no projeto.
+Os marcadores A/N/OT são rótulos em texto, não logotipos inventados.
+
 O componente `SocialLink` compartilha ícone, nome, foco e destinos entre MSN,
 Sobre mim, Contato, janela de e-mail e modos editoriais. O nome de nenhuma rede
 fica oculto em janelas estreitas. Ícones usam caixas de 16 px nos links compactos
 e 24 px nos cards, com `object-fit: contain` para preservar a proporção.
+
+## Novas telas dos cases — 16/11/2026
+
+Imagens preservadas como PNG, sem retoques. As molduras de celular são HTML/CSS.
+As capturas dos projetos contêm dados ilustrativos de UI, não métricas de resultado.
+
+| Arquivo em public/assets/cases | Origem |
+| --- | --- |
+| animae-busca.png | Figma Sdyl9kTkLtCZaIN13yvIgd, nó 1514:8703 |
+| animae-feed.png | Mesmo arquivo, nó 1399:2221 |
+| animae-perfil.png | Mesmo arquivo, nó 1394:4346 |
+| animae-onboarding.png | Mesmo arquivo, nó 1351:6756 |
+| oficina-home.png | Figma zPqNhCbwO8DDnnouXZfa5a, nó 4001:58593 |
+| oficina-guia.png | Mesmo arquivo, nó 4001:59029 |
+| navaja-estilos.png | Portfólio publicado de Thiago; Framer 1uIKFSwW7MVym1mgLMhyoJrHxc.png, variante 1024 |
+| navaja-rosto.png | Mesmo portfólio; Framer VKfRNDhIpmbBZ4hFSZAlpSkCV7U.png, variante 1024 |
+
+As imagens Navaja vêm de https://thiagomirandaux.framer.website/work/navaja.
+A captura atual da LP https://animaeapp.com.br/ continua pendente; o espaço no case
+é identificado como captura em preparação. Nenhum print de referência foi usado
+como se fosse uma tela do ANIMAE.

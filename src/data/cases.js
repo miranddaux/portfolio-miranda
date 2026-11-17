@@ -9,7 +9,7 @@ export const CASES = [
     icon: "✦",
     kicker: "PRODUTO / DESIGN SYSTEM",
     summary:
-      "Comecei com uma ideia de streaming, mudei o foco para comunidade e levei o design system do Figma para o código.",
+      "Criei uma comunidade para fãs de anime: descoberta, listas e conversas, com UX, UI e design system do Figma ao código.",
     problem:
       "Como ajudar fãs de anime a acompanhar o que assistem e compartilhar descobertas sem depender de um catálogo de streaming?",
     role: "Fundador · Product Design · UI · Design System",

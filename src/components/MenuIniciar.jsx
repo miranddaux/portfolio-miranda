@@ -57,7 +57,6 @@ export default function MenuIniciar({
             <Item icone="movie-maker" rotulo="Navaja" aoClicar={() => aoAbrir("cases")} />
             <Item icone="transferencia" rotulo="Oficina do Tenista" aoClicar={() => aoAbrir("cases")} />
             <Item icone="paint" rotulo="Ultragrip" aoClicar={() => aoAbrir("cases")} />
-            <Item icone="media-player" rotulo="Playground" aoClicar={() => aoAbrir("playground")} />
             <Divisor />
             <button
               className="menu-todos"
