@@ -240,3 +240,7 @@
 
 .proto-status-link { margin-left: var(--space-2); background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
 .proto-phone iframe { background: var(--color-neutral-950); }
+
+/* Hierarquia: títulos de etapa (H2) em 32 px, acima dos H3 de 24 px. */
+.case-stage-head h2, .case-hero h2 { font-size: var(--text-32); line-height: var(--space-5); }
+@media (max-width: 560px) { .case-stage-head h2, .case-hero h2 { font-size: var(--text-24); line-height: var(--space-4); } }
