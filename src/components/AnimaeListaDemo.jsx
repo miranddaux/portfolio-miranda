@@ -24,11 +24,16 @@ export default function AnimaeListaDemo() {
   // Escala a tela de 430 px para a largura do container.
   useLayoutEffect(() => {
     const el = root.current;
-    const fit = () => screen.current?.style.setProperty("--ad-scale", String(el.clientWidth / DESIGN.width));
+    // Nunca aplica escala 0 (container ainda sem tamanho): a tela some. Reajusta quando o tamanho chega.
+    const fit = () => {
+      const largura = el.clientWidth || el.getBoundingClientRect().width;
+      if (largura > 0) screen.current?.style.setProperty("--ad-scale", String(largura / DESIGN.width));
+    };
     fit();
     const ro = new ResizeObserver(fit);
     ro.observe(el);
-    return () => ro.disconnect();
+    window.addEventListener("load", fit);
+    return () => { ro.disconnect(); window.removeEventListener("load", fit); };
   }, []);
 
   useEffect(() => {

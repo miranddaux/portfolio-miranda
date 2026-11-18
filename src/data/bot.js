@@ -7,12 +7,14 @@ export const SUGESTOES = [
   { rotulo: "Projetos", pergunta: "Quero ver os projetos" },
   { rotulo: "Ferramentas", pergunta: "Quais ferramentas ele usa?" },
   { rotulo: "Currículo", pergunta: "Posso ver o currículo?" },
+  { rotulo: "O que ele curte?", pergunta: "O que ele gosta de fazer?" },
   { rotulo: "Contato", pergunta: "Como falo com ele?" },
 ];
 
 export const BOAS_VINDAS = [
-  "Olá, eu sou o Thiago Bot. O Thiago está procurando uma vaga de Product Designer pleno em uma empresa de produto.",
-  "Dê uma olhada por aqui ou me mande uma mensagem se quiser saber mais sobre o trabalho dele. Os atalhos abaixo levam direto ao que importa.",
+  "Oi, eu sou o Thiago Bot e vou te apresentar o Thiago.",
+  "Ele é Product Designer e nas horas vagas é fascinado por gadgets tecnológicos, adora ficção literária e joga muito battle royale. Ah, e também cria conteúdo.",
+  "Me manda uma mensagem ou usa os atalhos abaixo. Quer me perguntar o que ele gosta?",
 ];
 
 const INTENCOES = [
@@ -25,9 +27,16 @@ const INTENCOES = [
     chaves: ["quem", "sobre", "apresent", "thiago", "ele e", "voce e"],
     respostas: [
       "O Thiago é Product Designer em São José do Rio Preto, SP.",
-      "Ele desenha e-commerces na Shopify pela Agência Disco e nas horas vagas cria o ANIMAE, onde design e código se encontram.",
+      "Ele desenha e-commerces na Shopify pela Agência Disco e, à noite, cria pequenos projetos inusitados entre tecnologia e design.",
     ],
     acao: { rotulo: "Abrir Sobre mim", abrir: "sobre" },
+  },
+  {
+    chaves: ["gosta", "curte", "hobby", "hobbies", "horas vagas", "tempo livre", "lazer", "game", "jogo", "livro", "leitura", "gadget"],
+    respostas: [
+      "Nas horas vagas, o Thiago é fascinado por gadgets tecnológicos, adora ficção literária e joga battle royale demais.",
+      "Ah, e também cria conteúdo.",
+    ],
   },
   {
     chaves: ["experien", "trabalh", "disco", "empresa", "carreira", "anos", "historico"],

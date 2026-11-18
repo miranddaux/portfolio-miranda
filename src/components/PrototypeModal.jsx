@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import JanelaXP from "./JanelaXP.jsx";
 
@@ -53,6 +53,39 @@ function ScreenTour({ screens }) {
   );
 }
 
+// Celular do protótipo: a tela (iframe) tem exatamente a proporção do quadro do Figma, então ele preenche sem faixas.
+const MOLDURA = 20; // 8 px de respiro + 2 px de borda, de cada lado
+function CelularEmbed({ frame, embedUrl, title, run }) {
+  const box = useRef(null);
+  const [tela, setTela] = useState({ w: 0, h: 0 });
+  useLayoutEffect(() => {
+    const el = box.current;
+    if (!el) return undefined;
+    const fit = () => {
+      const maxW = el.clientWidth - MOLDURA;
+      const maxH = Math.min(el.clientHeight, 784 + MOLDURA) - MOLDURA;
+      if (maxW <= 0 || maxH <= 0) return;
+      let h = maxH;
+      let w = (h * frame.width) / frame.height;
+      if (w > maxW) { w = maxW; h = (w * frame.height) / frame.width; }
+      setTela({ w: Math.floor(w), h: Math.floor(h) });
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [frame.width, frame.height]);
+  return (
+    <div ref={box} className="proto-fit">
+      {tela.w > 0 && (
+        <div className="proto-phone" style={{ width: tela.w + MOLDURA, height: tela.h + MOLDURA }}>
+          <iframe key={run} title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen />
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function PrototypeModal({ title, url, embedUrl, screens = [], frame = { width: 430, height: 932 }, onClose }) {
   const [run, setRun] = useState(0);
   useEffect(() => {
@@ -88,7 +121,7 @@ export default function PrototypeModal({ title, url, embedUrl, screens = [], fra
       >
         <div className="proto-stage">
           {embedUrl
-            ? <div className="proto-phone" style={{ aspectRatio: `${frame.width} / ${frame.height}` }}><iframe key={run} title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen loading="lazy" /></div>
+            ? <CelularEmbed frame={frame} embedUrl={embedUrl} title={title} run={run} />
             : <ScreenTour screens={screens} />}
         </div>
       </JanelaXP>

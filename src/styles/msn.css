@@ -1040,3 +1040,9 @@ button.msn-aba-x:hover {
 .msn-bloquear img {
   opacity: 1;
 }
+
+/* Conversa fluida: rolagem isolada e entrada suave de cada mensagem */
+.msn-mensagens { overscroll-behavior: contain; contain: layout paint; }
+.msn-msg { animation: msn-msg-entra 0.2s ease-out both; }
+@keyframes msn-msg-entra { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .msn-msg { animation: none; } }
