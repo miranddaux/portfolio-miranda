@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import JanelaXP from "./JanelaXP.jsx";
 
@@ -16,7 +16,7 @@ export function prototypeEmbedUrl(url) {
     for (const key of ["node-id", "starting-point-node-id"]) {
       if (u.searchParams.has(key)) e.searchParams.set(key, u.searchParams.get(key));
     }
-    // O quadro do ANIMAE (430 × 932) preenche a moldura do celular: sem barra do Figma e sem faixas pretas.
+    // O celular já vem desenhado dentro do protótipo do Figma: o embed só o encaixa na janela.
     e.searchParams.set("scaling", "contain");
     e.searchParams.set("content-scaling", "fixed");
     e.searchParams.set("hide-ui", "1");
@@ -53,40 +53,7 @@ function ScreenTour({ screens }) {
   );
 }
 
-// Celular do protótipo: a tela (iframe) tem exatamente a proporção do quadro do Figma, então ele preenche sem faixas.
-const MOLDURA = 20; // 8 px de respiro + 2 px de borda, de cada lado
-function CelularEmbed({ frame, embedUrl, title, run }) {
-  const box = useRef(null);
-  const [tela, setTela] = useState({ w: 0, h: 0 });
-  useLayoutEffect(() => {
-    const el = box.current;
-    if (!el) return undefined;
-    const fit = () => {
-      const maxW = el.clientWidth - MOLDURA;
-      const maxH = Math.min(el.clientHeight, 784 + MOLDURA) - MOLDURA;
-      if (maxW <= 0 || maxH <= 0) return;
-      let h = maxH;
-      let w = (h * frame.width) / frame.height;
-      if (w > maxW) { w = maxW; h = (w * frame.height) / frame.width; }
-      setTela({ w: Math.floor(w), h: Math.floor(h) });
-    };
-    fit();
-    const ro = new ResizeObserver(fit);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [frame.width, frame.height]);
-  return (
-    <div ref={box} className="proto-fit">
-      {tela.w > 0 && (
-        <div className="proto-phone" style={{ width: tela.w + MOLDURA, height: tela.h + MOLDURA }}>
-          <iframe key={run} title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen />
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default function PrototypeModal({ title, url, embedUrl, screens = [], frame = { width: 430, height: 932 }, onClose }) {
+export default function PrototypeModal({ title, url, embedUrl, screens = [], onClose }) {
   const [run, setRun] = useState(0);
   useEffect(() => {
     const previous = document.activeElement;
@@ -106,14 +73,14 @@ export default function PrototypeModal({ title, url, embedUrl, screens = [], fra
         titulo={`Protótipo · ${title}`}
         icone="/assets/xp/figma/pasta.png"
         onFechar={onClose}
-        largura={1056}
+        largura={800}
         altura={880}
         reserva={32}
         centroVertical
         minLargura={320}
         minAltura={480}
         topo={32}
-        statusEsquerda={embedUrl ? `Celular · ${frame.width} px · protótipo navegável do Figma` : "Celular · telas do Figma · use as setas do teclado"}
+        statusEsquerda={embedUrl ? "Protótipo navegável do Figma" : "Celular · telas do Figma · use as setas do teclado"}
         statusDireita={<>
           {embedUrl && <button type="button" className="proto-status-link" onClick={() => setRun((n) => n + 1)}>Reiniciar</button>}
           <a className="proto-status-link" href={url} target="_blank" rel="noopener noreferrer">Abrir no Figma<span className="sr-only"> (abre em nova aba)</span></a>
@@ -121,7 +88,7 @@ export default function PrototypeModal({ title, url, embedUrl, screens = [], fra
       >
         <div className="proto-stage">
           {embedUrl
-            ? <CelularEmbed frame={frame} embedUrl={embedUrl} title={title} run={run} />
+            ? <iframe key={run} className="proto-embed" title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen />
             : <ScreenTour screens={screens} />}
         </div>
       </JanelaXP>
