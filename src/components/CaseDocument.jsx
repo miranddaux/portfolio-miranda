@@ -223,18 +223,6 @@ export default function CaseDocument({ project, onNavigate }) {
       </li>)}</ul>
     </Stage>
 
-    {project.landing && <section className="case-landing" aria-labelledby={id("lp-title")}>
-      <header className="case-stage-head">
-        <p className="case-stage-kicker"><span className="case-section-label">Landing page</span></p>
-        <h2 id={id("lp-title")}>A porta de entrada para o produto</h2>
-      </header>
-      <p>A landing page apresenta a proposta e convida para a versão Android.</p>
-      {project.links.site && <div className="case-document-actions"><a className="xp-button" href={project.links.site} target="_blank" rel="noopener noreferrer">Ver landing page<span className="sr-only"> (abre em nova aba)</span></a></div>}
-      <figure className="case-browser">
-        <img src={project.landing.image.src} alt={project.landing.image.alt} width={project.landing.image.width} height={project.landing.image.height} loading="lazy" decoding="async" />
-      </figure>
-    </section>}
-
     <footer className="case-document-footer">
       <a className="xp-button xp-button--back" href="/#cases" onClick={(e) => projectLinkAction(e, onNavigate, "/#cases")}><ChevronLeft size={16} aria-hidden="true" />Meus projetos</a>
       <a className="xp-button" href={`/cases/${next.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${next.id}`)}>Próximo: {next.title}</a>
