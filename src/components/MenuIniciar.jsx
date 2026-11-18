@@ -112,6 +112,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Divisor mini />
                 <Mini icone={img(`${MI}/msn.png`, 16)} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
                 <Mini icone={img(`${MI}/player.png`, 16)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
+                <Mini icone={img(`${MI}/headspace.png`, 16)} rotulo="Headspace" aoClicar={() => aoAbrir("headspace")} />
                 <Divisor mini />
                 <Mini icone={img(`${MI}/prompt.png`, 16)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
                 <Mini icone={img(`${MI}/campo-minado.png`, 16)} rotulo="Campo minado" aoClicar={() => aoAbrir("minas")} />
@@ -140,6 +141,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
             )}
           </div>
           <Linha icone={img(`${MI}/player.png`)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
+          <Linha icone={img(`${MI}/headspace.png`)} rotulo="Headspace" aoClicar={() => aoAbrir("headspace")} />
           <Linha icone={img(`${MI}/prompt.png`)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
           <Linha icone={img(`${MI}/habbo.png`)} rotulo="Habbo Hotel" aoClicar={() => aoAbrir("habbo")} />
         </div>
