@@ -2,6 +2,7 @@ import { Component, useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import AnimaeListaDemo from "./AnimaeListaDemo.jsx";
 import AnimaeQuizDemo from "./AnimaeQuizDemo.jsx";
+import { logoDe } from "../data/logos.js";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
@@ -190,7 +191,7 @@ export default function CaseDocument({ project, onNavigate }) {
 
     <dl className="case-overview-card" aria-label="Visão geral do projeto">
       <div><dt>Função</dt><dd><ul className="case-chips">{roles.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>
-      <div><dt>Ferramentas</dt><dd><ul className="case-chips">{project.tools.map((t) => <li key={t}>{t}</li>)}</ul></dd></div>
+      <div><dt>Ferramentas</dt><dd><ul className="case-chips">{project.tools.map((t) => <li key={t}>{logoDe(t) && <img className="logo-ferramenta" src={logoDe(t)} alt="" width="16" height="16" />}{t}</li>)}</ul></dd></div>
       <div><dt>Ano</dt><dd className="case-year"><span>{year}</span>{yearNote && <small>{yearNote}</small>}</dd></div>
     </dl>
 

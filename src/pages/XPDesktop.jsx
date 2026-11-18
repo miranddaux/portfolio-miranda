@@ -7,6 +7,12 @@ import DialogoDesligar, { TelaReiniciando } from "../components/DialogoDesligar"
 import { somDesligar } from "../lib/sons";
 import JanelaXP from "../components/JanelaXP";
 import JanelaPlayer from "../components/JanelaPlayer";
+import AppPrompt from "../components/apps/AppPrompt.jsx";
+import AppVisualizador from "../components/apps/AppVisualizador.jsx";
+import AppCampoMinado from "../components/apps/AppCampoMinado.jsx";
+import AppPaint from "../components/apps/AppPaint.jsx";
+import AppPinball from "../components/apps/AppPinball.jsx";
+import AppHabbo from "../components/apps/AppHabbo.jsx";
 import PainelSobre from "../components/PainelSobre";
 import JanelaCurriculo, { CURRICULOS } from "../components/JanelaCurriculo";
 import { MsnAviso, MsnContatos, MsnConversa } from "../components/Msn";
@@ -31,6 +37,12 @@ const APPS = [
   { id: "msn", name: "Messenger", title: "Messenger", icon: "mail" },
   { id: "msnchat", name: "Thiago Bot", title: "Conversa com Thiago Bot", icon: "mail" },
   { id: "player", name: "Reprodutor de mídia", title: "Reprodutor de mídia", icon: "media" },
+  { id: "prompt", name: "Prompt de Comando", title: "Prompt de Comando", icon: "app", barraIcone: "/assets/xp/apps/prompt.png" },
+  { id: "visualizador", name: "Visualizador de imagens", title: "Visualizador de imagens", icon: "app", barraIcone: "/assets/xp/figma/minhas-imagens.png" },
+  { id: "minas", name: "Campo minado", title: "Campo minado", icon: "app", barraIcone: "/assets/xp/apps/campo-minado.svg" },
+  { id: "paint", name: "Paint", title: "Paint", icon: "app", barraIcone: "/assets/xp/figma/paint.png" },
+  { id: "pinball", name: "Pinball", title: "3D Pinball", icon: "app", barraIcone: "/assets/xp/apps/pinball.svg" },
+  { id: "habbo", name: "Habbo Hotel", title: "Habbo Hotel", icon: "app", barraIcone: "/assets/xp/apps/habbo.svg" },
   { id: "case", name: "Case", title: "Case", icon: "document" },
 ];
 const APPS_JANELAS = [
@@ -41,6 +53,12 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "msn"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 728, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
   { ...APPS.find(a => a.id === "msnchat"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
   { ...APPS.find(a => a.id === "player"), janelaIcone: "/assets/xp/menu/media-player-orb.png" },
+  { ...APPS.find(a => a.id === "prompt"), janelaIcone: "/assets/xp/apps/prompt.png", largura: 640, altura: 408, cascata: 2, minLargura: 320, minAltura: 200, semStatus: true },
+  { ...APPS.find(a => a.id === "visualizador"), janelaIcone: "/assets/xp/figma/minhas-imagens.png", largura: 720, altura: 560, cascata: 1, minLargura: 400, minAltura: 360, semStatus: true },
+  { ...APPS.find(a => a.id === "minas"), janelaIcone: "/assets/xp/apps/campo-minado.svg", largura: 288, altura: 400, cascata: 3, minLargura: 288, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "paint"), janelaIcone: "/assets/xp/figma/paint.png", largura: 800, altura: 560, cascata: 2, minLargura: 480, minAltura: 360, semStatus: true },
+  { ...APPS.find(a => a.id === "pinball"), janelaIcone: "/assets/xp/apps/pinball.svg", largura: 640, altura: 560, cascata: 3, minLargura: 400, minAltura: 360, semStatus: true },
+  { ...APPS.find(a => a.id === "habbo"), janelaIcone: "/assets/xp/apps/habbo.svg", largura: 480, altura: 320, cascata: 1, minLargura: 320, minAltura: 280, semStatus: true },
   { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
 export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {
@@ -233,6 +251,12 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
                 <div className="case-document-scroll"><CaseDocument project={project} onNavigate={onNavigate} /></div>
               </>}
               {app.id === "contato" && <JanelaEmail />}
+              {app.id === "prompt" && <AppPrompt />}
+              {app.id === "visualizador" && <AppVisualizador />}
+              {app.id === "minas" && <AppCampoMinado />}
+              {app.id === "paint" && <AppPaint />}
+              {app.id === "pinball" && <AppPinball />}
+              {app.id === "habbo" && <AppHabbo />}
             </JanelaXP>
             )
           ) : null,

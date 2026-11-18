@@ -111,8 +111,8 @@ export default function AnimaeQuizDemo() {
               <span className="qd-time-row"><span className={urgente ? "is-urgent" : ""}>{Math.ceil(tempo)}s</span>{seq >= 2 && <strong>{seq} acertos seguidos</strong>}</span>
             </div>
             <div className="qd-ask">
-              <img src={reacao} alt="" width="160" height="180" draggable="false" />
-              <p>{p.q}</p>
+              <img src={reacao} alt="" width="96" height="108" draggable="false" />
+              <h2>{p.q}</h2>
             </div>
             <p className={`qd-result ${respondida ? (escolha === p.certa ? "is-ok" : "is-bad") : ""}`} aria-live="polite">
               {respondida ? (escolha === p.certa ? `Acertou! +${XP_ACERTO} XP` : escolha === -1 ? "Acabou o tempo!" : "Errou! A certa está destacada.") : " "}
