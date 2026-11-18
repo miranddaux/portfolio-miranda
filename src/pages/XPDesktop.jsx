@@ -7,6 +7,7 @@ import DialogoDesligar, { TelaReiniciando } from "../components/DialogoDesligar"
 import { somAbrir, somClique, somDesligar, somFechar, somMinimizar, ultimoSomJanela } from "../lib/sons";
 import JanelaXP from "../components/JanelaXP";
 import JanelaPlayer from "../components/JanelaPlayer";
+import JanelaHeadspace from "../components/JanelaHeadspace";
 import AppPrompt from "../components/apps/AppPrompt.jsx";
 import AppVisualizador from "../components/apps/AppVisualizador.jsx";
 import AppCampoMinado from "../components/apps/AppCampoMinado.jsx";
@@ -37,6 +38,7 @@ const APPS = [
   { id: "msn", name: "Messenger", title: "Messenger", icon: "mail" },
   { id: "msnchat", name: "Thiago Bot", title: "Conversa com Thiago Bot", icon: "mail" },
   { id: "player", name: "Reprodutor de mídia", title: "Reprodutor de mídia", icon: "media" },
+  { id: "headspace", name: "Headspace", title: "Headspace", icon: "media", barraIcone: "/assets/xp/menu-icons/headspace.png" },
   { id: "prompt", name: "Prompt de Comando", title: "Prompt de Comando", icon: "app", barraIcone: "/assets/xp/apps/prompt.png" },
   { id: "visualizador", name: "Visualizador de imagens", title: "Visualizador de imagens", icon: "app", barraIcone: "/assets/xp/figma/minhas-imagens.png" },
   { id: "minas", name: "Campo minado", title: "Campo minado", icon: "app", barraIcone: "/assets/xp/apps/campo-minado.png" },
@@ -53,6 +55,7 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "msn"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 728, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
   { ...APPS.find(a => a.id === "msnchat"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
   { ...APPS.find(a => a.id === "player"), janelaIcone: "/assets/xp/menu/media-player-orb.png" },
+  { ...APPS.find(a => a.id === "headspace"), janelaIcone: "/assets/xp/menu-icons/headspace.png" },
   { ...APPS.find(a => a.id === "prompt"), janelaIcone: "/assets/xp/apps/prompt.png", largura: 640, altura: 408, cascata: 2, minLargura: 320, minAltura: 200, semStatus: true },
   { ...APPS.find(a => a.id === "visualizador"), janelaIcone: "/assets/xp/figma/minhas-imagens.png", largura: 720, altura: 560, cascata: 1, minLargura: 400, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "minas"), janelaIcone: "/assets/xp/apps/campo-minado.png", largura: 280, altura: 424, cascata: 3, minLargura: 280, minAltura: 424, semStatus: true },
@@ -131,7 +134,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   useEffect(() => {
     const clique = (e) => {
       const alvo = e.target.closest?.("button, a[href], [role=menuitem], [role=tab]");
-      if (!alvo || alvo.disabled || alvo.getAttribute("aria-disabled") === "true" || alvo.closest(".wmp, .app-ms, .app-paint-area")) return;
+      if (!alvo || alvo.disabled || alvo.getAttribute("aria-disabled") === "true" || alvo.closest(".wmp, .app-ms, .app-paint-area, .hs")) return;
       setTimeout(() => { if (Date.now() - ultimoSomJanela > 150) somClique(); }, 0);
     };
     document.addEventListener("click", clique);
@@ -190,7 +193,16 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
       <div className="desktop-workspace">
         {appWindows.map((app) =>
           windows[app.id] === "open" || windows[app.id] === "minimized" ? (
-            app.id === "player" ? (
+            app.id === "headspace" ? (
+              <JanelaHeadspace
+                key="headspace"
+                ativa={active === "headspace"}
+                oculta={windows.headspace === "minimized"}
+                onFocar={() => setActive("headspace")}
+                onFechar={() => hide("headspace", "closed")}
+                onMinimizar={() => hide("headspace", "minimized")}
+              />
+            ) : app.id === "player" ? (
               <JanelaPlayer
                 key="player"
                 ativa={active === "player"}
