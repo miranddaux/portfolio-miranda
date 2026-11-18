@@ -1,0 +1,4 @@
+doom.wasm: motor DOOM (id Software, GPL-2.0) compilado para WebAssembly por Cornelius Diekmann
+(https://github.com/diekmann/wasm-fizzbuzz), distribuído no pacote npm "wasm-doom" (GPL-2.0).
+Contém o episódio shareware (DOOM1.WAD), de distribuição livre pela id Software.
+Logo de DOOM: arquivo enviado pelo autor do portfólio; DOOM é marca da id Software / ZeniMax.

@@ -119,7 +119,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Mini icone={<IconeBloco />} rotulo="Bloco de notas" breve />
                 <Mini icone={img(`${MI}/paint.png`, 16)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
                 <Mini icone={img(`${MI}/pinball.png`, 16)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
-                <Mini icone={img(`${MI}/habbo.png`, 16)} rotulo="Habbo Hotel" aoClicar={() => aoAbrir("habbo")} />
+                <Mini icone={img(`${MI}/doom.png`, 16)} rotulo="DOOM" aoClicar={() => aoAbrir("doom")} />
                 <Divisor mini />
               </div>
             )}
@@ -143,7 +143,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
           <Linha icone={img(`${MI}/player.png`)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
           <Linha icone={img(`${MI}/headspace.png`)} rotulo="Headspace" aoClicar={() => aoAbrir("headspace")} />
           <Linha icone={img(`${MI}/prompt.png`)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
-          <Linha icone={img(`${MI}/habbo.png`)} rotulo="Habbo Hotel" aoClicar={() => aoAbrir("habbo")} />
+          <Linha icone={img(`${MI}/doom.png`)} rotulo="DOOM" aoClicar={() => aoAbrir("doom")} />
         </div>
       </div>
       <div className="mi-rodape">
