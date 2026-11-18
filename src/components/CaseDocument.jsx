@@ -196,7 +196,6 @@ export default function CaseDocument({ project, onNavigate }) {
       <p>A landing page apresenta a proposta e convida para a versão Android.</p>
       {project.links.site && <div className="case-document-actions"><a className="xp-button" href={project.links.site} target="_blank" rel="noopener noreferrer">Ver landing page<span className="sr-only"> (abre em nova aba)</span></a></div>}
       <figure className="case-browser">
-        <div className="case-browser-bar"><span>{project.landing.address}</span></div>
         <img src={project.landing.image.src} alt={project.landing.image.alt} width={project.landing.image.width} height={project.landing.image.height} loading="lazy" decoding="async" />
       </figure>
     </section>}
