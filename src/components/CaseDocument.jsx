@@ -2,7 +2,6 @@ import { Component, useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import AnimaeListaDemo from "./AnimaeListaDemo.jsx";
 import AnimaeQuizDemo from "./AnimaeQuizDemo.jsx";
-import { logoDe } from "../data/logos.js";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
@@ -74,9 +73,9 @@ function Shot({ media, phone }) {
     </span></div>
   </figure>;
   return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
-    <a className={phone ? "case-device" : "case-shot"} href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar imagem: ${media.alt} (abre em nova aba)`}>
+    <div className={phone ? "case-device" : "case-shot"}>
       <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" decoding="async" /></span>
-    </a>
+    </div>
   </figure>;
 }
 
@@ -123,9 +122,9 @@ function FlowStory({ index, module }) {
       <h4>{row.label}</h4>
       <ol className="case-flow-row" style={{ "--passos": row.items.length }}>
         {row.items.map((m) => <li key={m.src}>
-          <a className="case-flow-shot" href={m.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar imagem: ${m.alt} (abre em nova aba)`}>
+          <div className="case-flow-shot">
             <img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" />
-          </a>
+          </div>
         </li>)}
       </ol>
     </section>)}
@@ -191,7 +190,7 @@ export default function CaseDocument({ project, onNavigate }) {
 
     <dl className="case-overview-card" aria-label="Visão geral do projeto">
       <div><dt>Função</dt><dd><ul className="case-chips">{roles.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>
-      <div><dt>Ferramentas</dt><dd><ul className="case-chips">{project.tools.map((t) => <li key={t}>{logoDe(t) && <img className="logo-ferramenta" src={logoDe(t)} alt="" width="16" height="16" />}{t}</li>)}</ul></dd></div>
+      <div><dt>Ferramentas</dt><dd><ul className="case-chips">{project.tools.map((t) => <li key={t}>{t}</li>)}</ul></dd></div>
       <div><dt>Ano</dt><dd className="case-year"><span>{year}</span>{yearNote && <small>{yearNote}</small>}</dd></div>
     </dl>
 

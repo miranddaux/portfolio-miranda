@@ -63,3 +63,4 @@
 .app-habbo h2 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); }
 .app-habbo p { margin: 0; font-size: var(--text-16); line-height: var(--space-3); }
 .app-habbo .xp-button { display: inline-flex; align-items: center; gap: var(--space-1); text-decoration: none; }
+.app-habbo-logo { display: block; width: 160px; height: auto; }
