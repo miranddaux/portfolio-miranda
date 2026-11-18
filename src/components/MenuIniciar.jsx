@@ -9,7 +9,7 @@ const img = (src, t = 32, classe) => <img className={classe} src={src} alt="" wi
 const imgRede = (r, t = 32) => img(`${MI}/${r.nome.toLowerCase()}.png`, t, `mi-rede mi-rede-${r.nome.toLowerCase()}`);
 
 // Programas usados recentemente: só os que têm logo enviado pelo Thiago.
-const RECENTES = ["Adobe Illustrator", "Adobe Photoshop", "Claude Code", "Cursor", "VS Code", "Figma", "Shopify"];
+const RECENTES = ["Adobe Photoshop", "Adobe Illustrator", "Claude Code", "Cursor", "VS Code", "Figma", "Shopify", "Framer AI"];
 const LOGO_RECENTE = { "Adobe Illustrator": "illustrator", "Adobe Photoshop": "photoshop", "Claude Code": "claude" };
 const logoRecente = (nome) => logoDe(LOGO_RECENTE[nome] || nome);
 
@@ -88,10 +88,8 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
         <div className="mi-coluna mi-esquerda" role="menu" aria-label="Programas">
           <Linha icone={img(`${MI}/projetos.png`)} rotulo="Meus Projetos" sub="Veja meu trabalho" aoClicar={() => aoAbrir("cases")} />
           <Linha icone={img(`${MI}/contato.png`)} rotulo="Fale comigo" sub="Envie-me uma mensagem" aoClicar={() => aoAbrir("contato")} />
-          <Divisor />
           <Linha icone={img(`${MI}/sobre.png`)} rotulo="Sobre mim" aoClicar={() => aoAbrir("sobre")} />
           <Linha icone={img(`${MI}/curriculo.png`)} rotulo="Meu Currículo" aoClicar={() => aoAbrir("curriculo")} />
-          <Divisor />
           <Linha icone={img(`${MI}/msn.png`)} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
           <Divisor />
           <Linha icone={img(`${MI}/campo-minado.png`)} rotulo="Campo Minado" aoClicar={() => aoAbrir("minas")} />

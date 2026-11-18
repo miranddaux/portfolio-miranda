@@ -98,3 +98,4 @@
 .mi { width: 480px; }
 .mi-colunas { grid-template-columns: 224px minmax(0, 1fr); }
 .mi-flyout-todos { width: 256px; }
+.mi-acao img { width: 24px; height: 24px; }

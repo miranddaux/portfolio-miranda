@@ -1,5 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ArrowLeft, Bell, Bookmark, Check, Ellipsis, Home, Newspaper, Signal, Wifi, BatteryFull } from "lucide-react";
 import "@fontsource/urbanist/latin-400.css";
 import "@fontsource/urbanist/latin-500.css";
@@ -9,6 +8,7 @@ import "@fontsource/inter/latin-700.css";
 
 // Tela "Minha lista" do ANIMAE refeita em código, com os tokens do design system do app
 // (Urbanist, neutros 0-100, laranja #ff5c02, raios 10/20/999). Os números são ilustrativos do layout.
+// A animação é só React + CSS, em looping (sem interação): marca o episódio, a barra enche e o anime vai para Concluídos.
 const DESIGN = { width: 430, height: 932 };
 const ITEMS = [
   { title: "Attack on Titan", thumb: "/assets/cases/animae-thumb-aot.webp", ep: 14, total: 25, last: "Último: E14 · há 2 dias" },
@@ -19,12 +19,14 @@ const ITEMS = [
 export default function AnimaeListaDemo() {
   const root = useRef(null);
   const screen = useRef(null);
-  const state = useRef({ busy: false, interacted: false, visible: false, timers: [], tls: [] });
+  const [fase, setFase] = useState(0); // 0 parado, 1 toque, 2 barra enchendo, 3 concluído, 4 saindo da lista
+  const [ep, setEp] = useState(ITEMS[0].ep);
+  const [ciclo, setCiclo] = useState(0);
+  const [visivel, setVisivel] = useState(false);
 
   // Escala a tela de 430 px para a largura do container.
   useLayoutEffect(() => {
     const el = root.current;
-    // Nunca aplica escala 0 (container ainda sem tamanho): a tela some. Reajusta quando o tamanho chega.
     const fit = () => {
       const largura = el.clientWidth || el.getBoundingClientRect().width;
       if (largura > 0) screen.current?.style.setProperty("--ad-scale", String(largura / DESIGN.width));
@@ -36,91 +38,52 @@ export default function AnimaeListaDemo() {
     return () => { ro.disconnect(); window.removeEventListener("load", fit); };
   }, []);
 
+  // O looping só corre enquanto a tela está visível.
   useEffect(() => {
-    const el = root.current;
-    const s = state.current;
-    const q = (sel, ctx = el) => ctx.querySelector(sel);
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const later = (fn, ms) => { const t = setTimeout(fn, ms); s.timers.push(t); };
-    const pop = (node) => !reduced && gsap.fromTo(node, { scale: 1.4 }, { scale: 1, duration: 0.5, ease: "back.out(3)" });
-
-    const reset = () => {
-      ITEMS.forEach((item, i) => {
-        const slot = q(`[data-slot="${i}"]`);
-        gsap.set(slot, { clearProps: "height,paddingBottom,opacity,y" });
-        gsap.set(q(`[data-bar="${i}"]`), { width: `${(item.ep / item.total) * 100}%` });
-        q(`[data-ep="${i}"]`).textContent = `EP ${item.ep} de ${item.total}`;
-        q(`[data-mark="${i}"]`).classList.remove("is-done");
-        q(`[data-card="${i}"]`).classList.remove("is-zap");
-      });
-      q('[data-count="watching"]').textContent = "12";
-      q('[data-count="done"]').textContent = "5";
-      if (!reduced) gsap.fromTo(el.querySelectorAll("[data-slot]"), { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.08, ease: "power2.out", clearProps: "opacity,y" });
-    };
-
-    const run = (i) => {
-      if (s.busy) return;
-      s.busy = true;
-      const item = ITEMS[i];
-      const slot = q(`[data-slot="${i}"]`);
-      const mark = q(`[data-mark="${i}"]`);
-      const bar = q(`[data-bar="${i}"]`);
-      const epText = q(`[data-ep="${i}"]`);
-      const counter = { n: item.ep };
-      const tl = gsap.timeline({ onComplete: () => {
-        later(() => { reset(); s.busy = false; if (!s.interacted && s.visible) later(() => run(0), 1600); }, 2200);
-      } });
-      if (reduced) tl.timeScale(40);
-      s.tls.push(tl);
-      tl.to(mark, { scale: 0.94, duration: 0.1, ease: "power2.out" })
-        .to(mark, { scale: 1, duration: 0.3, ease: "back.out(3)" })
-        .to(bar, { width: "100%", duration: 1.1, ease: "power2.inOut" }, "<")
-        .to(counter, { n: item.total, duration: 1.1, ease: "power2.inOut", onUpdate: () => { epText.textContent = `EP ${Math.round(counter.n)} de ${item.total}`; } }, "<")
-        .add(() => { mark.classList.add("is-done"); q(`[data-card="${i}"]`).classList.add("is-zap"); pop(q(`[data-check="${i}"]`)); }, "-=0.2")
-        .add(() => { q(`[data-card="${i}"]`).classList.remove("is-zap"); }, "+=0.5")
-        .to(slot, { opacity: 0, y: -24, duration: 0.35, ease: "power2.in" }, "+=0.2")
-        .to(slot, { height: 0, paddingBottom: 0, duration: 0.55, ease: "power3.inOut" }, "-=0.05")
-        .add(() => {
-          q('[data-count="watching"]').textContent = "11";
-          q('[data-count="done"]').textContent = "6";
-          pop(q('[data-count="watching"]'));
-          pop(q('[data-count="done"]'));
-        }, "-=0.45");
-    };
-
-    const io = new IntersectionObserver(([entry]) => {
-      s.visible = entry.isIntersecting;
-      if (s.visible && !s.busy && !s.interacted && !reduced) later(() => { if (s.visible && !s.busy && !s.interacted) run(0); }, 1200);
-    }, { threshold: 0.6 });
-    io.observe(el);
-
-    const onClick = (e) => {
-      const btn = e.target.closest("[data-mark]");
-      if (!btn) return;
-      s.interacted = true;
-      run(Number(btn.dataset.mark));
-    };
-    el.addEventListener("click", onClick);
-    return () => {
-      io.disconnect();
-      el.removeEventListener("click", onClick);
-      s.timers.forEach(clearTimeout);
-      s.tls.forEach((t) => t.kill());
-    };
+    const io = new IntersectionObserver(([e]) => setVisivel(e.isIntersecting), { threshold: 0.4 });
+    io.observe(root.current);
+    return () => io.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!visivel || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    const ids = [];
+    const at = (ms, fn) => ids.push(setTimeout(fn, ms));
+    const item = ITEMS[0];
+    const volta = () => {
+      setCiclo((c) => c + 1); setFase(0); setEp(item.ep);
+      at(1200, () => setFase(1));
+      at(1400, () => {
+        setFase(2);
+        const t0 = performance.now();
+        const iv = setInterval(() => {
+          const k = Math.min(1, (performance.now() - t0) / 1100);
+          setEp(Math.round(item.ep + (item.total - item.ep) * k));
+          if (k >= 1) clearInterval(iv);
+        }, 50);
+        ids.push(iv);
+      });
+      at(2600, () => setFase(3));
+      at(3400, () => setFase(4));
+      at(6200, volta);
+    };
+    volta();
+    return () => ids.forEach((id) => { clearTimeout(id); clearInterval(id); });
+  }, [visivel]);
+
+  const fora = fase >= 4;
   return (
-    <div ref={root} className="ad-root" role="group" aria-label="Demonstração da tela Minha Lista do ANIMAE: marque o episódio e o anime vai para Concluídos">
-      <div ref={screen} className="ad-screen" style={{ width: DESIGN.width, height: DESIGN.height }}>
-        <div className="ad-status" aria-hidden="true">
+    <div ref={root} className="ad-root" role="img" aria-label="Demonstração animada da tela Minha Lista do ANIMAE: ao marcar o episódio, a barra enche e o anime vai para Concluídos">
+      <div ref={screen} className="ad-screen" style={{ width: DESIGN.width, height: DESIGN.height }} aria-hidden="true">
+        <div className="ad-status">
           <span>9:41</span>
           <span className="ad-status-icons"><Signal className="ad-i18" /><Wifi className="ad-i18" /><BatteryFull className="ad-i18" /></span>
         </div>
         <div className="ad-flow">
           <header className="ad-header">
             <div className="ad-header-row">
-              <span className="ad-round" aria-hidden="true"><ArrowLeft size={24} /></span>
-              <span className="ad-round" aria-hidden="true"><Bell className="ad-i18" /></span>
+              <span className="ad-round"><ArrowLeft size={24} /></span>
+              <span className="ad-round"><Bell className="ad-i18" /></span>
             </div>
             <div className="ad-title">
               <p className="ad-h1">Minha Lista</p>
@@ -128,37 +91,43 @@ export default function AnimaeListaDemo() {
             </div>
           </header>
           <div className="ad-tabs">
-            <span className="ad-pill is-on">Assistindo <span className="ad-count" data-count="watching">12</span></span>
+            <span className="ad-pill is-on">Assistindo <span key={fora ? "a" : "b"} className={`ad-count ${fora ? "is-pop" : ""}`}>{fora ? 11 : 12}</span></span>
             <span className="ad-pill">Quero ver <span className="ad-count">28</span></span>
-            <span className="ad-pill">Concluídos <span className="ad-count" data-count="done">5</span></span>
+            <span className="ad-pill">Concluídos <span key={fora ? "c" : "d"} className={`ad-count ${fora ? "is-pop" : ""}`}>{fora ? 6 : 5}</span></span>
           </div>
           <div className="ad-list">
-            {ITEMS.map((item, i) => (
-              <div className="ad-slot" data-slot={i} key={item.title}>
-                <div className="ad-card" data-card={i}>
-                  <img className="ad-thumb" src={item.thumb} alt="" width="64" height="64" draggable="false" />
-                  <div className="ad-body">
-                    <div className="ad-top">
-                    <div className="ad-line"><span className="ad-name">{item.title}</span><Ellipsis aria-hidden="true" className="ad-dots ad-i26" /></div>
-                    <p className="ad-ep" data-ep={i}>{`EP ${item.ep} de ${item.total}`}</p>
-                    </div>
-                    <div className="ad-bottom">
-                    <div className="ad-track"><span className="ad-fill" data-bar={i} style={{ width: `${(item.ep / item.total) * 100}%` }} /></div>
-                    <div className="ad-foot">
-                      <span className="ad-last">{item.last}</span>
-                      <button type="button" className="ad-mark" data-mark={i} aria-label={`Marcar episódio de ${item.title}`}>
-                        <span className="ad-mark-a">Marcar EP {item.ep + 1}</span>
-                        <span className="ad-mark-b" data-check={i}><Check size={16} strokeWidth={3} aria-hidden="true" />Concluído</span>
-                      </button>
-                    </div>
+            {ITEMS.map((item, i) => {
+              const anima = i === 0;
+              const largura = anima && fase >= 2 ? 100 : (item.ep / item.total) * 100;
+              return (
+                <div className={`ad-slot ${anima && fora ? "is-out" : ""}`} key={`${item.title}-${anima ? ciclo : 0}`}>
+                  <div className="ad-slot-in">
+                    <div className={`ad-card ${anima && fase === 3 ? "is-zap" : ""}`}>
+                      <img className="ad-thumb" src={item.thumb} alt="" width="64" height="64" draggable="false" />
+                      <div className="ad-body">
+                        <div className="ad-top">
+                          <div className="ad-line"><span className="ad-name">{item.title}</span><Ellipsis className="ad-dots ad-i26" /></div>
+                          <p className="ad-ep">{`EP ${anima ? ep : item.ep} de ${item.total}`}</p>
+                        </div>
+                        <div className="ad-bottom">
+                          <div className="ad-track"><span className="ad-fill" style={{ width: `${largura}%` }} /></div>
+                          <div className="ad-foot">
+                            <span className="ad-last">{item.last}</span>
+                            <span className={`ad-mark ${anima && fase === 1 ? "is-press" : ""} ${anima && fase >= 3 ? "is-done" : ""}`}>
+                              <span className="ad-mark-a">Marcar EP {item.ep + 1}</span>
+                              <span className="ad-mark-b"><Check size={16} strokeWidth={3} />Concluído</span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
-        <nav className="ad-nav" aria-hidden="true">
+        <nav className="ad-nav">
           <span className="ad-nav-item"><Home size={24} />Home</span>
           <span className="ad-nav-item"><Newspaper size={24} />Feed</span>
           <span className="ad-nav-item is-on"><Bookmark className="ad-i28" />Minha Lista</span>
