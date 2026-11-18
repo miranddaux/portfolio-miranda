@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Component, useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import AnimaeListaDemo from "./AnimaeListaDemo.jsx";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
@@ -54,9 +54,19 @@ export function CaseJourney({ journeys }) {
 }
 
 // Só a tela, sem legenda. O alt descreve a imagem; clicar amplia em nova aba.
+// Se a demonstração em código falhar, a captura da tela continua visível por baixo (nunca fica um celular vazio).
+class DemoSegura extends Component {
+  state = { falhou: false };
+  static getDerivedStateFromError() { return { falhou: true }; }
+  render() { return this.state.falhou ? null : this.props.children; }
+}
+
 function Shot({ media, phone }) {
   if (media.demo === "lista") return <figure className="case-media is-phone">
-    <div className="case-device"><span className="case-device-screen"><AnimaeListaDemo /></span></div>
+    <div className="case-device"><span className="case-device-screen">
+      <img className="case-demo-poster" src={media.src} alt="" width={media.width} height={media.height} decoding="async" aria-hidden="true" />
+      <DemoSegura><AnimaeListaDemo /></DemoSegura>
+    </span></div>
   </figure>;
   return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
     <a className={phone ? "case-device" : "case-shot"} href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar imagem: ${media.alt} (abre em nova aba)`}>
