@@ -7,6 +7,7 @@ import "./styles/layout.css";
 import "./styles/xp.css";
 import "./styles/replica-figma.css";
 import "./styles/menu-iniciar.css";
+import "./styles/desligar.css";
 import "./styles/sobre.css";
 import "./styles/painel-xp.css";
 import "./styles/msn.css";

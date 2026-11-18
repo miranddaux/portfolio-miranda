@@ -20,13 +20,12 @@ const STORIES = {
     accent: "animae",
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
     links: {
-      prototype: "https://www.figma.com/proto/Sdyl9kTkLtCZaIN13yvIgd/%F0%9F%93%B1-Projeto-ANIMAE--%7C-18-10-25?node-id=2083-5686&page-id=2083%3A5497&starting-point-node-id=2083%3A5498&t=Ybga8QsKL8dZjSOu-1",
+      prototype: "https://www.figma.com/proto/Sdyl9kTkLtCZaIN13yvIgd/%F0%9F%93%B1-Projeto-ANIMAE--%7C-18-10-25?node-id=2083-5498&viewport=75%2C288%2C0.26&t=MBJWwQLeEJVIIHt8-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2083%3A5498&page-id=2083%3A5497",
       site: "https://animaeapp.com.br/",
       siteLabel: "Ver landing page",
       // Behance do ANIMAE em pausa: o que está publicado lá é a proposta antiga de streaming.
     },
     // Tamanho do quadro inicial do protótipo no Figma (Home · Redesenho), usado para encaixar o embed.
-    prototypeFrame: { width: 430, height: 932 },
     // Vídeo do protótipo funcionando: `video: { src, poster, caption }` quando o Thiago enviar.
     heroShot: "animae-hub",
     roles: ["Product Design", "Design System", "Mobile"],
@@ -36,7 +35,6 @@ const STORIES = {
     },
     // Imagens por etapa (layouts: wide, pair, trio, mosaic). Slugs apontam para arquivos em /assets/cases.
     stageImages: {
-      problema: { layout: "wide", images: ["animae-v1"] },
       ideacao: { layout: "pair", images: ["animae-flow-onb-1", "animae-feed-comunidade"] },
     },
     quick: [
@@ -63,7 +61,7 @@ const STORIES = {
     ],
     journeys: [{ label: "Jornada proposta do fã", steps: ["Explorar o catálogo", "Organizar a lista", "Registrar episódios", "Compartilhar com a comunidade"] }],
     solution: "Organizei fluxos e wireframes antes das interfaces finais. Variáveis e componentes do Figma alimentam uma base de tokens consumida pelo app. O objetivo é manter a mesma linguagem visual entre design e implementação, migrando o que o MVP realmente precisa.",
-    gallery: [{ src: "/assets/cases/animae-v1.png", width: 1024, height: 427, alt: "Mockup da primeira versão ANIMAE+, com proposta de streaming", caption: "Arquivo · versão 1, de streaming. O produto atual mudou para comunidade e acompanhamento." }],
+    gallery: [],
     outcome: "O resultado documentado é um produto funcional na web e uma versão Android preparada para teste fechado. A documentação de novembro de 2026 ainda não traz resultados de uso publicados. A evolução do produto será contada com datas e evidências.",
     kpis: [
       ["Ativação", "Primeira ação relevante após o cadastro"],

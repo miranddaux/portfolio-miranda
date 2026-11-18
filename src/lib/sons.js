@@ -95,3 +95,27 @@ const somChamarSintetizado = () =>
     [196, 0.24, 0.12],
     [220, 0.36, 0.12],
   ], { tipo: "square", volume: 0.05 });
+
+// Desligar/reiniciar: se existir public/assets/audio/windows-xp-shutdown.mp3, toca o arquivo; senão, um acorde sintetizado simples.
+let audioDesligar;
+const somDesligarSintetizado = () =>
+  tocar([
+    [784, 0, 0.5],
+    [659.25, 0.35, 0.5],
+    [523.25, 0.7, 0.5],
+    [392, 1.05, 0.9],
+  ], { tipo: "sine", volume: 0.1 });
+export const somDesligar = () => {
+  let falhou = false;
+  const sintetizar = () => { if (!falhou) { falhou = true; somDesligarSintetizado(); } };
+  try {
+    audioDesligar = audioDesligar || new Audio("/assets/audio/windows-xp-shutdown.mp3");
+    audioDesligar.volume = 0.5;
+    audioDesligar.currentTime = 0;
+    audioDesligar.onerror = sintetizar;
+    const p = audioDesligar.play();
+    if (p && p.catch) p.catch(sintetizar);
+  } catch {
+    sintetizar();
+  }
+};

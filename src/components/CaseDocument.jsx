@@ -5,7 +5,7 @@ import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
 // Botões do topo: protótipo e case completo. Mesmo .xp-button (azul com ▸) em todo o case.
-export function CaseLinks({ links, projectTitle = "projeto", prototypePending = false, prototypeFrame, screens = [] }) {
+export function CaseLinks({ links, projectTitle = "projeto", prototypePending = false, screens = [] }) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
   const embed = links.prototype ? prototypeEmbedUrl(links.prototype) : null;
@@ -42,7 +42,7 @@ export function CaseLinks({ links, projectTitle = "projeto", prototypePending = 
       : <a key={key} className="xp-button" href={links[key]} target="_blank" rel="noopener noreferrer">{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
     {prototypePending && !links.prototype && <span className="xp-button is-disabled" aria-disabled="true" role="link">Ver protótipo<span className="sr-only"> (link em breve)</span></span>}
     {!actions.length && !prototypePending && <span className="case-links-pending">Links públicos em curadoria.</span>}
-    {open && canOpen && <PrototypeModal title={projectTitle} url={links.prototype} embedUrl={embed} screens={screens} frame={prototypeFrame} onClose={close} />}
+    {open && canOpen && <PrototypeModal title={projectTitle} url={links.prototype} embedUrl={embed} screens={screens} onClose={close} />}
   </div>;
 }
 
@@ -107,11 +107,10 @@ function FlowStory({ index, module }) {
     {module.flow.map((row) => <section key={row.label} className="case-flow-group" aria-label={row.label}>
       <h4>{row.label}</h4>
       <ol className="case-flow-row" style={{ "--passos": row.items.length }}>
-        {row.items.map((m, i) => <li key={m.src}>
+        {row.items.map((m) => <li key={m.src}>
           <a className="case-flow-shot" href={m.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar imagem: ${m.alt} (abre em nova aba)`}>
             <img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" />
           </a>
-          <span className="case-flow-caption"><b>{String(i + 1).padStart(2, "0")}</b> {m.caption}</span>
         </li>)}
       </ol>
     </section>)}
@@ -168,7 +167,7 @@ export default function CaseDocument({ project, onNavigate }) {
       <ul className="case-tags" aria-label="Categorias do projeto">{project.categories.map((category) => <li key={category}>{category}</li>)}</ul>
       <h1 ref={title} tabIndex={-1}>{project.title}</h1>
       <p className="case-document-question">{project.question}</p>
-      <CaseLinks links={project.links} projectTitle={project.title} prototypePending={project.prototypePending} prototypeFrame={project.prototypeFrame} screens={tourScreens} />
+      <CaseLinks links={project.links} projectTitle={project.title} prototypePending={project.prototypePending} screens={tourScreens} />
     </header>
 
     <div className="case-hero-shot" role="group" aria-label="Tela do aplicativo em destaque">

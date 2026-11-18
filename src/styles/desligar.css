@@ -1,0 +1,18 @@
+/* Desligar e reiniciar: fundo em preto e branco + modal no estilo XP. Escala de 8 pontos. */
+.dd-fundo { position: fixed; inset: 0; z-index: 10001; display: grid; place-items: center; padding: var(--space-2); background: #0006; -webkit-backdrop-filter: grayscale(1) brightness(0.6); backdrop-filter: grayscale(1) brightness(0.6); }
+.dd-caixa { width: 352px; max-width: 100%; overflow: hidden; border: 1px solid #0831a0; border-radius: 8px 8px 0 0; background: #5a7edc; box-shadow: 0 16px 40px #000a; font-family: var(--font-ui); color: #fff; }
+.dd-topo { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 var(--space-2); background: linear-gradient(180deg, #0a3ba8, #002697); border-bottom: 2px solid #f4a12a; }
+.dd-topo h2 { margin: 0; font-size: var(--text-16); font-weight: 700; line-height: var(--space-3); }
+.dd-meio { display: flex; justify-content: center; gap: var(--space-6); padding: var(--space-4) var(--space-2); background: radial-gradient(circle at 50% 0, #7b9bea, #5a7edc 70%); }
+.dd-opcao { display: grid; justify-items: center; gap: var(--space-1); min-width: 96px; padding: var(--space-1); border: 1px solid transparent; border-radius: 4px; background: transparent; color: #fff; font: inherit; font-size: var(--text-14); line-height: var(--space-3); cursor: pointer; }
+.dd-opcao:hover, .dd-opcao:focus-visible { border-color: #ffffff99; background: #ffffff26; outline: 0; }
+.dd-opcao img { display: block; width: 48px; height: 48px; object-fit: contain; }
+.dd-base { display: flex; justify-content: flex-end; padding: var(--space-2); background: #002697; }
+.dd-cancelar { min-width: 88px; padding: var(--space-1) var(--space-2); border: 1px solid #003c74; border-radius: 4px; background: linear-gradient(180deg, #fff, #ece9d8); color: #000; font: inherit; font-size: var(--text-14); cursor: pointer; }
+.dd-cancelar:hover, .dd-cancelar:focus-visible { border-color: #f4a12a; outline: 0; }
+
+.dd-tela { position: fixed; inset: 0; z-index: 10002; display: grid; grid-template-rows: 96px 1fr 96px; background: #5179e1; color: #f5f7fb; font-family: var(--font-ui); }
+.dd-tela-banda { background: #002697; }
+.dd-tela-centro { display: grid; place-content: center; justify-items: center; gap: var(--space-3); padding: var(--space-3); text-align: center; }
+.dd-tela-centro img { display: block; max-width: 100%; height: auto; }
+.dd-tela-centro p { margin: 0; font-size: var(--text-16); line-height: var(--space-4); font-weight: 500; }

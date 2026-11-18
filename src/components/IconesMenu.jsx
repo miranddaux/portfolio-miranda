@@ -43,21 +43,6 @@ export const IconePrompt = () => (
     <rect x="20" y="19" width="5" height="2" fill="#e6e6e6" />
   </Base>
 );
-export const IconeSair = () => (
-  <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false">
-    <rect x="2" y="2" width="28" height="28" rx="5" fill="#f2a31f" stroke="#b86a00" strokeWidth="1.5" />
-    <circle cx="12" cy="16" r="5" fill="#fff4cf" stroke="#8a4f00" strokeWidth="1.5" />
-    <circle cx="12" cy="16" r="1.8" fill="#8a4f00" />
-    <path d="M17 16h9M23 16v4M26 16v3" stroke="#fff4cf" strokeWidth="2.4" strokeLinecap="round" />
-  </svg>
-);
-export const IconeDesligar = () => (
-  <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true" focusable="false">
-    <rect x="2" y="2" width="28" height="28" rx="5" fill="#e0482e" stroke="#9c2210" strokeWidth="1.5" />
-    <path d="M16 7v8" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
-    <path d="M10.5 11.5a8 8 0 1 0 11 0" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
-  </svg>
-);
 export const SetaVerde = () => (
   <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
     <rect x="1" y="1" width="22" height="22" rx="4" fill="#3fae3a" stroke="#1f7a1c" strokeWidth="1.5" />

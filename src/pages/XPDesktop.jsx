@@ -3,6 +3,8 @@ import DesktopAlerts from "../components/DesktopAlerts";
 import BarraDeTarefas from "../components/BarraDeTarefas";
 import MenuIniciar from "../components/MenuIniciar";
 import AvisoTelaCheia from "../components/AvisoTelaCheia";
+import DialogoDesligar, { TelaReiniciando } from "../components/DialogoDesligar";
+import { somDesligar } from "../lib/sons";
 import JanelaXP from "../components/JanelaXP";
 import PainelSobre from "../components/PainelSobre";
 import JanelaCurriculo, { CURRICULOS } from "../components/JanelaCurriculo";
@@ -43,6 +45,14 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
     [active, setActive] = useState("sobre"),
     [start, setStart] = useState(false);
   const previousProject = useRef(null);
+  const [energia, setEnergia] = useState(null); // null | "confirmar" | "reiniciando"
+  const timerReinicio = useRef(null);
+  useEffect(() => () => clearTimeout(timerReinicio.current), []);
+  const reiniciar = () => {
+    setEnergia("reiniciando");
+    somDesligar();
+    timerReinicio.current = setTimeout(() => { setEnergia(null); onShowWelcome(); }, 3400);
+  };
   const apps = APPS.map((a) => a.id === "case" && project ? { ...a, name: project.title, title: `${project.title} — Case` } : a);
   const appWindows = APPS_JANELAS.map((a) => a.id === "case" && project ? { ...a, name: project.title, title: `${project.title} — Case` } : a);
   useEffect(() => {
@@ -247,12 +257,20 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
             setStart(false);
             onShowWelcome();
           }}
-          aoDesligar={() => {
+          aoSair={() => {
             setStart(false);
-            setMode("rapido");
+            setEnergia("confirmar");
           }}
         />
       )}
+      {energia === "confirmar" && (
+        <DialogoDesligar
+          aoCancelar={() => setEnergia(null)}
+          aoReiniciar={reiniciar}
+          aoLogoff={() => { setEnergia(null); onShowWelcome(); }}
+        />
+      )}
+      {energia === "reiniciando" && <TelaReiniciando />}
       <DesktopAlerts
         ancoraRef={infoRef}
         reabrir={reabrir}
