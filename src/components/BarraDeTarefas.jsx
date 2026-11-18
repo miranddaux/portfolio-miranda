@@ -42,7 +42,7 @@ export default function BarraDeTarefas({
               onClick={() => aoClicarTarefa(a)}
             >
               <img
-                src={a.id === "player" ? "/assets/xp/menu/media-player-orb.png" : a.id.startsWith("msn") ? "/assets/xp/msn/logo-32.png" : `${A}/${a.id === "cases" ? "pasta" : "edge-barra"}.png`}
+                src={a.barraIcone || (a.id === "player" ? "/assets/xp/menu/media-player-orb.png" : a.id.startsWith("msn") ? "/assets/xp/msn/logo-32.png" : `${A}/${a.id === "cases" ? "pasta" : "edge-barra"}.png`)}
                 alt=""
                 width="18"
                 height="16"

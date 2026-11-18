@@ -13,7 +13,7 @@ export const SUGESTOES = [
 
 export const BOAS_VINDAS = [
   "Oi, eu sou o Thiago Bot e vou te apresentar o verdadeiro Thiago.",
-  "Ele é Product Designer e, nas horas vagas, é fascinado por tecnologia, adora filmes e séries e joga muito MOBA e games de RPG. Ah, e também cria conteúdo.",
+  "Ele é Product Designer e, nas horas vagas, vive no universo geek, pop e retrô: RPGs, games clássicos, filmes e séries. Ah, e também cria conteúdo.",
   "Me manda uma mensagem ou usa os atalhos abaixo. Quer saber mais sobre o que ele gosta?",
 ];
 
@@ -32,10 +32,10 @@ const INTENCOES = [
     acao: { rotulo: "Abrir Sobre mim", abrir: "sobre" },
   },
   {
-    chaves: ["gosta", "curte", "hobby", "hobbies", "horas vagas", "tempo livre", "lazer", "game", "jogo", "filme", "serie", "moba", "rpg", "tecnologia"],
+    chaves: ["gosta", "curte", "hobby", "hobbies", "horas vagas", "tempo livre", "lazer", "game", "jogo", "filme", "serie", "rpg", "geek", "nerd", "marvel", "capcom", "mario", "conteudo", "youtube", "medium"],
     respostas: [
-      "Nas horas vagas, o Thiago é fascinado por tecnologia, adora filmes e séries e joga muito MOBA e games de RPG.",
-      "Ah, e também cria conteúdo.",
+      "Nas horas vagas, o Thiago vive no universo geek, pop e retrô. Ele gosta de RPGs e jogou muito Call of Duty, Far Cry, Donkey Kong e Super Mario World, além de filmes e séries, com Marvel, Capcom e DC no meio.",
+      "Ele também cria conteúdo e quer expandir para o YouTube em breve. O Medium vem aí.",
     ],
   },
   {

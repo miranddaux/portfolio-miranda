@@ -1,0 +1,65 @@
+/* Apps das janelas XP: Prompt, Visualizador de imagens, Campo Minado, Paint, Pinball e Habbo Hotel. */
+.janela-xp-miolo:has(> .app-prompt, > .app-viz, > .app-ms, > .app-paint, > .app-embed, > .app-habbo) { display: flex; flex-direction: column; min-height: 0; padding: 0; background: #ece9d8; overflow: hidden; }
+
+/* Prompt de comando */
+.app-prompt { flex: 1; min-height: 0; margin: 0; padding: var(--space-1) var(--space-2); overflow: auto; background: #000; color: #c0c0c0; font: 400 var(--text-16)/var(--space-3) "Lucida Console", Consolas, "Courier New", monospace; outline-offset: -2px; }
+.app-prompt p { margin: 0; white-space: pre-wrap; }
+.app-prompt-cursor { display: inline-block; width: 8px; height: 16px; margin-left: 0; vertical-align: text-bottom; background: #c0c0c0; animation: app-cursor 1s steps(1) infinite; }
+@keyframes app-cursor { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .app-prompt-cursor { animation: none; } }
+
+/* Visualizador de imagens */
+.app-viz { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+.app-viz-endereco { display: flex; align-items: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); border-bottom: 1px solid #aca899; font-size: var(--text-14); line-height: var(--space-3); }
+.app-viz-endereco output { flex: 1; padding: 0 var(--space-1); border: 1px solid #7f9db9; background: #fff; }
+.app-viz-palco { display: flex; flex: 1; min-height: 0; align-items: center; justify-content: center; overflow: auto; margin: var(--space-1) var(--space-2) 0; background: #1a1a1a; outline-offset: 2px; }
+.app-viz-palco img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }
+.app-viz-palco.is-real { align-items: flex-start; justify-content: flex-start; }
+.app-viz-palco.is-real img { max-width: none; max-height: none; }
+.app-viz-barra { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1); padding: var(--space-1) var(--space-2); }
+.app-viz-barra .xp-button { display: inline-flex; align-items: center; gap: var(--space-1); }
+.app-viz-status { display: flex; justify-content: space-between; gap: var(--space-2); padding: 0 var(--space-2); border-top: 1px solid #aca899; font-size: var(--text-12); line-height: var(--space-3); color: #222; }
+
+/* Campo Minado */
+.app-ms { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); padding: var(--space-2); }
+.app-ms-topo { display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; width: 232px; padding: var(--space-1); border: 2px solid; border-color: #7b7b7b #fff #fff #7b7b7b; background: #c0c0c0; }
+.app-ms-led { min-width: 56px; padding: 0 var(--space-1); background: #000; color: #ff2a1a; font: 700 var(--text-24)/var(--space-4) "Courier New", monospace; text-align: right; letter-spacing: 2px; }
+.app-ms-rosto { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 2px solid; border-color: #fff #7b7b7b #7b7b7b #fff; background: #c0c0c0; cursor: pointer; }
+.app-ms-rosto:active { border-color: #7b7b7b #fff #fff #7b7b7b; }
+.app-ms-tabuleiro { display: grid; grid-template-columns: repeat(9, 24px); border: 3px solid; border-color: #7b7b7b #fff #fff #7b7b7b; background: #7b7b7b; touch-action: manipulation; user-select: none; }
+.app-ms-casa { box-sizing: border-box; width: 24px; height: 24px; padding: 0; border: 2px solid; border-color: #fff #7b7b7b #7b7b7b #fff; background: #c0c0c0; color: #000; font: 700 var(--text-16)/20px "Segoe UI", sans-serif; cursor: pointer; }
+.app-ms-casa:focus-visible { outline: 2px solid #316ac5; outline-offset: -2px; z-index: 1; }
+.app-ms-casa.is-aberta { border: 1px solid #7b7b7b; cursor: default; }
+.app-ms-casa.is-explodiu { background: #ff0000; }
+.app-ms-casa.n1 { color: #0000ff; } .app-ms-casa.n2 { color: #008000; } .app-ms-casa.n3 { color: #ff0000; } .app-ms-casa.n4 { color: #000080; }
+.app-ms-casa.n5 { color: #800000; } .app-ms-casa.n6 { color: #008080; } .app-ms-casa.n7 { color: #000; } .app-ms-casa.n8 { color: #808080; }
+.app-ms-status { margin: 0; font-size: var(--text-12); line-height: var(--space-3); color: #222; text-align: center; }
+
+/* Paint */
+.app-paint { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+.app-paint-corpo { display: flex; flex: 1; min-height: 0; }
+.app-paint-ferramentas { display: flex; flex: none; flex-direction: column; align-items: center; gap: var(--space-1); box-sizing: border-box; width: 48px; padding: var(--space-1); border-right: 1px solid #aca899; }
+.app-paint-ferramentas > button, .app-paint-tamanhos button { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 1px solid #fff; border-color: #fff #7b7b7b #7b7b7b #fff; background: #ece9d8; color: #000; cursor: pointer; }
+.app-paint-ferramentas button[aria-pressed="true"] { border-color: #7b7b7b #fff #fff #7b7b7b; background: #fff; }
+.app-paint-ferramentas button:focus-visible, .app-paint-cores button:focus-visible { outline: 2px solid #316ac5; outline-offset: 1px; }
+.app-paint-tamanhos { display: flex; flex-direction: column; gap: var(--space-1); margin-top: var(--space-1); }
+.app-paint-tamanhos i { display: block; width: 16px; background: #000; }
+.app-paint-area { flex: 1; min-width: 0; overflow: auto; padding: var(--space-1); background: #808080; }
+.app-paint-area canvas { display: block; width: 640px; max-width: none; height: 400px; background: #fff; cursor: crosshair; touch-action: none; }
+.app-paint-paleta { display: flex; flex: none; align-items: center; gap: var(--space-1); padding: var(--space-1); border-top: 1px solid #aca899; }
+.app-paint-atual { flex: none; width: 32px; height: 32px; border: 2px solid; border-color: #7b7b7b #fff #fff #7b7b7b; }
+.app-paint-cores { display: grid; grid-template-columns: repeat(14, 16px); gap: 0; }
+.app-paint-cores button { box-sizing: border-box; width: 16px; height: 16px; padding: 0; border: 1px solid #7b7b7b; cursor: pointer; }
+.app-paint-cores button[aria-pressed="true"] { outline: 1px solid #000; outline-offset: -3px; }
+
+/* Pinball (iframe) */
+.app-embed { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+.app-embed iframe { flex: 1; min-height: 0; width: 100%; border: 0; background: #000; }
+.app-embed-status { display: flex; justify-content: space-between; gap: var(--space-2); padding: 0 var(--space-2); font-size: var(--text-12); line-height: var(--space-3); }
+.app-embed-status a { color: #00309c; }
+
+/* Habbo Hotel */
+.app-habbo { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-4); text-align: center; }
+.app-habbo h2 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); }
+.app-habbo p { margin: 0; font-size: var(--text-16); line-height: var(--space-3); }
+.app-habbo .xp-button { display: inline-flex; align-items: center; gap: var(--space-1); text-decoration: none; }

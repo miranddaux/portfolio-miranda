@@ -273,3 +273,7 @@
 @container janela (max-width: 600px) { .case-overview-card { grid-template-columns: minmax(0, 1fr); } }
 
 .case-research-facts dd { white-space: pre-line; }
+
+/* Logo da ferramenta ao lado do nome (chips do case e lista do Sobre mim) */
+.case-chips li:has(.logo-ferramenta), .painel-lista-sec li.tem-logo { display: inline-flex; align-items: center; gap: var(--space-1); }
+.logo-ferramenta { flex: none; width: 16px; height: 16px; object-fit: contain; }
