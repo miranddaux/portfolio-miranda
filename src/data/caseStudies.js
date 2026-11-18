@@ -20,11 +20,24 @@ const STORIES = {
     accent: "animae",
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
     links: {
+      prototype: "https://www.figma.com/proto/Sdyl9kTkLtCZaIN13yvIgd/%F0%9F%93%B1-Projeto-ANIMAE--%7C-18-10-25?node-id=2083-5498&viewport=-728%2C217%2C0.4&t=2j3LQlrqLrdyODvw-1&scaling=scale-down-width&content-scaling=fixed&starting-point-node-id=2083%3A5498&page-id=2083%3A5497",
       site: "https://animaeapp.com.br/",
-      siteLabel: "Visitar LP",
-      design: "https://www.figma.com/design/Sdyl9kTkLtCZaIN13yvIgd",
+      siteLabel: "Ver landing page",
       behance: "https://www.behance.net/gallery/243377867/ANIMAE-Social-Streaming-Gamification",
-      behanceLabel: "Apresentação v1 no Behance",
+      behanceLabel: "Ver case completo no Behance",
+    },
+    // Vídeo do protótipo funcionando: `video: { src, poster, caption }` quando o Thiago enviar.
+    heroShot: "animae-perfil",
+    roles: ["Product Design", "Design System", "Mobile"],
+    landing: {
+      address: "animaeapp.com.br",
+      image: { src: "/assets/cases/animae-lp-completa.webp", width: 1440, height: 5311, alt: "Landing page completa do ANIMAE, do topo com o título e o app até o convite para a versão Android" },
+      note: "Captura de 16/11/2026.",
+    },
+    // Imagens por etapa (layouts: wide, pair, trio, mosaic). Slugs apontam para arquivos em /assets/cases.
+    stageImages: {
+      problema: { layout: "wide", images: ["animae-v1"] },
+      ideacao: { layout: "pair", images: ["animae-onboarding", "animae-perfil"] },
     },
     quick: [
       ["Problema", "Acompanhar anime, organizar listas e conversar com amigos exige alternar entre plataformas."],
@@ -32,7 +45,7 @@ const STORIES = {
       ["Decisão central", "Deixei o streaming próprio de fora para concentrar o MVP em organização e comunidade."],
       ["Estado documentado", "Versão web disponível; Android preparado para teste fechado. Sem métricas públicas de uso."],
     ],
-    cover: { type: "phone", src: "/assets/cases/animae-lista.png", width: 428, height: 1024, alt: "Tela Minha Lista do ANIMAE, com acompanhamento de episódios e navegação do app", caption: "Tela real do Figma · MVP social. Contagens e dados da interface são demonstrativos.", title: "Acompanhar. Registrar. Conversar.", text: "Uma experiência para organizar o que a pessoa assiste e criar conexões em torno das mesmas histórias." },
+    cover: { type: "phone", src: "/assets/cases/animae-lista.png", width: 428, height: 1024, alt: "Tela Minha Lista do ANIMAE, com acompanhamento de episódios e navegação do app", caption: "Tela real do Figma · MVP social. Contagens e dados da interface são demonstrativos.", title: "Acompanhar, registrar e conversar", text: "Uma experiência para organizar o que a pessoa assiste e criar conexões em torno das mesmas histórias." },
     context: "O ANIMAE nasceu de uma vontade minha: acompanhar os animes que assisto e conversar sobre teorias com amigos sem ficar pulando de aplicativo. Comecei com streaming social e salas para assistir em grupo, mas o custo e as licenças de catálogo tornavam essa proposta inviável para um produto solo.",
     problem: "Como aproximar organização, descoberta e comunidade sem depender de um catálogo próprio de streaming?",
     research: {

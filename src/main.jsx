@@ -15,4 +15,5 @@ import "./styles/perfil-busca.css";
 import "./styles/msn-banner.css";
 import "./styles/projects.css";
 import "./styles/case-document.css";
+import "./styles/case-stages.css";
 createRoot(document.getElementById("root")).render(<App />);

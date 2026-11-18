@@ -1,14 +1,27 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ChevronLeft } from "lucide-react";
+import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
-export function CaseLinks({ links }) {
+// Botões do topo: protótipo e case completo. Mesmo .xp-button (azul com ▸) em todo o case.
+export function CaseLinks({ links, projectTitle = "projeto", prototypePending = false, screens = [] }) {
+  const [open, setOpen] = useState(false);
+  const close = useCallback(() => setOpen(false), []);
+  const embed = links.prototype ? prototypeEmbedUrl(links.prototype) : null;
+  const canOpen = Boolean(links.prototype) && (Boolean(embed) || screens.length > 0);
   const actions = [
-    ["site", links.siteLabel || "Visitar site"], ["prototype", "Ver protótipo"],
-    ["design", "Ver no Figma"], ["behance", links.behanceLabel || "Ver no Behance"],
-  ].filter(([key]) => links[key] && (key !== "behance" || !links.behanceLabel));
+    ["prototype", "Ver protótipo"],
+    ["design", "Ver no Figma"],
+    ["behance", links.behanceLabel || "Ver no Behance"],
+    ...(links.siteInTop ? [["site", links.siteLabel || "Visitar site"]] : []),
+  ].filter(([key]) => links[key]);
   return <div className="case-document-actions">
-    {actions.map(([key, label]) => <a key={key} className={`xp-button ${key === "site" && links.siteLabel ? "xp-button--success" : ""}`} href={links[key]} target="_blank" rel="noopener noreferrer">{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
-    {!actions.length && <span className="case-links-pending">Links públicos em curadoria.</span>}
+    {actions.map(([key, label]) => key === "prototype" && canOpen
+      ? <button key={key} type="button" className="xp-button" onClick={() => setOpen(true)} aria-haspopup="dialog">{label}</button>
+      : <a key={key} className="xp-button" href={links[key]} target="_blank" rel="noopener noreferrer">{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
+    {prototypePending && !links.prototype && <span className="xp-button is-disabled" aria-disabled="true" role="link">Ver protótipo<span className="sr-only"> (link em breve)</span></span>}
+    {!actions.length && !prototypePending && <span className="case-links-pending">Links públicos em curadoria.</span>}
+    {open && canOpen && <PrototypeModal title={projectTitle} url={links.prototype} embedUrl={embed} screens={screens} onClose={close} />}
   </div>;
 }
 
@@ -19,14 +32,62 @@ export function CaseJourney({ journeys }) {
   </div>)}</div>;
 }
 
-function CaseMedia({ media, cover = false, phone = false }) {
-  if (!media?.src) return null;
-  return <figure className={`case-media ${cover ? "is-cover" : ""} ${phone ? "is-phone" : ""}`}>
-    <a className={phone ? "case-device" : undefined} href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar imagem: ${media.alt} (abre em nova aba)`}>
-      <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading={cover ? "eager" : "lazy"} decoding="async" /></span>
+// Só a tela, sem legenda. O alt descreve a imagem; clicar amplia em nova aba.
+function Shot({ media, phone }) {
+  return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
+    <a className={phone ? "case-device" : "case-shot"} href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar imagem: ${media.alt} (abre em nova aba)`}>
+      <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" decoding="async" /></span>
     </a>
-    <figcaption>{media.caption}{phone && <span className="case-image-hint">Ampliar tela completa</span>}</figcaption>
   </figure>;
+}
+
+// Containers de imagem: wide (1), pair (2), trio (3) e mosaic (1 grande + linhas de até 3).
+function Frame({ layout, items, phone, label }) {
+  if (!items.length) return null;
+  if (layout === "mosaic") {
+    const [lead, ...rest] = items;
+    const rows = [];
+    for (let i = 0; i < rest.length; i += 3) rows.push(rest.slice(i, i + 3));
+    return <div className="case-frame is-mosaic" role="group" aria-label={label}>
+      <div className="case-frame-lead"><Shot media={lead} phone={phone} /></div>
+      {rows.map((row, i) => <div key={i} className="case-frame-row">{row.map((m) => <Shot key={m.src} media={m} phone={phone} />)}</div>)}
+    </div>;
+  }
+  const shot = layout === "story" ? "264px" : undefined;
+  const stagger = layout === "story" && items.length === 2 ? " is-stagger" : "";
+  return <div className={`case-frame is-${layout}${stagger}`} style={shot ? { "--shot": shot } : undefined} role="group" aria-label={label}>
+    {items.map((m) => <Shot key={m.src} media={m} phone={phone} />)}
+  </div>;
+}
+
+// Um módulo do produto: texto de um lado, tela(s) do outro. Alterna o lado para guiar o olhar.
+function Story({ index, module, phone }) {
+  return <article className={`case-story ${index % 2 ? "is-reverse" : ""}`}>
+    <div className="case-story-text">
+      <span className="case-story-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+      <h3>{module.title}</h3>
+      <p>{module.text}</p>
+    </div>
+    <Frame layout="story" items={module.images} phone={phone} label={module.title} />
+  </article>;
+}
+
+function CaseVideo({ video }) {
+  if (!video?.src) return null;
+  return <figure className="case-video">
+    <video controls preload="metadata" poster={video.poster} src={video.src}>Seu navegador não reproduz este vídeo.</video>
+    <figcaption>{video.caption}</figcaption>
+  </figure>;
+}
+
+function Stage({ number, label, title, id, children }) {
+  return <section className="case-stage" id={id} aria-labelledby={`${id}-title`}>
+    <header className="case-stage-head">
+      <p className="case-stage-kicker"><span className="case-stage-number" aria-hidden="true">{number}</span><span className="case-section-label">{label}</span></p>
+      <h2 id={`${id}-title`}>{title}</h2>
+    </header>
+    <div className="case-stage-body">{children}</div>
+  </section>;
 }
 
 export default function CaseDocument({ project, onNavigate }) {
@@ -34,6 +95,18 @@ export default function CaseDocument({ project, onNavigate }) {
   const root = useRef(null);
   const next = nextCaseStudy(project.id);
   const id = (section) => `case-${project.id}-${section}`;
+  const phones = project.cover.type === "phone";
+  const pool = [...project.modules.flatMap((m) => m.images), ...(project.gallery || []), project.cover];
+  const find = (slug) => pool.find((m) => m.src.includes(slug));
+  const stage = (key) => {
+    const cfg = project.stageImages?.[key];
+    return cfg ? { layout: cfg.layout, items: cfg.images.map(find).filter(Boolean) } : null;
+  };
+  const roles = project.roles || [project.roleShort];
+  const [year, yearNote] = project.period.split(" · ");
+  const heroShot = find(project.heroShot) || project.modules[0].images[0];
+  const hero = phones ? [project.modules[0].images[0], project.modules[1].images[0], project.modules[2].images[0]] : [project.cover];
+  const problem = stage("problema"), ideation = stage("ideacao");
   useEffect(() => {
     document.title = `${project.title} · Case de Product Design · Thiago Miranda`;
     const meta = document.querySelector('meta[name="description"]');
@@ -41,77 +114,86 @@ export default function CaseDocument({ project, onNavigate }) {
     root.current?.closest(".case-document-scroll")?.scrollTo?.({ top: 0 });
     title.current?.focus({ preventScroll: true });
   }, [project.id, project.title, project.summary]);
+  const tourScreens = project.modules.flatMap((m) => (m.images || []).map((img) => ({ ...img, label: m.title }))).filter((m, i, all) => all.findIndex((x) => x.src === m.src) === i);
+  const withImages = project.modules.filter((m) => m.images?.length);
+  const textOnly = project.modules.filter((m) => !m.images?.length);
   return <article ref={root} className={`case-document theme-${project.accent}`}>
     <header className="case-document-header">
-      <div className="case-categories"><span className="case-metadata-label">Categorias</span><ul aria-label="Categorias do projeto">{project.categories.map(category => <li key={category}>{category}</li>)}</ul></div>
+      <ul className="case-tags" aria-label="Categorias do projeto">{project.categories.map((category) => <li key={category}>{category}</li>)}</ul>
       <h1 ref={title} tabIndex={-1}>{project.title}</h1>
       <p className="case-document-question">{project.question}</p>
-      <dl className="case-document-facts">
-        {[["Função", `${project.roleShort} · ${project.team}`], ["Ferramentas", project.tools.join(", ")], ["Ano", project.period]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
-      </dl>
-      <CaseLinks links={project.links} />
+      <CaseLinks links={project.links} projectTitle={project.title} prototypePending={project.prototypePending} screens={tourScreens} />
     </header>
-    {project.cover.type === "phone" ? <section className="case-overview-visual" aria-label="Visão geral da interface ANIMAE">
-      <div className="case-module-intro"><span className="case-section-label">O produto em telas</span><h2>{project.cover.title}</h2><p>{project.cover.text}</p></div>
-      <div className="case-visual-grid is-phones is-triptych">
-        {[project.modules[0].images[0], project.modules[1].images[0], project.modules[2].images[0]].map(media => <CaseMedia key={media.src} media={media} phone cover />)}
-      </div>
-    </section> : <CaseMedia media={project.cover} cover />}
-    <section className="case-quick-summary" id={id("resumo")} aria-labelledby={id("resumo-title")}>
-      <div className="case-section-label">Leitura rápida</div>
-      <h2 id={id("resumo-title")}>O case em 60 segundos</h2>
-      <dl>{project.quick.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
-    </section>
-    <section className="case-story-section" id={id("problema")}>
-      <div className="case-section-heading"><span className="case-section-label">De onde eu parti</span><h2>{project.problem}</h2></div>
-      <p>{project.context}</p>
-    </section>
-    <div className="case-product-modules" aria-label="Interface e detalhes do produto">
-      {project.modules.map((module, index) => <section className="case-product-module" key={module.title} aria-labelledby={id(`module-${index}`)}>
-        <div className="case-module-intro"><span className="case-section-label">{String(index + 1).padStart(2, "0")} · Interface e experiência</span><h2 id={id(`module-${index}`)}>{module.title}</h2><p>{module.text}</p></div>
-        {module.images.length > 0 && <div className={`case-visual-grid ${module.layout === "phones" ? "is-phones" : ""}`}>
-          {module.images.map(media => <CaseMedia key={media.src} media={media} phone={module.layout === "phones"} />)}
-        </div>}
-      </section>)}
+
+    <div className="case-hero-shot" role="group" aria-label="Tela do aplicativo em destaque">
+      {phones ? <Shot media={heroShot} phone /> : <Shot media={project.cover} phone={false} />}
     </div>
-    <section className="case-story-section" id={id("pesquisa")}>
-      <div className="case-section-heading"><span className="case-section-label">Pesquisa e contexto</span><h2>O que orientou a direção</h2></div>
-      <div><p>{project.research.intro}</p><dl className="case-research-facts">{project.research.findings.map(([label, value]) => <div key={`${label}-${value}`}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></div>
+
+    <dl className="case-overview-card" aria-label="Visão geral do projeto">
+      <div><dt>Função</dt><dd><ul className="case-chips">{roles.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>
+      <div><dt>Ferramentas</dt><dd><ul className="case-chips">{project.tools.map((t) => <li key={t}>{t}</li>)}</ul></dd></div>
+      <div><dt>Ano</dt><dd className="case-year"><span>{year}</span>{yearNote && <small>{yearNote}</small>}</dd></div>
+    </dl>
+
+    <section className="case-hero" aria-label="O produto em telas">
+      <span className="case-section-label">O produto</span>
+      <h2>{project.cover.title}</h2>
+      <p>{project.cover.text}</p>
+      <Frame layout={phones ? "trio" : "wide"} items={hero} phone={phones} label="Visão geral da interface" />
     </section>
-    <section className="case-decisions-section" id={id("decisoes")}>
-      <span className="case-section-label">Decisões de produto</span><h2>Escolhas que deram forma ao produto</h2>
+
+    <Stage id={id("problema")} number="01" label="Problema" title={project.problem}>
+      <p>{project.context}</p>
+      <p>{project.research.intro}</p>
+      <dl className="case-research-facts">{project.research.findings.map(([label, value]) => <div key={`${label}-${value}`}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+      {problem && <Frame layout={problem.layout} items={problem.items} phone={false} label="Versão inicial do produto" />}
+    </Stage>
+
+    <Stage id={id("ideacao")} number="02" label="Ideação" title="Escolhas que deram forma ao produto">
       <div className="case-decisions">{project.decisions.map((d, i) => <section key={d.title} className="case-decision">
         <span className="case-decision-number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
         <div><h3>{d.title}</h3><p>{d.choice}</p><p className="case-tradeoff"><strong>A troca:</strong> {d.tradeoff}</p></div>
       </section>)}</div>
-    </section>
-    <section className="case-solution-section" id={id("solucao")}>
-      <span className="case-section-label">Fluxo da experiência</span><h2>Da hipótese à experiência</h2><p>{project.solution}</p>
+      {ideation && <Frame layout={ideation.layout} items={ideation.items} phone={phones} label="Telas das escolhas de produto" />}
+    </Stage>
+
+    <Stage id={id("prototipacao")} number="03" label="Prototipação" title="Da hipótese à experiência">
+      <p>{project.solution}</p>
       <CaseJourney journeys={project.journeys} />
-    </section>
-    <section className="case-results-section" id={id("resultados")}>
-      <span className="case-section-label">Estado do projeto</span><h2>O que existe e o que medir</h2><p>{project.outcome}</p>
-      <div className="case-measurement"><h3>Plano de medição</h3><p>Indicadores propostos. Ainda sem resultados publicados.</p>
-        <dl>{project.kpis.map(([label, definition]) => <div key={label}><dt>{label}</dt><dd>{definition}</dd><span>A medir</span></div>)}</dl>
+      {textOnly.map((m) => <div key={m.title} className="case-note"><h3>{m.title}</h3><p>{m.text}</p></div>)}
+    </Stage>
+
+    <Stage id={id("solucao")} number="04" label="Solução" title="Como a solução funciona">
+      <div className="case-stories">
+        {withImages.map((module, index) => <Story key={module.title} index={index} module={module} phone={phones} />)}
       </div>
-    </section>
-    <section className="case-learning-section" id={id("aprendizados")}>
-      <span className="case-section-label">Aprendizados</span><h2>O que levo para o próximo projeto</h2><p>{project.learning}</p>
-    </section>
-    {project.id === "animae" && <section className="case-website-section" aria-labelledby={id("website-title")}>
-      <span className="case-section-label">Website</span><h2 id={id("website-title")}>A porta de entrada para o ANIMAE</h2>
-      <p>Na landing page, apresento a proposta do produto e o universo visual que construí para ele. É o primeiro contato antes de explorar o aplicativo.</p>
-      <div className="case-website-preview" role="img" aria-label="Espaço reservado para a captura real da landing page do ANIMAE">
-        <span className="case-website-address">animaeapp.com.br</span><strong>Landing page do ANIMAE</strong><span>Captura em preparação</span>
-      </div>
+      <CaseVideo video={project.video} />
+    </Stage>
+
+    <Stage id={id("aprendizado")} number="05" label="Aprendizado" title="O que levo para o próximo projeto">
+      <p>{project.learning}</p>
+      <p>{project.outcome}</p>
+      <ul className="case-kpis" aria-label="Indicadores propostos, ainda sem resultados publicados">{project.kpis.map(([label, definition]) => <li key={label}>
+        <span className="case-kpi-status">A medir</span><strong>{label}</strong><span>{definition}</span>
+      </li>)}</ul>
+    </Stage>
+
+    {project.landing && <section className="case-landing" aria-labelledby={id("lp-title")}>
+      <header className="case-stage-head">
+        <p className="case-stage-kicker"><span className="case-section-label">Landing page</span></p>
+        <h2 id={id("lp-title")}>A porta de entrada para o produto</h2>
+      </header>
+      <p>A landing page apresenta a proposta e convida para a versão Android.</p>
+      {project.links.site && <div className="case-document-actions"><a className="xp-button" href={project.links.site} target="_blank" rel="noopener noreferrer">Ver landing page<span className="sr-only"> (abre em nova aba)</span></a></div>}
+      <figure className="case-browser">
+        <div className="case-browser-bar"><span>{project.landing.address}</span></div>
+        <img src={project.landing.image.src} alt={project.landing.image.alt} width={project.landing.image.width} height={project.landing.image.height} loading="lazy" decoding="async" />
+      </figure>
     </section>}
+
     <footer className="case-document-footer">
-      <CaseLinks links={project.links} />
-      {project.links.behanceLabel && <p className="case-archive-link"><a href={project.links.behance} target="_blank" rel="noopener noreferrer">{project.links.behanceLabel}<span className="sr-only"> (abre em nova aba)</span></a><span>Arquivo da proposta inicial de streaming.</span></p>}
-      <div className="case-document-pagination">
-        <a className="xp-button" href="/#cases" onClick={(e) => projectLinkAction(e, onNavigate, "/#cases")}>Meus Projetos</a>
-        <a className="xp-button" href={`/cases/${next.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${next.id}`)}>Próximo: {next.title}</a>
-      </div>
+      <a className="xp-button xp-button--back" href="/#cases" onClick={(e) => projectLinkAction(e, onNavigate, "/#cases")}><ChevronLeft size={16} aria-hidden="true" />Meus projetos</a>
+      <a className="xp-button" href={`/cases/${next.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${next.id}`)}>Próximo: {next.title}</a>
     </footer>
   </article>;
 }

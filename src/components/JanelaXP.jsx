@@ -26,6 +26,8 @@ export default function JanelaXP({
   minLargura = MIN_L,
   minAltura = MIN_A,
   alinhar = "centro",
+  reserva = 304,
+  centroVertical = false,
   topo = 32,
   semStatus = false,
   classe = "",
@@ -43,14 +45,14 @@ export default function JanelaXP({
 
   useLayoutEffect(() => {
     const { w, h } = area();
-    const lar = limitar(Math.min(largura, w - (alinhar === "centro" ? 304 : 32)), minLargura, w);
+    const lar = limitar(Math.min(largura, w - (alinhar === "centro" ? reserva : 32)), minLargura, w);
     const alt = limitar(Math.min(altura, h - 64), minAltura, h);
     const desl = cascata * 32;
     const xBase =
       alinhar === "direita" ? w - lar - 24 : alinhar === "esquerda" ? 152 : Math.round((w - lar) / 2);
     setCaixa({
       x: limitar(xBase + desl, 0, Math.max(0, w - lar)),
-      y: limitar(topo + desl, 0, Math.max(0, h - alt)),
+      y: centroVertical ? Math.max(0, Math.round((window.innerHeight - alt) / 2)) : limitar(topo + desl, 0, Math.max(0, h - alt)),
       w: lar,
       h: alt,
     });
