@@ -26,6 +26,8 @@ const STORIES = {
       behance: "https://www.behance.net/gallery/243377867/ANIMAE-Social-Streaming-Gamification",
       behanceLabel: "Ver case completo no Behance",
     },
+    // Tamanho do quadro inicial do protótipo no Figma (Home · Redesenho), usado para encaixar o embed.
+    prototypeFrame: { width: 430, height: 932 },
     // Vídeo do protótipo funcionando: `video: { src, poster, caption }` quando o Thiago enviar.
     heroShot: "animae-hub",
     roles: ["Product Design", "Design System", "Mobile"],
