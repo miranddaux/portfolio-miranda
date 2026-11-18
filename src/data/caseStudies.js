@@ -37,7 +37,7 @@ const STORIES = {
     // Imagens por etapa (layouts: wide, pair, trio, mosaic). Slugs apontam para arquivos em /assets/cases.
     stageImages: {
       problema: { layout: "wide", images: ["animae-v1"] },
-      ideacao: { layout: "pair", images: ["animae-onboarding", "animae-feed-comunidade"] },
+      ideacao: { layout: "pair", images: ["animae-flow-onb-1", "animae-feed-comunidade"] },
     },
     quick: [
       ["Problema", "Acompanhar anime, organizar listas e conversar com amigos exige alternar entre plataformas."],
@@ -193,30 +193,16 @@ const MODULES = {
       ],
     },
     {
-      title: "Uma identidade que mostra o que a pessoa acompanha",
-      text: "No perfil, reuni estatísticas, nível, sequência de dias e conquistas. A progressão dá motivo para voltar sem tirar o foco do que importa, que é acompanhar e conversar. Os números do layout são ilustrativos.",
-      layout: "phones",
-      images: [{ src: "/assets/cases/animae-perfil.webp", width: 860, height: 1864, alt: "Perfil do ANIMAE com estatísticas, nível, progresso de XP, sequência de dias e conquistas" }],
-    },
-    {
-      title: "Do primeiro toque à conta criada",
-      text: "A entrada começa com uma splash e quatro telas de onboarding que apresentam descoberta, recomendações, acompanhamento e progressão, sempre com a opção de pular. O cadastro vem em passos curtos, com a indicação de progresso no topo: e-mail e senha, apelido, senha com regras visíveis, gêneros favoritos, onde a pessoa assiste e permissão de notificações.",
+      title: "Da primeira abertura à conta criada",
+      text: "A entrada começa com uma splash e um onboarding que apresenta o universo do app, com a opção de pular. Depois vêm login e cadastro em passos curtos, com a escolha de gêneros e de onde a pessoa assiste, para que as recomendações já comecem com o gosto dela.",
       images: [],
       flow: [
-        { label: "Onboarding", items: [
+        { label: "Fluxo de entrada", items: [
           { src: "/assets/cases/animae-flow-splash.webp", width: 860, height: 1864, alt: "Splash do ANIMAE com o mascote", caption: "Splash" },
           { src: "/assets/cases/animae-flow-onb-1.webp", width: 860, height: 1864, alt: "Onboarding 1: Seu universo otaku do seu jeito", caption: "Universo otaku" },
-          { src: "/assets/cases/animae-flow-onb-2.webp", width: 860, height: 1864, alt: "Onboarding 2: Descubra o que combina com você", caption: "Recomendações" },
-          { src: "/assets/cases/animae-flow-onb-3.webp", width: 860, height: 1864, alt: "Onboarding 3: Nunca esqueça onde parou", caption: "Onde parou" },
-          { src: "/assets/cases/animae-flow-onb-4.webp", width: 860, height: 1864, alt: "Onboarding 4: Suba de nível como um verdadeiro otaku", caption: "Progressão" },
-        ] },
-        { label: "Cadastro", items: [
           { src: "/assets/cases/animae-login.webp", width: 860, height: 1864, alt: "Login com e-mail, senha, Criar conta, Entrar no fandom e login social", caption: "Login" },
-          { src: "/assets/cases/animae-flow-nome.webp", width: 860, height: 1864, alt: "Cadastro: Como podemos te chamar", caption: "Apelido" },
-          { src: "/assets/cases/animae-flow-senha.webp", width: 860, height: 1864, alt: "Cadastro: Crie a sua senha, com regras visíveis", caption: "Senha" },
           { src: "/assets/cases/animae-generos.webp", width: 860, height: 1864, alt: "Cadastro: O que você curte, com gêneros para escolher", caption: "Gêneros" },
           { src: "/assets/cases/animae-flow-streaming.webp", width: 860, height: 1864, alt: "Cadastro: Onde você assiste, com lista de serviços de streaming", caption: "Onde assiste" },
-          { src: "/assets/cases/animae-flow-notificacoes.webp", width: 860, height: 1864, alt: "Cadastro: pedido de permissão para notificações", caption: "Notificações" },
         ] },
       ],
     },

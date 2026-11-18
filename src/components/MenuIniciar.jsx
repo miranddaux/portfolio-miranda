@@ -1,99 +1,111 @@
-const A = "/assets/xp/figma";
+import { useState } from "react";
+import { REDES_PRINCIPAIS, REDES_SOCIAIS } from "../data/social.js";
+import { IconeBloco, IconeDesligar, IconeGaleria3D, IconeGameBoy, IconeJogo, IconePrompt, IconeSair, SetaVerde } from "./IconesMenu.jsx";
 
-// Item da lista do menu. `acelerador` sublinha a letra de atalho, como no Figma.
-function Item({ icone, rotulo, aoClicar, desativado, nota }) {
+const XP = "/assets/xp";
+const img = (src) => <img src={src} alt="" width="32" height="32" />;
+
+// Linha do menu. `sub` cria o estilo de item fixado (título em negrito + descrição).
+function Linha({ icone, rotulo, sub, aoClicar, href, breve }) {
+  const conteudo = (
+    <>
+      <span className="mi-icone">{icone}</span>
+      <span className="mi-texto">
+        <strong>{rotulo}</strong>
+        {sub && <small>{sub}</small>}
+      </span>
+    </>
+  );
+  if (href) {
+    return (
+      <a className={`mi-linha ${sub ? "is-fixo" : ""}`} href={href} target="_blank" rel="noopener noreferrer" role="menuitem">
+        {conteudo}
+        <span className="sr-only"> (abre em nova aba)</span>
+      </a>
+    );
+  }
   return (
     <button
-      className="menu-item"
-      onClick={aoClicar}
-      disabled={desativado}
       type="button"
+      role="menuitem"
+      className={`mi-linha ${sub ? "is-fixo" : ""} ${breve ? "is-breve" : ""}`}
+      onClick={breve ? undefined : aoClicar}
+      aria-disabled={breve || undefined}
+      title={breve ? "Em breve" : undefined}
     >
-      <img src={`${A}/${icone}.png`} alt="" width="25" height="25" />
-      <span>{rotulo}</span>
-      {nota && <small>{nota}</small>}
+      {conteudo}
     </button>
   );
 }
-const Divisor = () => <div className="menu-divisor" aria-hidden="true" />;
+const Divisor = () => <div className="mi-divisor" aria-hidden="true" />;
 
-// Menu Iniciar — réplica do Figma (Home 125:36 › Start).
-export default function MenuIniciar({
-  menuRef,
-  usuario = "Thiago Miranda",
-  aoAbrir,
-  aoTrocarModo,
-  aoFazerLogoff,
-  aoDesligar,
-}) {
+// Menu Iniciar: coluna branca (atalhos do portfólio) e coluna azul (redes e aplicativos).
+export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbrir, aoTrocarModo, aoFazerLogoff, aoDesligar }) {
+  const [todos, setTodos] = useState(false);
+  const redes = REDES_PRINCIPAIS.map((id) => REDES_SOCIAIS[id]).filter((r) => r?.href);
   return (
-    <nav
-      className="menu-iniciar"
-      ref={menuRef}
-      id="menu-iniciar"
-      aria-label="Menu Iniciar"
-    >
-      <div className="menu-cabecalho">
-        <img
-          className="menu-avatar"
-          src="/assets/xp/msn/fotos/thiago-retro.webp"
-          alt=""
-          width="54"
-          height="54"
-        />
+    <nav className="menu-iniciar mi" ref={menuRef} id="menu-iniciar" aria-label="Menu Iniciar">
+      <div className="mi-cabecalho">
+        <img className="mi-avatar" src="/assets/xp/msn/fotos/thiago-retro.webp" alt="" width="48" height="48" />
         <strong>{usuario}</strong>
       </div>
-      <div className="menu-colunas">
-        <div className="menu-coluna menu-coluna-programas">
-          <h2>Programas</h2>
-          <div className="menu-lista">
-            <div className="menu-rotulo">Mais usados</div>
+      <div className="mi-colunas">
+        <div className="mi-coluna mi-esquerda" role="menu" aria-label="Programas">
+          {!todos ? (
+            <>
+              <Linha icone={img(`${XP}/area/projetos.png`)} rotulo="Meus Projetos" sub="Veja meu trabalho" aoClicar={() => aoAbrir("cases")} />
+              <Linha icone={img(`${XP}/area/contato.png`)} rotulo="Fale comigo" sub="Envie-me uma mensagem" aoClicar={() => aoAbrir("contato")} />
+              <Divisor />
+              <Linha icone={img(`${XP}/area/sobre.png`)} rotulo="Sobre mim" aoClicar={() => aoAbrir("sobre")} />
+              <Linha icone={img(`${XP}/area/curriculo.png`)} rotulo="Meu Currículo" aoClicar={() => aoAbrir("curriculo")} />
+              <Linha icone={<IconeGameBoy />} rotulo="Game Boy Color" breve />
+              <Linha icone={img(`${XP}/figma/msn.png`)} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
+            </>
+          ) : (
+            <>
+              <Linha icone={img(`${XP}/figma/edge.png`)} rotulo="ANIMAE" aoClicar={() => aoAbrir("cases")} />
+              <Linha icone={img(`${XP}/figma/movie-maker.png`)} rotulo="Navaja" aoClicar={() => aoAbrir("cases")} />
+              <Linha icone={img(`${XP}/figma/transferencia.png`)} rotulo="Oficina do Tenista" aoClicar={() => aoAbrir("cases")} />
+              <Linha icone={img(`${XP}/figma/paint.png`)} rotulo="Ultragrip" aoClicar={() => aoAbrir("cases")} />
+              <Divisor />
+              <Linha icone={img(`${XP}/figma/meu-computador.png`)} rotulo="Modo Rápido" aoClicar={() => aoTrocarModo("rapido")} />
+              <Linha icone={img(`${XP}/figma/painel-de-controle.png`)} rotulo="Modo Noite" aoClicar={() => aoTrocarModo("noite")} />
+              <Linha icone={img(`${XP}/figma/minhas-imagens.png`)} rotulo="Tela inicial" aoClicar={aoFazerLogoff} />
+            </>
+          )}
+          <div className="mi-todos-area">
             <Divisor />
-            <Item icone="msn" rotulo="Sobre mim" aoClicar={() => aoAbrir("sobre")} />
-            <Item icone="explorador" rotulo="Meus projetos" aoClicar={() => aoAbrir("cases")} />
-            <Item icone="email" rotulo="Contato" aoClicar={() => aoAbrir("contato")} />
-            <Item icone="msn" rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
-            <Item icone="edge" rotulo="ANIMAE" aoClicar={() => aoAbrir("cases")} />
-            <Item icone="movie-maker" rotulo="Navaja" aoClicar={() => aoAbrir("cases")} />
-            <Item icone="transferencia" rotulo="Oficina do Tenista" aoClicar={() => aoAbrir("cases")} />
-            <Item icone="paint" rotulo="Ultragrip" aoClicar={() => aoAbrir("cases")} />
-            <Divisor />
-            <button
-              className="menu-todos"
-              type="button"
-              onClick={() => aoAbrir("cases")}
-            >
-              <span>Todos os projetos</span>
-              <img src={`${A}/todos-os-programas.png`} alt="" width="25" height="25" />
+            <button type="button" className="mi-todos" onClick={() => setTodos((v) => !v)} aria-expanded={todos}>
+              <span>{todos ? "Voltar" : "Todos os programas"}</span>
+              <span className={todos ? "mi-seta is-volta" : "mi-seta"}><SetaVerde /></span>
             </button>
           </div>
         </div>
-        <div className="menu-coluna menu-coluna-sistema">
-          <h2>Sistema</h2>
-          <div className="menu-lista">
-            <div className="menu-rotulo">Mais usados</div>
-            <Divisor />
-            <Item icone="documentos-recentes" rotulo="Meu currículo" aoClicar={() => aoAbrir("curriculo")} />
-            <Item icone="meu-computador" rotulo="Modo Rápido" aoClicar={() => aoTrocarModo("rapido")} />
-            <Item icone="painel-de-controle" rotulo="Modo Noite" aoClicar={() => aoTrocarModo("noite")} />
-            <Item icone="minhas-imagens" rotulo="Tela inicial" aoClicar={aoFazerLogoff} />
-            <Divisor />
-            <Item icone="ajuda" rotulo="Ajuda e contato" aoClicar={() => aoAbrir("contato")} />
+        <div className="mi-coluna mi-direita" role="menu" aria-label="Redes e aplicativos">
+          {redes.map((r) => (
+            <Linha key={r.nome} icone={img(r.icone)} rotulo={r.nome} href={r.href} />
+          ))}
+          <Divisor />
+          <div className="mi-recente" aria-hidden="true">
+            <span>Usado recentemente</span>
+            <i>▸</i>
           </div>
+          <Linha icone={img(`${XP}/figma/media-player.png`)} rotulo="Reprodutor de mídia" breve />
+          <Linha icone={img(`${XP}/figma/minhas-imagens.png`)} rotulo="Visualizador de imagens" breve />
+          <Linha icone={<IconeGaleria3D />} rotulo="Galeria 3D" breve />
+          <Linha icone={<IconeJogo />} rotulo="World of Warcraft" breve />
+          <Linha icone={<IconeBloco />} rotulo="Bloco de notas" breve />
+          <Linha icone={<IconePrompt />} rotulo="Prompt de Comando" breve />
         </div>
       </div>
-      <div className="menu-rodape">
-        <button className="menu-acao" onClick={aoFazerLogoff} type="button">
-          <img src={`${A}/rodape-adicionar.png`} alt="" width="16" height="16" />
-          <span>
-            <u>F</u>azer logoff
-          </span>
+      <div className="mi-rodape">
+        <button type="button" className="mi-acao" onClick={aoFazerLogoff}>
+          <IconeSair />
+          <span>Sair</span>
         </button>
-        <button className="menu-acao" onClick={aoDesligar} type="button">
-          <img src={`${A}/rodape-desligar.png`} alt="" width="20" height="20" />
-          <span>
-            <u>D</u>esligar
-          </span>
+        <button type="button" className="mi-acao" onClick={aoDesligar}>
+          <IconeDesligar />
+          <span>Desligar</span>
         </button>
       </div>
     </nav>

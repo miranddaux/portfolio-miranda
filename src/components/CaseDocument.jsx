@@ -142,7 +142,7 @@ export default function CaseDocument({ project, onNavigate }) {
   const next = nextCaseStudy(project.id);
   const id = (section) => `case-${project.id}-${section}`;
   const phones = project.cover.type === "phone";
-  const pool = [...project.modules.flatMap((m) => m.images), ...(project.gallery || []), project.cover];
+  const pool = [...project.modules.flatMap((m) => [...m.images, ...(m.flow || []).flatMap((r) => r.items)]), ...(project.gallery || []), project.cover];
   const find = (slug) => pool.find((m) => m.src.includes(slug));
   const stage = (key) => {
     const cfg = project.stageImages?.[key];
