@@ -217,30 +217,6 @@
 .proto-tour-dots button { width: var(--space-2); height: var(--space-2); padding: 0; border: 1px solid var(--color-blue-900); border-radius: 50%; background: transparent; cursor: pointer; }
 .proto-tour-dots button.is-on { background: var(--color-blue-900); }
 
-/* Microanimação da Minha Lista: toque no botão e avanço do progresso (posições em % da imagem 860 × 1864). */
-.case-device-screen { position: relative; }
-.demo-lista { position: absolute; inset: 0; pointer-events: none; }
-.demo-lista > span { position: absolute; display: block; }
-.demo-lista-fill { left: 67.791%; top: 39.7%; width: 6.628%; height: 0.858%; border-radius: 999px; background: #ff5f07; animation: demo-lista-fill 4.8s ease-in-out infinite; }
-.demo-lista-button { left: 57.791%; top: 42.275%; width: 33.837%; height: 4.292%; border: 2px solid #ff5f07; border-radius: 999px; opacity: 0; animation: demo-lista-button 4.8s ease-in-out infinite; }
-.demo-lista-tap { left: 74.65%; top: 44.42%; width: 7%; aspect-ratio: 1; border-radius: 50%; background: #ffffffb3; opacity: 0; transform: translate(-50%, -50%) scale(0.4); animation: demo-lista-tap 4.8s ease-out infinite; }
-@keyframes demo-lista-fill {
-  0%, 28% { width: 6.628%; clip-path: inset(0 100% 0 0); opacity: 1; }
-  42%, 86% { width: 6.628%; clip-path: inset(0 0 0 0); opacity: 1; }
-  94% { width: 6.628%; clip-path: inset(0 0 0 0); opacity: 0; }
-  94.01%, 100% { width: 6.628%; clip-path: inset(0 100% 0 0); opacity: 0; }
-}
-@keyframes demo-lista-button { 0%, 10% { opacity: 0; } 14%, 32% { opacity: 1; } 40%, 100% { opacity: 0; } }
-@keyframes demo-lista-tap {
-  0%, 12% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
-  18% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.9); }
-  30%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(1.8); }
-}
-@media (prefers-reduced-motion: reduce) { .demo-lista { display: none; } }
-
-.proto-status-link { margin-left: var(--space-2); background: none; border: 0; padding: 0; font: inherit; cursor: pointer; }
-.proto-phone iframe { background: var(--color-neutral-950); }
-
 /* Hierarquia: títulos de etapa (H2) em 32 px, acima dos H3 de 24 px. */
 .case-stage-head h2, .case-hero h2 { font-size: var(--text-32); line-height: var(--space-5); }
 @media (max-width: 560px) { .case-stage-head h2, .case-hero h2 { font-size: var(--text-24); line-height: var(--space-4); } }

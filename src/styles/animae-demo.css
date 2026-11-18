@@ -1,0 +1,62 @@
+/* Réplica em código da tela Minha Lista do ANIMAE (430 x 932). Medidas do design do app, por isso fora do verificador de 8 pt. */
+.ad-root {
+  --n0: #f9faff; --n10: #eceff8; --n40: #a6acc7; --n50: #7e85a3; --n70: #3a3f5a; --n80: #1f2333; --n90: #141725; --n100: #0f1018; --primary: #ff5c02;
+  position: absolute; inset: 0; overflow: hidden; background: var(--n90);
+  font-family: "Urbanist", system-ui, sans-serif; color: var(--n0);
+}
+.ad-screen { position: absolute; top: 0; left: 0; transform: scale(var(--ad-scale, 0.5)); transform-origin: 0 0; background: var(--n90); }
+.ad-status { position: absolute; top: 0; left: 0; right: 0; height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 16px; z-index: 2; }
+.ad-status-icons { display: inline-flex; gap: 16px; }
+.ad-flow { display: flex; flex-direction: column; gap: 32px; padding-top: 60px; }
+.ad-header { display: flex; flex-direction: column; gap: 32px; padding: 0 20px; }
+.ad-header-row { display: flex; justify-content: space-between; }
+.ad-round { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; background: var(--n80); }
+.ad-title { display: flex; flex-direction: column; gap: 8px; }
+.ad-h1 { margin: 0; font: 700 28px/42px "Inter", system-ui, sans-serif; color: var(--n10); }
+.ad-sub { margin: 0; font-size: 14px; line-height: 20px; color: var(--n40); }
+.ad-tabs { display: flex; gap: 8px; padding: 0 20px; }
+.ad-pill { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 20px; border: 1.5px solid var(--n70); border-radius: 999px; background: var(--n90); font-size: 14px; color: var(--n40); white-space: nowrap; }
+.ad-pill.is-on { padding-right: 8px; padding-left: 20px; border-color: var(--primary); background: var(--primary); color: var(--n0); }
+.ad-count { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--n70); border-radius: 999px; background: var(--n80); font-size: 12px; font-weight: 500; color: var(--n50); }
+.ad-pill.is-on .ad-count { border-color: var(--n100); background: var(--n100); color: var(--n0); }
+.ad-list { display: flex; flex-direction: column; margin-top: -12px; padding: 0 20px; }
+.ad-slot { overflow: hidden; padding-bottom: 16px; }
+.ad-card { display: flex; align-items: center; gap: 12px; padding: 16px; border-radius: 20px; background: var(--n80); box-shadow: inset 0 0 0 1.5px transparent; transition: box-shadow 0.3s ease; }
+.ad-card.is-zap { box-shadow: inset 0 0 0 1.5px var(--primary), 0 0 24px #ff5c0059; }
+.ad-thumb { flex: none; width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
+.ad-body { display: flex; flex: 1; flex-direction: column; gap: 8px; min-width: 0; }
+.ad-line { display: flex; align-items: center; justify-content: space-between; }
+.ad-name { font-size: 16px; font-weight: 600; line-height: 24px; color: var(--n10); }
+.ad-dots { color: var(--n40); }
+.ad-top { display: flex; flex-direction: column; gap: 4px; }
+.ad-bottom { display: flex; flex-direction: column; gap: 16px; }
+.ad-ep { margin: 0; font-size: 14px; line-height: 20px; color: var(--n40); }
+.ad-track { position: relative; height: 8px; border-radius: 999px; background: var(--n0); }
+.ad-fill { position: absolute; top: 0; left: 0; height: 8px; border-radius: 999px; background: var(--primary); box-shadow: 0 4px 10px #ff5c024d, inset 0 2px 4px #ffffff33; }
+.ad-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.ad-last { font-size: 12px; font-weight: 500; line-height: 16px; color: var(--n50); white-space: nowrap; }
+.ad-mark { position: relative; flex: none; width: 146px; height: 40px; padding: 0; border: 0; border-radius: 999px; background: #f9faff1a; color: var(--n0); font: 700 14px "Urbanist", system-ui, sans-serif; cursor: pointer; overflow: hidden; transition: background 0.3s ease, transform 0.2s ease; }
+.ad-mark:hover { background: #f9faff2e; }
+.ad-mark:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.ad-mark-a, .ad-mark-b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 4px; transition: opacity 0.25s ease, transform 0.3s ease; }
+.ad-mark-b { opacity: 0; transform: translateY(8px); }
+.ad-mark.is-done { background: var(--primary); }
+.ad-mark.is-done .ad-mark-a { opacity: 0; transform: translateY(-8px); }
+.ad-mark.is-done .ad-mark-b { opacity: 1; transform: none; }
+.ad-nav { position: absolute; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: space-between; height: 94px; padding: 20px 32px; border-top: 0.5px solid #f9faff33; border-radius: 20px 20px 0 0; background: var(--n100); }
+.ad-nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 62px; font-size: 12px; font-weight: 500; line-height: 16px; color: var(--n50); white-space: nowrap; }
+.ad-nav-item.is-on { color: var(--primary); filter: drop-shadow(0 0 6px #ff5c0059); }
+.ad-avatar { border-radius: 50%; }
+@media (prefers-reduced-motion: reduce) { .ad-card, .ad-mark, .ad-mark-a, .ad-mark-b { transition: none; } }
+.ad-i18 { width: 18px; height: 18px; }
+.ad-i26 { width: 26px; height: 26px; }
+.ad-i28 { width: 28px; height: 28px; }
+/* Mais específico que ".case-frame .case-device-screen img", que estica imagens de tela. */
+.case-device-screen .ad-root img.ad-thumb { width: 64px; height: 64px; object-fit: cover; object-position: center; }
+.case-device-screen .ad-root img.ad-avatar { width: 28px; height: 28px; object-fit: cover; object-position: center; }
+/* Os estilos de parágrafo do case não podem vazar para dentro da tela do app. */
+.case-document .ad-root p { max-width: none; margin: 0; }
+.case-document .ad-root p.ad-h1 { font: 700 28px/42px "Inter", system-ui, sans-serif; color: var(--n10); }
+.case-document .ad-root p.ad-sub { font: 400 14px/20px "Urbanist", system-ui, sans-serif; color: var(--n40); }
+.case-document .ad-root p.ad-ep { font: 400 14px/20px "Urbanist", system-ui, sans-serif; color: var(--n40); }
+.ad-line { height: 24px; }
