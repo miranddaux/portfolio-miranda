@@ -51,7 +51,7 @@ export const ADICIONAL = [
     texto: "Aplicativo social para quem acompanha animes.",
   },
   {
-    cargo: "Vencedor do Hackathon SouJunior — 1º lugar",
+    cargo: "Vencedor do Hackathon SouJunior | 1º lugar",
     empresa: "Designer e mentor",
     periodo: "set 2026",
     texto: "Atuei como designer e mentor da equipe que conquistou o 1º lugar entre 30 squads, com a landing page do Apoia.se.",
