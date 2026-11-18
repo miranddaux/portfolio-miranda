@@ -28,7 +28,20 @@ const CATALOGO = [
   ["Feel Good Inc.", "Gorillaz"],
   ["Mr. Brightside", "The Killers"],
   ["Everytime We Touch", "Cascada"],
-].map(([titulo, artista]) => ({ titulo, artista, link: `https://www.youtube.com/results?search_query=${encodeURIComponent(`${artista} ${titulo} official`)}` }));
+].map(([titulo, artista]) => ({ id: `cat-${artista}-${titulo}`, titulo, artista, url: "", duracao: 30, origem: "catalogo" }));
+
+// Prévias oficiais de 30 s pela API pública de busca do iTunes (Apple). Nada é hospedado no site.
+const normaliza = (t) => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+async function buscarPrevia(f) {
+  const r = await fetch(`https://itunes.apple.com/search?${new URLSearchParams({ term: `${f.artista} ${f.titulo}`, media: "music", entity: "song", limit: "10" })}`);
+  if (!r.ok) throw new Error("busca");
+  const { results = [] } = await r.json();
+  const t = normaliza(f.titulo), a = normaliza(f.artista).replace(/^the /, "");
+  const ok = results.filter((x) => x.previewUrl);
+  const achou = ok.find((x) => normaliza(x.trackName).startsWith(t.split(" ")[0]) && normaliza(x.artistName).includes(a)) || ok.find((x) => normaliza(x.artistName).includes(a));
+  if (!achou) throw new Error("sem previa");
+  return achou.previewUrl;
+}
 
 const PlayVidro = () => (
   <svg className="hs-play-glifo" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
@@ -63,6 +76,8 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
   const [repetir, setRepetir] = useState(true);
   const [aleatorio, setAleatorio] = useState(false);
   const [aviso, setAviso] = useState("");
+  const [buscando, setBuscando] = useState(false);
+  const cacheUrl = useRef({});
 
   const faixa = faixas[atual];
   tocandoRef.current = tocando;
@@ -71,7 +86,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
   // Faixas iniciais: a demonstração gerada no navegador. As demais vêm da importação de arquivos do visitante.
   useEffect(() => {
     const url = criarFaixaDemo();
-    setFaixas([{ id: "demo", titulo: "Demonstração Headspace", artista: "Gerada no navegador", url, duracao: 32, origem: "demo" }]);
+    setFaixas([{ id: "demo", titulo: "Demonstração Headspace", artista: "Gerada no navegador", url, duracao: 32, origem: "demo" }, ...CATALOGO]);
     return () => URL.revokeObjectURL(url);
   }, []);
 
@@ -101,12 +116,26 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     }
   }, [garantirMotor]);
 
-  const carregar = useCallback((i, tocarLogo = true) => {
+  const pedido = useRef(0);
+  const carregar = useCallback(async (i, tocarLogo = true) => {
     const f = faixas[i];
     const el = audio.current;
     if (!f || !el) return;
+    const meu = ++pedido.current;
     setAtual(i); setTempo(0); setDuracao(f.duracao || 0); setAviso("");
-    el.src = f.url;
+    let url = f.url;
+    if (f.origem === "catalogo") {
+      el.pause(); setBuscando(true);
+      try {
+        url = cacheUrl.current[f.id] || (cacheUrl.current[f.id] = await buscarPrevia(f));
+      } catch {
+        if (meu === pedido.current) { setBuscando(false); setAviso("Não encontrei a prévia desta música agora. Tente outra."); }
+        return;
+      }
+      if (meu !== pedido.current) return;
+      setBuscando(false);
+    }
+    el.src = url;
     el.load();
     if (tocarLogo) tocar();
   }, [faixas, tocar]);
@@ -130,7 +159,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
   const alternarTocar = () => {
     const el = audio.current;
     if (!el) return;
-    if (!el.src) { carregar(atual, true); return; }
+    if (!el.src || buscando) { carregar(atual, true); return; }
     if (el.paused) tocar(); else el.pause();
   };
   const parar = () => { const el = audio.current; if (!el) return; el.pause(); el.currentTime = 0; setTempo(0); };
@@ -138,6 +167,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
   // Elemento de áudio e eventos
   useEffect(() => {
     const el = new Audio();
+    el.crossOrigin = "anonymous"; // necessário para o analisador ler o áudio das prévias
     el.preload = "metadata";
     audio.current = el;
     const aoTempo = () => { if (!arrastando.current) setTempo(el.currentTime); };
@@ -282,22 +312,13 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
               {lista.map((f, i) => (
                 <li key={f.id}>
                   <button type="button" className={`hs-faixa ${i === atual ? "is-atual" : ""}`} aria-current={i === atual ? "true" : undefined} onClick={() => carregar(i, true)}>
-                    <span className="hs-faixa-nome">{i === atual && tocando ? "▶ " : ""}{f.titulo} - {f.artista}</span>
-                    <span className="hs-faixa-dur">{formatarTempo(f.duracao)}</span>
+                    <span className="hs-faixa-nome">{i === atual && (tocando || buscando) ? (buscando ? "… " : "▶ ") : ""}{f.titulo} - {f.artista}</span>
+                    <span className="hs-faixa-dur">{f.origem === "catalogo" ? "prévia" : formatarTempo(f.duracao)}</span>
                   </button>
                 </li>
               ))}
-              <li className="hs-separador" aria-hidden="true">Catálogo (links oficiais)</li>
-              {CATALOGO.map((c) => (
-                <li key={c.titulo}>
-                  <a className="hs-faixa hs-faixa-link" href={c.link} target="_blank" rel="noopener noreferrer">
-                    <span className="hs-faixa-nome">{c.titulo} - {c.artista}</span>
-                    <span className="hs-faixa-dur" aria-hidden="true">↗</span>
-                    <span className="sr-only"> (abre em nova aba)</span>
-                  </a>
-                </li>
-              ))}
             </ul>
+            <p className="hs-nota">Músicas do catálogo tocam a prévia oficial de 30 s (iTunes). Importe seus arquivos para ouvir inteiras.</p>
             <label className="hs-mini hs-importar">
               Importar arquivos…
               <input type="file" accept="audio/*" multiple onChange={importar} />
@@ -308,10 +329,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
         {/* Visualizador (atrás da moldura) */}
         <div className="hs-visor" ref={visor} style={area(622, 455.500, 652, 443)}>
           <canvas ref={canvas} aria-label={`Visualização: ${MODOS[modo]}`} role="img" />
-          <div className="hs-info" aria-hidden="true">
-            <span className="hs-info-titulo">{rotuloModo || (faixa ? `${faixa.titulo}` : "Headspace")}</span>
-            <span>{formatarTempo(tempo)} / {formatarTempo(duracao)}</span>
-          </div>
+          {rotuloModo && <div className="hs-info" aria-hidden="true"><span>{rotuloModo}</span></div>}
         </div>
 
         <img className="hs-moldura" src={`${A}/frame.webp`} alt="" width="1254" height="1254" draggable="false" />
