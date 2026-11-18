@@ -271,3 +271,5 @@
 @media (max-width: 560px) { .case-overview-card { grid-template-columns: minmax(0, 1fr); } }
 @container janela (max-width: 880px) { .case-overview-card { grid-template-columns: repeat(2, minmax(0, 1fr)); } .case-overview-card > div:last-child { grid-column: 1 / -1; } }
 @container janela (max-width: 600px) { .case-overview-card { grid-template-columns: minmax(0, 1fr); } }
+
+.case-research-facts dd { white-space: pre-line; }

@@ -36,7 +36,7 @@ test("links conhecidos são HTTPS e a apresentação antiga do ANIMAE é identif
       if (!key.endsWith("Label")) assert.equal(new URL(href).protocol, "https:");
     }
     assert(project.research.intro);
-    assert.equal(project.decisions.length, 3);
+    assert(project.decisions.length >= 3 && project.decisions.length <= 4);
     assert(project.journeys.every((j) => j.steps.length >= 3));
     assert(project.kpis.every(([name, definition]) => name && definition));
   }
@@ -63,7 +63,7 @@ test("navegação interna preserva abrir em nova aba e cliques modificados", () 
   const animae = getCaseStudy("animae");
   assert.equal(animae.period, "Out/2025 — out/2026 · 1 ano");
   assert.equal(animae.links.site, "https://animaeapp.com.br/");
-  assert.equal(animae.modules.length, 5);
+  assert.equal(animae.modules.length, 4);
   for (const project of CASE_STUDIES) {
     assert(project.categories.length >= 2);
     assert(project.categories.every(c => c === c.toUpperCase()));

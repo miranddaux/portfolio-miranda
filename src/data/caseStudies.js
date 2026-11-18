@@ -15,7 +15,7 @@ const STORIES = {
     roleShort: "UX, UI, design system e código com auxílio de IA",
     team: "Projeto solo",
     period: "Out/2025 — out/2026 · 1 ano",
-    tools: ["Figma", "Illustrator", "Expo", "React Native", "Supabase"],
+    tools: ["Figma", "Illustrator", "Expo", "React Native", "Supabase", "Vercel"],
     status: "Produto próprio · web disponível",
     accent: "animae",
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
@@ -39,30 +39,31 @@ const STORIES = {
       ["Decisão central", "Deixei o streaming próprio de fora para concentrar o MVP em organização e comunidade."],
       ["Estado documentado", "Versão web disponível; Android preparado para teste fechado. Sem métricas públicas de uso."],
     ],
-    cover: { type: "phone", src: "/assets/cases/animae-lista.webp", width: 860, height: 1864, alt: "Tela Minha Lista do ANIMAE, com acompanhamento de episódios e navegação do app", caption: "Tela real do Figma · MVP social. Contagens e dados da interface são demonstrativos.", title: "Acompanhar, registrar e conversar", text: "Uma experiência para organizar o que a pessoa assiste e criar conexões em torno das mesmas histórias." },
-    context: "O ANIMAE nasceu de uma vontade minha: acompanhar os animes que assisto e conversar sobre teorias com amigos sem ficar pulando de aplicativo. Comecei com streaming social e salas para assistir em grupo, mas o custo e as licenças de catálogo tornavam essa proposta inviável para um produto solo.",
+    cover: { type: "phone", src: "/assets/cases/animae-lista.webp", width: 860, height: 1864, alt: "Tela Minha Lista do ANIMAE, com acompanhamento de episódios e navegação do app", caption: "Tela real do Figma · MVP social. Contagens e dados da interface são demonstrativos.", title: "Acompanhar, registrar e conversar", text: "Uma experiência para organizar o que o usuário assiste e criar conexões em torno das mesmas histórias." },
+    context: "O ANIMAE nasceu de uma vontade minha: acompanhar os animes que assisto e conversar sobre teorias com amigos sem ficar pulando de aplicativo. A primeira versão, o ANIMAE+, era um streaming social, com player e salas para assistir em grupo. Quando parei para decidir o que o produto era de verdade, a pergunta mudou: não era mais onde assistir, e sim com quem conversar sobre o que se assistiu. Além disso, o custo e as licenças de um catálogo próprio tornavam o streaming inviável para um produto solo. Por isso o ANIMAE virou um app social de acompanhamento e comunidade, e o streaming ficou de fora.",
     problem: "Como aproximar organização, descoberta e comunidade sem depender de um catálogo próprio de streaming?",
     research: {
       intro: "Fiz pesquisa de mesa com fontes públicas e reclamações de usuários. Interfaces carregadas, pouca interação entre fãs e personalização limitada ajudaram a orientar a oportunidade. Essa etapa não é apresentada como pesquisa por entrevistas.",
       findings: [
-        ["Método", "Pesquisa de mesa e análise de relatos públicos"],
-        ["Oportunidade", "Aproximar acompanhamento e conversa entre fãs"],
-        ["Limite", "Hipóteses ainda precisam de validação com uso real"],
+        ["Método", "Pesquisa de mesa e\nanálise de relatos públicos"],
+        ["Oportunidade", "Aproximar acompanhamento\ne conversa entre fãs"],
+        ["Limite", "Hipóteses ainda precisam de\nvalidação com uso real"],
       ],
     },
     decisions: [
-      { title: "Comunidade em vez de streaming", choice: "Retirei o player e as salas para assistir em grupo. O foco passou a ser lista, acompanhamento e interação.", tradeoff: "Abri mão do diferencial original para construir um produto que eu conseguisse manter." },
-      { title: "Explorar antes de criar conta", choice: "Permiti conhecer a home e o catálogo em modo visitante, antes do cadastro.", tradeoff: "Menos personalização no primeiro acesso, em troca de uma barreira inicial menor." },
-      { title: "Progresso com consistência", choice: "Organizei a experiência com XP, níveis e conquistas; o cálculo da pontuação fica no servidor.", tradeoff: "A lógica exige cuidado técnico, mas não depende de valores definidos pelo dispositivo." },
+      { title: "Comunidade em vez de streaming", choice: "Retirei o player e as salas para assistir em grupo, que eram o destaque da primeira versão. O app passou a indicar onde assistir e a concentrar lista, acompanhamento e interação.", tradeoff: "Abri mão do diferencial original para construir um produto que eu conseguisse manter." },
+      { title: "Explorar antes de criar conta", choice: "Permiti que o usuário conheça a home e o catálogo em modo visitante, antes do cadastro.", tradeoff: "Menos personalização no primeiro acesso, em troca de uma barreira inicial menor." },
+      { title: "Transformar o uso em jogo", choice: "Cada episódio registrado gera XP, que evolui níveis, badges e recompensas, em uma lógica parecida com a do Duolingo. O cálculo da pontuação fica no servidor.", tradeoff: "A lógica exige cuidado técnico, mas não depende de valores definidos pelo dispositivo." },
+      { title: "Uma comunidade que não nasce vazia", choice: "Para o feed não começar parado, criei bots para a comunidade e programei o Draco, o mascote, para publicar quizzes toda semana e registrar o XP, de modo que sempre haja atividade.", tradeoff: "A atividade automática ajuda no começo, mas não substitui uma comunidade real e precisa ficar clara para o usuário." },
     ],
     journeys: [{ label: "Jornada proposta do fã", steps: ["Explorar o catálogo", "Organizar a lista", "Registrar episódios", "Compartilhar com a comunidade"] }],
-    solution: "Organizei fluxos e wireframes antes das interfaces finais. Variáveis e componentes do Figma alimentam uma base de tokens consumida pelo app. O objetivo é manter a mesma linguagem visual entre design e implementação, migrando o que o MVP realmente precisa.",
+    solution: "Organizei fluxos e wireframes antes das interfaces finais. Como o projeto é solo, também cuidei do que acontece depois do layout: variáveis e componentes do Figma alimentam uma base de tokens consumida pelo app, para manter a mesma linguagem visual entre design e código. O app foi construído com Expo e React Native, tem o Supabase no back-end e a versão web roda na Vercel.",
     gallery: [],
-    outcome: "O resultado documentado é um produto funcional na web e uma versão Android preparada para teste fechado. A documentação de novembro de 2026 ainda não traz resultados de uso publicados. A evolução do produto será contada com datas e evidências.",
+    outcome: "O resultado documentado é um produto funcional na web e uma versão Android preparada para teste fechado. Ainda não houve teste com usuários, e é ele que fecha o ciclo de design: a evolução do produto será contada com datas e evidências.",
     kpis: [
       ["Ativação", "Primeira ação relevante após o cadastro"],
       ["Retenção D7", "Retorno ao app sete dias depois"],
-      ["Participação", "Publicações por pessoa no período"],
+      ["Participação", "Publicações por usuário no período"],
     ],
     learning: "Mudar de direção não significa necessariamente começar de novo. Deixar o streaming de lado preservou o problema que eu queria resolver e tornou possível continuar construindo o produto.",
   },
@@ -164,7 +165,7 @@ const MODULES = {
   animae: [
     {
       title: "Descobrir o próximo anime",
-      text: "Quis deixar a descoberta simples. A home destaca um título, mostra quem da minha rede está online e leva direto para a página do anime, com onde assistir e o progresso à vista. A pessoa pode conhecer o catálogo antes de criar uma conta, e esse primeiro contato precisava mostrar o valor do produto sem pedir compromisso logo de cara.",
+      text: "Quis deixar a descoberta simples. A home não destaca um título fixo: é um banner rotativo alimentado por uma API pública de animes, que traz os títulos em alta no momento e troca os banners sozinho. O aplicativo inteiro consome essa API para trazer os dados do catálogo. Da home, o usuário vai direto para a página do anime, com onde assistir e o progresso à vista, e pode conhecer tudo antes de criar uma conta.",
       layout: "phones",
       images: [
         { src: "/assets/cases/animae-home.webp", width: 860, height: 1864, alt: "Home do ANIMAE com anime em destaque, botões Adicionar e Onde assistir, e amigos online" },
@@ -173,13 +174,13 @@ const MODULES = {
     },
     {
       title: "Uma lista que acompanha o ritmo de cada fã",
-      text: "Organizei os títulos por intenção: assistindo, quero ver e concluídos. O progresso fica junto de cada anime, para a pessoa retomar de onde parou sem procurar essa informação em outra tela. Trabalhei contraste, hierarquia e estados para manter a lista fácil de percorrer.",
+      text: "Organizei os títulos por intenção: assistindo, quero ver e concluídos. O progresso fica junto de cada anime, para o usuário retomar de onde parou sem procurar essa informação em outra tela. Trabalhei contraste, hierarquia e estados para manter a lista fácil de percorrer.",
       layout: "phones",
       images: [{ src: "/assets/cases/animae-lista.webp", width: 860, height: 1864, alt: "Minha Lista com filtros de acompanhamento e progresso dos episódios", demo: "lista" }],
     },
     {
       title: "O que eu assisto também vira conversa",
-      text: "No feed, o acompanhamento ganha um lado social. Conclusões, avaliações e debates ajudam a começar uma conversa, entre amigos ou com a comunidade toda. A ideia é que o que a pessoa acompanha seja o ponto de partida do papo.",
+      text: "No feed, o acompanhamento ganha um lado social. Conclusões, avaliações e debates ajudam a começar uma conversa, entre amigos ou com a comunidade toda. A ideia é que o que o usuário acompanha seja o ponto de partida do papo.",
       layout: "phones",
       images: [
         { src: "/assets/cases/animae-feed-amigos.webp", width: 860, height: 1864, alt: "Feed de amigos do ANIMAE com atividade de conclusão de um anime, reações e comentários" },
@@ -188,22 +189,16 @@ const MODULES = {
     },
     {
       title: "Da primeira abertura à conta criada",
-      text: "A entrada começa com uma splash e um onboarding que apresenta o universo do app, com a opção de pular. Depois vêm login e cadastro em passos curtos, com a escolha de gêneros e de onde a pessoa assiste, para que as recomendações já comecem com o gosto dela.",
+      text: "O fluxo de entrada começa com o onboarding, que apresenta o aplicativo e o universo otaku, com a opção de pular. Depois vêm login e cadastro em passos curtos, com a escolha de gêneros e de onde o usuário assiste, para que as recomendações já comecem com o gosto dele.",
       images: [],
       flow: [
         { label: "Fluxo de entrada", items: [
-          { src: "/assets/cases/animae-flow-splash.webp", width: 860, height: 1864, alt: "Splash do ANIMAE com o mascote", caption: "Splash" },
           { src: "/assets/cases/animae-flow-onb-1.webp", width: 860, height: 1864, alt: "Onboarding 1: Seu universo otaku do seu jeito", caption: "Universo otaku" },
           { src: "/assets/cases/animae-login.webp", width: 860, height: 1864, alt: "Login com e-mail, senha, Criar conta, Entrar no fandom e login social", caption: "Login" },
           { src: "/assets/cases/animae-generos.webp", width: 860, height: 1864, alt: "Cadastro: O que você curte, com gêneros para escolher", caption: "Gêneros" },
           { src: "/assets/cases/animae-flow-streaming.webp", width: 860, height: 1864, alt: "Cadastro: Onde você assiste, com lista de serviços de streaming", caption: "Onde assiste" },
         ] },
       ],
-    },
-    {
-      title: "Do Figma ao produto",
-      text: "Como o projeto é solo, também preciso cuidar do que acontece depois do layout. Estruturei variáveis, componentes e tokens no Figma e levei essa base para o código com auxílio de IA. O aplicativo concentra a experiência de acompanhar e conversar.",
-      images: [],
     },
   ],
   navaja: [
