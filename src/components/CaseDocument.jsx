@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
+import AnimaeListaDemo from "./AnimaeListaDemo.jsx";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
@@ -32,21 +33,14 @@ export function CaseJourney({ journeys }) {
   </div>)}</div>;
 }
 
-// Microanimação em código sobre a tela da Minha Lista: toque no botão e avanço da barra de progresso.
-// Posições em % da imagem (860 × 1864). Só decoração: some com "reduzir movimento".
-function ListaDemo() {
-  return <span className="demo-lista" aria-hidden="true">
-    <span className="demo-lista-fill" />
-    <span className="demo-lista-button" />
-    <span className="demo-lista-tap" />
-  </span>;
-}
-
 // Só a tela, sem legenda. O alt descreve a imagem; clicar amplia em nova aba.
 function Shot({ media, phone }) {
+  if (media.demo === "lista") return <figure className="case-media is-phone">
+    <div className="case-device"><span className="case-device-screen"><AnimaeListaDemo /></span></div>
+  </figure>;
   return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
     <a className={phone ? "case-device" : "case-shot"} href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar imagem: ${media.alt} (abre em nova aba)`}>
-      <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" decoding="async" />{media.demo === "lista" && <ListaDemo />}</span>
+      <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" decoding="async" /></span>
     </a>
   </figure>;
 }

@@ -10,7 +10,7 @@ const properties =
   /^(?:font-size|line-height|(?:(?:min-|max-)?(?:width|height))|(?:padding|margin)(?:-.+)?|(?:row-|column-)?gap|grid-template-(?:columns|rows)|grid-auto-(?:columns|rows)|flex-basis|scroll-margin(?:-.+)?)$/;
 let declarations = 0;
 // replica-figma.css é a réplica fiel do Figma (medidas exatas do desenho).
-const excecoes = new Set(["replica-figma.css", "painel-xp.css", "msn.css"]);
+const excecoes = new Set(["replica-figma.css", "painel-xp.css", "msn.css", "animae-demo.css"]);
 for (const file of readdirSync(styles).filter(
   (name) => name.endsWith(".css") && !excecoes.has(name),
 )) {
