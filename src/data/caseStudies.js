@@ -27,7 +27,7 @@ const STORIES = {
       behanceLabel: "Ver case completo no Behance",
     },
     // Vídeo do protótipo funcionando: `video: { src, poster, caption }` quando o Thiago enviar.
-    heroShot: "animae-perfil",
+    heroShot: "animae-hub",
     roles: ["Product Design", "Design System", "Mobile"],
     landing: {
       address: "animaeapp.com.br",
@@ -37,7 +37,7 @@ const STORIES = {
     // Imagens por etapa (layouts: wide, pair, trio, mosaic). Slugs apontam para arquivos em /assets/cases.
     stageImages: {
       problema: { layout: "wide", images: ["animae-v1"] },
-      ideacao: { layout: "pair", images: ["animae-onboarding", "animae-perfil"] },
+      ideacao: { layout: "pair", images: ["animae-onboarding", "animae-feed-comunidade"] },
     },
     quick: [
       ["Problema", "Acompanhar anime, organizar listas e conversar com amigos exige alternar entre plataformas."],
@@ -45,7 +45,7 @@ const STORIES = {
       ["Decisão central", "Deixei o streaming próprio de fora para concentrar o MVP em organização e comunidade."],
       ["Estado documentado", "Versão web disponível; Android preparado para teste fechado. Sem métricas públicas de uso."],
     ],
-    cover: { type: "phone", src: "/assets/cases/animae-lista.png", width: 428, height: 1024, alt: "Tela Minha Lista do ANIMAE, com acompanhamento de episódios e navegação do app", caption: "Tela real do Figma · MVP social. Contagens e dados da interface são demonstrativos.", title: "Acompanhar, registrar e conversar", text: "Uma experiência para organizar o que a pessoa assiste e criar conexões em torno das mesmas histórias." },
+    cover: { type: "phone", src: "/assets/cases/animae-lista.webp", width: 860, height: 1864, alt: "Tela Minha Lista do ANIMAE, com acompanhamento de episódios e navegação do app", caption: "Tela real do Figma · MVP social. Contagens e dados da interface são demonstrativos.", title: "Acompanhar, registrar e conversar", text: "Uma experiência para organizar o que a pessoa assiste e criar conexões em torno das mesmas histórias." },
     context: "O ANIMAE nasceu de uma vontade minha: acompanhar os animes que assisto e conversar sobre teorias com amigos sem ficar pulando de aplicativo. Comecei com streaming social e salas para assistir em grupo, mas o custo e as licenças de catálogo tornavam essa proposta inviável para um produto solo.",
     problem: "Como aproximar organização, descoberta e comunidade sem depender de um catálogo próprio de streaming?",
     research: {
@@ -170,24 +170,33 @@ const MODULES = {
   animae: [
     {
       title: "Descobrir o próximo anime",
-      text: "Quis deixar a descoberta mais simples: buscar um título, explorar gêneros e retomar buscas recentes. A pessoa pode conhecer o catálogo antes de criar uma conta. Esse primeiro contato precisava mostrar o valor do produto sem pedir compromisso logo de cara.",
+      text: "Quis deixar a descoberta simples. A home destaca um título, mostra quem da minha rede está online e leva direto para a página do anime, com onde assistir e o progresso à vista. A pessoa pode conhecer o catálogo antes de criar uma conta, e esse primeiro contato precisava mostrar o valor do produto sem pedir compromisso logo de cara.",
       layout: "phones",
-      images: [{ src: "/assets/cases/animae-busca.png", width: 430, height: 932, alt: "Busca do ANIMAE com histórico, gêneros e títulos mais buscados", caption: "Busca e descoberta · interface do MVP no Figma." }],
+      images: [
+        { src: "/assets/cases/animae-home.webp", width: 860, height: 1864, alt: "Home do ANIMAE com anime em destaque, botões Adicionar e Onde assistir, e amigos online" },
+        { src: "/assets/cases/animae-hub.webp", width: 860, height: 1864, alt: "Página de um anime no ANIMAE com onde assistir, botão de adicionar à lista e progresso de episódios" },
+      ],
     },
     {
       title: "Uma lista que acompanha o ritmo de cada fã",
       text: "Organizei os títulos por intenção: assistindo, quero ver e concluídos. O progresso fica junto de cada anime, para a pessoa retomar de onde parou sem procurar essa informação em outra tela. Trabalhei contraste, hierarquia e estados para manter a lista fácil de percorrer.",
       layout: "phones",
-      images: [{ src: "/assets/cases/animae-lista.png", width: 428, height: 1024, alt: "Minha Lista com filtros de acompanhamento e progresso dos episódios", caption: "Minha Lista · estados e progresso de episódios." }],
+      images: [{ src: "/assets/cases/animae-lista.webp", width: 860, height: 1864, alt: "Minha Lista com filtros de acompanhamento e progresso dos episódios", demo: "lista" }],
     },
     {
       title: "O que eu assisto também vira conversa",
-      text: "No feed, o acompanhamento ganha um lado social. Conclusões, avaliações e animes em comum ajudam a começar uma conversa. No perfil, reuni favoritos, estatísticas e conquistas. A ideia é que a identidade da pessoa apareça no que ela acompanha e compartilha.",
+      text: "No feed, o acompanhamento ganha um lado social. Conclusões, avaliações e debates ajudam a começar uma conversa, entre amigos ou com a comunidade toda. A ideia é que o que a pessoa acompanha seja o ponto de partida do papo.",
       layout: "phones",
       images: [
-        { src: "/assets/cases/animae-feed.png", width: 253, height: 1024, alt: "Feed social do ANIMAE com atividades de amigos e recomendação por interesses em comum", caption: "Feed · atividades, interações e interesses em comum." },
-        { src: "/assets/cases/animae-perfil.png", width: 272, height: 1024, alt: "Perfil do ANIMAE com favoritos, nível, progresso de XP e conquistas", caption: "Perfil · favoritos e progressão. Números ilustrativos do layout." },
+        { src: "/assets/cases/animae-feed-amigos.webp", width: 860, height: 1864, alt: "Feed de amigos do ANIMAE com atividade de conclusão de um anime, reações e comentários" },
+        { src: "/assets/cases/animae-feed-comunidade.webp", width: 860, height: 1864, alt: "Feed da comunidade do ANIMAE com debate aberto e ranking de animes da semana" },
       ],
+    },
+    {
+      title: "Uma identidade que mostra o que a pessoa acompanha",
+      text: "No perfil, reuni estatísticas, nível, sequência de dias e conquistas. A progressão dá motivo para voltar sem tirar o foco do que importa, que é acompanhar e conversar. Os números do layout são ilustrativos.",
+      layout: "phones",
+      images: [{ src: "/assets/cases/animae-perfil.webp", width: 860, height: 1864, alt: "Perfil do ANIMAE com estatísticas, nível, progresso de XP, sequência de dias e conquistas" }],
     },
     {
       title: "Apresentar o universo sem atrasar a entrada",
