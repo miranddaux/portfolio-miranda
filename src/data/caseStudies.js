@@ -32,7 +32,6 @@ const STORIES = {
     heroShot: "animae-hub",
     roles: ["Product Design", "Design System", "Mobile"],
     landing: {
-      address: "animaeapp.com.br",
       image: { src: "/assets/cases/animae-lp-completa.webp", width: 1440, height: 5311, alt: "Landing page completa do ANIMAE, do topo com o título e o app até o convite para a versão Android" },
       note: "Captura de 16/11/2026.",
     },
