@@ -27,7 +27,11 @@ const STORIES = {
     },
     // Tamanho do quadro inicial do protótipo no Figma (Home · Redesenho), usado para encaixar o embed.
     // Vídeo do protótipo funcionando: `video: { src, poster, caption }` quando o Thiago enviar.
-    heroShot: "animae-hub",
+    heroTrio: [
+      { src: "/assets/cases/animae-home.webp", width: 860, height: 1864, alt: "Tela inicial do ANIMAE com destaque, botão de adicionar e amigos online" },
+      { src: "/assets/cases/animae-lista.webp", width: 860, height: 1864, alt: "Tela Minha Lista do ANIMAE com filtros e progresso dos episódios" },
+      { src: "/assets/cases/animae-perfil-xp.webp", width: 860, height: 1864, alt: "Tela de perfil do ANIMAE com XP, sequência de dias e conquistas" },
+    ],
     roles: ["Product Design", "Design System", "Mobile"],
     // Imagens por etapa (layouts: wide, pair, trio, mosaic). Slugs apontam para arquivos em /assets/cases.
     stageImages: {},
@@ -191,7 +195,7 @@ const MODULES = {
       layout: "phones",
       images: [
         { src: "/assets/cases/animae-perfil-xp.webp", width: 860, height: 1864, alt: "Perfil do ANIMAE com nível, XP, sequência de dias e conquistas" },
-        { src: "/assets/cases/animae-quiz-draco.webp", width: 860, height: 1864, alt: "Quiz do Draco com pergunta, barra de tempo, vidas e quatro opções de resposta" },
+        { src: "/assets/cases/animae-quiz-draco.webp", width: 860, height: 1864, alt: "Quiz do Draco com pergunta, barra de tempo, vidas e quatro opções de resposta", demo: "quiz" },
       ],
     },
     {

@@ -274,3 +274,9 @@
 
 .case-research-facts dd { white-space: pre-line; }
 
+
+/* Banner do case ANIMAE: três telas inteiras, retas, lado a lado */
+.case-hero-shot:has(.case-hero-phone) { height: auto; align-items: center; gap: var(--space-3); padding: var(--space-4); }
+.case-hero-phone { flex: 0 1 200px; min-width: 0; padding: var(--space-1); border: 2px solid var(--color-neutral-700); border-radius: var(--space-5); background: var(--color-neutral-950); box-shadow: 0 16px 40px #1b243644; }
+.case-hero-phone img { display: block; width: 100%; height: auto; aspect-ratio: 9 / 19.5; object-fit: cover; border-radius: var(--space-4); }
+@media (max-width: 640px) { .case-hero-shot:has(.case-hero-phone) { gap: var(--space-1); padding: var(--space-2); } .case-hero-phone { padding: 0; border-radius: var(--space-2); } .case-hero-phone img { border-radius: var(--space-2); } }

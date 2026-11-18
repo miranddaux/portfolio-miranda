@@ -10,14 +10,8 @@ import useXPLogin from "./hooks/useXPLogin";
 import { CASES } from "./data/cases";
 import { getCaseStudy } from "./data/caseStudies.js";
 import { irParaEntrada, rota } from "./lib/rota.js";
-const modes = ["rapido", "noite", "xp"];
 function initialMode() {
-  try {
-    const saved = localStorage.getItem("miranda-mode");
-    return modes.includes(saved) ? saved : "xp";
-  } catch {
-    return "xp";
-  }
+  return "xp";
 }
 function initialWelcome() {
   if (rota() !== "/" || location.hash) return false;

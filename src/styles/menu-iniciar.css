@@ -81,3 +81,20 @@
 .mi-acao { height: 32px; padding: 0 var(--space-1); font-size: var(--text-14); }
 .mi-acao img { width: 24px; height: 24px; }
 .mi-flyout-todos { left: 224px; width: 224px; bottom: 40px; }
+
+/* Refino: linhas mais altas, ícones todos de 24 px (arquivos normalizados), rodapé com ícones de 16 px */
+.mi-coluna { padding: var(--space-1) 0; gap: 0; }
+.mi-linha, .mi-esquerda .mi-linha, .mi-direita .mi-linha { height: 40px; gap: var(--space-2); padding: 0 var(--space-2); }
+.mi-esquerda .mi-linha.is-fixo { height: 48px; }
+.mi-divisor { margin: var(--space-1) var(--space-2); }
+.mi-icone img, .mi-icone img.mi-rede { width: 24px; height: 24px; object-fit: contain; transform: none; }
+.mi-todos { height: 40px; padding: 0 var(--space-2); }
+.mi-todos svg { width: 24px; height: 24px; }
+.mi-rodape { height: 48px; gap: var(--space-1); padding: 0 var(--space-2); }
+.mi-acao { height: 32px; padding: 0 var(--space-1); gap: var(--space-1); }
+.mi-acao img { width: 16px; height: 16px; }
+.mi-flyout-todos { bottom: 48px; }
+.mi-mini-icone img { transform: none; }
+.mi { width: 480px; }
+.mi-colunas { grid-template-columns: 224px minmax(0, 1fr); }
+.mi-flyout-todos { width: 256px; }

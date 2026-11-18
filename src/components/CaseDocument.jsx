@@ -1,6 +1,7 @@
 import { Component, useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import AnimaeListaDemo from "./AnimaeListaDemo.jsx";
+import AnimaeQuizDemo from "./AnimaeQuizDemo.jsx";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
@@ -61,7 +62,7 @@ class DemoSegura extends Component {
   render() { return this.state.falhou ? null : this.props.children; }
 }
 
-const DEMOS = { lista: AnimaeListaDemo };
+const DEMOS = { lista: AnimaeListaDemo, quiz: AnimaeQuizDemo };
 
 function Shot({ media, phone }) {
   const Demo = DEMOS[media.demo];
@@ -184,7 +185,9 @@ export default function CaseDocument({ project, onNavigate }) {
     </header>
 
     <div className="case-hero-shot" role="group" aria-label="Tela do aplicativo em destaque">
-      {phones ? <Shot media={heroShot} phone /> : <Shot media={project.cover} phone={false} />}
+      {phones && project.heroTrio
+        ? project.heroTrio.map((m) => <div key={m.src} className="case-hero-phone"><img src={m.src} alt={m.alt} width={m.width} height={m.height} decoding="async" /></div>)
+        : phones ? <Shot media={heroShot} phone /> : <Shot media={project.cover} phone={false} />}
     </div>
 
     <dl className="case-overview-card" aria-label="Visão geral do projeto">
