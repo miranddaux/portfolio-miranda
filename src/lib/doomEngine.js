@@ -12,6 +12,9 @@ const carregarModulo = () => (modulo ||= WebAssembly.compileStreaming(fetch(WASM
 const CODIGOS = { 8: 127, 16: 182, 17: 157, 18: 184, 37: 172, 38: 173, 39: 174, 40: 175 };
 const codigo = (k) => CODIGOS[k] ?? (k >= 65 && k <= 90 ? k + 32 : k >= 112 && k <= 123 ? k + 75 : k);
 
+// Chamado cedo (ex.: ao abrir o menu Iniciar) para o jogo já estar baixado e compilado quando a janela abrir.
+export const preCarregarDoom = () => { carregarModulo().catch(() => {}); };
+
 export async function iniciarDoom({ canvas, alvo }) {
   const compilado = await carregarModulo();
   const memoria = new WebAssembly.Memory({ initial: 108 });

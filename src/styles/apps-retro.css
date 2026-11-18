@@ -51,6 +51,7 @@
 .doom-logo { display: block; width: min(360px, 70%); height: auto; object-fit: contain; }
 .app-doom h2 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); }
 .app-doom p { margin: 0; font-size: var(--text-14); line-height: var(--space-3); }
+.app-doom .doom-teclas { margin: 0; font-size: var(--text-12); }
 .doom-botoes { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-1); }
 .doom-jogar { font-weight: 700; }
 .doom-barra { display: flex; flex: none; gap: var(--space-1); padding: var(--space-1); border-bottom: 1px solid #d0cebf; background: #f5f4ea; }
@@ -60,6 +61,8 @@
 .doom-palco:fullscreen .doom-canvas { width: auto; height: 100%; }
 .doom-online iframe { flex: 1; width: 100%; height: 100%; border: 0; background: #000; }
 .doom-msg { position: absolute; inset: auto 0 var(--space-2); margin: 0 auto !important; width: fit-content; padding: var(--space-1) var(--space-2); background: rgba(0, 0, 0, 0.75); color: #fff; font-size: var(--text-14); pointer-events: none; }
+.doom-teclas { flex: none; padding: var(--space-1) var(--space-2); border-top: 1px solid #d0cebf; background: #f5f4ea; color: #333; font-size: var(--text-12); line-height: var(--space-3); }
+.doom-teclas a { color: #00309c; }
 .doom-ajuda { position: absolute; inset: 50% auto auto 50%; z-index: 2; width: min(360px, 90%); padding: var(--space-2); border: 1px solid #0a246a; background: #ece9d8; color: #000; text-align: left; transform: translate(-50%, -50%); box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4); }
 .app-doom-launcher .doom-ajuda { position: static; transform: none; }
 .doom-ajuda h3 { margin: 0 0 var(--space-1); font-size: var(--text-16); }

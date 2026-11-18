@@ -67,3 +67,6 @@
 
 .hs-nota { margin: 4px 0 0; font-size: 12px; line-height: 16px; color: #cfeaa0; }
 .hs-gaveta-dir { top: calc(var(--u) * 110); height: calc(var(--u) * 1030); }
+.hs-menu-visual { position: absolute; z-index: 7; top: 16%; right: 2%; min-width: 168px; margin: 0; padding: 4px; list-style: none; border: 2px solid #2f7000; border-radius: 8px; background: #150818; box-shadow: 0 4px 10px #000a; }
+.hs-menu-visual button { display: block; width: 100%; padding: 4px 8px; border: 0; border-radius: 4px; background: transparent; color: #eaffd0; font: 14px/16px "Segoe UI", Tahoma, sans-serif; text-align: left; cursor: pointer; }
+.hs-menu-visual button:hover, .hs-menu-visual button:focus-visible { background: #b02be0; color: #fff; outline: none; }

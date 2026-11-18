@@ -141,6 +141,9 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
     return () => document.removeEventListener("click", clique);
   }, []);
   useEffect(() => {
+    if (start) import("../lib/doomEngine.js").then((m) => m.preCarregarDoom());
+  }, [start]);
+  useEffect(() => {
     if (!start) return;
     menuRef.current?.querySelector("button")?.focus({ preventScroll: true });
     const close = (e) => {
