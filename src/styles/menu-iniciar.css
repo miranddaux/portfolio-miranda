@@ -1,19 +1,24 @@
 /* Menu Iniciar: tudo em grade de 8 pontos. Linhas de 40 px com ícone de 32 px; mini menus com linhas de 32 px e ícone de 24 px. */
-.mi { position: fixed; left: 0; bottom: 25px; z-index: 32; display: flex; flex-direction: column; width: 480px; max-width: 100vw; border: 1px solid #0831a0; border-bottom: 0; border-radius: 8px 8px 0 0; background: #fff; font-family: var(--font-ui); color: #000; box-shadow: 4px -2px 12px #0006; }
+.mi { position: fixed; left: 0; bottom: 25px; z-index: 32; display: flex; flex-direction: column; width: 544px; max-width: 100vw; border: 1px solid #0831a0; border-bottom: 0; border-radius: 8px 8px 0 0; background: #fff; font-family: var(--font-ui); color: #000; box-shadow: 4px -2px 12px #0006; }
 .mi-cabecalho { display: flex; align-items: center; gap: var(--space-2); height: 64px; padding: 0 var(--space-2); border-radius: 7px 7px 0 0; background: linear-gradient(180deg, #4a8df0, #1f66d8 55%, #0d5cc9); border-bottom: 2px solid #f4a12a; color: #fff; }
 .mi-avatar { width: 48px; height: 48px; border: 2px solid #fff; border-radius: 4px; object-fit: cover; background: #fff; }
 .mi-cabecalho strong { font-size: var(--text-16); line-height: var(--space-3); text-shadow: 1px 1px 1px #0008; }
-.mi-colunas { display: grid; grid-template-columns: 224px minmax(0, 1fr); }
+.mi-colunas { display: grid; grid-template-columns: 256px minmax(0, 1fr); }
 .mi-coluna { display: flex; flex-direction: column; padding: var(--space-1) 0; min-width: 0; }
 .mi-esquerda { background: #fff; }
 .mi-direita { background: #d3e5fa; border-left: 1px solid #95bdee; }
-.mi-linha { display: flex; align-items: center; gap: var(--space-1); width: 100%; height: 40px; padding: 0 var(--space-2); border: 0; background: transparent; color: #0b2f78; font: inherit; text-align: left; text-decoration: none; cursor: pointer; }
+.mi-linha { display: flex; align-items: center; gap: var(--space-2); width: 100%; height: 48px; padding: 0 var(--space-2); border: 0; background: transparent; color: #0b2f78; font: inherit; text-align: left; text-decoration: none; cursor: pointer; }
 .mi-esquerda .mi-linha { color: #1a1a1a; }
 .mi-icone { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 32px; height: 32px; }
 .mi-icone img, .mi-icone svg { display: block; width: 32px; height: 32px; object-fit: contain; }
+.mi-esquerda .mi-linha { height: 48px; }
+.mi-esquerda .mi-linha.is-fixo { height: 56px; }
+.mi-direita .mi-linha { height: 40px; gap: var(--space-1); }
+.mi-esquerda .mi-icone, .mi-esquerda .mi-icone img, .mi-esquerda .mi-icone svg { width: 40px; height: 40px; }
+.mi-esquerda .mi-icone .mi-selo { width: 32px; height: 32px; font-size: var(--text-14); border-radius: 8px; }
 .mi-texto { display: grid; min-width: 0; }
-.mi-texto strong { overflow: hidden; font-size: var(--text-14); font-weight: 400; line-height: var(--space-3); white-space: nowrap; text-overflow: ellipsis; }
-.mi-linha.is-fixo .mi-texto strong { font-weight: 700; line-height: var(--space-2); }
+.mi-texto strong { overflow: hidden; font-size: var(--text-16); font-weight: 400; line-height: var(--space-3); white-space: nowrap; text-overflow: ellipsis; }
+.mi-linha.is-fixo .mi-texto strong { font-weight: 700; line-height: var(--space-3); }
 .mi-texto small { font-size: var(--text-12); line-height: var(--space-2); color: #6b7f9c; }
 .mi-linha:hover:not(.is-breve), .mi-linha:focus-visible:not(.is-breve), .mi-linha.is-aberto { background: #316ac5; color: #fff; outline: 0; }
 .mi-linha:hover:not(.is-breve) small, .mi-linha:focus-visible:not(.is-breve) small { color: #dbe7ff; }
@@ -23,11 +28,11 @@
 .mi-recente .mi-texto strong { font-weight: 700; }
 .mi-sub { position: relative; }
 .mi-todos-area { margin-top: auto; }
-.mi-todos { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 40px; padding: 0 var(--space-2); border: 0; background: transparent; font: inherit; font-size: var(--text-14); font-weight: 700; color: #1a1a1a; cursor: pointer; }
+.mi-todos { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 48px; padding: 0 var(--space-2); border: 0; background: transparent; font: inherit; font-size: var(--text-16); font-weight: 700; color: #1a1a1a; cursor: pointer; }
 .mi-todos svg { display: block; width: 24px; height: 24px; }
 .mi-todos:hover, .mi-todos:focus-visible, .mi-todos.is-aberto { background: #316ac5; color: #fff; outline: 0; }
 .mi-rodape { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-3); height: 56px; padding: 0 var(--space-2); background: linear-gradient(180deg, #2f78e0, #0d5cc9 60%, #0a4fb0); border-top: 2px solid #5b9af0; }
-.mi-acao { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1); border: 0; border-radius: 4px; background: transparent; color: #fff; font: inherit; font-size: var(--text-14); font-weight: 700; cursor: pointer; }
+.mi-acao { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1); border: 0; border-radius: 4px; background: transparent; color: #fff; font: inherit; font-size: var(--text-16); font-weight: 700; cursor: pointer; }
 .mi-acao img { display: block; width: 32px; height: 32px; object-fit: contain; }
 .mi-acao:hover, .mi-acao:focus-visible { background: #ffffff2e; outline: 0; }
 
@@ -36,7 +41,7 @@
 
 /* Mini menus: "Todos os programas" cobre a coluna azul; "Usado recentemente" abre ao lado do menu */
 .mi-flyout { position: absolute; z-index: 2; display: flex; flex-direction: column; padding: var(--space-1) 0; overflow-y: auto; border: 1px solid #8d99ad; background: #fff; box-shadow: 4px 4px 8px #0004; }
-.mi-flyout-todos { left: 224px; right: 0; bottom: 56px; max-height: calc(100vh - 160px); border-radius: 4px 4px 0 0; }
+.mi-flyout-todos { left: 256px; right: 0; bottom: 56px; max-height: calc(100vh - 160px); border-radius: 4px 4px 0 0; }
 .mi-flyout-recente { top: 0; left: 100%; width: 240px; border-radius: 0 4px 4px 4px; }
 .mi-mini { display: flex; align-items: center; gap: var(--space-1); flex: none; width: 100%; height: 32px; padding: 0 var(--space-2); border: 0; background: transparent; color: #1a1a1a; font: inherit; font-size: var(--text-14); line-height: var(--space-3); text-align: left; text-decoration: none; white-space: nowrap; cursor: pointer; }
 .mi-mini-icone { display: inline-flex; flex: none; width: 24px; height: 24px; }
