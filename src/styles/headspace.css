@@ -66,3 +66,4 @@
 @media (prefers-reduced-motion: reduce) { .hs-gaveta { transition: none; } }
 
 .hs-nota { margin: 4px 0 0; font-size: 12px; line-height: 16px; color: #cfeaa0; }
+.hs-gaveta-dir { top: calc(var(--u) * 110); height: calc(var(--u) * 1030); }

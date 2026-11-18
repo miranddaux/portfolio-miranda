@@ -4,4 +4,5 @@
 export const VIDEOS_PLAYER = [
   { src: "https://www.youtube.com/watch?v=VgDgWzBL7s4" },
   { src: "https://www.youtube.com/watch?v=_Aeh_8X1RVo" },
+  { src: "https://www.youtube.com/watch?v=b2MGzu8SBjg" },
 ];
