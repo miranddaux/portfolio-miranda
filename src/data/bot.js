@@ -25,15 +25,15 @@ const INTENCOES = [
     chaves: ["quem", "sobre", "apresent", "thiago", "ele e", "voce e"],
     respostas: [
       "O Thiago é Product Designer em São José do Rio Preto, SP.",
-      "De dia, desenha e-commerces na Shopify pela Agência Disco. À noite, cria pequenos projetos onde design e código se encontram.",
+      "Ele desenha e-commerces na Shopify pela Agência Disco e nas horas vagas cria o ANIMAE, onde design e código se encontram.",
     ],
     acao: { rotulo: "Abrir Sobre mim", abrir: "sobre" },
   },
   {
     chaves: ["experien", "trabalh", "disco", "empresa", "carreira", "anos", "historico"],
     respostas: [
-      "São 6 anos de design: 4 em design gráfico e 2 em produto.",
-      "Hoje ele é Product Designer na Agência Disco: e-commerces em Shopify do briefing ao handoff, com design systems no Figma.",
+      "São 6 anos de design.",
+      "Hoje ele é Product Designer na Agência Disco e desenha e-commerces em Shopify do briefing ao handoff, com design systems no Figma.",
     ],
     acao: { rotulo: "Ver currículo", abrir: "curriculo" },
   },
