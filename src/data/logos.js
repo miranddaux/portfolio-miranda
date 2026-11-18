@@ -10,5 +10,7 @@ const LOGOS = {
   cursor: `${L}/cursor.png`,
   shopify: `${L}/shopify.png`,
   "vs code": `${L}/vscode.png`,
+  "framer ai": `${L}/framer.png`,
+  framer: `${L}/framer.png`,
 };
 export const logoDe = (nome) => LOGOS[String(nome).toLowerCase()] || null;

@@ -1,7 +1,6 @@
 import { Component, useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import AnimaeListaDemo from "./AnimaeListaDemo.jsx";
-import AnimaeQuizDemo from "./AnimaeQuizDemo.jsx";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 
@@ -62,7 +61,7 @@ class DemoSegura extends Component {
   render() { return this.state.falhou ? null : this.props.children; }
 }
 
-const DEMOS = { lista: AnimaeListaDemo, quiz: AnimaeQuizDemo };
+const DEMOS = { lista: AnimaeListaDemo };
 
 function Shot({ media, phone }) {
   const Demo = DEMOS[media.demo];
