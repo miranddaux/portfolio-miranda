@@ -102,6 +102,8 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
           <Linha icone={img(`${XP}/area/sobre.png`)} rotulo="Sobre mim" aoClicar={() => aoAbrir("sobre")} />
           <Linha icone={img(`${XP}/area/curriculo.png`)} rotulo="Meu Currículo" aoClicar={() => aoAbrir("curriculo")} />
           <Linha icone={<IconeGameBoy />} rotulo="Game Boy Color" breve />
+          <Linha icone={<Selo sigla="Dd" fundo="#2f9e6e" />} rotulo="DoodleDev" breve />
+          <Linha icone={<Selo sigla="iP" fundo="#9aa3b2" />} rotulo="iPod Classic" breve />
           <Linha icone={img(MSN)} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
           <div className="mi-todos-area" onMouseEnter={() => abrir("todos")} onMouseLeave={fechar}>
             <Divisor />
@@ -129,7 +131,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Mini icone={img(`${XP}/figma/minhas-imagens.png`, 24)} rotulo="Visualizador de imagens" breve />
                 <Mini icone={<Selo sigla="iP" fundo="#9aa3b2" />} rotulo="iPod Classic" breve />
                 <Mini icone={img(MSN, 24)} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
-                <Mini icone={img(`${XP}/figma/media-player.png`, 24)} rotulo="Reprodutor de mídia" breve />
+                <Mini icone={img(`${XP}/menu/media-player-orb.png`, 24)} rotulo="Reprodutor de mídia" breve />
                 <Mini icone={<Selo sigla="Cm" fundo="#6b7280" />} rotulo="Campo minado" breve />
                 <Mini icone={<IconeBloco />} rotulo="Bloco de notas" breve />
                 <Mini icone={img(`${XP}/figma/paint.png`, 24)} rotulo="Paint" breve />
@@ -154,7 +156,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
               </div>
             )}
           </div>
-          <Linha icone={img(`${XP}/figma/media-player.png`)} rotulo="Reprodutor de mídia" breve />
+          <Linha icone={img(`${XP}/menu/media-player-orb.png`)} rotulo="Reprodutor de mídia" breve />
           <Linha icone={img(`${XP}/figma/minhas-imagens.png`)} rotulo="Visualizador de imagens" breve />
           <Linha icone={<IconeGaleria3D />} rotulo="Galeria 3D" breve />
           <Linha icone={<IconeJogo />} rotulo="World of Warcraft" breve />
