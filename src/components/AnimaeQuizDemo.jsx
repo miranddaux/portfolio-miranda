@@ -13,9 +13,9 @@ const VIDAS = 3;
 const XP_ACERTO = 2;
 const FEEDBACK_MS = 1300;
 const PERGUNTAS = [
-  { q: "Qual destes animes tem mais episódios?", opcoes: ["Demon Slayer", "One Piece", "Attack on Titan", "Death Note"], certa: 1 },
-  { q: "Tanjiro Kamado é o protagonista de qual anime?", opcoes: ["Naruto", "Bleach", "Demon Slayer", "Jujutsu Kaisen"], certa: 2 },
-  { q: "Qual destes foi lançado primeiro?", opcoes: ["Attack on Titan", "Naruto", "Demon Slayer", "Dragon Ball Z"], certa: 3 },
+  { q: ["Qual desses animes", "tem mais episódios?"], opcoes: ["Demon Slayer", "One Piece", "Attack on Titan", "Death Note"], certa: 1 },
+  { q: ["Tanjiro é o protagonista", "de qual anime?"], opcoes: ["Naruto", "Bleach", "Demon Slayer", "Jujutsu Kaisen"], certa: 2 },
+  { q: ["Qual desses animes", "foi lançado primeiro?"], opcoes: ["Attack on Titan", "Naruto", "Demon Slayer", "Dragon Ball Z"], certa: 3 },
 ];
 const CIRC = 2 * Math.PI * 66;
 const A = "/assets/cases";
@@ -110,7 +110,7 @@ export default function AnimaeQuizDemo() {
             <div className="qd-steps" aria-hidden="true">
               {PERGUNTAS.map((_, n) => <span key={n} className={n < i || (n === i && respondida) ? "is-done" : n === i ? "is-now" : ""} />)}
             </div>
-            <div className="qd-hero">
+            <div className="qd-main">
               <div className="qd-ring">
                 <svg viewBox="0 0 144 144" aria-hidden="true">
                   <circle className="qd-ring-track" cx="72" cy="72" r="66" />
@@ -121,26 +121,29 @@ export default function AnimaeQuizDemo() {
               </div>
               <div className="qd-hero-info">
                 <span className="qd-kicker">PERGUNTA {i + 1} DE {PERGUNTAS.length}</span>
-                <span className="qd-worth">Vale +{XP_ACERTO} XP</span>
-                {seq >= 2 && <span className="qd-streak"><Flame size={16} aria-hidden="true" />{seq} acertos seguidos</span>}
+                {seq >= 2
+                  ? <span className="qd-streak"><Flame size={16} aria-hidden="true" />{seq} acertos seguidos</span>
+                  : <span className="qd-worth">Vale +{XP_ACERTO} XP</span>}
               </div>
-            </div>
-            <h2 className="qd-title">{p.q}</h2>
-            <p className={`qd-feedback ${respondida ? (escolha === p.certa ? "is-ok" : "is-bad") : ""}`} aria-live="polite">
-              {respondida ? (escolha === p.certa ? <><Check size={16} aria-hidden="true" />{`Acertou! +${XP_ACERTO} XP`}</> : <><X size={16} aria-hidden="true" />{escolha === -1 ? "Acabou o tempo!" : "Errou! A certa está destacada."}</>) : "Escolha uma resposta"}
-            </p>
-            <div className="qd-options">
-              {p.opcoes.map((o, n) => {
-                const estado = respondida ? (n === p.certa ? "is-correct" : n === escolha ? "is-wrong" : "is-dim") : "";
-                return (
-                  <button key={o} type="button" className={`qd-option ${estado}`} disabled={respondida} onClick={() => responder(n)}>
-                    <span className="qd-letter" aria-hidden="true">{"ABCD"[n]}</span>
-                    <span className="qd-option-text">{o}</span>
-                    {estado === "is-correct" && <Check size={24} aria-hidden="true" />}
-                    {estado === "is-wrong" && <X size={24} aria-hidden="true" />}
-                  </button>
-                );
-              })}
+              <h2 className="qd-title"><span>{p.q[0]}</span><span>{p.q[1]}</span></h2>
+              <p className={`qd-feedback ${respondida ? (escolha === p.certa ? "is-ok" : "is-bad") : ""}`} aria-live="polite">
+                {respondida ? (escolha === p.certa ? <><Check size={16} aria-hidden="true" />{`Acertou! +${XP_ACERTO} XP`}</> : <><X size={16} aria-hidden="true" />{escolha === -1 ? "Acabou o tempo!" : "Errou! A certa está destacada."}</>) : "Escolha uma resposta"}
+              </p>
+              <div className="qd-options">
+                {p.opcoes.map((o, n) => {
+                  const estado = respondida ? (n === p.certa ? "is-correct" : n === escolha ? "is-wrong" : "is-dim") : "";
+                  return (
+                    <button key={o} type="button" className={`qd-option ${estado}`} disabled={respondida} onClick={() => responder(n)}>
+                      <span className="qd-letter" aria-hidden="true">{"ABCD"[n]}</span>
+                      <span className="qd-option-text">{o}</span>
+                      <span className="qd-mark" aria-hidden="true">
+                        {estado === "is-correct" && <Check size={16} strokeWidth={3} />}
+                        {estado === "is-wrong" && <X size={16} strokeWidth={3} />}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         ) : (

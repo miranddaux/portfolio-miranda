@@ -1,13 +1,14 @@
-// Habbo Hotel: um jogo que o Thiago jogava. Não reproduz o login do site: só leva ao site oficial.
+// Habbo Hotel: o site oficial carrega dentro da janela. Login e jogo acontecem no próprio Habbo.
+// Se o site bloquear a exibição em quadro, o link abaixo abre em nova aba.
+const URL_HABBO = "https://www.habbo.com.br/";
 export default function AppHabbo() {
   return (
-    <div className="app-habbo">
-      <img className="app-habbo-logo" src="/assets/xp/apps/habbo-logo.png" alt="Habbo" width="160" />
-      <h2 className="sr-only">Habbo Hotel</h2>
-      <p>Um jogo que eu jogava.</p>
-      <a className="xp-button" href="https://www.habbo.com.br/" target="_blank" rel="noopener noreferrer">
-        Abrir habbo.com.br<span className="sr-only"> (abre em nova aba)</span>
-      </a>
+    <div className="app-embed">
+      <iframe title="Habbo Hotel" src={URL_HABBO} loading="lazy" allow="autoplay; fullscreen; clipboard-write" referrerPolicy="no-referrer-when-downgrade" />
+      <div className="app-embed-status">
+        <span>Site oficial do Habbo Hotel.</span>
+        <a href={URL_HABBO} target="_blank" rel="noopener noreferrer">Não carregou? Abrir em nova aba<span className="sr-only"> (abre em nova aba)</span></a>
+      </div>
     </div>
   );
 }

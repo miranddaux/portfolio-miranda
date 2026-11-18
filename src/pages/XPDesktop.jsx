@@ -39,9 +39,9 @@ const APPS = [
   { id: "player", name: "Reprodutor de mídia", title: "Reprodutor de mídia", icon: "media" },
   { id: "prompt", name: "Prompt de Comando", title: "Prompt de Comando", icon: "app", barraIcone: "/assets/xp/apps/prompt.png" },
   { id: "visualizador", name: "Visualizador de imagens", title: "Visualizador de imagens", icon: "app", barraIcone: "/assets/xp/figma/minhas-imagens.png" },
-  { id: "minas", name: "Campo minado", title: "Campo minado", icon: "app", barraIcone: "/assets/xp/apps/campo-minado.svg" },
+  { id: "minas", name: "Campo minado", title: "Campo minado", icon: "app", barraIcone: "/assets/xp/apps/campo-minado.png" },
   { id: "paint", name: "Paint", title: "Paint", icon: "app", barraIcone: "/assets/xp/figma/paint.png" },
-  { id: "pinball", name: "Pinball", title: "3D Pinball", icon: "app", barraIcone: "/assets/xp/apps/pinball.svg" },
+  { id: "pinball", name: "Pinball", title: "3D Pinball", icon: "app", barraIcone: "/assets/xp/apps/pinball.png" },
   { id: "habbo", name: "Habbo Hotel", title: "Habbo Hotel", icon: "app", barraIcone: "/assets/xp/apps/habbo.png" },
   { id: "case", name: "Case", title: "Case", icon: "document" },
 ];
@@ -55,10 +55,10 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "player"), janelaIcone: "/assets/xp/menu/media-player-orb.png" },
   { ...APPS.find(a => a.id === "prompt"), janelaIcone: "/assets/xp/apps/prompt.png", largura: 640, altura: 408, cascata: 2, minLargura: 320, minAltura: 200, semStatus: true },
   { ...APPS.find(a => a.id === "visualizador"), janelaIcone: "/assets/xp/figma/minhas-imagens.png", largura: 720, altura: 560, cascata: 1, minLargura: 400, minAltura: 360, semStatus: true },
-  { ...APPS.find(a => a.id === "minas"), janelaIcone: "/assets/xp/apps/campo-minado.svg", largura: 288, altura: 400, cascata: 3, minLargura: 288, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "minas"), janelaIcone: "/assets/xp/apps/campo-minado.png", largura: 288, altura: 400, cascata: 3, minLargura: 288, minAltura: 400, semStatus: true },
   { ...APPS.find(a => a.id === "paint"), janelaIcone: "/assets/xp/figma/paint.png", largura: 800, altura: 560, cascata: 2, minLargura: 480, minAltura: 360, semStatus: true },
-  { ...APPS.find(a => a.id === "pinball"), janelaIcone: "/assets/xp/apps/pinball.svg", largura: 640, altura: 560, cascata: 3, minLargura: 400, minAltura: 360, semStatus: true },
-  { ...APPS.find(a => a.id === "habbo"), janelaIcone: "/assets/xp/apps/habbo.png", largura: 480, altura: 320, cascata: 1, minLargura: 320, minAltura: 280, semStatus: true },
+  { ...APPS.find(a => a.id === "pinball"), janelaIcone: "/assets/xp/apps/pinball.png", largura: 480, altura: 680, cascata: 3, minLargura: 360, minAltura: 520, semStatus: true },
+  { ...APPS.find(a => a.id === "habbo"), janelaIcone: "/assets/xp/apps/habbo.png", largura: 960, altura: 640, cascata: 1, minLargura: 480, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
 export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {

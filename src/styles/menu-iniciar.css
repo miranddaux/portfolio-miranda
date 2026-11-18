@@ -12,9 +12,9 @@
 .mi-icone { display: inline-flex; flex: none; align-items: center; justify-content: center; width: 32px; height: 32px; }
 .mi-icone img, .mi-icone svg { display: block; width: 32px; height: 32px; object-fit: contain; }
 .mi-esquerda .mi-linha { height: 48px; }
+.mi-icone img, .mi-icone svg { border-radius: 4px; }
 .mi-esquerda .mi-linha.is-fixo { height: 56px; }
 .mi-direita .mi-linha { height: 40px; gap: var(--space-1); }
-.mi-esquerda .mi-icone, .mi-esquerda .mi-icone img, .mi-esquerda .mi-icone svg { width: 40px; height: 40px; }
 .mi-esquerda .mi-icone .mi-selo { width: 32px; height: 32px; font-size: var(--text-14); border-radius: 8px; }
 .mi-texto { display: grid; min-width: 0; }
 .mi-texto strong { overflow: hidden; font-size: var(--text-16); font-weight: 400; line-height: var(--space-3); white-space: nowrap; text-overflow: ellipsis; }
@@ -61,7 +61,23 @@
 }
 
 /* Redes: ícones menores e na mesma proporção; o glifo do WhatsApp ocupa menos da caixa, então ganha um pouco mais */
-.mi-icone img.mi-rede { width: 24px; height: 24px; }
-.mi-icone img.mi-rede-whatsapp { transform: scale(1.3); }
-.mi-mini-icone img.mi-rede-whatsapp { transform: scale(1.25); }
-.mi-esquerda .mi-icone img.mi-msn { width: 32px; height: 32px; }
+
+/* Versão compacta: ícones de 24 px, textos de 14 px (12 nas legendas), linhas de 32 e 40 px */
+.mi { width: 448px; }
+.mi-cabecalho { height: 56px; }
+.mi-avatar { width: 40px; height: 40px; border-width: 1px; }
+.mi-cabecalho strong { font-size: var(--text-14); }
+.mi-colunas { grid-template-columns: 224px minmax(0, 1fr); }
+.mi-icone, .mi-icone img, .mi-icone svg,
+.mi-esquerda .mi-icone, .mi-esquerda .mi-icone img, .mi-esquerda .mi-icone svg { width: 24px; height: 24px; }
+.mi-esquerda .mi-icone .mi-selo { width: 24px; height: 24px; }
+.mi-linha, .mi-esquerda .mi-linha, .mi-direita .mi-linha { height: 32px; gap: var(--space-1); padding: 0 var(--space-1); }
+.mi-esquerda .mi-linha.is-fixo { height: 40px; }
+.mi-texto strong, .mi-linha.is-fixo .mi-texto strong { font-size: var(--text-14); line-height: var(--space-2); }
+.mi-texto small { font-size: var(--text-12); line-height: var(--space-2); }
+.mi-todos { height: 32px; padding: 0 var(--space-1); font-size: var(--text-14); }
+.mi-todos svg { width: 16px; height: 16px; }
+.mi-rodape { height: 40px; }
+.mi-acao { height: 32px; padding: 0 var(--space-1); font-size: var(--text-14); }
+.mi-acao img { width: 24px; height: 24px; }
+.mi-flyout-todos { left: 224px; width: 224px; bottom: 40px; }

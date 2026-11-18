@@ -94,9 +94,9 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
           <Divisor />
           <Linha icone={img(MSN, 32, "mi-msn")} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
           <Divisor />
-          <Linha icone={img(`${XP}/apps/campo-minado.svg`)} rotulo="Campo Minado" aoClicar={() => aoAbrir("minas")} />
+          <Linha icone={img(`${XP}/apps/campo-minado.png`)} rotulo="Campo Minado" aoClicar={() => aoAbrir("minas")} />
           <Linha icone={img(`${XP}/figma/paint.png`)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
-          <Linha icone={img(`${XP}/apps/pinball.svg`)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
+          <Linha icone={img(`${XP}/apps/pinball.png`)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
           <div className="mi-todos-area" onMouseEnter={() => abrir("todos")} onMouseLeave={fechar}>
             <Divisor />
             <button type="button" className={`mi-todos ${sub === "todos" ? "is-aberto" : ""}`} onClick={() => alternar("todos")} onKeyDown={teclaSub("todos")} aria-haspopup="menu" aria-expanded={sub === "todos"}>
@@ -118,10 +118,10 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Divisor mini />
                 <Mini icone={img(`${XP}/apps/prompt.png`, 16)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
                 <Mini icone={img(`${XP}/figma/minhas-imagens.png`, 16)} rotulo="Visualizador de imagens" aoClicar={() => aoAbrir("visualizador")} />
-                <Mini icone={img(`${XP}/apps/campo-minado.svg`, 16)} rotulo="Campo minado" aoClicar={() => aoAbrir("minas")} />
+                <Mini icone={img(`${XP}/apps/campo-minado.png`, 16)} rotulo="Campo minado" aoClicar={() => aoAbrir("minas")} />
                 <Mini icone={<IconeBloco />} rotulo="Bloco de notas" breve />
                 <Mini icone={img(`${XP}/figma/paint.png`, 16)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
-                <Mini icone={img(`${XP}/apps/pinball.svg`, 16)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
+                <Mini icone={img(`${XP}/apps/pinball.png`, 16)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
                 <Mini icone={img(`${XP}/apps/habbo.png`, 16)} rotulo="Habbo Hotel" aoClicar={() => aoAbrir("habbo")} />
                 <Divisor mini />
                 <Mini icone={img(`${XP}/figma/meu-computador.png`, 16)} rotulo="Modo Rápido" aoClicar={() => aoTrocarModo("rapido")} />
