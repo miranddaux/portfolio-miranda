@@ -13,7 +13,7 @@ import AppVisualizador from "../components/apps/AppVisualizador.jsx";
 import AppCampoMinado from "../components/apps/AppCampoMinado.jsx";
 import AppPaint from "../components/apps/AppPaint.jsx";
 import AppPinball from "../components/apps/AppPinball.jsx";
-import AppHabbo from "../components/apps/AppHabbo.jsx";
+import DoomGameWindow from "../components/DoomGameWindow.jsx";
 import PainelSobre from "../components/PainelSobre";
 import JanelaCurriculo, { CURRICULOS } from "../components/JanelaCurriculo";
 import { MsnAviso, MsnContatos, MsnConversa } from "../components/Msn";
@@ -44,7 +44,7 @@ const APPS = [
   { id: "minas", name: "Campo minado", title: "Campo minado", icon: "app", barraIcone: "/assets/xp/apps/campo-minado.png" },
   { id: "paint", name: "Paint", title: "Paint", icon: "app", barraIcone: "/assets/xp/figma/paint.png" },
   { id: "pinball", name: "Pinball", title: "3D Pinball", icon: "app", barraIcone: "/assets/xp/apps/pinball.png" },
-  { id: "habbo", name: "Habbo Hotel", title: "Habbo Hotel", icon: "app", barraIcone: "/assets/xp/apps/habbo.png" },
+  { id: "doom", name: "DOOM", title: "DOOM (1993)", icon: "app", barraIcone: "/assets/xp/menu-icons/doom.png" },
   { id: "case", name: "Case", title: "Case", icon: "document" },
 ];
 const APPS_JANELAS = [
@@ -61,7 +61,7 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "minas"), janelaIcone: "/assets/xp/apps/campo-minado.png", largura: 280, altura: 424, cascata: 3, minLargura: 280, minAltura: 424, semStatus: true },
   { ...APPS.find(a => a.id === "paint"), janelaIcone: "/assets/xp/figma/paint.png", largura: 800, altura: 560, cascata: 2, minLargura: 480, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "pinball"), janelaIcone: "/assets/xp/apps/pinball.png", largura: 640, altura: 560, cascata: 3, minLargura: 400, minAltura: 360, semStatus: true },
-  { ...APPS.find(a => a.id === "habbo"), janelaIcone: "/assets/xp/apps/habbo.png", largura: 960, altura: 640, cascata: 1, minLargura: 480, minAltura: 360, semStatus: true },
+  { ...APPS.find(a => a.id === "doom"), janelaIcone: "/assets/xp/menu-icons/doom.png", largura: 960, altura: 720, cascata: 1, minLargura: 480, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
 export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {
@@ -281,7 +281,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               {app.id === "minas" && <AppCampoMinado />}
               {app.id === "paint" && <AppPaint />}
               {app.id === "pinball" && <AppPinball />}
-              {app.id === "habbo" && <AppHabbo />}
+              {app.id === "doom" && <DoomGameWindow />}
             </JanelaXP>
             )
           ) : null,
