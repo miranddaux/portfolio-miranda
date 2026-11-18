@@ -1,7 +1,7 @@
 /* Menu Iniciar: tudo em grade de 8 pontos. Linhas de 40 px com ícone de 32 px; mini menus com linhas de 32 px e ícone de 24 px. */
 .mi { position: fixed; left: 0; bottom: 25px; z-index: 32; display: flex; flex-direction: column; width: 544px; max-width: 100vw; border: 1px solid #0831a0; border-bottom: 0; border-radius: 8px 8px 0 0; background: #fff; font-family: var(--font-ui); color: #000; box-shadow: 4px -2px 12px #0006; }
-.mi-cabecalho { display: flex; align-items: center; gap: var(--space-2); height: 64px; padding: 0 var(--space-2); border-radius: 7px 7px 0 0; background: linear-gradient(180deg, #4a8df0, #1f66d8 55%, #0d5cc9); border-bottom: 2px solid #f4a12a; color: #fff; }
-.mi-avatar { width: 48px; height: 48px; border: 2px solid #fff; border-radius: 4px; object-fit: cover; background: #fff; }
+.mi-cabecalho { display: flex; align-items: center; gap: var(--space-2); height: 80px; padding: 0 var(--space-2); border-radius: 7px 7px 0 0; background: linear-gradient(180deg, #4a8df0, #1f66d8 55%, #0d5cc9); border-bottom: 2px solid #f4a12a; color: #fff; }
+.mi-avatar { width: 64px; height: 64px; border: 2px solid #fff; border-radius: 4px; object-fit: cover; background: #fff; }
 .mi-cabecalho strong { font-size: var(--text-16); line-height: var(--space-3); text-shadow: 1px 1px 1px #0008; }
 .mi-colunas { display: grid; grid-template-columns: 256px minmax(0, 1fr); }
 .mi-coluna { display: flex; flex-direction: column; padding: var(--space-1) 0; min-width: 0; }
@@ -31,8 +31,8 @@
 .mi-todos { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 48px; padding: 0 var(--space-2); border: 0; background: transparent; font: inherit; font-size: var(--text-16); font-weight: 700; color: #1a1a1a; cursor: pointer; }
 .mi-todos svg { display: block; width: 24px; height: 24px; }
 .mi-todos:hover, .mi-todos:focus-visible, .mi-todos.is-aberto { background: #316ac5; color: #fff; outline: 0; }
-.mi-rodape { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-3); height: 56px; padding: 0 var(--space-2); background: linear-gradient(180deg, #2f78e0, #0d5cc9 60%, #0a4fb0); border-top: 2px solid #5b9af0; }
-.mi-acao { display: inline-flex; align-items: center; gap: var(--space-1); padding: var(--space-1); border: 0; border-radius: 4px; background: transparent; color: #fff; font: inherit; font-size: var(--text-16); font-weight: 700; cursor: pointer; }
+.mi-rodape { display: flex; align-items: center; justify-content: flex-end; gap: var(--space-1); height: 56px; padding: 0 var(--space-1); background: linear-gradient(180deg, #2f78e0, #0d5cc9 60%, #0a4fb0); border-top: 2px solid #5b9af0; }
+.mi-acao { display: inline-flex; align-items: center; gap: var(--space-1); height: 40px; padding: 0 var(--space-2); border: 0; border-radius: 4px; background: transparent; color: #fff; font: inherit; font-size: var(--text-16); font-weight: 700; cursor: pointer; }
 .mi-acao img { display: block; width: 32px; height: 32px; object-fit: contain; }
 .mi-acao:hover, .mi-acao:focus-visible { background: #ffffff2e; outline: 0; }
 
@@ -58,3 +58,9 @@
   .mi-flyout-todos { left: 0; }
   .mi-flyout-recente { left: 0; top: 100%; width: 100%; }
 }
+
+/* Redes: ícones menores e na mesma proporção; o glifo do WhatsApp ocupa menos da caixa, então ganha um pouco mais */
+.mi-icone img.mi-rede { width: 24px; height: 24px; }
+.mi-icone img.mi-rede-whatsapp { transform: scale(1.3); }
+.mi-mini-icone img.mi-rede-whatsapp { transform: scale(1.25); }
+.mi-esquerda .mi-icone img.mi-msn { width: 32px; height: 32px; }

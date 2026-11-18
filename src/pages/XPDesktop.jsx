@@ -6,6 +6,7 @@ import AvisoTelaCheia from "../components/AvisoTelaCheia";
 import DialogoDesligar, { TelaReiniciando } from "../components/DialogoDesligar";
 import { somDesligar } from "../lib/sons";
 import JanelaXP from "../components/JanelaXP";
+import JanelaPlayer from "../components/JanelaPlayer";
 import PainelSobre from "../components/PainelSobre";
 import JanelaCurriculo, { CURRICULOS } from "../components/JanelaCurriculo";
 import { MsnAviso, MsnContatos, MsnConversa } from "../components/Msn";
@@ -29,6 +30,7 @@ const APPS = [
   { id: "curriculo", name: "Meu currículo", title: "Meu currículo", icon: "document" },
   { id: "msn", name: "Messenger", title: "Messenger", icon: "mail" },
   { id: "msnchat", name: "Thiago Bot", title: "Conversa com Thiago Bot", icon: "mail" },
+  { id: "player", name: "Reprodutor de mídia", title: "Reprodutor de mídia", icon: "media" },
   { id: "case", name: "Case", title: "Case", icon: "document" },
 ];
 const APPS_JANELAS = [
@@ -38,6 +40,7 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "curriculo"), janelaIcone: "/assets/xp/area/curriculo.png", largura: 600, altura: 768, cascata: 1 },
   { ...APPS.find(a => a.id === "msn"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 336, altura: 728, alinhar: "direita", topo: 16, minLargura: 288, minAltura: 400, semStatus: true },
   { ...APPS.find(a => a.id === "msnchat"), janelaIcone: "/assets/xp/msn/logo-32.png", largura: 640, altura: 608, alinhar: "esquerda", topo: 16, minLargura: 400, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "player"), janelaIcone: "/assets/xp/menu/media-player-orb.png" },
   { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
 export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {
@@ -156,6 +159,16 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
       <div className="desktop-workspace">
         {appWindows.map((app) =>
           windows[app.id] === "open" || windows[app.id] === "minimized" ? (
+            app.id === "player" ? (
+              <JanelaPlayer
+                key="player"
+                ativa={active === "player"}
+                oculta={windows.player === "minimized"}
+                onFocar={() => setActive("player")}
+                onFechar={() => hide("player", "closed")}
+                onMinimizar={() => hide("player", "minimized")}
+              />
+            ) : (
             <JanelaXP
               key={app.id}
               id={app.id}
@@ -221,6 +234,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               </>}
               {app.id === "contato" && <JanelaEmail />}
             </JanelaXP>
+            )
           ) : null,
         )}
       </div>

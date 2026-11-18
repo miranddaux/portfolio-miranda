@@ -51,7 +51,7 @@ function Slider({ area, de, ate, valor, aoMudar, rotulo, texto, passo, children,
   );
 }
 
-export default function WindowsMediaPlayer({ src, poster, title, autoPlay = false, loop = false, onClose, onMinimize, className = "", style }) {
+export default function WindowsMediaPlayer({ src, poster, title, autoPlay = false, loop = false, onClose, onMinimize, onDragStart, className = "", style }) {
   const p = useMediaPlayer({ src, autoPlay, loop });
   const { acoes } = p;
   const temVideo = Boolean(src);
@@ -151,6 +151,8 @@ export default function WindowsMediaPlayer({ src, poster, title, autoPlay = fals
             </>
           )}
         </Slider>
+
+        {onDragStart && <div className="wmp-alca" style={R(0, 0, 1330, 70)} onPointerDown={onDragStart} aria-hidden="true" />}
 
         {/* Controles da janela da moldura (só quando a página que usa o player quiser ouvir) */}
         {onMinimize && <button type="button" className="wmp-janela" style={R(1340, 18, 38, 38)} onClick={onMinimize} aria-label="Minimizar" />}
