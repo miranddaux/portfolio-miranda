@@ -45,7 +45,20 @@ export const IconePrompt = () => (
 );
 export const SetaVerde = () => (
   <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
-    <rect x="1" y="1" width="22" height="22" rx="4" fill="#3fae3a" stroke="#1f7a1c" strokeWidth="1.5" />
-    <path d="M7 12h9m-4-5l5 5-5 5" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+    <defs>
+      <linearGradient id="seta-fundo" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor="#7be06f" />
+        <stop offset="0.5" stopColor="#3cb531" />
+        <stop offset="1" stopColor="#23891f" />
+      </linearGradient>
+      <linearGradient id="seta-brilho" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stopColor="#fff" stopOpacity="0.55" />
+        <stop offset="1" stopColor="#fff" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+    <rect x="1.5" y="1.5" width="21" height="21" rx="5" fill="url(#seta-fundo)" stroke="#fff" strokeWidth="1.5" />
+    <rect x="1.5" y="1.5" width="21" height="10.5" rx="5" fill="url(#seta-brilho)" />
+    <rect x="0.75" y="0.75" width="22.5" height="22.5" rx="5.75" fill="none" stroke="#1d6f1a" strokeWidth="0.75" />
+    <path d="M6 10.2h6V6.6L18.2 12 12 17.4v-3.6H6z" fill="#fff" stroke="#1d6f1a" strokeWidth="0.6" strokeLinejoin="round" />
   </svg>
 );

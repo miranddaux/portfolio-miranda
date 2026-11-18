@@ -300,10 +300,6 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
         <MenuIniciar
           menuRef={menuRef}
           aoAbrir={(id) => open(id)}
-          aoTrocarModo={(modo) => {
-            setStart(false);
-            setMode(modo);
-          }}
           aoFazerLogoff={() => {
             setStart(false);
             onShowWelcome();

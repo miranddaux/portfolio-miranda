@@ -27,22 +27,6 @@ export default function Header({ mode, setMode, onShowWelcome }) {
         <button className="entry-return" onClick={onShowWelcome}>
           Tela inicial
         </button>
-        <div className="mode-switch" role="group" aria-label="Modo visual">
-          {[
-            ["rapido", "Rápido"],
-            ["noite", "Noite"],
-            ["xp", "XP"],
-          ].map(([id, label]) => (
-            <button
-              key={id}
-              className={`mode ${id === mode ? "active" : ""}`}
-              onClick={() => setMode(id)}
-              aria-pressed={id === mode}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
         <span
           className="cv-unavailable"
           title="O currículo revisado ainda não foi anexado"
