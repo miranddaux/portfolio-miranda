@@ -337,7 +337,6 @@ export function ContatoConteudo({ aoEscrever }) {
           </li>
         ))}
       </ul>
-      <p className="painel-local">{CONTATO.local}</p>
       <h4 className="painel-subtitulo">Adicione-me ao</h4>
       <ul className="painel-redes">
         <li>
