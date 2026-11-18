@@ -10,6 +10,26 @@ export function CaseLinks({ links, projectTitle = "projeto", prototypePending = 
   const close = useCallback(() => setOpen(false), []);
   const embed = links.prototype ? prototypeEmbedUrl(links.prototype) : null;
   const canOpen = Boolean(links.prototype) && (Boolean(embed) || screens.length > 0);
+  // Aquece o protótipo em segundo plano: quando a pessoa clica, o Figma já tem o arquivo em cache.
+  useEffect(() => {
+    if (!embed) return undefined;
+    const host = document.createElement("div");
+    host.setAttribute("aria-hidden", "true");
+    host.style.cssText = "position:fixed;left:-9999px;top:0;width:430px;height:932px;overflow:hidden;pointer-events:none;opacity:0";
+    const warm = () => {
+      const frame = document.createElement("iframe");
+      frame.src = embed;
+      frame.tabIndex = -1;
+      frame.title = "";
+      host.appendChild(frame);
+      document.body.appendChild(host);
+    };
+    const idle = window.requestIdleCallback ? window.requestIdleCallback(warm, { timeout: 4000 }) : window.setTimeout(warm, 2500);
+    return () => {
+      if (window.cancelIdleCallback && window.requestIdleCallback) window.cancelIdleCallback(idle); else window.clearTimeout(idle);
+      host.remove();
+    };
+  }, [embed]);
   const actions = [
     ["prototype", "Ver protótipo"],
     ["design", "Ver no Figma"],
@@ -76,6 +96,28 @@ function Story({ index, module, phone }) {
   </article>;
 }
 
+// Fluxo de telas em fileiras (ex.: onboarding e cadastro), todas do mesmo tamanho.
+function FlowStory({ index, module }) {
+  return <article className="case-flow">
+    <div className="case-flow-text">
+      <span className="case-story-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+      <h3>{module.title}</h3>
+      <p>{module.text}</p>
+    </div>
+    {module.flow.map((row) => <section key={row.label} className="case-flow-group" aria-label={row.label}>
+      <h4>{row.label}</h4>
+      <ol className="case-flow-row" style={{ "--passos": row.items.length }}>
+        {row.items.map((m, i) => <li key={m.src}>
+          <a className="case-flow-shot" href={m.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar imagem: ${m.alt} (abre em nova aba)`}>
+            <img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" />
+          </a>
+          <span className="case-flow-caption"><b>{String(i + 1).padStart(2, "0")}</b> {m.caption}</span>
+        </li>)}
+      </ol>
+    </section>)}
+  </article>;
+}
+
 function CaseVideo({ video }) {
   if (!video?.src) return null;
   return <figure className="case-video">
@@ -119,8 +161,8 @@ export default function CaseDocument({ project, onNavigate }) {
     title.current?.focus({ preventScroll: true });
   }, [project.id, project.title, project.summary]);
   const tourScreens = project.modules.flatMap((m) => (m.images || []).map((img) => ({ ...img, label: m.title }))).filter((m, i, all) => all.findIndex((x) => x.src === m.src) === i);
-  const withImages = project.modules.filter((m) => m.images?.length);
-  const textOnly = project.modules.filter((m) => !m.images?.length);
+  const withImages = project.modules.filter((m) => m.images?.length || m.flow?.length);
+  const textOnly = project.modules.filter((m) => !m.images?.length && !m.flow?.length);
   return <article ref={root} className={`case-document theme-${project.accent}`}>
     <header className="case-document-header">
       <ul className="case-tags" aria-label="Categorias do projeto">{project.categories.map((category) => <li key={category}>{category}</li>)}</ul>
@@ -169,7 +211,7 @@ export default function CaseDocument({ project, onNavigate }) {
 
     <Stage id={id("solucao")} number="04" label="Solução" title="Como a solução funciona">
       <div className="case-stories">
-        {withImages.map((module, index) => <Story key={module.title} index={index} module={module} phone={phones} />)}
+        {withImages.map((module, index) => module.flow ? <FlowStory key={module.title} index={index} module={module} /> : <Story key={module.title} index={index} module={module} phone={phones} />)}
       </div>
       <CaseVideo video={project.video} />
     </Stage>

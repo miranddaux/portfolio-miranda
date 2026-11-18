@@ -39,6 +39,16 @@ const somMensagemSintetizado = () =>
     [2093, 0.09, 0.3],
   ], { tipo: "triangle", volume: 0.12 });
 
+// Carrega e decodifica o toque antes da primeira mensagem, para o navegador não travar a rolagem na hora de tocar.
+export const prepararSomMensagem = () => {
+  try {
+    if (audioMsg) return;
+    audioMsg = new Audio("/assets/audio/msn-mensagem.mp3");
+    audioMsg.preload = "auto";
+    audioMsg.load();
+  } catch {}
+};
+
 export const somMensagem = () => {
   const agora = Date.now();
   if (agora - ultimoToque < 700) return;

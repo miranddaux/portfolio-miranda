@@ -23,8 +23,7 @@ const STORIES = {
       prototype: "https://www.figma.com/proto/Sdyl9kTkLtCZaIN13yvIgd/%F0%9F%93%B1-Projeto-ANIMAE--%7C-18-10-25?node-id=2083-5686&page-id=2083%3A5497&starting-point-node-id=2083%3A5498&t=Ybga8QsKL8dZjSOu-1",
       site: "https://animaeapp.com.br/",
       siteLabel: "Ver landing page",
-      behance: "https://www.behance.net/gallery/243377867/ANIMAE-Social-Streaming-Gamification",
-      behanceLabel: "Ver case completo no Behance",
+      // Behance do ANIMAE em pausa: o que está publicado lá é a proposta antiga de streaming.
     },
     // Tamanho do quadro inicial do protótipo no Figma (Home · Redesenho), usado para encaixar o embed.
     prototypeFrame: { width: 430, height: 932 },
@@ -200,19 +199,26 @@ const MODULES = {
       images: [{ src: "/assets/cases/animae-perfil.webp", width: 860, height: 1864, alt: "Perfil do ANIMAE com estatísticas, nível, progresso de XP, sequência de dias e conquistas" }],
     },
     {
-      title: "Apresentar o universo sem atrasar a entrada",
-      text: "Desenhei o onboarding para apresentar descoberta, organização e comunidade em etapas curtas, com a opção de pular. Na etapa seguinte, a pessoa escolhe pelo menos 3 gêneros para que as recomendações já nasçam com o gosto dela.",
-      layout: "phones",
-      images: [
-        { src: "/assets/cases/animae-onboarding.webp", width: 860, height: 1864, alt: "Onboarding do ANIMAE com apresentação do universo otaku, opção de pular e botão Próximo", caption: "Onboarding · primeira etapa." },
-        { src: "/assets/cases/animae-generos.webp", width: 860, height: 1864, alt: "Tela O que você curte? do ANIMAE, com gêneros de anime para selecionar", caption: "Escolha de gêneros · recortada no topo." },
+      title: "Do primeiro toque à conta criada",
+      text: "A entrada começa com uma splash e quatro telas de onboarding que apresentam descoberta, recomendações, acompanhamento e progressão, sempre com a opção de pular. O cadastro vem em passos curtos, com a indicação de progresso no topo: e-mail e senha, apelido, senha com regras visíveis, gêneros favoritos, onde a pessoa assiste e permissão de notificações.",
+      images: [],
+      flow: [
+        { label: "Onboarding", items: [
+          { src: "/assets/cases/animae-flow-splash.webp", width: 860, height: 1864, alt: "Splash do ANIMAE com o mascote", caption: "Splash" },
+          { src: "/assets/cases/animae-flow-onb-1.webp", width: 860, height: 1864, alt: "Onboarding 1: Seu universo otaku do seu jeito", caption: "Universo otaku" },
+          { src: "/assets/cases/animae-flow-onb-2.webp", width: 860, height: 1864, alt: "Onboarding 2: Descubra o que combina com você", caption: "Recomendações" },
+          { src: "/assets/cases/animae-flow-onb-3.webp", width: 860, height: 1864, alt: "Onboarding 3: Nunca esqueça onde parou", caption: "Onde parou" },
+          { src: "/assets/cases/animae-flow-onb-4.webp", width: 860, height: 1864, alt: "Onboarding 4: Suba de nível como um verdadeiro otaku", caption: "Progressão" },
+        ] },
+        { label: "Cadastro", items: [
+          { src: "/assets/cases/animae-login.webp", width: 860, height: 1864, alt: "Login com e-mail, senha, Criar conta, Entrar no fandom e login social", caption: "Login" },
+          { src: "/assets/cases/animae-flow-nome.webp", width: 860, height: 1864, alt: "Cadastro: Como podemos te chamar", caption: "Apelido" },
+          { src: "/assets/cases/animae-flow-senha.webp", width: 860, height: 1864, alt: "Cadastro: Crie a sua senha, com regras visíveis", caption: "Senha" },
+          { src: "/assets/cases/animae-generos.webp", width: 860, height: 1864, alt: "Cadastro: O que você curte, com gêneros para escolher", caption: "Gêneros" },
+          { src: "/assets/cases/animae-flow-streaming.webp", width: 860, height: 1864, alt: "Cadastro: Onde você assiste, com lista de serviços de streaming", caption: "Onde assiste" },
+          { src: "/assets/cases/animae-flow-notificacoes.webp", width: 860, height: 1864, alt: "Cadastro: pedido de permissão para notificações", caption: "Notificações" },
+        ] },
       ],
-    },
-    {
-      title: "Entrar no fandom sem fricção",
-      text: "No login, deixei e-mail e senha no centro, com Criar conta e Entrar no fandom em destaque. Google, Apple e Discord ficam como alternativa rápida, e o mascote mantém a identidade do produto desde o primeiro contato.",
-      layout: "phones",
-      images: [{ src: "/assets/cases/animae-login.webp", width: 860, height: 1864, alt: "Tela de login do ANIMAE com campos de e-mail e senha, botões Criar conta e Entrar no fandom e login social" }],
     },
     {
       title: "Do Figma ao produto",

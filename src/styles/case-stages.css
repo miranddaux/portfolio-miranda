@@ -220,3 +220,34 @@
 /* Hierarquia: títulos de etapa (H2) em 32 px, acima dos H3 de 24 px. */
 .case-stage-head h2, .case-hero h2 { font-size: var(--text-32); line-height: var(--space-5); }
 @media (max-width: 560px) { .case-stage-head h2, .case-hero h2 { font-size: var(--text-24); line-height: var(--space-4); } }
+
+/* Protótipo: o celular é dimensionado em JS para a tela ter a proporção exata do quadro do Figma */
+.proto-fit { flex: 1 1 0; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.proto-fit .proto-phone { flex: none; height: auto; max-height: none; max-width: none; aspect-ratio: auto; box-sizing: border-box; }
+
+/* Landing: cantos arredondados também nas laterais */
+.case-browser { border-radius: var(--space-2); overflow: hidden; }
+
+/* Todos os blocos de texto têm a mesma largura e nunca terminam com uma palavra sozinha */
+.case-note, .case-journeys, .case-research-facts, .case-kpis, .case-decisions { width: 100%; max-width: none; }
+.case-document p, .case-document dd, .case-document li { text-wrap: pretty; }
+.case-document h1, .case-document h2, .case-document h3, .case-document h4 { text-wrap: balance; }
+.case-story-text { max-width: 416px; }
+
+/* Fluxo de telas (onboarding e cadastro) */
+.case-flow { display: grid; gap: var(--space-3); padding: var(--space-4) var(--space-3); background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-flow-text { display: grid; gap: var(--space-1); max-width: var(--case-measure); }
+.case-flow-text h3 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); }
+.case-flow-text p { margin: 0; font-size: var(--text-16); line-height: var(--space-3); color: var(--case-ink); }
+.case-flow-group { display: grid; gap: var(--space-1); }
+.case-flow-group h4 { margin: 0; font-size: var(--text-12); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--case-accent); }
+.case-flow-row { display: grid; grid-template-columns: repeat(var(--passos), minmax(0, 1fr)); gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.case-flow-row li { display: grid; gap: var(--space-1); align-content: start; min-width: 0; }
+.case-flow-shot { display: block; aspect-ratio: 9 / 19.5; overflow: hidden; border: 2px solid var(--color-neutral-700); border-radius: var(--space-2); background: var(--color-neutral-950); }
+.case-flow-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.case-flow-caption { font-size: var(--text-12); line-height: var(--space-2); color: var(--case-ink); }
+.case-flow-caption b { color: var(--case-accent); }
+.case-flow-shot:focus-visible { outline: 2px solid var(--case-accent); outline-offset: 2px; }
+@media (max-width: 860px) {
+  .case-flow-row { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 120px; overflow-x: auto; padding-bottom: var(--space-1); }
+}

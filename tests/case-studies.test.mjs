@@ -15,7 +15,7 @@ test("somente os três projetos definidos têm case disponível", () => {
 
 test("mídias são locais, não vazias e preservam as dimensões do arquivo original", () => {
   for (const project of CASE_STUDIES) {
-    for (const image of [project.cover, ...project.gallery, ...project.modules.flatMap(m => m.images)].filter((m) => m.src)) {
+    for (const image of [project.cover, ...project.gallery, ...project.modules.flatMap(m => [...m.images, ...(m.flow || []).flatMap(r => r.items)])].filter((m) => m.src)) {
       const path = new URL(`../public${image.src}`, import.meta.url);
       assert(existsSync(path), image.src);
       const bytes = readFileSync(path);
@@ -40,7 +40,7 @@ test("links conhecidos são HTTPS e a apresentação antiga do ANIMAE é identif
     assert(project.journeys.every((j) => j.steps.length >= 3));
     assert(project.kpis.every(([name, definition]) => name && definition));
   }
-  assert.equal(getCaseStudy("animae").links.behanceLabel, "Ver case completo no Behance");
+  assert.equal(getCaseStudy("animae").links.behance, undefined);
   assert.equal(getCaseStudy("navaja").links.prototype, undefined);
   assert.equal(getCaseStudy("oficina-do-tenista").links.site, undefined);
 });
@@ -63,7 +63,7 @@ test("navegação interna preserva abrir em nova aba e cliques modificados", () 
   const animae = getCaseStudy("animae");
   assert.equal(animae.period, "Out/2025 — out/2026 · 1 ano");
   assert.equal(animae.links.site, "https://animaeapp.com.br/");
-  assert.equal(animae.modules.length, 7);
+  assert.equal(animae.modules.length, 6);
   for (const project of CASE_STUDIES) {
     assert(project.categories.length >= 2);
     assert(project.categories.every(c => c === c.toUpperCase()));

@@ -6,7 +6,7 @@ import { CONTATO } from "../data/perfil.js";
 import SocialLink from "./SocialLink.jsx";
 import MsnBanner from "./MsnBanner.jsx";
 import { REDES_PRINCIPAIS } from "../data/social.js";
-import { somChamar, somEnviar, somMensagem } from "../lib/sons";
+import { prepararSomMensagem, somChamar, somEnviar, somMensagem } from "../lib/sons";
 
 export const NOME_BOT = "Thiago Bot";
 const FOTO = "/assets/xp/foto-thiago-rosto.webp";
@@ -281,15 +281,23 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar, aoFechar }) {
   };
 
   useEffect(() => {
+    prepararSomMensagem();
     falarBot(BOAS_VINDAS, { sugestoes: true });
     const filaAtual = fila.current;
     return () => filaAtual.forEach(clearTimeout);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
+  // Rolagem suave até a última mensagem, sem pular nem travar.
+  const rolarAoFim = () => {
     const el = rolagem.current;
-    if (el) el.scrollTop = el.scrollHeight;
-  }, [msgs, digitando]);
+    if (!el) return;
+    const reduzido = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    el.scrollTo({ top: el.scrollHeight, behavior: reduzido ? "auto" : "smooth" });
+  };
+  useEffect(() => {
+    const id = requestAnimationFrame(rolarAoFim);
+    return () => cancelAnimationFrame(id);
+  }, [msgs]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (ativa) campo.current?.focus({ preventScroll: true });
@@ -377,7 +385,7 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar, aoFechar }) {
       </div>
       <div className="msn-corpo">
         <div className="msn-chat">
-          <div className="msn-mensagens" ref={rolagem} role="log" aria-live="polite" aria-label="Conversa">
+          <div className="msn-mensagens" ref={rolagem} onLoadCapture={rolarAoFim} role="log" aria-live="polite" aria-label="Conversa">
             <p className="msn-info">
               <img src="/assets/xp/figma/informacao.png" alt="" width="16" height="16" /> Thiago está disponível para projetos
             </p>
