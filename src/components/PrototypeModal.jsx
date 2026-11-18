@@ -16,8 +16,11 @@ export function prototypeEmbedUrl(url) {
     for (const key of ["node-id", "starting-point-node-id"]) {
       if (u.searchParams.has(key)) e.searchParams.set(key, u.searchParams.get(key));
     }
-    e.searchParams.set("scaling", "scale-down");
+    // O quadro do ANIMAE (430 × 932) preenche a moldura do celular: sem barra do Figma e sem faixas pretas.
+    e.searchParams.set("scaling", "contain");
     e.searchParams.set("content-scaling", "fixed");
+    e.searchParams.set("hide-ui", "1");
+    e.searchParams.set("hotspot-hints", "0");
     e.searchParams.set("embed-host", "portfolio-miranda");
     return e.toString();
   } catch {
@@ -50,7 +53,8 @@ function ScreenTour({ screens }) {
   );
 }
 
-export default function PrototypeModal({ title, url, embedUrl, screens = [], onClose }) {
+export default function PrototypeModal({ title, url, embedUrl, screens = [], frame = { width: 430, height: 932 }, onClose }) {
+  const [run, setRun] = useState(0);
   useEffect(() => {
     const previous = document.activeElement;
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -76,12 +80,15 @@ export default function PrototypeModal({ title, url, embedUrl, screens = [], onC
         minLargura={320}
         minAltura={480}
         topo={32}
-        statusEsquerda={embedUrl ? "Celular · 390 px · protótipo navegável do Figma" : "Celular · telas do Figma · use as setas do teclado"}
-        statusDireita={<a className="proto-status-link" href={url} target="_blank" rel="noopener noreferrer">Abrir no Figma<span className="sr-only"> (abre em nova aba)</span></a>}
+        statusEsquerda={embedUrl ? `Celular · ${frame.width} px · protótipo navegável do Figma` : "Celular · telas do Figma · use as setas do teclado"}
+        statusDireita={<>
+          {embedUrl && <button type="button" className="proto-status-link" onClick={() => setRun((n) => n + 1)}>Reiniciar</button>}
+          <a className="proto-status-link" href={url} target="_blank" rel="noopener noreferrer">Abrir no Figma<span className="sr-only"> (abre em nova aba)</span></a>
+        </>}
       >
         <div className="proto-stage">
           {embedUrl
-            ? <div className="proto-phone"><iframe title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen loading="lazy" /></div>
+            ? <div className="proto-phone" style={{ aspectRatio: `${frame.width} / ${frame.height}` }}><iframe key={run} title={`Protótipo navegável de ${title}`} src={embedUrl} allow="fullscreen" allowFullScreen loading="lazy" /></div>
             : <ScreenTour screens={screens} />}
         </div>
       </JanelaXP>
