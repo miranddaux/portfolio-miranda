@@ -29,10 +29,6 @@ const STORIES = {
     // Vídeo do protótipo funcionando: `video: { src, poster, caption }` quando o Thiago enviar.
     heroShot: "animae-hub",
     roles: ["Product Design", "Design System", "Mobile"],
-    landing: {
-      image: { src: "/assets/cases/animae-lp-completa.webp", width: 1440, height: 5311, alt: "Landing page completa do ANIMAE, do topo com o título e o app até o convite para a versão Android" },
-      note: "Captura de 16/11/2026.",
-    },
     // Imagens por etapa (layouts: wide, pair, trio, mosaic). Slugs apontam para arquivos em /assets/cases.
     stageImages: {
       ideacao: { layout: "pair", images: ["animae-flow-onb-1", "animae-feed-comunidade"] },
@@ -206,7 +202,7 @@ const MODULES = {
     },
     {
       title: "Do Figma ao produto",
-      text: "Como o projeto é solo, também preciso cuidar do que acontece depois do layout. Estruturei variáveis, componentes e tokens no Figma e levei essa base para o código com auxílio de IA. A landing page apresenta a proposta; o aplicativo concentra a experiência de acompanhar e conversar.",
+      text: "Como o projeto é solo, também preciso cuidar do que acontece depois do layout. Estruturei variáveis, componentes e tokens no Figma e levei essa base para o código com auxílio de IA. O aplicativo concentra a experiência de acompanhar e conversar.",
       images: [],
     },
   ],

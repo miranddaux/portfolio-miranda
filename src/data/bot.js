@@ -12,9 +12,9 @@ export const SUGESTOES = [
 ];
 
 export const BOAS_VINDAS = [
-  "Oi, eu sou o Thiago Bot e vou te apresentar o Thiago.",
-  "Ele é Product Designer e nas horas vagas é fascinado por gadgets tecnológicos, adora ficção literária e joga muito battle royale. Ah, e também cria conteúdo.",
-  "Me manda uma mensagem ou usa os atalhos abaixo. Quer me perguntar o que ele gosta?",
+  "Oi, eu sou o Thiago Bot e vou te apresentar o verdadeiro Thiago.",
+  "Ele é Product Designer e, nas horas vagas, é fascinado por tecnologia, adora filmes e séries e joga muito MOBA e games de RPG. Ah, e também cria conteúdo.",
+  "Me manda uma mensagem ou usa os atalhos abaixo. Quer saber mais sobre o que ele gosta?",
 ];
 
 const INTENCOES = [
@@ -32,9 +32,9 @@ const INTENCOES = [
     acao: { rotulo: "Abrir Sobre mim", abrir: "sobre" },
   },
   {
-    chaves: ["gosta", "curte", "hobby", "hobbies", "horas vagas", "tempo livre", "lazer", "game", "jogo", "livro", "leitura", "gadget"],
+    chaves: ["gosta", "curte", "hobby", "hobbies", "horas vagas", "tempo livre", "lazer", "game", "jogo", "filme", "serie", "moba", "rpg", "tecnologia"],
     respostas: [
-      "Nas horas vagas, o Thiago é fascinado por gadgets tecnológicos, adora ficção literária e joga battle royale demais.",
+      "Nas horas vagas, o Thiago é fascinado por tecnologia, adora filmes e séries e joga muito MOBA e games de RPG.",
       "Ah, e também cria conteúdo.",
     ],
   },
