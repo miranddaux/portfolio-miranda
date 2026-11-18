@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ArrowLeft, Heart, Zap } from "lucide-react";
+import { ArrowLeft, Check, Flame, Heart, X, Zap } from "lucide-react";
 import "@fontsource/urbanist/latin-400.css";
 import "@fontsource/urbanist/latin-600.css";
 import "@fontsource/urbanist/latin-700.css";
@@ -17,6 +17,7 @@ const PERGUNTAS = [
   { q: "Tanjiro Kamado é o protagonista de qual anime?", opcoes: ["Naruto", "Bleach", "Demon Slayer", "Jujutsu Kaisen"], certa: 2 },
   { q: "Qual destes foi lançado primeiro?", opcoes: ["Attack on Titan", "Naruto", "Demon Slayer", "Dragon Ball Z"], certa: 3 },
 ];
+const CIRC = 2 * Math.PI * 66;
 const A = "/assets/cases";
 const DRACO = { cabeca: `${A}/animae-draco-head.webp`, ace: `${A}/animae-draco-ace.webp`, good: `${A}/animae-draco-good.webp`, low: `${A}/animae-draco-low.webp` };
 
@@ -100,27 +101,45 @@ export default function AnimaeQuizDemo() {
           <div className="qd-body">
             <div className="qd-top">
               <span className="qd-round" aria-hidden="true"><ArrowLeft size={24} /></span>
-              <span className="qd-hearts" aria-label={`${vidas} vidas`}>
-                {Array.from({ length: VIDAS }).map((_, n) => <Heart key={n} size={24} className={n < vidas ? "is-on" : "is-off"} fill={n < vidas ? "currentColor" : "none"} aria-hidden="true" />)}
-              </span>
               <span className="qd-grow" />
-              <span className="qd-xp"><span className="qd-xp-row"><Zap size={24} fill="currentColor" aria-hidden="true" />{xp} XP</span><span className="qd-meta">Quiz do dia · {i + 1}/{PERGUNTAS.length}</span></span>
+              <span className="qd-chip" aria-label={`${xp} XP`}><Zap size={16} fill="currentColor" className="qd-bolt" aria-hidden="true" />{xp} XP</span>
+              <span className="qd-chip qd-hearts" aria-label={`${vidas} vidas`}>
+                {Array.from({ length: VIDAS }).map((_, n) => <Heart key={n} size={16} className={n < vidas ? "is-on" : "is-off"} fill={n < vidas ? "currentColor" : "none"} aria-hidden="true" />)}
+              </span>
             </div>
-            <div className="qd-time">
-              <span className="qd-bar"><span className={`qd-bar-fill ${urgente ? "is-urgent" : ""}`} style={{ width: `${(tempo / SEGUNDOS) * 100}%` }} /></span>
-              <span className="qd-time-row"><span className={urgente ? "is-urgent" : ""}>{Math.ceil(tempo)}s</span>{seq >= 2 && <strong>{seq} acertos seguidos</strong>}</span>
+            <div className="qd-steps" aria-hidden="true">
+              {PERGUNTAS.map((_, n) => <span key={n} className={n < i || (n === i && respondida) ? "is-done" : n === i ? "is-now" : ""} />)}
             </div>
-            <div className="qd-ask">
-              <img src={reacao} alt="" width="96" height="108" draggable="false" />
-              <h2>{p.q}</h2>
+            <div className="qd-hero">
+              <div className="qd-ring">
+                <svg viewBox="0 0 144 144" aria-hidden="true">
+                  <circle className="qd-ring-track" cx="72" cy="72" r="66" />
+                  <circle className={`qd-ring-fill ${urgente ? "is-urgent" : ""}`} cx="72" cy="72" r="66" style={{ strokeDasharray: CIRC, strokeDashoffset: CIRC * (1 - tempo / SEGUNDOS) }} />
+                </svg>
+                <img src={reacao} alt="" width="96" height="108" draggable="false" />
+                <span className={`qd-seconds ${urgente ? "is-urgent" : ""}`} role="timer" aria-label={`${Math.ceil(tempo)} segundos`}>{Math.ceil(tempo)}s</span>
+              </div>
+              <div className="qd-hero-info">
+                <span className="qd-kicker">PERGUNTA {i + 1} DE {PERGUNTAS.length}</span>
+                <span className="qd-worth">Vale +{XP_ACERTO} XP</span>
+                {seq >= 2 && <span className="qd-streak"><Flame size={16} aria-hidden="true" />{seq} acertos seguidos</span>}
+              </div>
             </div>
-            <p className={`qd-result ${respondida ? (escolha === p.certa ? "is-ok" : "is-bad") : ""}`} aria-live="polite">
-              {respondida ? (escolha === p.certa ? `Acertou! +${XP_ACERTO} XP` : escolha === -1 ? "Acabou o tempo!" : "Errou! A certa está destacada.") : " "}
+            <h2 className="qd-title">{p.q}</h2>
+            <p className={`qd-feedback ${respondida ? (escolha === p.certa ? "is-ok" : "is-bad") : ""}`} aria-live="polite">
+              {respondida ? (escolha === p.certa ? <><Check size={16} aria-hidden="true" />{`Acertou! +${XP_ACERTO} XP`}</> : <><X size={16} aria-hidden="true" />{escolha === -1 ? "Acabou o tempo!" : "Errou! A certa está destacada."}</>) : "Escolha uma resposta"}
             </p>
             <div className="qd-options">
               {p.opcoes.map((o, n) => {
-                const estado = respondida ? (n === p.certa ? "is-correct" : n === escolha ? "is-wrong" : "") : "";
-                return <button key={o} type="button" className={`qd-option ${estado}`} disabled={respondida} onClick={() => responder(n)}>{o}</button>;
+                const estado = respondida ? (n === p.certa ? "is-correct" : n === escolha ? "is-wrong" : "is-dim") : "";
+                return (
+                  <button key={o} type="button" className={`qd-option ${estado}`} disabled={respondida} onClick={() => responder(n)}>
+                    <span className="qd-letter" aria-hidden="true">{"ABCD"[n]}</span>
+                    <span className="qd-option-text">{o}</span>
+                    {estado === "is-correct" && <Check size={24} aria-hidden="true" />}
+                    {estado === "is-wrong" && <X size={24} aria-hidden="true" />}
+                  </button>
+                );
               })}
             </div>
           </div>

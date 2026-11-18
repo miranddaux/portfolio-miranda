@@ -119,3 +119,33 @@ export const somDesligar = () => {
     sintetizar();
   }
 };
+
+// Sons de interface do desktop XP, sintetizados (sem arquivo de áudio de terceiros).
+// Mantêm o carimbo do último som "específico" (abrir, minimizar, fechar) para o clique genérico não tocar por cima.
+export let ultimoSomJanela = 0;
+const marcar = () => { ultimoSomJanela = Date.now(); };
+let ruido;
+function tique() {
+  try {
+    const c = contexto();
+    if (!c) return;
+    if (!ruido) {
+      ruido = c.createBuffer(1, Math.round(c.sampleRate * 0.03), c.sampleRate);
+      const d = ruido.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
+    }
+    const fonte = c.createBufferSource();
+    const filtro = c.createBiquadFilter();
+    const ganho = c.createGain();
+    fonte.buffer = ruido;
+    filtro.type = "bandpass";
+    filtro.frequency.value = 2600;
+    ganho.gain.value = 0.35;
+    fonte.connect(filtro).connect(ganho).connect(c.destination);
+    fonte.start(c.currentTime + 0.01);
+  } catch {}
+}
+export const somClique = () => tique();
+export const somAbrir = () => { marcar(); tocar([[523.25, 0, 0.07], [783.99, 0.05, 0.11]], { tipo: "triangle", volume: 0.05 }); };
+export const somMinimizar = () => { marcar(); tocar([[783.99, 0, 0.06], [523.25, 0.045, 0.1]], { tipo: "triangle", volume: 0.05 }); };
+export const somFechar = () => { marcar(); tocar([[659.25, 0, 0.07], [392, 0.05, 0.12]], { tipo: "triangle", volume: 0.05 }); };

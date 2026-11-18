@@ -5,7 +5,6 @@ import SocialLink from "./SocialLink.jsx";
 import ResultadosPerfil from "./ResultadosPerfil.jsx";
 import { ABAS_PERFIL as ABAS, abaVizinha, buscarNoPerfil } from "../data/perfilSearch.js";
 import { REDES_PRINCIPAIS } from "../data/social.js";
-import { logoDe } from "../data/logos.js";
 import { ADICIONAL, CERTIFICACOES, CONTATO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "../data/perfil.js";
 
 const P = "/assets/xp/painel";
@@ -218,7 +217,7 @@ export default function PainelSobre({ aoAbrir, onNavigate }) {
             {secoes.soft && (
               <ul className="painel-corpo-sec painel-lista-sec">
                 {FERRAMENTAS.map((f) => (
-                  <li key={f} className={logoDe(f) ? "tem-logo" : undefined}>{logoDe(f) && <img className="logo-ferramenta" src={logoDe(f)} alt="" width="16" height="16" />}{f}</li>
+                  <li key={f}>{f}</li>
                 ))}
               </ul>
             )}

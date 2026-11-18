@@ -2,8 +2,8 @@
 export default function AppHabbo() {
   return (
     <div className="app-habbo">
-      <img src="/assets/xp/apps/habbo.svg" alt="" width="64" height="64" />
-      <h2>Habbo Hotel</h2>
+      <img className="app-habbo-logo" src="/assets/xp/apps/habbo-logo.png" alt="Habbo" width="160" />
+      <h2 className="sr-only">Habbo Hotel</h2>
       <p>Um jogo que eu jogava.</p>
       <a className="xp-button" href="https://www.habbo.com.br/" target="_blank" rel="noopener noreferrer">
         Abrir habbo.com.br<span className="sr-only"> (abre em nova aba)</span>

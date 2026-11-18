@@ -4,7 +4,7 @@ import BarraDeTarefas from "../components/BarraDeTarefas";
 import MenuIniciar from "../components/MenuIniciar";
 import AvisoTelaCheia from "../components/AvisoTelaCheia";
 import DialogoDesligar, { TelaReiniciando } from "../components/DialogoDesligar";
-import { somDesligar } from "../lib/sons";
+import { somAbrir, somClique, somDesligar, somFechar, somMinimizar, ultimoSomJanela } from "../lib/sons";
 import JanelaXP from "../components/JanelaXP";
 import JanelaPlayer from "../components/JanelaPlayer";
 import AppPrompt from "../components/apps/AppPrompt.jsx";
@@ -42,7 +42,7 @@ const APPS = [
   { id: "minas", name: "Campo minado", title: "Campo minado", icon: "app", barraIcone: "/assets/xp/apps/campo-minado.svg" },
   { id: "paint", name: "Paint", title: "Paint", icon: "app", barraIcone: "/assets/xp/figma/paint.png" },
   { id: "pinball", name: "Pinball", title: "3D Pinball", icon: "app", barraIcone: "/assets/xp/apps/pinball.svg" },
-  { id: "habbo", name: "Habbo Hotel", title: "Habbo Hotel", icon: "app", barraIcone: "/assets/xp/apps/habbo.svg" },
+  { id: "habbo", name: "Habbo Hotel", title: "Habbo Hotel", icon: "app", barraIcone: "/assets/xp/apps/habbo.png" },
   { id: "case", name: "Case", title: "Case", icon: "document" },
 ];
 const APPS_JANELAS = [
@@ -58,7 +58,7 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "minas"), janelaIcone: "/assets/xp/apps/campo-minado.svg", largura: 288, altura: 400, cascata: 3, minLargura: 288, minAltura: 400, semStatus: true },
   { ...APPS.find(a => a.id === "paint"), janelaIcone: "/assets/xp/figma/paint.png", largura: 800, altura: 560, cascata: 2, minLargura: 480, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "pinball"), janelaIcone: "/assets/xp/apps/pinball.svg", largura: 640, altura: 560, cascata: 3, minLargura: 400, minAltura: 360, semStatus: true },
-  { ...APPS.find(a => a.id === "habbo"), janelaIcone: "/assets/xp/apps/habbo.svg", largura: 480, altura: 320, cascata: 1, minLargura: 320, minAltura: 280, semStatus: true },
+  { ...APPS.find(a => a.id === "habbo"), janelaIcone: "/assets/xp/apps/habbo.png", largura: 480, altura: 320, cascata: 1, minLargura: 320, minAltura: 280, semStatus: true },
   { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
 export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {
@@ -97,6 +97,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   const [avisoMsn, setAvisoMsn] = useState(false);
   const [tremer, setTremer] = useState(0);
   const open = (id, focus = true) => {
+    somAbrir();
     setWindows((w) => ({ ...w, [id]: "open" }));
     setActive(id);
     setStart(false);
@@ -106,6 +107,8 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
       );
   };
   const hide = (id, state) => {
+    if (state === "closed") somFechar();
+    else if (state === "minimized") somMinimizar();
     setWindows((w) => ({ ...w, [id]: state }));
     requestAnimationFrame(() => {
       const target =
@@ -123,6 +126,16 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
     sync();
     window.addEventListener("hashchange", sync);
     return () => window.removeEventListener("hashchange", sync);
+  }, []);
+  // Clique em botões e links: tique curto, a menos que abrir/minimizar/fechar já tenha tocado o seu som.
+  useEffect(() => {
+    const clique = (e) => {
+      const alvo = e.target.closest?.("button, a[href], [role=menuitem], [role=tab]");
+      if (!alvo || alvo.disabled || alvo.getAttribute("aria-disabled") === "true" || alvo.closest(".wmp, .app-ms, .app-paint-area")) return;
+      setTimeout(() => { if (Date.now() - ultimoSomJanela > 150) somClique(); }, 0);
+    };
+    document.addEventListener("click", clique);
+    return () => document.removeEventListener("click", clique);
   }, []);
   useEffect(() => {
     if (!start) return;
@@ -204,7 +217,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               semStatus={app.semStatus}
               classe={app.id === "msnchat" && tremer % 2 === 1 ? "is-tremendo" : ""}
               onFocar={() => setActive(app.id)}
-              onFechar={() => app.id === "case" ? onNavigate("/#cases") : hide(app.id, "closed")}
+              onFechar={() => { if (app.id === "case") { somFechar(); onNavigate("/#cases"); } else hide(app.id, "closed"); }}
               onMinimizar={() => hide(app.id, "minimized")}
               statusEsquerda={
                 app.id === "curriculo"

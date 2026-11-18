@@ -1,16 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { REDES_PRINCIPAIS, REDES_SOCIAIS } from "../data/social.js";
-import { IconeBloco, IconeGameBoy, SetaVerde } from "./IconesMenu.jsx";
+import { IconeBloco, SetaVerde } from "./IconesMenu.jsx";
 import { logoDe } from "../data/logos.js";
 
 const XP = "/assets/xp";
 const img = (src, t = 32, classe) => <img className={classe} src={src} alt="" width={t} height={t} />;
 const imgRede = (r, t = 32) => img(r.icone, t, `mi-rede mi-rede-${r.nome.toLowerCase()}`);
-
-// Selo de duas letras para itens sem arquivo de ícone (provisório).
-const Selo = ({ sigla, fundo, cor = "#fff" }) => (
-  <span className="mi-selo" style={{ background: fundo, color: cor }} aria-hidden="true">{sigla}</span>
-);
 
 // Programas usados recentemente: só os que têm logo enviado pelo Thiago.
 const RECENTES = ["Adobe Illustrator", "Adobe Photoshop", "Claude Code", "Cursor", "VS Code", "Figma", "Shopify"];
@@ -96,10 +91,12 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
           <Divisor />
           <Linha icone={img(`${XP}/area/sobre.png`)} rotulo="Sobre mim" aoClicar={() => aoAbrir("sobre")} />
           <Linha icone={img(`${XP}/area/curriculo.png`)} rotulo="Meu Currículo" aoClicar={() => aoAbrir("curriculo")} />
-          <Linha icone={<IconeGameBoy />} rotulo="Game Boy Color" breve />
-          <Linha icone={<Selo sigla="Dd" fundo="#2f9e6e" />} rotulo="DoodleDev" breve />
-          <Linha icone={<Selo sigla="iP" fundo="#9aa3b2" />} rotulo="iPod Classic" breve />
+          <Divisor />
           <Linha icone={img(MSN, 32, "mi-msn")} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
+          <Divisor />
+          <Linha icone={img(`${XP}/apps/campo-minado.svg`)} rotulo="Campo Minado" aoClicar={() => aoAbrir("minas")} />
+          <Linha icone={img(`${XP}/figma/paint.png`)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
+          <Linha icone={img(`${XP}/apps/pinball.svg`)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
           <div className="mi-todos-area" onMouseEnter={() => abrir("todos")} onMouseLeave={fechar}>
             <Divisor />
             <button type="button" className={`mi-todos ${sub === "todos" ? "is-aberto" : ""}`} onClick={() => alternar("todos")} onKeyDown={teclaSub("todos")} aria-haspopup="menu" aria-expanded={sub === "todos"}>
@@ -114,7 +111,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Mini icone={img(`${XP}/area/curriculo.png`, 16)} rotulo="Meu Currículo" aoClicar={() => aoAbrir("curriculo")} />
                 <Divisor mini />
                 {redes.map((r) => <Mini key={r.nome} icone={imgRede(r, 16)} rotulo={r.nome} href={r.href} />)}
-                <Mini icone={<Selo sigla="M" fundo="#111" />} rotulo="Medium (em breve)" breve />
+                <Mini icone={imgRede(REDES_SOCIAIS.medium, 16)} rotulo="Medium (em breve)" breve />
                 <Divisor mini />
                 <Mini icone={img(MSN, 16)} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
                 <Mini icone={img(`${XP}/menu/media-player-orb.png`, 16)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
@@ -125,7 +122,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Mini icone={<IconeBloco />} rotulo="Bloco de notas" breve />
                 <Mini icone={img(`${XP}/figma/paint.png`, 16)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
                 <Mini icone={img(`${XP}/apps/pinball.svg`, 16)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
-                <Mini icone={img(`${XP}/apps/habbo.svg`, 16)} rotulo="Habbo Hotel" aoClicar={() => aoAbrir("habbo")} />
+                <Mini icone={img(`${XP}/apps/habbo.png`, 16)} rotulo="Habbo Hotel" aoClicar={() => aoAbrir("habbo")} />
                 <Divisor mini />
                 <Mini icone={img(`${XP}/figma/meu-computador.png`, 16)} rotulo="Modo Rápido" aoClicar={() => aoTrocarModo("rapido")} />
                 <Mini icone={img(`${XP}/figma/painel-de-controle.png`, 16)} rotulo="Modo Noite" aoClicar={() => aoTrocarModo("noite")} />
@@ -148,11 +145,11 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
               </div>
             )}
           </div>
-          <Linha icone={<Selo sigla="M" fundo="#111" />} rotulo="Medium (em breve)" breve />
+          <Linha icone={imgRede(REDES_SOCIAIS.medium)} rotulo="Medium (em breve)" breve />
           <Linha icone={img(`${XP}/menu/media-player-orb.png`)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
           <Linha icone={img(`${XP}/figma/minhas-imagens.png`)} rotulo="Visualizador de imagens" aoClicar={() => aoAbrir("visualizador")} />
           <Linha icone={img(`${XP}/apps/prompt.png`)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
-          <Linha icone={img(`${XP}/apps/habbo.svg`)} rotulo="Habbo Hotel" aoClicar={() => aoAbrir("habbo")} />
+          <Linha icone={img(`${XP}/apps/habbo.png`)} rotulo="Habbo Hotel" aoClicar={() => aoAbrir("habbo")} />
         </div>
       </div>
       <div className="mi-rodape">
