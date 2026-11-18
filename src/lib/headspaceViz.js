@@ -20,6 +20,14 @@ export function criarVisualizador() {
   const picos = new Array(48).fill(0);
   let giro = 0, tom = 120;
   return function desenhar(modo, ctx, w, h, freq, onda) {
+    desenharModo(modo, ctx, w, h, freq, onda);
+    if (modo === 2) return;
+    // vinheta suave: escurece as bordas para o visor parecer um tubo de vidro
+    const vg = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * 0.35, w / 2, h / 2, Math.max(w, h) * 0.75);
+    vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0,0.45)");
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, w, h);
+  };
+  function desenharModo(modo, ctx, w, h, freq, onda) {
     if (modo === 0) {
       const g = ctx.createLinearGradient(0, 0, 0, h);
       g.addColorStop(0, "#2b0d00"); g.addColorStop(1, "#050100");
@@ -36,7 +44,7 @@ export function criarVisualizador() {
         ctx.fillRect(i * largura + 1, h - picos[i] - 2, largura - 2, 2);
       }
     } else if (modo === 1) {
-      ctx.fillStyle = "#031503"; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(2, 18, 6, 0.28)"; ctx.fillRect(0, 0, w, h);
       const cx = w / 2, cy = h / 2, base = Math.min(w, h) * 0.5, graves = media(freq, 1, 12), medios = media(freq, 12, 120);
       giro += 0.004 + graves * 0.03;
       ctx.lineCap = "round"; ctx.shadowColor = "#37ff6a"; ctx.shadowBlur = 8;
@@ -71,7 +79,7 @@ export function criarVisualizador() {
       ctx.beginPath(); ctx.arc(cx, cy, 8 + graves * Math.min(w, h) * 0.4, 0, Math.PI * 2); ctx.stroke();
       ctx.globalCompositeOperation = "source-over";
     } else {
-      ctx.fillStyle = "#00110a"; ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = "rgba(0, 17, 10, 0.35)"; ctx.fillRect(0, 0, w, h);
       ctx.strokeStyle = "rgba(60, 255, 130, 0.14)"; ctx.lineWidth = 1;
       for (let x = 0; x <= w; x += w / 10) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
       for (let y = 0; y <= h; y += h / 6) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke(); }
@@ -90,5 +98,5 @@ export function criarVisualizador() {
       }
       ctx.stroke(); ctx.shadowBlur = 0;
     }
-  };
+  }
 }

@@ -11,23 +11,23 @@ const REF = 1254;
 const area = (cx, cy, w, h = w) => ({ left: `${((cx - w / 2) / REF) * 100}%`, top: `${((cy - h / 2) / REF) * 100}%`, width: `${(w / REF) * 100}%`, height: `${(h / REF) * 100}%` });
 
 const CATALOGO = [
-  ["ABC", "The Jackson 5"],
-  ["Billie Jean", "Michael Jackson"],
-  ["Thriller", "Michael Jackson"],
-  ["I Want You Back", "The Jackson 5"],
-  ["I'll Be There", "The Jackson 5"],
-  ["Beat It", "Michael Jackson"],
-  ["Smooth Criminal", "Michael Jackson"],
-  ["Poker Face", "Lady Gaga"],
-  ["Bad Romance", "Lady Gaga"],
-  ["Umbrella", "Rihanna"],
-  ["Only Girl (In the World)", "Rihanna"],
-  ["In the End", "Linkin Park"],
-  ["Sk8er Boi", "Avril Lavigne"],
-  ["Bring Me to Life", "Evanescence"],
-  ["Feel Good Inc.", "Gorillaz"],
-  ["Mr. Brightside", "The Killers"],
-  ["Everytime We Touch", "Cascada"],
+  ["ABC", "The Jackson 5"], ["I Want You Back", "The Jackson 5"], ["I'll Be There", "The Jackson 5"],
+  ["Billie Jean", "Michael Jackson"], ["Thriller", "Michael Jackson"], ["Beat It", "Michael Jackson"], ["Smooth Criminal", "Michael Jackson"], ["Man in the Mirror", "Michael Jackson"], ["Black or White", "Michael Jackson"], ["Don't Stop 'Til You Get Enough", "Michael Jackson"],
+  ["Poker Face", "Lady Gaga"], ["Bad Romance", "Lady Gaga"], ["Just Dance", "Lady Gaga"], ["Paparazzi", "Lady Gaga"],
+  ["Umbrella", "Rihanna"], ["Only Girl (In the World)", "Rihanna"], ["SOS", "Rihanna"], ["Don't Stop the Music", "Rihanna"],
+  ["Toxic", "Britney Spears"], ["...Baby One More Time", "Britney Spears"], ["Oops!... I Did It Again", "Britney Spears"],
+  ["Hips Don't Lie", "Shakira"], ["Whenever, Wherever", "Shakira"],
+  ["Crazy in Love", "Beyoncé"], ["Single Ladies (Put a Ring on It)", "Beyoncé"],
+  ["Hey Ya!", "OutKast"], ["Yeah!", "Usher"], ["In da Club", "50 Cent"], ["Lose Yourself", "Eminem"], ["Gold Digger", "Kanye West"],
+  ["Since U Been Gone", "Kelly Clarkson"], ["Complicated", "Avril Lavigne"], ["Sk8er Boi", "Avril Lavigne"],
+  ["Mr. Brightside", "The Killers"], ["Seven Nation Army", "The White Stripes"], ["Do I Wanna Know?", "Arctic Monkeys"], ["Take Me Out", "Franz Ferdinand"],
+  ["In the End", "Linkin Park"], ["Numb", "Linkin Park"], ["Bring Me to Life", "Evanescence"], ["My Immortal", "Evanescence"],
+  ["American Idiot", "Green Day"], ["Boulevard of Broken Dreams", "Green Day"], ["Welcome to the Black Parade", "My Chemical Romance"],
+  ["Sugar, We're Goin Down", "Fall Out Boy"], ["I Write Sins Not Tragedies", "Panic! At The Disco"], ["Dani California", "Red Hot Chili Peppers"],
+  ["Feel Good Inc.", "Gorillaz"], ["Clocks", "Coldplay"], ["Viva la Vida", "Coldplay"], ["Chasing Cars", "Snow Patrol"],
+  ["Everytime We Touch", "Cascada"], ["Dragostea Din Tei", "O-Zone"], ["Sandstorm", "Darude"], ["Blue (Da Ba Dee)", "Eiffel 65"],
+  ["Barbie Girl", "Aqua"], ["Wannabe", "Spice Girls"], ["I Want It That Way", "Backstreet Boys"], ["Bye Bye Bye", "*NSYNC"],
+  ["Hung Up", "Madonna"], ["Titanium", "David Guetta"], ["Levels", "Avicii"],
 ].map(([titulo, artista]) => ({ id: `cat-${artista}-${titulo}`, titulo, artista, url: "", duracao: 30, origem: "catalogo" }));
 
 // Prévias oficiais de 30 s pela API pública de busca do iTunes (Apple). Nada é hospedado no site.
@@ -129,7 +129,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
       try {
         url = cacheUrl.current[f.id] || (cacheUrl.current[f.id] = await buscarPrevia(f));
       } catch {
-        if (meu === pedido.current) { setBuscando(false); setAviso("Não encontrei a prévia desta música agora. Tente outra."); }
+        if (meu === pedido.current) { setBuscando(false); setAviso("Não encontrei esta música agora. Tente outra."); }
         return;
       }
       if (meu !== pedido.current) return;
@@ -230,10 +230,15 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     return () => { cancelAnimationFrame(raf); ro.disconnect(); };
   }, []);
 
-  const alternarVisual = () => {
-    const n = (modo + 1) % MODOS.length;
-    setModo(n); setRotuloModo(MODOS[n]);
-  };
+  const [menuVisual, setMenuVisual] = useState(false);
+  const escolherVisual = (n) => { setModo(n); setRotuloModo(MODOS[n]); setMenuVisual(false); };
+  useEffect(() => {
+    if (!menuVisual) return undefined;
+    const fora = (e) => { if (!e.target.closest(".hs-menu-visual, .hs-bt-visual")) setMenuVisual(false); };
+    const tecla = (e) => { if (e.key === "Escape") setMenuVisual(false); };
+    document.addEventListener("pointerdown", fora); document.addEventListener("keydown", tecla);
+    return () => { document.removeEventListener("pointerdown", fora); document.removeEventListener("keydown", tecla); };
+  }, [menuVisual]);
   useEffect(() => {
     if (!rotuloModo) return undefined;
     const t = setTimeout(() => setRotuloModo(""), 1600);
@@ -313,12 +318,11 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
                 <li key={f.id}>
                   <button type="button" className={`hs-faixa ${i === atual ? "is-atual" : ""}`} aria-current={i === atual ? "true" : undefined} onClick={() => carregar(i, true)}>
                     <span className="hs-faixa-nome">{i === atual && (tocando || buscando) ? (buscando ? "… " : "▶ ") : ""}{f.titulo} - {f.artista}</span>
-                    <span className="hs-faixa-dur">{f.origem === "catalogo" ? "prévia" : formatarTempo(f.duracao)}</span>
+                    <span className="hs-faixa-dur">{f.origem === "catalogo" ? "" : formatarTempo(f.duracao)}</span>
                   </button>
                 </li>
               ))}
             </ul>
-            <p className="hs-nota">Músicas do catálogo tocam a prévia oficial de 30 s (iTunes). Importe seus arquivos para ouvir inteiras.</p>
             <label className="hs-mini hs-importar">
               Importar arquivos…
               <input type="file" accept="audio/*" multiple onChange={importar} />
@@ -340,7 +344,14 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
         <button type="button" className="hs-bt" style={area(531, 165, 88)} onClick={alternarTocar} aria-label={tocando ? "Pausar" : "Tocar"} />
         <button type="button" className="hs-bt" style={area(621, 165, 88)} onClick={parar} aria-label="Parar" />
         <button type="button" className="hs-bt" style={area(711, 165, 88)} onClick={() => proxima(false)} aria-label="Próxima faixa" />
-        <button type="button" className="hs-bt" style={area(819, 166, 94)} onClick={alternarVisual} aria-label={`Trocar visualização. Atual: ${MODOS[modo]}`} />
+        <button type="button" className="hs-bt hs-bt-visual" style={area(819, 166, 94)} onClick={() => setMenuVisual((m) => !m)} aria-haspopup="menu" aria-expanded={menuVisual} aria-label={`Escolher visualização. Atual: ${MODOS[modo]}`} />
+        {menuVisual && (
+          <ul className="hs-menu-visual" role="menu" aria-label="Visualizações">
+            {MODOS.map((m, n) => (
+              <li key={m} role="none"><button type="button" role="menuitemradio" aria-checked={n === modo} onClick={() => escolherVisual(n)}>{n === modo ? "✓ " : ""}{m}</button></li>
+            ))}
+          </ul>
+        )}
         <button type="button" className="hs-bt hs-bt-q" style={area(589, 65, 55, 59)} onClick={onMinimize} aria-label="Minimizar" />
         <button type="button" className="hs-bt hs-bt-q" style={area(658, 65, 56, 59)} onClick={onClose} aria-label="Fechar" />
         <button type="button" className="hs-bt hs-bt-q" style={area(124, 565, 65, 111)} onClick={() => setEqAberto((a) => !a)} aria-expanded={eqAberto} aria-label="Equalizador" />
