@@ -63,7 +63,7 @@ test("navegação interna preserva abrir em nova aba e cliques modificados", () 
   const animae = getCaseStudy("animae");
   assert.equal(animae.period, "Out/2025 — out/2026 · 1 ano");
   assert.equal(animae.links.site, "https://animaeapp.com.br/");
-  assert.equal(animae.modules.length, 6);
+  assert.equal(animae.modules.length, 7);
   for (const project of CASE_STUDIES) {
     assert(project.categories.length >= 2);
     assert(project.categories.every(c => c === c.toUpperCase()));

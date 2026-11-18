@@ -201,9 +201,18 @@ const MODULES = {
     },
     {
       title: "Apresentar o universo sem atrasar a entrada",
-      text: "Desenhei o onboarding para apresentar descoberta, organização e comunidade em etapas curtas, com a opção de pular. A identidade visual participa dessa apresentação, mas o caminho para começar continua à vista.",
+      text: "Desenhei o onboarding para apresentar descoberta, organização e comunidade em etapas curtas, com a opção de pular. Na etapa seguinte, a pessoa escolhe pelo menos 3 gêneros para que as recomendações já nasçam com o gosto dela.",
       layout: "phones",
-      images: [{ src: "/assets/cases/animae-onboarding.webp", width: 860, height: 1864, alt: "Onboarding do ANIMAE com apresentação do universo otaku, opção de pular e botão Próximo", caption: "Onboarding · primeira etapa desenhada no Figma." }],
+      images: [
+        { src: "/assets/cases/animae-onboarding.webp", width: 860, height: 1864, alt: "Onboarding do ANIMAE com apresentação do universo otaku, opção de pular e botão Próximo", caption: "Onboarding · primeira etapa." },
+        { src: "/assets/cases/animae-generos.webp", width: 860, height: 1864, alt: "Tela O que você curte? do ANIMAE, com gêneros de anime para selecionar", caption: "Escolha de gêneros · recortada no topo." },
+      ],
+    },
+    {
+      title: "Entrar no fandom sem fricção",
+      text: "No login, deixei e-mail e senha no centro, com Criar conta e Entrar no fandom em destaque. Google, Apple e Discord ficam como alternativa rápida, e o mascote mantém a identidade do produto desde o primeiro contato.",
+      layout: "phones",
+      images: [{ src: "/assets/cases/animae-login.webp", width: 860, height: 1864, alt: "Tela de login do ANIMAE com campos de e-mail e senha, botões Criar conta e Entrar no fandom e login social" }],
     },
     {
       title: "Do Figma ao produto",
