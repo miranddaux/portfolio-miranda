@@ -1,7 +1,7 @@
 /* Réplica em código da tela Minha Lista do ANIMAE (430 x 932). Medidas do design do app, por isso fora do verificador de 8 pt. */
 .ad-root {
   --n0: #f9faff; --n10: #eceff8; --n40: #a6acc7; --n50: #7e85a3; --n70: #3a3f5a; --n80: #1f2333; --n90: #141725; --n100: #0f1018; --primary: #ff5c02;
-  position: absolute; inset: 0; overflow: hidden; background: var(--n90);
+  position: absolute; inset: 0; overflow: hidden; background: transparent;
   font-family: "Urbanist", system-ui, sans-serif; color: var(--n0);
 }
 .ad-screen { position: absolute; top: 0; left: 0; transform: scale(var(--ad-scale, 0.5)); transform-origin: 0 0; background: var(--n90); }
@@ -60,3 +60,6 @@
 .case-document .ad-root p.ad-sub { font: 400 14px/20px "Urbanist", system-ui, sans-serif; color: var(--n40); }
 .case-document .ad-root p.ad-ep { font: 400 14px/20px "Urbanist", system-ui, sans-serif; color: var(--n40); }
 .ad-line { height: 24px; }
+
+.case-device-screen { position: relative; }
+.case-device-screen img.case-demo-poster { position: absolute; inset: 0; display: block; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: top; }

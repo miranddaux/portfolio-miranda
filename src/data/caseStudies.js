@@ -15,7 +15,7 @@ const STORIES = {
     roleShort: "UX, UI, design system e código com auxílio de IA",
     team: "Projeto solo",
     period: "Out/2025 — out/2026 · 1 ano",
-    tools: ["Figma", "Illustrator", "Expo", "React Native", "Supabase", "Vercel"],
+    tools: ["Figma", "Illustrator", "Expo", "React Native", "Supabase", "Vercel", "AniList", "Jikan"],
     status: "Produto próprio · web disponível",
     accent: "animae",
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
@@ -53,8 +53,8 @@ const STORIES = {
     decisions: [
       { title: "Comunidade em vez de streaming", choice: "Retirei o player e as salas para assistir em grupo, que eram o destaque da primeira versão. O app passou a indicar onde assistir e a concentrar lista, acompanhamento e interação.", tradeoff: "Abri mão do diferencial original para construir um produto que eu conseguisse manter." },
       { title: "Explorar antes de criar conta", choice: "Permiti que o usuário conheça a home e o catálogo em modo visitante, antes do cadastro.", tradeoff: "Menos personalização no primeiro acesso, em troca de uma barreira inicial menor." },
-      { title: "Transformar o uso em jogo", choice: "Cada episódio registrado gera XP, que evolui níveis, badges e recompensas, em uma lógica parecida com a do Duolingo. O cálculo da pontuação fica no servidor.", tradeoff: "A lógica exige cuidado técnico, mas não depende de valores definidos pelo dispositivo." },
-      { title: "Uma comunidade que não nasce vazia", choice: "Para o feed não começar parado, criei bots para a comunidade e programei o Draco, o mascote, para publicar quizzes toda semana e registrar o XP, de modo que sempre haja atividade.", tradeoff: "A atividade automática ajuda no começo, mas não substitui uma comunidade real e precisa ficar clara para o usuário." },
+      { title: "Transformar o uso em jogo", choice: "Cada episódio registrado gera XP, que evolui níveis e conquistas, em uma lógica parecida com a do Duolingo. Também estou pensando em recompensas, como ícone, badge e banner exclusivos, ainda em definição. O cálculo da pontuação fica no servidor.", tradeoff: "A lógica exige cuidado técnico, mas não depende de valores definidos pelo dispositivo." },
+      { title: "Uma comunidade que não nasce vazia", choice: "Para o feed não começar parado, programei o Draco, o mascote, para publicar quizzes diários, agendados toda semana, e registrar o XP, de modo que sempre haja atividade.", tradeoff: "A atividade programada ajuda no começo, mas não substitui uma comunidade real." },
     ],
     journeys: [{ label: "Jornada proposta do fã", steps: ["Explorar o catálogo", "Organizar a lista", "Registrar episódios", "Compartilhar com a comunidade"] }],
     solution: "Organizei fluxos e wireframes antes das interfaces finais. Como o projeto é solo, também cuidei do que acontece depois do layout: variáveis e componentes do Figma alimentam uma base de tokens consumida pelo app, para manter a mesma linguagem visual entre design e código. O app foi construído com Expo e React Native, tem o Supabase no back-end e a versão web roda na Vercel.",
@@ -165,7 +165,7 @@ const MODULES = {
   animae: [
     {
       title: "Descobrir o próximo anime",
-      text: "Quis deixar a descoberta simples. A home não destaca um título fixo: é um banner rotativo alimentado por uma API pública de animes, que traz os títulos em alta no momento e troca os banners sozinho. O aplicativo inteiro consome essa API para trazer os dados do catálogo. Da home, o usuário vai direto para a página do anime, com onde assistir e o progresso à vista, e pode conhecer tudo antes de criar uma conta.",
+      text: "Quis deixar a descoberta simples. A home não destaca um título fixo: é um banner rotativo que mostra os animes em alta no momento e troca sozinho. Os dados vêm de APIs públicas: comecei com a AniList, mas o catálogo dela era limitado, então adicionei a Jikan para completar. O aplicativo inteiro consome essas duas fontes. Da home, o usuário vai direto para a página do anime, com onde assistir e o progresso à vista, e pode conhecer tudo antes de criar uma conta.",
       layout: "phones",
       images: [
         { src: "/assets/cases/animae-home.webp", width: 860, height: 1864, alt: "Home do ANIMAE com anime em destaque, botões Adicionar e Onde assistir, e amigos online" },
