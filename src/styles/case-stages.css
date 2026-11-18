@@ -262,3 +262,12 @@
 /* Protótipo: só a superfície azul e o iframe, que traz o celular do próprio Figma */
 .proto-stage:has(.proto-embed) { padding: 0; }
 .proto-embed { display: block; width: 100%; height: 100%; border: 0; background: transparent; }
+
+/* Função, Ferramentas e Ano: grade que reorganiza conforme a largura; as listas quebram em linhas */
+.case-overview-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; flex-wrap: initial; justify-content: initial; gap: var(--space-3) var(--space-5); align-items: start; }
+.case-overview-card > div { min-width: 0; }
+.case-overview-card > div:last-child { margin-left: 0; }
+@media (max-width: 960px) { .case-overview-card { grid-template-columns: repeat(2, minmax(0, 1fr)); } .case-overview-card > div:last-child { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .case-overview-card { grid-template-columns: minmax(0, 1fr); } }
+@container janela (max-width: 880px) { .case-overview-card { grid-template-columns: repeat(2, minmax(0, 1fr)); } .case-overview-card > div:last-child { grid-column: 1 / -1; } }
+@container janela (max-width: 600px) { .case-overview-card { grid-template-columns: minmax(0, 1fr); } }
