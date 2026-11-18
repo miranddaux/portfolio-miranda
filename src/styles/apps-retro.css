@@ -21,19 +21,6 @@
 .app-viz-status { display: flex; justify-content: space-between; gap: var(--space-2); padding: 0 var(--space-2); border-top: 1px solid #aca899; font-size: var(--text-12); line-height: var(--space-3); color: #222; }
 
 /* Campo Minado */
-.app-ms { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); padding: var(--space-2); }
-.app-ms-topo { display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; width: 232px; padding: var(--space-1); border: 2px solid; border-color: #7b7b7b #fff #fff #7b7b7b; background: #c0c0c0; }
-.app-ms-led { min-width: 56px; padding: 0 var(--space-1); background: #000; color: #ff2a1a; font: 700 var(--text-24)/var(--space-4) "Courier New", monospace; text-align: right; letter-spacing: 2px; }
-.app-ms-rosto { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 2px solid; border-color: #fff #7b7b7b #7b7b7b #fff; background: #c0c0c0; cursor: pointer; }
-.app-ms-rosto:active { border-color: #7b7b7b #fff #fff #7b7b7b; }
-.app-ms-tabuleiro { display: grid; grid-template-columns: repeat(9, 24px); border: 3px solid; border-color: #7b7b7b #fff #fff #7b7b7b; background: #7b7b7b; touch-action: manipulation; user-select: none; }
-.app-ms-casa { box-sizing: border-box; width: 24px; height: 24px; padding: 0; border: 2px solid; border-color: #fff #7b7b7b #7b7b7b #fff; background: #c0c0c0; color: #000; font: 700 var(--text-16)/20px "Segoe UI", sans-serif; cursor: pointer; }
-.app-ms-casa:focus-visible { outline: 2px solid #316ac5; outline-offset: -2px; z-index: 1; }
-.app-ms-casa.is-aberta { border: 1px solid #7b7b7b; cursor: default; }
-.app-ms-casa.is-explodiu { background: #ff0000; }
-.app-ms-casa.n1 { color: #0000ff; } .app-ms-casa.n2 { color: #008000; } .app-ms-casa.n3 { color: #ff0000; } .app-ms-casa.n4 { color: #000080; }
-.app-ms-casa.n5 { color: #800000; } .app-ms-casa.n6 { color: #008080; } .app-ms-casa.n7 { color: #000; } .app-ms-casa.n8 { color: #808080; }
-.app-ms-status { margin: 0; font-size: var(--text-12); line-height: var(--space-3); color: #222; text-align: center; }
 
 /* Paint */
 .app-paint { display: flex; flex: 1; flex-direction: column; min-height: 0; }
@@ -65,3 +52,27 @@
 .app-habbo .xp-button { display: inline-flex; align-items: center; gap: var(--space-1); text-decoration: none; }
 .app-habbo-logo { display: block; width: 160px; height: auto; }
 
+/* Campo Minado no visual do Windows XP: barra de menu, painel cinza em relevo, contadores em LED e barra de status. Desenhado em CSS e SVG, sem arquivos da Microsoft. */
+.app-ms { display: flex; flex: 1; flex-direction: column; min-height: 0; background: #ece9d8; user-select: none; }
+.app-ms-menu { display: flex; flex: none; align-items: center; height: 24px; padding: 0 var(--space-1); border-bottom: 1px solid #d0cebf; background: #f5f4ea; }
+.app-ms-menu-item { position: relative; }
+.app-ms-menu-item > button { height: 24px; padding: 0 var(--space-1); border: 0; background: transparent; color: #000; font: inherit; font-size: var(--text-14); line-height: var(--space-3); cursor: default; }
+.app-ms-menu-item > button:hover, .app-ms-menu-item > button.is-aberto { background: #316ac5; color: #fff; }
+.app-ms-menu-lista { position: absolute; top: 24px; left: 0; z-index: 3; display: flex; flex-direction: column; min-width: 160px; padding: 0; border: 1px solid #aca899; background: #fff; box-shadow: 2px 2px 4px #0004; }
+.app-ms-menu-lista button { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); height: 24px; padding: 0 var(--space-2); border: 0; background: transparent; color: #000; font: inherit; font-size: var(--text-14); text-align: left; cursor: default; }
+.app-ms-menu-lista button:hover { background: #316ac5; color: #fff; }
+.app-ms-menu-lista kbd { font: inherit; font-size: var(--text-12); opacity: 0.7; }
+.app-ms-corpo { display: flex; flex: 1; flex-direction: column; align-items: center; gap: var(--space-1); min-height: 0; margin: var(--space-1); padding: var(--space-1); border: 3px solid; border-color: #fff #7b7b7b #7b7b7b #fff; background: #c0c0c0; }
+.app-ms-topo { display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; width: 100%; padding: var(--space-1); border: 3px solid; border-color: #7b7b7b #fff #fff #7b7b7b; }
+.app-ms-led { display: inline-flex; gap: 0; padding: 0; border: 1px solid; border-color: #7b7b7b #fff #fff #7b7b7b; background: #000; line-height: 0; }
+.app-ms-rosto { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 3px solid; border-color: #fff #7b7b7b #7b7b7b #fff; outline: 1px solid #7b7b7b; background: #c0c0c0; cursor: pointer; }
+.app-ms-rosto:active { border-width: 1px; border-color: #7b7b7b; }
+.app-ms-tabuleiro { display: grid; grid-template-columns: repeat(9, 24px); box-sizing: content-box; border: 3px solid; border-color: #7b7b7b #fff #fff #7b7b7b; touch-action: manipulation; }
+.app-ms-casa { display: grid; place-items: center; box-sizing: border-box; width: 24px; height: 24px; padding: 0; border: 3px solid; border-color: #fff #7b7b7b #7b7b7b #fff; background: #c0c0c0; color: #000; font: 700 var(--text-16)/var(--space-3) "Segoe UI", Tahoma, sans-serif; cursor: default; }
+.app-ms-casa:focus-visible { outline: 2px solid #316ac5; outline-offset: -2px; z-index: 1; }
+.app-ms-casa.is-aberta { border: 1px solid; border-color: #7b7b7b #7b7b7b #c0c0c0 #c0c0c0; }
+.app-ms-casa.is-explodiu { background: #f00; }
+.app-ms-casa svg { display: block; }
+.app-ms-casa.n1 { color: #0000ff; } .app-ms-casa.n2 { color: #008000; } .app-ms-casa.n3 { color: #f00; } .app-ms-casa.n4 { color: #000080; }
+.app-ms-casa.n5 { color: #800000; } .app-ms-casa.n6 { color: #008080; } .app-ms-casa.n7 { color: #000; } .app-ms-casa.n8 { color: #808080; }
+.app-ms-status { flex: none; margin: 0; padding: 0 var(--space-1); border-top: 1px solid #d0cebf; font-size: var(--text-12); line-height: var(--space-3); color: #000; text-align: left; }

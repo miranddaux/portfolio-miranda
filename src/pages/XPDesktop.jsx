@@ -55,7 +55,7 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "player"), janelaIcone: "/assets/xp/menu/media-player-orb.png" },
   { ...APPS.find(a => a.id === "prompt"), janelaIcone: "/assets/xp/apps/prompt.png", largura: 640, altura: 408, cascata: 2, minLargura: 320, minAltura: 200, semStatus: true },
   { ...APPS.find(a => a.id === "visualizador"), janelaIcone: "/assets/xp/figma/minhas-imagens.png", largura: 720, altura: 560, cascata: 1, minLargura: 400, minAltura: 360, semStatus: true },
-  { ...APPS.find(a => a.id === "minas"), janelaIcone: "/assets/xp/apps/campo-minado.png", largura: 288, altura: 400, cascata: 3, minLargura: 288, minAltura: 400, semStatus: true },
+  { ...APPS.find(a => a.id === "minas"), janelaIcone: "/assets/xp/apps/campo-minado.png", largura: 280, altura: 424, cascata: 3, minLargura: 280, minAltura: 424, semStatus: true },
   { ...APPS.find(a => a.id === "paint"), janelaIcone: "/assets/xp/figma/paint.png", largura: 800, altura: 560, cascata: 2, minLargura: 480, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "pinball"), janelaIcone: "/assets/xp/apps/pinball.png", largura: 640, altura: 560, cascata: 3, minLargura: 400, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "habbo"), janelaIcone: "/assets/xp/apps/habbo.png", largura: 960, altura: 640, cascata: 1, minLargura: 480, minAltura: 360, semStatus: true },
