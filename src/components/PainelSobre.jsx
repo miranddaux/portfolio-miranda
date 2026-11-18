@@ -85,6 +85,7 @@ function BotaoBarra({ icone, rotulo, desativado, aoClicar, seta, nomeAcessivel, 
 }
 
 const SITE_DISCO = "https://www.agenciadisco.com/";
+const SITE_SHOPIFY = "https://www.shopify.com/br";
 
 // Conteúdo da janela "Sobre mim" no layout do Painel de Controle (Figma 135:2065).
 export default function PainelSobre({ aoAbrir, onNavigate }) {
@@ -274,7 +275,7 @@ export default function PainelSobre({ aoAbrir, onNavigate }) {
                     <p className="painel-cargo">Product Designer pleno</p>
                     <p className="painel-destaque">São José do Rio Preto, SP</p>
                     <p>
-                      Sou Product Designer em São José do Rio Preto. De dia desenho e-commerces na <a className="painel-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Shopify<span className="sr-only"> (abre em nova aba)</span></a> pela <a className="painel-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Agência Disco<span className="sr-only"> (abre em nova aba)</span></a>. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.
+                      Sou Product Designer em São José do Rio Preto. De dia desenho e-commerces na <a className="sobre-link" href={SITE_SHOPIFY} target="_blank" rel="noopener noreferrer">Shopify<span className="sr-only"> (abre em nova aba)</span></a> pela <a className="sobre-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Agência Disco<span className="sr-only"> (abre em nova aba)</span></a>. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.
                     </p>
                   </div>
                 </div>
