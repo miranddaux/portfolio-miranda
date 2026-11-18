@@ -203,7 +203,7 @@ const MODULES = {
       title: "Apresentar o universo sem atrasar a entrada",
       text: "Desenhei o onboarding para apresentar descoberta, organização e comunidade em etapas curtas, com a opção de pular. A identidade visual participa dessa apresentação, mas o caminho para começar continua à vista.",
       layout: "phones",
-      images: [{ src: "/assets/cases/animae-onboarding.png", width: 430, height: 932, alt: "Onboarding do ANIMAE com apresentação do universo otaku, opção de pular e botão Próximo", caption: "Onboarding · primeira etapa desenhada no Figma." }],
+      images: [{ src: "/assets/cases/animae-onboarding.webp", width: 860, height: 1864, alt: "Onboarding do ANIMAE com apresentação do universo otaku, opção de pular e botão Próximo", caption: "Onboarding · primeira etapa desenhada no Figma." }],
     },
     {
       title: "Do Figma ao produto",
