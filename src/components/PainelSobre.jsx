@@ -3,7 +3,7 @@ import ProjectsExplorer from "./ProjectsExplorer.jsx";
 import FotoXP from "./FotoXP.jsx";
 import SocialLink from "./SocialLink.jsx";
 import ResultadosPerfil from "./ResultadosPerfil.jsx";
-import { ABAS_PERFIL as ABAS, BIO_PERFIL, abaVizinha, buscarNoPerfil } from "../data/perfilSearch.js";
+import { ABAS_PERFIL as ABAS, abaVizinha, buscarNoPerfil } from "../data/perfilSearch.js";
 import { REDES_PRINCIPAIS } from "../data/social.js";
 import { ADICIONAL, CERTIFICACOES, CONTATO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "../data/perfil.js";
 
@@ -83,6 +83,8 @@ function BotaoBarra({ icone, rotulo, desativado, aoClicar, seta, nomeAcessivel, 
     </button>
   );
 }
+
+const SITE_DISCO = "https://www.agenciadisco.com/";
 
 // Conteúdo da janela "Sobre mim" no layout do Painel de Controle (Figma 135:2065).
 export default function PainelSobre({ aoAbrir, onNavigate }) {
@@ -272,7 +274,7 @@ export default function PainelSobre({ aoAbrir, onNavigate }) {
                     <p className="painel-cargo">Product Designer pleno</p>
                     <p className="painel-destaque">São José do Rio Preto, SP</p>
                     <p>
-                      {BIO_PERFIL}
+                      Sou Product Designer em São José do Rio Preto. De dia desenho e-commerces na <a className="painel-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Shopify<span className="sr-only"> (abre em nova aba)</span></a> pela <a className="painel-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Agência Disco<span className="sr-only"> (abre em nova aba)</span></a>. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.
                     </p>
                   </div>
                 </div>
@@ -335,7 +337,6 @@ export function ContatoConteudo({ aoEscrever }) {
           </li>
         ))}
       </ul>
-      <p className="painel-local">{CONTATO.local}</p>
       <h4 className="painel-subtitulo">Adicione-me ao</h4>
       <ul className="painel-redes">
         <li>

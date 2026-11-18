@@ -10,7 +10,7 @@ export const ABAS_PERFIL = [
   { id: "contato", nome: "Contato", endereco: "Entre em contato" },
 ];
 
-export const BIO_PERFIL = "Sou Product Designer em São José do Rio Preto e tenho 6 anos de design. Hoje trabalho na Agência Disco, onde desenho e-commerces em Shopify do briefing ao handoff. Antes passei pela M8K, DR Publicidade e Grupo ZNTT. Nas horas vagas crio o ANIMAE, um app para quem acompanha animes, e me divirto levando design e código para o mesmo lugar.";
+export const BIO_PERFIL = "Sou Product Designer em São José do Rio Preto. De dia desenho e-commerces na Shopify pela Agência Disco. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.";
 export const RESUMO_PROJETOS = "ANIMAE, Navaja e Oficina do Tenista: produto próprio, aplicativo e e-commerce, com contexto, decisões e interfaces.";
 
 const experiencias = (itens, prefixo) => itens.map((item, i) => ({

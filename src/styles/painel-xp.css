@@ -601,6 +601,12 @@
   margin-bottom: 4px !important;
   font-weight: 700;
 }
+.painel-link {
+  color: var(--color-blue-850);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.painel-link:hover { color: var(--color-xp-deep); }
 .painel-destaque {
   color: #a8420a;
   font-weight: 700;
