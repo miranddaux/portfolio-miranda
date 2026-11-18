@@ -13,8 +13,8 @@ export const SUGESTOES = [
 
 export const BOAS_VINDAS = [
   "Oi, eu sou o Thiago Bot e vou te apresentar o verdadeiro Thiago.",
-  "Ele é Product Designer e, nas horas vagas, vive no universo geek, pop e retrô: RPGs, games clássicos, filmes e séries. Ah, e também cria conteúdo.",
-  "Me manda uma mensagem ou usa os atalhos abaixo. Quer saber mais sobre o que ele gosta?",
+  "Ele é Product Designer e, nas horas vagas, é fascinado por filmes e séries, gosta do universo geek e joga muito jogos de MOBA e RPGs. Ah, e também cria conteúdo.",
+  "Me manda uma mensagem ou usa os atalhos abaixo, para saber mais sobre o Thiago.",
 ];
 
 const INTENCOES = [
