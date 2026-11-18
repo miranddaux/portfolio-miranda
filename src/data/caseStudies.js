@@ -30,20 +30,18 @@ const STORIES = {
     heroShot: "animae-hub",
     roles: ["Product Design", "Design System", "Mobile"],
     // Imagens por etapa (layouts: wide, pair, trio, mosaic). Slugs apontam para arquivos em /assets/cases.
-    stageImages: {
-      ideacao: { layout: "pair", images: ["animae-flow-onb-1", "animae-feed-comunidade"] },
-    },
+    stageImages: {},
     quick: [
       ["Problema", "Acompanhar anime, organizar listas e conversar com amigos exige alternar entre plataformas."],
       ["Minha contribuição", "Defini o produto, pesquisei, desenhei a experiência e construí o app com apoio de IA."],
       ["Decisão central", "Deixei o streaming próprio de fora para concentrar o MVP em organização e comunidade."],
       ["Estado documentado", "Versão web disponível; Android preparado para teste fechado. Sem métricas públicas de uso."],
     ],
-    cover: { type: "phone", src: "/assets/cases/animae-lista.webp", width: 860, height: 1864, alt: "Tela Minha Lista do ANIMAE, com acompanhamento de episódios e navegação do app", caption: "Tela real do Figma · MVP social. Contagens e dados da interface são demonstrativos.", title: "Acompanhar, registrar e conversar", text: "Uma experiência para organizar o que o usuário assiste e criar conexões em torno das mesmas histórias." },
-    context: "O ANIMAE nasceu de uma vontade minha: acompanhar os animes que assisto e conversar sobre teorias com amigos sem ficar pulando de aplicativo. A primeira versão, o ANIMAE+, era um streaming social, com player e salas para assistir em grupo. Quando parei para decidir o que o produto era de verdade, a pergunta mudou: não era mais onde assistir, e sim com quem conversar sobre o que se assistiu. Além disso, o custo e as licenças de um catálogo próprio tornavam o streaming inviável para um produto solo. Por isso o ANIMAE virou um app social de acompanhamento e comunidade, e o streaming ficou de fora.",
+    cover: { type: "phone", src: "/assets/cases/animae-lista.webp", width: 860, height: 1864, alt: "Tela Minha Lista do ANIMAE, com acompanhamento de episódios e navegação do app", caption: "Tela real do Figma · MVP social. Contagens e dados da interface são demonstrativos.", title: "Acompanhar, registrar e conversar", text: "Uma experiência para organizar o que o usuário assiste e criar conexões em torno das mesmas experiências." },
+    context: "Eu queria uma coisa simples: acompanhar os animes que assisto e conversar sobre eles com amigos, sem pular de aplicativo em aplicativo. Minha primeira ideia foi o ANIMAE+, um streaming social, com player próprio e salas para assistir junto. Mas, ao desenhar, percebi que a pergunta estava errada. O fã não precisa de mais um lugar para assistir. Ele precisa de um lugar para dividir o que assistiu. Além disso, manter um catálogo próprio, com custo e licenças, não cabia em um produto feito por uma pessoa só. Então mudei o rumo: o ANIMAE deixou de ser onde você assiste e virou onde você acompanha e conversa. Foi a decisão que organizou todo o resto do produto.",
     problem: "Como aproximar organização, descoberta e comunidade sem depender de um catálogo próprio de streaming?",
     research: {
-      intro: "Fiz pesquisa de mesa com fontes públicas e reclamações de usuários. Interfaces carregadas, pouca interação entre fãs e personalização limitada ajudaram a orientar a oportunidade. Essa etapa não é apresentada como pesquisa por entrevistas.",
+      intro: "Antes de redesenhar, olhei como os fãs falam dos apps que já usam: fontes públicas e reclamações de usuários. Três coisas se repetiam: telas carregadas, pouca conversa entre fãs e quase nenhuma personalização. É daí que vem a oportunidade do ANIMAE. Foi uma pesquisa de mesa, não entrevistas, e por isso ainda precisa ser confirmada com o uso real.",
       findings: [
         ["Método", "Pesquisa de mesa e\nanálise de relatos públicos"],
         ["Oportunidade", "Aproximar acompanhamento\ne conversa entre fãs"],
@@ -53,8 +51,8 @@ const STORIES = {
     decisions: [
       { title: "Comunidade em vez de streaming", choice: "Retirei o player e as salas para assistir em grupo, que eram o destaque da primeira versão. O app passou a indicar onde assistir e a concentrar lista, acompanhamento e interação.", tradeoff: "Abri mão do diferencial original para construir um produto que eu conseguisse manter." },
       { title: "Explorar antes de criar conta", choice: "Permiti que o usuário conheça a home e o catálogo em modo visitante, antes do cadastro.", tradeoff: "Menos personalização no primeiro acesso, em troca de uma barreira inicial menor." },
-      { title: "Transformar o uso em jogo", choice: "Cada episódio registrado gera XP, que evolui níveis e conquistas, em uma lógica parecida com a do Duolingo. Também estou pensando em recompensas, como ícone, badge e banner exclusivos, ainda em definição. O cálculo da pontuação fica no servidor.", tradeoff: "A lógica exige cuidado técnico, mas não depende de valores definidos pelo dispositivo." },
-      { title: "Uma comunidade que não nasce vazia", choice: "Para o feed não começar parado, programei o Draco, o mascote, para publicar quizzes diários, agendados toda semana, e registrar o XP, de modo que sempre haja atividade.", tradeoff: "A atividade programada ajuda no começo, mas não substitui uma comunidade real." },
+      { title: "Transformar o uso em jogo", choice: "Cada episódio registrado gera XP, que evolui níveis e conquistas, em uma lógica parecida com a do Duolingo. O cálculo da pontuação fica no servidor.", tradeoff: "A lógica exige mais cuidado técnico, mas a pontuação não pode ser alterada pelo aparelho do usuário." },
+      { title: "Uma comunidade que não nasce vazia", choice: "Um feed sem ninguém parece abandonado. Por isso criei o Quiz do Draco, o mascote do app: um desafio rápido, com tempo e vidas, que dá XP a quem acerta e mostra o resultado no perfil. Assim, o usuário tem o que fazer desde o primeiro dia, mesmo antes de a comunidade crescer.", tradeoff: "O quiz dá um motivo para voltar ao app, mas a conversa entre os fãs ainda precisa vir de pessoas reais." },
     ],
     journeys: [{ label: "Jornada proposta do fã", steps: ["Explorar o catálogo", "Organizar a lista", "Registrar episódios", "Compartilhar com a comunidade"] }],
     solution: "Organizei fluxos e wireframes antes das interfaces finais. Como o projeto é solo, também cuidei do que acontece depois do layout: variáveis e componentes do Figma alimentam uma base de tokens consumida pelo app, para manter a mesma linguagem visual entre design e código. O app foi construído com Expo e React Native, tem o Supabase no back-end e a versão web roda na Vercel.",
@@ -185,6 +183,15 @@ const MODULES = {
       images: [
         { src: "/assets/cases/animae-feed-amigos.webp", width: 860, height: 1864, alt: "Feed de amigos do ANIMAE com atividade de conclusão de um anime, reações e comentários" },
         { src: "/assets/cases/animae-feed-comunidade.webp", width: 860, height: 1864, alt: "Feed da comunidade do ANIMAE com debate aberto e ranking de animes da semana" },
+      ],
+    },
+    {
+      title: "Jogar também é acompanhar",
+      text: "Cada episódio registrado e cada quiz respondido rendem XP, que alimenta o perfil: nível, sequência de dias e conquistas. O Quiz do Draco tem 15 segundos por pergunta, três vidas e +2 XP por acerto, e o Draco reage a cada resposta. Esta tela eu desenhei direto no código do app, então a versão ao lado é uma demonstração reduzida, com três perguntas de exemplo; no aplicativo são dez, geradas a partir do catálogo.",
+      layout: "phones",
+      images: [
+        { src: "/assets/cases/animae-perfil-xp.webp", width: 860, height: 1864, alt: "Perfil do ANIMAE com nível, XP, sequência de dias e conquistas" },
+        { src: "/assets/cases/animae-quiz-draco.webp", width: 860, height: 1864, alt: "Quiz do Draco com pergunta, barra de tempo, vidas e quatro opções de resposta", demo: "quiz" },
       ],
     },
     {
