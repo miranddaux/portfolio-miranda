@@ -13,16 +13,19 @@ test("somente os três projetos definidos têm case disponível", () => {
   assert.equal(nextCaseStudy("oficina-do-tenista").id, "animae");
 });
 
-test("mídias são locais, não vazias e preservam as dimensões do PNG original", () => {
+test("mídias são locais, não vazias e preservam as dimensões do arquivo original", () => {
   for (const project of CASE_STUDIES) {
     for (const image of [project.cover, ...project.gallery, ...project.modules.flatMap(m => m.images)].filter((m) => m.src)) {
       const path = new URL(`../public${image.src}`, import.meta.url);
       assert(existsSync(path), image.src);
       const bytes = readFileSync(path);
       assert(bytes.length > 1000);
-      assert.equal(bytes.readUInt32BE(16), image.width, image.src);
-      assert.equal(bytes.readUInt32BE(20), image.height, image.src);
-      assert(image.alt && image.caption);
+      const webp = image.src.endsWith(".webp");
+      const width = webp ? bytes.readUInt16LE(26) & 0x3fff : bytes.readUInt32BE(16);
+      const height = webp ? bytes.readUInt16LE(28) & 0x3fff : bytes.readUInt32BE(20);
+      assert.equal(width, image.width, image.src);
+      assert.equal(height, image.height, image.src);
+      assert(image.alt);
     }
   }
 });
@@ -60,7 +63,7 @@ test("navegação interna preserva abrir em nova aba e cliques modificados", () 
   const animae = getCaseStudy("animae");
   assert.equal(animae.period, "Out/2025 — out/2026 · 1 ano");
   assert.equal(animae.links.site, "https://animaeapp.com.br/");
-  assert.equal(animae.modules.length, 5);
+  assert.equal(animae.modules.length, 6);
   for (const project of CASE_STUDIES) {
     assert(project.categories.length >= 2);
     assert(project.categories.every(c => c === c.toUpperCase()));

@@ -11,8 +11,8 @@ export const SUGESTOES = [
 ];
 
 export const BOAS_VINDAS = [
-  "Oi! :) Eu sou o Thiago Bot, o assistente do Thiago aqui no portfólio.",
-  "Pode perguntar sobre experiência, projetos, ferramentas, currículo ou contato. Ou escolha um assunto abaixo.",
+  "Olá, eu sou o Thiago Bot. O Thiago está procurando uma vaga de Product Designer pleno em uma empresa de produto.",
+  "Dê uma olhada por aqui ou me mande uma mensagem se quiser saber mais sobre o trabalho dele. Os atalhos abaixo levam direto ao que importa.",
 ];
 
 const INTENCOES = [
