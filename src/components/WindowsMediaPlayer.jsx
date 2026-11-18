@@ -1,5 +1,6 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { formatarTempo, useMediaPlayer } from "../hooks/useMediaPlayer";
+import { idDoYouTube, useYouTubePlayer } from "../hooks/useYouTubePlayer";
 import { GlifoAnterior, GlifoPause, GlifoPlay, GlifoProximo, GlifoStop, GlifoVolume } from "./GlifosWMP";
 import "../styles/windows-media-player.css";
 
@@ -51,13 +52,32 @@ function Slider({ area, de, ate, valor, aoMudar, rotulo, texto, passo, children,
   );
 }
 
-export default function WindowsMediaPlayer({ src, poster, title, autoPlay = false, loop = false, onClose, onMinimize, onDragStart, className = "", style }) {
-  const p = useMediaPlayer({ src, autoPlay, loop });
+export default function WindowsMediaPlayer({ src, playlist, poster, title, autoPlay = false, loop = false, onClose, onMinimize, onDragStart, className = "", style }) {
+  // Fonte: um `src` (MP4/WebM local ou link do YouTube) ou uma `playlist` [{ src, title }].
+  const lista = playlist?.length ? playlist : src ? [{ src, title }] : [];
+  const [indice, setIndice] = useState(0);
+  const [iniciar, setIniciar] = useState(autoPlay);
+  const atual = lista[indice] || {};
+  const idYT = idDoYouTube(atual.src);
+  const arquivo = idYT ? undefined : atual.src;
+  const mp = useMediaPlayer({ src: arquivo, autoPlay: iniciar, loop: loop && lista.length <= 1 });
+  const yt = useYouTubePlayer({ videoId: idYT, autoPlay: iniciar });
+  const p = idYT ? yt : mp;
   const { acoes } = p;
-  const temVideo = Boolean(src);
+  const temVideo = Boolean(atual.src);
+  const varios = lista.length > 1;
+
+  // Fim do vídeo: segue para o próximo da lista (e volta ao primeiro se `loop`).
+  useEffect(() => {
+    if (!p.terminou || !varios) return;
+    if (indice < lista.length - 1) { setIniciar(true); setIndice(indice + 1); }
+    else if (loop) { setIniciar(true); setIndice(0); }
+  }, [p.terminou]); // eslint-disable-line react-hooks/exhaustive-deps
+  const irParaFaixa = (i) => { setIniciar(true); setIndice((i + lista.length) % lista.length); };
+
   const frac = p.duracao > 0 ? Math.min(1, p.atual / p.duracao) : 0;
   const volumeEfetivo = p.mudo ? 0 : p.volume;
-  const nome = title || (temVideo ? decodeURIComponent(src.split("/").pop().split("?")[0]) : "Nenhum arquivo");
+  const nome = atual.title || p.titulo || (temVideo && !idYT ? decodeURIComponent(atual.src.split("/").pop().split("?")[0]) : temVideo ? "YouTube" : "Nenhum arquivo");
   const status = p.erro || (p.carregando && temVideo ? "Carregando…" : nome);
 
   return (
@@ -75,20 +95,22 @@ export default function WindowsMediaPlayer({ src, poster, title, autoPlay = fals
 
         {/* Camada 2: vídeo real. Fica dentro do retângulo preto, sem tocar nas bordas. */}
         <div className="wmp-tela" style={R(48, 75, 1380, 732)}>
+          {idYT ? <div ref={yt.caixa} className="wmp-yt" aria-hidden="true" /> :
           <video
-            ref={p.videoRef}
-            key={src || "vazio"}
+            ref={mp.videoRef}
+            key={arquivo || "vazio"}
             className="wmp-video"
-            src={src || undefined}
+            src={arquivo}
             poster={poster}
-            autoPlay={autoPlay}
+            autoPlay={iniciar}
             loop={loop}
             playsInline
             preload="metadata"
             controls={false}
             onClick={acoes.alternar}
             onDoubleClick={(e) => e.currentTarget.requestFullscreen?.()}
-          />
+          />}
+          {idYT && <button type="button" className="wmp-yt-clique" onClick={acoes.alternar} aria-label={p.tocando ? "Pausar" : "Reproduzir"} tabIndex={-1} />}
           {!temVideo && <p className="wmp-aviso">Nenhum vídeo selecionado</p>}
           {temVideo && p.carregando && !p.erro && <p className="wmp-aviso" role="status">Carregando…</p>}
           {p.erro && <p className="wmp-aviso is-erro" role="alert">{p.erro}</p>}
@@ -125,8 +147,8 @@ export default function WindowsMediaPlayer({ src, poster, title, autoPlay = fals
           {p.tocando ? <GlifoPause /> : <GlifoPlay />}
         </button>
         <button type="button" className="wmp-esfera" style={R(141, 933, 58, 58)} onClick={acoes.parar} disabled={!temVideo} aria-label="Parar"><GlifoStop /></button>
-        <button type="button" className="wmp-esfera" style={R(209, 933, 58, 58)} onClick={() => acoes.pular(-PASSO_TEMPO)} disabled={!temVideo} aria-label="Anterior: voltar 10 segundos"><GlifoAnterior /></button>
-        <button type="button" className="wmp-esfera" style={R(276, 933, 58, 58)} onClick={() => acoes.pular(PASSO_TEMPO)} disabled={!temVideo} aria-label="Próximo: avançar 10 segundos"><GlifoProximo /></button>
+        <button type="button" className="wmp-esfera" style={R(209, 933, 58, 58)} onClick={() => (varios ? irParaFaixa(indice - 1) : acoes.pular(-PASSO_TEMPO))} disabled={!temVideo} aria-label={varios ? "Vídeo anterior" : "Anterior: voltar 10 segundos"}><GlifoAnterior /></button>
+        <button type="button" className="wmp-esfera" style={R(276, 933, 58, 58)} onClick={() => (varios ? irParaFaixa(indice + 1) : acoes.pular(PASSO_TEMPO))} disabled={!temVideo} aria-label={varios ? "Próximo vídeo" : "Próximo: avançar 10 segundos"}><GlifoProximo /></button>
         <button type="button" className="wmp-esfera" style={R(346, 933, 58, 58)} onClick={acoes.alternarMudo} disabled={!temVideo} aria-label={volumeEfetivo === 0 ? "Ativar som" : "Desativar som"} aria-pressed={volumeEfetivo === 0}><GlifoVolume mudo={volumeEfetivo === 0} /></button>
 
         {/* Volume: cunha desenhada em SVG + marcador do sprite */}

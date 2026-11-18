@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import WindowsMediaPlayer from "./WindowsMediaPlayer";
+import { VIDEOS_PLAYER } from "../data/player.js";
 
 const BARRA = 30;
 const limitar = (v, min, max) => Math.max(min, Math.min(max, v));
@@ -45,7 +46,7 @@ export default function JanelaPlayer({ ativa, oculta, onFocar, onFechar, onMinim
 
   return (
     <div ref={raiz} id="player-title" tabIndex={-1} className={`janela-player ${ativa ? "is-ativa" : ""}`} style={estilo} onPointerDown={onFocar}>
-      <WindowsMediaPlayer src={src} poster={poster} title={title} onClose={onFechar} onMinimize={onMinimizar} onDragStart={arrastar} />
+      <WindowsMediaPlayer src={src} playlist={src ? undefined : VIDEOS_PLAYER} poster={poster} title={title} autoPlay loop onClose={onFechar} onMinimize={onMinimizar} onDragStart={arrastar} />
     </div>
   );
 }
