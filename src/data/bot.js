@@ -52,8 +52,8 @@ const INTENCOES = [
     acao: { rotulo: "Abrir Dribbble", link: "https://dribbble.com/thiagouidesign" },
   },
   {
-    chaves: ["projet", "case", "portfolio", "trabalhos", "navaja", "oficina", "tenista", "ultragrip"],
-    respostas: ["Os destaques são ANIMAE, Navaja e Oficina do Tenista. Cada case mostra o contexto, as decisões e o resultado."],
+    chaves: ["projet", "case", "portfolio", "trabalhos", "navaja", "ciao"],
+    respostas: ["O case disponível é o ANIMAE, com contexto, decisões e interfaces. Navaja e CIAO estão em construção."],
     acao: { rotulo: "Abrir Meus projetos", abrir: "cases" },
   },
   {

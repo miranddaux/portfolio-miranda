@@ -87,7 +87,7 @@ export default function Home() {
         <div className="section-width">
           <div className="section-header">
             <div>
-              <span className="eyebrow">3 CASES EM DESTAQUE</span>
+              <span className="eyebrow">PROJETOS</span>
               <h2>Prova de processo, não só de tela.</h2>
             </div>
           </div>
@@ -127,21 +127,21 @@ export default function Home() {
               </div>
               <div className="compact-projects">
                 {CASES.filter((c) => filter === "Todos" || c.group === filter)
-                  .sort(
-                    (a, b) => (b.id === "ultragrip") - (a.id === "ultragrip"),
-                  )
-                  .map((c) => (
-                    <a
-                      className="compact-project"
-                      key={c.id}
-                      href={`/cases/${c.id}`}
-                    >
-                      <span>{c.number}</span>
-                      <strong>{c.title}</strong>
-                      <span>{c.type}</span>
-                      <ArrowRight size={16} />
-                    </a>
-                  ))}
+                  .map((c) => {
+                    const conteudo = (
+                      <>
+                        <span>{c.number}</span>
+                        <strong>{c.title}</strong>
+                        <span>{c.pending ? "Em construção" : c.type}</span>
+                        {!c.pending && <ArrowRight size={16} />}
+                      </>
+                    );
+                    return c.pending ? (
+                      <div className="compact-project" key={c.id} aria-disabled="true">{conteudo}</div>
+                    ) : (
+                      <a className="compact-project" key={c.id} href={`/cases/${c.id}`}>{conteudo}</a>
+                    );
+                  })}
               </div>
             </div>
           )}

@@ -11,7 +11,7 @@ export const ABAS_PERFIL = [
 ];
 
 export const BIO_PERFIL = "Sou Product Designer em São José do Rio Preto. De dia desenho e-commerces na Shopify pela Agência Disco. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.";
-export const RESUMO_PROJETOS = "ANIMAE, Navaja e Oficina do Tenista: produto próprio, aplicativo e e-commerce, com contexto, decisões e interfaces.";
+export const RESUMO_PROJETOS = "ANIMAE (produto próprio, com contexto, decisões e interfaces). Navaja e CIAO estão em construção.";
 
 const experiencias = (itens, prefixo) => itens.map((item, i) => ({
   id: `perfil-${prefixo}-${i}`,

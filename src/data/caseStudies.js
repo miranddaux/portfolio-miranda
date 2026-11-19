@@ -2,10 +2,10 @@ import { CASES } from "./cases.js";
 
 // Curadoria editorial: Notion, revisão de 03/11/2026. Indicadores propostos
 // ficam separados dos achados de pesquisa e dos resultados observados.
-export const FEATURED_IDS = ["animae", "navaja", "oficina-do-tenista"];
+export const FEATURED_IDS = ["animae"];
 export const PENDING_PROJECTS = [
-  { id: "ultragrip", title: "UltraGrip", category: "E-commerce" },
-  { id: "ciao", title: "CIAO", category: "E-commerce" },
+  { id: "navaja", title: "Navaja", category: "UX Research · App" },
+  { id: "ciao", title: "CIAO", category: "Em construção" },
 ];
 
 const STORIES = {
@@ -117,50 +117,6 @@ const STORIES = {
     ],
     learning: "Se eu tivesse seguido só a hipótese inicial, teria desenhado mais um aplicativo de agenda. A pesquisa me ajudou a encontrar uma pergunta mais relevante: como barbeiro e cliente se entendem sobre o corte?",
   },
-  "oficina-do-tenista": {
-    question: "Uma compra de raquetes tão orientada quanto uma conversa na loja.",
-    categories: ["E-COMMERCE", "SHOPIFY", "AGÊNCIA DISCO"],
-    roleShort: "UX/UI, wireframes e handoff",
-    team: "Agência Disco",
-    period: "2026 · projeto de 90 dias",
-    tools: ["Figma", "Shopify"],
-    status: "Cliente real · projeto entregue",
-    accent: "oficina",
-    source: "https://app.notion.com/p/40a34785429b814c8dcdc411a8a50b32",
-    links: { design: "https://www.figma.com/design/zPqNhCbwO8DDnnouXZfa5a?node-id=4001-25252" },
-    quick: [
-      ["Problema", "Quem está começando tem receio de escolher a raquete errada e encontra informações técnicas cedo demais."],
-      ["Minha contribuição", "Desenhei wireframes, layouts desktop/mobile e handoff, com as decisões de UX da experiência."],
-      ["Solução", "Guia por nível de jogo, uma estrutura de página de produto e comparador lado a lado."],
-      ["Resultado documentado", "Projeto entregue pela Agência Disco. Sem números de resultado disponíveis."],
-    ],
-    cover: { type: "image", src: "/assets/cases/oficina-produto.png", width: 1024, height: 536, alt: "Página de produto da Oficina do Tenista no Figma, com raquete, atributos e compra", caption: "Página de produto · layout real do projeto na Agência Disco." },
-    context: "A Oficina do Tenista, loja de esportes de raquete de Belo Horizonte, estava migrando da OpenCart para a Shopify em um projeto sob medida da Agência Disco. Meu trabalho foi aproximar a experiência digital da orientação que a pessoa recebe na loja física.",
-    problem: "Como dar a quem compra online a mesma segurança de uma conversa com o vendedor?",
-    research: {
-      intro: "O briefing e o discovery mostraram uma dúvida recorrente no atendimento: qual raquete é adequada para meu nível? Iniciantes precisavam interpretar peso, equilíbrio e tamanho da cabeça antes de saber o que procurar. Essa evidência vem do contexto do projeto, não de um teste de usabilidade documentado.",
-      findings: [
-        ["Pergunta recorrente", "Qual é a raquete ideal para o meu nível?"],
-        ["Barreira", "Receio de comprar um produto técnico sem experimentar"],
-        ["Referência de serviço", "O vendedor começa entendendo como a pessoa joga"],
-      ],
-    },
-    decisions: [
-      { title: "Começar pelo nível de jogo", choice: "Estruturei o guia de escolha com entradas para iniciante, intermediário, avançado e competição, explicando a ficha técnica no momento certo.", tradeoff: "Acrescentei uma etapa de orientação antes da escolha do modelo." },
-      { title: "Uma página de produto", choice: "Propus uma estrutura única, em vez de três páginas separadas por nível.", tradeoff: "A página precisa atender perfis diferentes, mas evita fragmentar a comparação e a manutenção." },
-      { title: "Comparar lado a lado", choice: "Desenhei um comparador de três raquetes com características e preço, no guia e na página de produto.", tradeoff: "Organizei os atributos para facilitar a decisão sem sobrecarregar a primeira leitura." },
-    ],
-    journeys: [{ label: "Jornada proposta de compra", steps: ["Identificar o nível", "Entender as características", "Comparar raquetes", "Escolher o produto", "Adicionar ao carrinho"] }],
-    solution: "A solução reúne o guia de raquetes, a página de produto com comparador e uma entrada para iniciantes com kits de raquete, corda e acessórios. O objetivo é orientar a escolha sem exigir conhecimento técnico prévio.",
-    gallery: [{ src: "/assets/cases/oficina-comparador.png", width: 1024, height: 420, alt: "Comparador da Oficina do Tenista com três raquetes lado a lado e seus atributos", caption: "Comparação de três modelos · componente real do Figma da Disco. Valores pertencem ao layout apresentado." }],
-    outcome: "O projeto foi entregue pela Agência Disco. Ainda não tenho números de resultado para apresentar. O próximo passo de avaliação é observar se a orientação ajuda na escolha e onde a jornada ainda gera dúvidas.",
-    kpis: [
-      ["Conversão", "Conversão da categoria de raquetes"],
-      ["Trocas", "Trocas motivadas pela escolha do modelo errado"],
-      ["Dúvidas", "Frequência da pergunta sobre qual raquete escolher no atendimento"],
-    ],
-    learning: "Na loja física, o vendedor não começa entregando uma ficha técnica: pergunta como a pessoa joga. Meu trabalho foi transformar essa conversa em interface e apresentar a informação no momento certo.",
-  },
 };
 
 const MODULES = {
@@ -170,7 +126,7 @@ const MODULES = {
       text: "Quis deixar a descoberta simples. A home não destaca um título fixo: é um banner rotativo que mostra os animes em alta no momento e troca sozinho. Os dados vêm de APIs públicas: comecei com a AniList, mas o catálogo dela era limitado, então adicionei a Jikan para completar. O aplicativo inteiro consome essas duas fontes. Da home, o usuário vai direto para a página do anime, com onde assistir e o progresso à vista, e pode conhecer tudo antes de criar uma conta.",
       layout: "phones",
       images: [
-        { src: "/assets/cases/animae-home.webp", width: 860, height: 1864, alt: "Home do ANIMAE com anime em destaque, botões Adicionar e Onde assistir, e amigos online" },
+        { src: "/assets/cases/animae-home.webp", width: 860, height: 1864, alt: "Home do ANIMAE com anime em destaque, botões Adicionar e Onde assistir, e amigos online", demo: "home" },
         { src: "/assets/cases/animae-hub.webp", width: 860, height: 1864, alt: "Página de um anime no ANIMAE com onde assistir, botão de adicionar à lista e progresso de episódios" },
       ],
     },
@@ -185,7 +141,7 @@ const MODULES = {
       text: "No feed, o acompanhamento ganha um lado social. Conclusões, avaliações e debates ajudam a começar uma conversa, entre amigos ou com a comunidade toda. A ideia é que o que o usuário acompanha seja o ponto de partida do papo.",
       layout: "phones",
       images: [
-        { src: "/assets/cases/animae-feed-amigos.webp", width: 860, height: 1864, alt: "Feed de amigos do ANIMAE com atividade de conclusão de um anime, reações e comentários" },
+        { src: "/assets/cases/animae-feed-amigos.webp", width: 860, height: 1864, alt: "Feed de amigos do ANIMAE com atividade de conclusão de um anime, reações e comentários", demo: "feed" },
         { src: "/assets/cases/animae-feed-comunidade.webp", width: 860, height: 1864, alt: "Feed da comunidade do ANIMAE com debate aberto e ranking de animes da semana" },
       ],
     },
@@ -227,28 +183,11 @@ const MODULES = {
       images: [STORIES.navaja.gallery[0]],
     },
   ],
-  "oficina-do-tenista": [
-    {
-      title: "Primeiro, como você joga?",
-      text: "Comecei o guia pelo nível de jogo, antes das especificações. As entradas vão de iniciante a competição e explicam o que priorizar em cada momento. Quis transformar a orientação da loja em uma sequência que a pessoa conseguisse seguir sozinha.",
-      images: [{ src: "/assets/cases/oficina-guia.png", width: 1024, height: 329, alt: "Guia da Oficina do Tenista com quatro níveis: iniciante, intermediário, avançado e competição", caption: "Guia de raquetes · orientação por nível no Figma da Disco." }],
-    },
-    {
-      title: "A vitrine também orienta a descoberta",
-      text: "Na Home, trabalhei a relação entre campanha, imagem e ação para apresentar as linhas de produto com clareza. O projeto precisava manter a força visual das marcas e dar continuidade à experiência de compra, do primeiro contato até a escolha da raquete.",
-      images: [{ src: "/assets/cases/oficina-home.png", width: 1024, height: 461, alt: "Vitrine da Home Oficina do Tenista, com campanha de tênis e acesso à linha de produtos", caption: "Home · carrossel de campanhas no layout real da Disco." }],
-    },
-    {
-      title: "Comparar para escolher com mais segurança",
-      text: "Coloquei três raquetes lado a lado para que as diferenças aparecessem no mesmo contexto. Peso, equilíbrio, características e preço ajudam a comparar sem alternar entre várias páginas. Esse componente faz parte da proposta do guia e da página de produto.",
-      images: [STORIES["oficina-do-tenista"].gallery[0]],
-    },
-  ],
 };
 
 export const CASE_STUDIES = FEATURED_IDS.map((id) => ({ ...CASES.find((c) => c.id === id), ...STORIES[id], modules: MODULES[id] }));
 export const getCaseStudy = (id) => CASE_STUDIES.find((c) => c.id === id);
-export const nextCaseStudy = (id) => CASE_STUDIES[(FEATURED_IDS.indexOf(id) + 1) % FEATURED_IDS.length];
+export const nextCaseStudy = (id) => (CASE_STUDIES.length > 1 ? CASE_STUDIES[(FEATURED_IDS.indexOf(id) + 1) % FEATURED_IDS.length] : null);
 
 export function projectLinkAction(event, navigate, href) {
   if (!navigate || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;

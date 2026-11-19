@@ -134,7 +134,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   useEffect(() => {
     const clique = (e) => {
       const alvo = e.target.closest?.("button, a[href], [role=menuitem], [role=tab]");
-      if (!alvo || alvo.disabled || alvo.getAttribute("aria-disabled") === "true" || alvo.closest(".wmp, .app-ms, .app-paint-area, .hs")) return;
+      if (!alvo || alvo.disabled || alvo.getAttribute("aria-disabled") === "true" || alvo.closest(".wmp, .app-ms, .ap-area, .hs")) return;
       setTimeout(() => { if (Date.now() - ultimoSomJanela > 150) somClique(); }, 0);
     };
     document.addEventListener("click", clique);

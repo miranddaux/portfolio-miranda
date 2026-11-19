@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { REDES_PRINCIPAIS, REDES_SOCIAIS } from "../data/social.js";
-import { IconeBloco, SetaVerde } from "./IconesMenu.jsx";
+import { SetaVerde } from "./IconesMenu.jsx";
 import { logoDe } from "../data/logos.js";
 
 const XP = "/assets/xp";
@@ -116,7 +116,6 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Divisor mini />
                 <Mini icone={img(`${MI}/prompt.png`, 16)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
                 <Mini icone={img(`${MI}/campo-minado.png`, 16)} rotulo="Campo minado" aoClicar={() => aoAbrir("minas")} />
-                <Mini icone={<IconeBloco />} rotulo="Bloco de notas" breve />
                 <Mini icone={img(`${MI}/paint.png`, 16)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
                 <Mini icone={img(`${MI}/pinball.png`, 16)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
                 <Mini icone={img(`${MI}/doom.png`, 16)} rotulo="DOOM" aoClicar={() => aoAbrir("doom")} />

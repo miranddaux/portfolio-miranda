@@ -91,7 +91,7 @@ export default function AnimaeListaDemo() {
             </div>
           </header>
           <div className="ad-tabs">
-            <span className="ad-pill is-on">Assistindo <span key={fora ? "a" : "b"} className={`ad-count ${fora ? "is-pop" : ""}`}>{fora ? 11 : 12}</span></span>
+            <span className="ad-pill is-on">Assistindo <span key={fora ? "a" : "b"} className={`ad-count ${fora ? "is-pop" : ""}`}>{fora ? 2 : 3}</span></span>
             <span className="ad-pill">Quero ver <span className="ad-count">28</span></span>
             <span className="ad-pill">Concluídos <span key={fora ? "c" : "d"} className={`ad-count ${fora ? "is-pop" : ""}`}>{fora ? 6 : 5}</span></span>
           </div>
