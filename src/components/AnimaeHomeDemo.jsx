@@ -28,6 +28,7 @@ const CONTINUE = [
 ];
 const EM_ALTA = [
   { nome: "Death Note", img: "/assets/cases/animae-banner-deathnote.webp", nota: "8.4", review: true },
+  { nome: "My Hero Academia Season 2", img: "/assets/cases/animae-poster-mha.webp", nota: "7.9", review: false },
   { nome: "Mob Psycho 100", img: "/assets/cases/animae-poster-mobpsycho.webp", nota: "8.4", review: false },
 ];
 const CICLO = 23500;
