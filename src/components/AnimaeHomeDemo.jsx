@@ -10,8 +10,10 @@ import "@fontsource/inter/latin-700.css";
 // Tela Home do ANIMAE em código (tokens do app). Loop sem interação: o banner troca sozinho,
 // o botão Adicionar é tocado, a tela rola até Amigos Online / Continue assistindo e volta.
 const BANNERS = [
-  { id: "dbz", art: "/assets/cases/animae-banner-dbz.webp", meta: ["Luta", "291 episódios", "9 seasons", "12+"], desc: "Goku e seus amigos enfrentam ameaças intergalácticas em batalhas épicas que marcaram a história dos animes" },
-  { id: "aot", art: "/assets/cases/animae-banner-aot.webp", titulo: "Attack on Titan", meta: ["Ação", "História", "16+"], desc: "A humanidade vive atrás de muralhas e luta para sobreviver aos titãs que a ameaçam" },
+  { id: "dbz", art: "/assets/cases/animae-banner-dbz.webp", meta: ["Luta", "291 episódios", "9 temporadas", "12+"], desc: "Goku e seus amigos enfrentam ameaças intergalácticas em batalhas épicas que marcaram a história dos animes" },
+  { id: "naruto", art: "/assets/cases/animae-banner-naruto.webp", meta: ["Shounnen", "220 episódios", "9 temporadas", "12+"], desc: "Naruto sonha em se tornar Hokage enquanto enfrenta inimigos perigosos e descobre o poder dos laços que o fortalecem" },
+  { id: "deathnote", art: "/assets/cases/animae-banner-deathnote.webp", meta: ["Thriller Psicológico", "37 episódios", "1 temporada", "14+"], desc: "Um estudante encontra um caderno capaz de matar e entra em um duelo de inteligência contra o maior detetive do mundo" },
+  { id: "chihiro", art: "/assets/cases/animae-banner-chihiro.webp", meta: ["Fantasia", "2h 05m", "10+"], desc: "Chihiro fica presa em um mundo mágico cheio de espíritos e precisa encontrar coragem para salvar seus pais e voltar para casa" },
 ];
 const AMIGOS = [
   { nome: "Marina", img: "/assets/cases/animae-av-marina.webp" },
@@ -24,7 +26,7 @@ const CONTINUE = [
   { title: "Attack on Titan", thumb: "/assets/cases/animae-thumb-aot.webp", ep: 14, total: 25, last: "Último: E14 · há 2 dias" },
   { title: "Demon Slayer", thumb: "/assets/cases/animae-thumb-demon.webp", ep: 8, total: 26, last: "Último: E8 · há 5 dias" },
 ];
-const CICLO = 13000;
+const CICLO = 15000;
 
 export default function AnimaeHomeDemo() {
   const { root, screen, animar } = useDemoTela("--ad-scale");
@@ -41,10 +43,12 @@ export default function AnimaeHomeDemo() {
       setBanner(0); setNa(false); setRolou(false); setToque(false);
       at(1200, () => setToque(true));
       at(1450, () => { setToque(false); setNa(true); });
-      at(3800, () => { setBanner(1); setNa(false); });
-      at(6200, () => setRolou(true));
-      at(9800, () => setRolou(false));
-      at(11400, () => { setBanner(0); setNa(false); });
+      at(3200, () => { setBanner(1); setNa(false); });
+      at(4400, () => setBanner(2));
+      at(5600, () => setBanner(3));
+      at(7000, () => setRolou(true));
+      at(10600, () => setRolou(false));
+      at(12200, () => { setBanner(0); setNa(false); });
       at(CICLO, volta);
     };
     volta();
