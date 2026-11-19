@@ -61,7 +61,7 @@ export default function AnimaeHomeDemo() {
         </div>
         <header className="ah-header">
           <img className="ah-logo" src="/assets/cases/animae-logo-app.webp" alt="" width="144" height="41" draggable="false" />
-          <span className="ah-icons"><Search size={28} strokeWidth={1.75} /><Bell size={28} strokeWidth={1.75} /></span>
+          <span className="ah-icons"><Search className="ad-i28" strokeWidth={1.75} /><Bell className="ad-i28" strokeWidth={1.75} /></span>
         </header>
         <div className={`ah-scroll ${rolou ? "is-rolou" : ""}`}>
           <section className="ah-hero">
