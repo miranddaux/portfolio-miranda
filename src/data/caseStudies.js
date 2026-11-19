@@ -170,7 +170,7 @@ const MODULES = {
       text: "Quis deixar a descoberta simples. A home não destaca um título fixo: é um banner rotativo que mostra os animes em alta no momento e troca sozinho. Os dados vêm de APIs públicas: comecei com a AniList, mas o catálogo dela era limitado, então adicionei a Jikan para completar. O aplicativo inteiro consome essas duas fontes. Da home, o usuário vai direto para a página do anime, com onde assistir e o progresso à vista, e pode conhecer tudo antes de criar uma conta.",
       layout: "phones",
       images: [
-        { src: "/assets/cases/animae-home.webp", width: 860, height: 1864, alt: "Home do ANIMAE com anime em destaque, botões Adicionar e Onde assistir, e amigos online" },
+        { src: "/assets/cases/animae-home.webp", width: 860, height: 1864, alt: "Home do ANIMAE com anime em destaque, botões Adicionar e Onde assistir, e amigos online", demo: "home" },
         { src: "/assets/cases/animae-hub.webp", width: 860, height: 1864, alt: "Página de um anime no ANIMAE com onde assistir, botão de adicionar à lista e progresso de episódios" },
       ],
     },
