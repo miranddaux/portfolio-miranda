@@ -185,7 +185,7 @@ const MODULES = {
       text: "No feed, o acompanhamento ganha um lado social. Conclusões, avaliações e debates ajudam a começar uma conversa, entre amigos ou com a comunidade toda. A ideia é que o que o usuário acompanha seja o ponto de partida do papo.",
       layout: "phones",
       images: [
-        { src: "/assets/cases/animae-feed-amigos.webp", width: 860, height: 1864, alt: "Feed de amigos do ANIMAE com atividade de conclusão de um anime, reações e comentários" },
+        { src: "/assets/cases/animae-feed-amigos.webp", width: 860, height: 1864, alt: "Feed de amigos do ANIMAE com atividade de conclusão de um anime, reações e comentários", demo: "feed" },
         { src: "/assets/cases/animae-feed-comunidade.webp", width: 860, height: 1864, alt: "Feed da comunidade do ANIMAE com debate aberto e ranking de animes da semana" },
       ],
     },
