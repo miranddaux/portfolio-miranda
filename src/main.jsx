@@ -20,4 +20,5 @@ import "./styles/case-document.css";
 import "./styles/case-stages.css";
 import "./styles/animae-demo.css";
 import "./styles/apps-retro.css";
+import "./styles/paint.css";
 createRoot(document.getElementById("root")).render(<App />);
