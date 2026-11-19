@@ -65,7 +65,7 @@ export default function ProjectsExplorer({ onNavigate, embedded = false }) {
                 <span className="project-folder-name">{p.title}</span>
                 {!p.available && <span className="project-folder-pending" aria-hidden="true">Em construção</span>}
               </span>
-              {p.available && <span className="project-folder-category">Produto próprio</span>}
+              {p.available && <span className="project-folder-category">Web app • Comunidade • Anime</span>}
             </>;
             return <li key={p.id}>
               {p.available ? <a className="project-folder" href={`/cases/${p.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${p.id}`)}>{content}</a>
