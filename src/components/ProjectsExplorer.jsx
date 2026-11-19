@@ -62,7 +62,7 @@ export default function ProjectsExplorer({ onNavigate, embedded = false }) {
                 {p.available && <span className={`project-folder-mark is-${p.id}`} aria-hidden="true">{"A"}</span>}
               </span>
               <span className="project-folder-caption">
-                <span className="project-folder-name">{p.title}</span>
+                <span className="project-folder-name">{p.title === "ANIMAE" ? "Animae" : p.title}</span>
                 {!p.available && <span className="project-folder-pending" aria-hidden="true">Em construção</span>}
               </span>
               {p.available && <span className="project-folder-category">Web app • Comunidade • Anime</span>}
