@@ -77,7 +77,7 @@ export default function AnimaeHomeDemo() {
             <div className="ah-botoes">
               <span className={`ah-add ${toque ? "is-press" : ""} ${na ? "is-on" : ""}`}>
                 <span className="ah-add-a"><BookmarkPlus size={24} />Adicionar</span>
-                <span className="ah-add-b"><Check size={24} strokeWidth={3} />Na lista</span>
+                <span className="ah-add-b"><Check className="ah-check" strokeWidth={2.5} />Na lista</span>
               </span>
               <span className="ah-onde">Onde assistir</span>
             </div>
