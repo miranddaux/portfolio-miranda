@@ -112,7 +112,7 @@ export default function AnimaeFeedDemo() {
                 <span className={`fd-acao ${curtiu ? "is-on" : ""}`}><ThumbsUp size={16} /><b key={curtiu ? "s" : "n"} className={curtiu ? "is-pop" : ""}>{curtiu ? 6 : 5}</b></span>
                 <span className={`fd-acao ${tocaCom ? "is-toque" : ""}`}><MessageCircleMore size={16} /><b key={nCom} className={nCom === 3 ? "is-pop" : ""}>{nCom}</b></span>
               </>} />
-            <Cartao art="/assets/cases/animae-banner-chihiro.webp" autor={AV.nayara} titulo="Nayara adicionou Frieren à lista" hora="4h atrás" ep="Quero assistir" anime="Frieren" tags={TAGS_SLICE}
+            <Cartao art="/assets/cases/animae-feed-frieren.webp" autor={AV.nayara} titulo="Nayara adicionou Frieren à lista" hora="4h atrás" ep="Quero assistir" anime="Frieren" tags={TAGS_SLICE}
               acoes={<><span className="fd-acao"><ThumbsUp size={16} /><b>12</b></span><span className="fd-acao"><MessageCircleMore size={16} /><b>8</b></span></>} />
             <div className="fd-conv">
               <p className="fd-titulo">Você e Ana têm 8 animes em comum</p>
@@ -121,7 +121,7 @@ export default function AnimaeFeedDemo() {
                 <span className="fd-seguir">Seguir</span>
               </div>
             </div>
-            <Cartao art="/assets/cases/animae-banner-naruto.webp" autor={AV.lucas} titulo="Lucas avaliou Vinland Saga" hora="2h atrás" ep="EP 14" anime="Vinland Saga" tags={TAGS_ACAO}
+            <Cartao art="/assets/cases/animae-feed-vinland.webp" autor={AV.lucas} titulo="Lucas avaliou Vinland Saga" hora="2h atrás" ep="EP 14" anime="Vinland Saga" tags={TAGS_ACAO}
               acoes={<><span className="fd-acao"><ThumbsUp size={16} /><b>7</b></span><span className="fd-acao"><MessageCircleMore size={16} /><b>12</b></span></>} />
           </div>
         </div>
