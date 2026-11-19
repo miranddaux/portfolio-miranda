@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowLeft, Bell, Bookmark, Heart, Home, MessageCircleMore, Newspaper, Send, Signal, Star, ThumbsUp, Wifi, BatteryFull, X } from "lucide-react";
+import { ArrowLeft, Bell, Bookmark, Heart, Home, MessageCircleMore, Newspaper, Send, Signal, ThumbsUp, Wifi, BatteryFull, X } from "lucide-react";
 import { DESIGN, useDemoTela } from "./useDemoTela.js";
 import "@fontsource/urbanist/latin-400.css";
 import "@fontsource/urbanist/latin-500.css";
@@ -13,6 +13,27 @@ const AV = { marina: "/assets/cases/animae-av-marina.webp", lucas: "/assets/case
 const AMIGOS = [["Marina", AV.marina], ["Lucas", AV.lucas], ["Ana", AV.ana], ["Nayara", AV.nayara], ["Pedro", AV.eu]];
 const DIGITAR = "Esse final de temporada vai ser insano!";
 const CICLO = 15200;
+
+const TAGS_ACAO = [["Ação", "#ff9f2a"], ["História", "#3c7bff"]];
+const TAGS_SLICE = [["Slice of Life", "#32d27f"], ["Drama", "#ff4f4f"]];
+
+function Cartao({ art, autor, titulo, hora, ep, anime, tags, acoes }) {
+  return (
+    <article className="fd-card">
+      <div className="fd-art">
+        <img src={art} alt="" width="390" height="220" draggable="false" />
+        <span className="fd-tags">{tags.map(([t, c]) => <span key={t} className="fd-tag" style={{ background: c }}>{t}</span>)}</span>
+      </div>
+      <span className="fd-autor-wrap"><img src={autor} alt="" width="48" height="48" draggable="false" /></span>
+      <div className="fd-corpo">
+        <p className="fd-titulo">{titulo}</p>
+        <p className="fd-meta">{hora}<i className="fd-sep" />{ep}</p>
+        <p className="fd-anime">{anime}</p>
+      </div>
+      <div className="fd-acoes">{acoes}</div>
+    </article>
+  );
+}
 
 function Coment({ nome, av, hora, texto, curtidas = 3, children }) {
   return (
@@ -76,41 +97,33 @@ export default function AnimaeFeedDemo() {
         </div>
         <div className={`fd-scroll ${rolou ? "is-rolou" : ""}`}>
           <div className="fd-topo">
-            <div className="ad-header-row"><span className="ad-round"><ArrowLeft size={24} /></span><span className="ad-round"><Bell className="ad-i18" /></span></div>
+            <div className="ad-header-row"><span className="ad-round"><ArrowLeft size={24} /></span><span className="fd-sino"><Bell className="ad-i18" /></span></div>
             <p className="fd-h1">Feed</p>
-            <div className="fd-tabs"><span className="is-on">Amigos</span><span>Comunidade</span></div>
           </div>
+          <div className="fd-tabs"><span className="is-on">Amigos</span><span>Comunidade</span></div>
           <div className="ah-amigos fd-amigos">
             {AMIGOS.map(([nome, img]) => (
-              <div className="ah-amigo" key={nome}><span className="ah-ring"><img src={img} alt="" width="56" height="56" draggable="false" /></span><span className="ah-nome">{nome}</span></div>
+              <div className="ah-amigo" key={nome}><span className="ah-ring"><img src={img} alt="" width="60" height="60" draggable="false" /></span><span className="ah-nome">{nome}</span></div>
             ))}
           </div>
-          <article className="fd-card">
-            <div className="fd-art">
-              <img src="/assets/cases/animae-banner-aot.webp" alt="" width="390" height="220" draggable="false" />
-              <span className="fd-tag is-acao">Ação</span><span className="fd-tag is-hist">História</span>
-              <img className="fd-autor" src={AV.marina} alt="" width="52" height="52" draggable="false" />
+          <div className="fd-cards">
+            <Cartao art="/assets/cases/animae-banner-aot.webp" autor={AV.marina} titulo="Marina concluiu AOT" hora="1h atrás" ep="EP 14" anime="Attack on Titan" tags={TAGS_ACAO}
+              acoes={<>
+                <span className={`fd-acao ${curtiu ? "is-on" : ""}`}><ThumbsUp size={16} /><b key={curtiu ? "s" : "n"} className={curtiu ? "is-pop" : ""}>{curtiu ? 6 : 5}</b></span>
+                <span className={`fd-acao ${tocaCom ? "is-toque" : ""}`}><MessageCircleMore size={16} /><b key={nCom} className={nCom === 3 ? "is-pop" : ""}>{nCom}</b></span>
+              </>} />
+            <Cartao art="/assets/cases/animae-banner-chihiro.webp" autor={AV.nayara} titulo="Nayara adicionou Frieren à lista" hora="4h atrás" ep="Quero assistir" anime="Frieren" tags={TAGS_SLICE}
+              acoes={<><span className="fd-acao"><ThumbsUp size={16} /><b>12</b></span><span className="fd-acao"><MessageCircleMore size={16} /><b>8</b></span></>} />
+            <div className="fd-conv">
+              <p className="fd-titulo">Você e Ana têm 8 animes em comum</p>
+              <div className="fd-conv-linha">
+                <span className="fd-conv-av"><img src={AV.ana} alt="" width="40" height="40" draggable="false" /><img src={AV.eu} alt="" width="40" height="40" draggable="false" /></span>
+                <span className="fd-seguir">Seguir</span>
+              </div>
             </div>
-            <div className="fd-corpo">
-              <p className="fd-titulo">Marina concluiu AOT</p>
-              <p className="fd-meta">1h atrás<i className="ah-sep" />EP 14</p>
-              <p className="fd-anime">Attack on Titan</p>
-            </div>
-            <div className="fd-acoes">
-              <span className={`fd-acao ${curtiu ? "is-on" : ""}`}><ThumbsUp className="fd-i24" /><b key={curtiu ? "s" : "n"} className={curtiu ? "is-pop" : ""}>{curtiu ? 6 : 5}</b></span>
-              <span className={`fd-acao ${tocaCom ? "is-toque" : ""}`}><MessageCircleMore className="fd-i24" /><b key={nCom} className={nCom === 3 ? "is-pop" : ""}>{nCom}</b></span>
-            </div>
-          </article>
-          <article className="fd-card fd-mini">
-            <img className="fd-mini-av" src={AV.lucas} alt="" width="40" height="40" draggable="false" />
-            <div className="fd-mini-t"><p className="fd-titulo">Lucas avaliou Demon Slayer</p><p className="fd-meta">3h atrás<i className="ah-sep" />Avaliação</p><p className="fd-stars">{[0, 1, 2, 3, 4].map((i) => <Star key={i} className="fd-i16" />)}</p></div>
-            <img className="fd-mini-th" src="/assets/cases/animae-thumb-demon.webp" alt="" width="64" height="64" draggable="false" />
-          </article>
-          <article className="fd-card fd-mini">
-            <img className="fd-mini-av" src={AV.ana} alt="" width="40" height="40" draggable="false" />
-            <div className="fd-mini-t"><p className="fd-titulo">Ana começou One Piece</p><p className="fd-meta">5h atrás<i className="ah-sep" />EP 1</p></div>
-            <img className="fd-mini-th" src="/assets/cases/animae-thumb-onepiece.webp" alt="" width="64" height="64" draggable="false" />
-          </article>
+            <Cartao art="/assets/cases/animae-banner-naruto.webp" autor={AV.lucas} titulo="Lucas avaliou Vinland Saga" hora="2h atrás" ep="EP 14" anime="Vinland Saga" tags={TAGS_ACAO}
+              acoes={<><span className="fd-acao"><ThumbsUp size={16} /><b>7</b></span><span className="fd-acao"><MessageCircleMore size={16} /><b>12</b></span></>} />
+          </div>
         </div>
         <nav className="ad-nav">
           <span className="ad-nav-item"><Home size={24} />Home</span>

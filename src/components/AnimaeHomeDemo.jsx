@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Bell, Bookmark, BookmarkPlus, Check, Ellipsis, Home, Newspaper, Search, Signal, Wifi, BatteryFull } from "lucide-react";
+import { ArrowRight, Bell, Bookmark, BookmarkPlus, Check, Home, Newspaper, PenLine, Search, Signal, Star, Users, Wifi, BatteryFull } from "lucide-react";
 import { DESIGN, useDemoTela } from "./useDemoTela.js";
 import "@fontsource/urbanist/latin-400.css";
 import "@fontsource/urbanist/latin-500.css";
@@ -10,7 +10,7 @@ import "@fontsource/inter/latin-700.css";
 // Tela Home do ANIMAE em código (tokens do app). Loop sem interação: o banner troca sozinho,
 // o botão Adicionar é tocado, a tela rola até Amigos Online / Continue assistindo e volta.
 const BANNERS = [
-  { id: "dbz", art: "/assets/cases/animae-banner-dbz.webp", meta: ["Luta", "291 episódios", "9 temporadas", "12+"], desc: "Goku e seus amigos enfrentam ameaças intergalácticas em batalhas épicas que marcaram a história dos animes" },
+  { id: "dbz", art: "/assets/cases/animae-banner-dbz.webp", meta: ["Luta", "291 episódios", "9 temporadas", "12+"], desc: "Goku e seus amigos enfrentam ameaças intergalácticas em batalhas épicas que\nmarcaram a história dos animes" },
   { id: "naruto", art: "/assets/cases/animae-banner-naruto.webp", meta: ["Shounnen", "220 episódios", "9 temporadas", "12+"], desc: "Naruto sonha em se tornar Hokage enquanto enfrenta inimigos perigosos e descobre o poder dos laços que o fortalecem" },
   { id: "deathnote", art: "/assets/cases/animae-banner-deathnote.webp", meta: ["Thriller Psicológico", "37 episódios", "1 temporada", "14+"], desc: "Um estudante encontra um caderno capaz de matar e entra em um duelo de inteligência contra o maior detetive do mundo" },
   { id: "chihiro", art: "/assets/cases/animae-banner-chihiro.webp", meta: ["Fantasia", "2h 05m", "10+"], desc: "Chihiro fica presa em um mundo mágico cheio de espíritos e precisa encontrar coragem para salvar seus pais e voltar para casa" },
@@ -23,10 +23,14 @@ const AMIGOS = [
   { nome: "Pedro", img: "/assets/cases/animae-avatar.webp" },
 ];
 const CONTINUE = [
-  { title: "Attack on Titan", thumb: "/assets/cases/animae-thumb-aot.webp", ep: 14, total: 25, last: "Último: E14 · há 2 dias" },
-  { title: "Demon Slayer", thumb: "/assets/cases/animae-thumb-demon.webp", ep: 8, total: 26, last: "Último: E8 · há 5 dias" },
+  { title: "Attack on Titan", img: "/assets/cases/animae-banner-aot.webp", ep: 7, total: 25, pct: 28, prox: 8 },
+  { title: "One Piece", img: "/assets/cases/animae-thumb-onepiece.webp", ep: 7, total: 1100, pct: 1, prox: 8 },
 ];
-const CICLO = 15000;
+const EM_ALTA = [
+  { nome: "Death Note", img: "/assets/cases/animae-banner-deathnote.webp", nota: "8.4", review: true },
+  { nome: "Naruto Clássico", img: "/assets/cases/animae-banner-naruto.webp", nota: "7.9", review: false },
+];
+const CICLO = 23500;
 
 export default function AnimaeHomeDemo() {
   const { root, screen, animar } = useDemoTela("--ad-scale");
@@ -43,12 +47,12 @@ export default function AnimaeHomeDemo() {
       setBanner(0); setNa(false); setRolou(false); setToque(false);
       at(1200, () => setToque(true));
       at(1450, () => { setToque(false); setNa(true); });
-      at(3200, () => { setBanner(1); setNa(false); });
-      at(4400, () => setBanner(2));
-      at(5600, () => setBanner(3));
-      at(7000, () => setRolou(true));
-      at(10600, () => setRolou(false));
-      at(12200, () => { setBanner(0); setNa(false); });
+      at(4400, () => { setBanner(1); setNa(false); });
+      at(8000, () => setBanner(2));
+      at(11600, () => setBanner(3));
+      at(14200, () => setRolou(true));
+      at(18400, () => setRolou(false));
+      at(20000, () => { setBanner(0); setNa(false); });
       at(CICLO, volta);
     };
     volta();
@@ -87,37 +91,49 @@ export default function AnimaeHomeDemo() {
             </div>
             <div className="ah-dots">{BANNERS.map((s, i) => <span key={s.id} className={i === banner ? "is-on" : ""} />)}</div>
           </section>
-          <section className="ah-secao">
-            <div className="ah-secao-topo"><p className="ah-h2">Amigos Online</p><span className="ah-link">Ver feed</span></div>
-            <div className="ah-amigos">
-              {AMIGOS.map((a, i) => (
-                <div className="ah-amigo" key={a.nome}>
-                  <span className={`ah-ring ${i === 0 ? "is-live" : ""}`}><img src={a.img} alt="" width="56" height="56" draggable="false" /></span>
-                  <span className="ah-nome">{a.nome}</span>
-                </div>
-              ))}
-            </div>
-          </section>
-          <section className="ah-secao">
-            <div className="ah-secao-topo"><p className="ah-h2">Continue assistindo</p></div>
-            <div className="ah-cards">
-              {CONTINUE.map((item) => (
-                <div className="ad-card" key={item.title}>
-                  <img className="ad-thumb" src={item.thumb} alt="" width="64" height="64" draggable="false" />
-                  <div className="ad-body">
-                    <div className="ad-top">
-                      <div className="ad-line"><span className="ad-name">{item.title}</span><Ellipsis className="ad-dots ad-i26" /></div>
-                      <p className="ad-ep">{`EP ${item.ep} de ${item.total}`}</p>
-                    </div>
-                    <div className="ad-bottom">
-                      <div className="ad-track"><span className="ad-fill" style={{ width: `${(item.ep / item.total) * 100}%` }} /></div>
-                      <div className="ad-foot"><span className="ad-last">{item.last}</span><span className="ad-mark"><span className="ad-mark-a">Marcar EP {item.ep + 1}</span></span></div>
+          <div className="ah-conteudo">
+            <section className="ah-secao">
+              <div className="ah-secao-topo"><p className="ah-h2">Amigos Online</p><span className="ah-link">Ver feed</span></div>
+              <div className="ah-amigos">
+                {AMIGOS.map((a, i) => (
+                  <div className="ah-amigo" key={a.nome}>
+                    <span className={`ah-ring ${i === 0 ? "is-live" : ""}`}><img src={a.img} alt="" width="60" height="60" draggable="false" /></span>
+                    <span className="ah-nome">{a.nome}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+            <section className="ah-secao">
+              <div className="ah-secao-topo"><p className="ah-h2">Continue de onde parou</p><span className="ah-link">Ver todos</span></div>
+              <div className="ah-fila">
+                {CONTINUE.map((c) => (
+                  <div className="ah-cont" key={c.title}>
+                    <div className="ah-cont-media"><img src={c.img} alt="" width="320" height="124" draggable="false" /><p className="ah-cont-titulo">{c.title}</p></div>
+                    <div className="ah-cont-corpo">
+                      <div className="ah-cont-prog">
+                        <div className="ah-cont-lab"><span>{`EP ${c.ep} de ${c.total}`}</span><span>{c.pct}%</span></div>
+                        <div className="ah-cont-barra"><i style={{ width: 81 }} /></div>
+                      </div>
+                      <span className="ah-cont-btn">{`Ver EP ${c.prox}`}<ArrowRight className="fd-i20" /></span>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+            <section className="ah-secao">
+              <div className="ah-secao-topo"><p className="ah-h2">Em alta entre amigos</p><span className="ah-link">Ver todos</span></div>
+              <div className="ah-fila">
+                {EM_ALTA.map((c) => (
+                  <div className="ah-poster" key={c.nome}>
+                    <div className="ah-poster-img"><img src={c.img} alt="" width="160" height="232" draggable="false" /><span className="ah-nota"><Star />{c.nota}</span></div>
+                    <p className="ah-poster-nome">{c.nome}</p>
+                    <p className="ah-poster-info"><Users />1 amigo adicionou</p>
+                    {c.review && <p className="ah-poster-info is-rev"><PenLine />1 fez review</p>}
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
         </div>
         <nav className="ad-nav">
           <span className="ad-nav-item is-on"><Home size={24} />Home</span>

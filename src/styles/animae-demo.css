@@ -148,97 +148,13 @@
 @media (prefers-reduced-motion: reduce) { .ad-slot, .ad-count.is-pop { animation: none; } .ad-fill { transition: none; } }
 
 /* ---- Home do ANIMAE (430 x 932): banner, Adicionar, Amigos Online ---- */
-.ah-header { position: absolute; z-index: 3; top: 0; left: 0; right: 0; display: flex; align-items: flex-end; justify-content: space-between; box-sizing: border-box; height: 112px; padding: 0 20px 12px; border-radius: 0 0 20px 20px; background: var(--n100); }
-.ah-logo { display: block; width: 144px; height: 41px; }
-.ah-icons { display: inline-flex; gap: 16px; align-items: center; height: 44px; color: var(--n0); }
-.ah-scroll { position: absolute; top: 0; left: 0; right: 0; padding-top: 112px; padding-bottom: 126px; transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1); }
-.ah-scroll.is-rolou { transform: translateY(-440px); }
-.ah-hero { position: relative; height: 533px; border-radius: 0 0 20px 20px; background: var(--n100); overflow: hidden; }
-.ah-slides { position: relative; height: 392px; }
-.ah-slide { position: absolute; inset: 0; opacity: 0; transform: scale(1.03); transition: opacity 0.7s ease, transform 1.2s ease; }
-.ah-slide.is-on { opacity: 1; transform: none; }
-.ah-art { position: relative; height: 288px; overflow: hidden; }
-.ah-art img { display: block; width: 430px; height: 288px; object-fit: cover; }
-.ah-fade { position: absolute; inset: auto 0 0 0; height: 56px; background: linear-gradient(transparent, var(--n100)); }
-.ah-titulo { position: absolute; left: 20px; right: 20px; bottom: 8px; text-align: center; font: 700 40px/44px "Urbanist", system-ui, sans-serif; letter-spacing: -0.01em; color: var(--n0); text-shadow: 0 2px 12px #000a; }
-.ah-meta { display: flex; justify-content: center; align-items: center; gap: 0; height: 24px; margin: 0; font-size: 14px; line-height: 24px; color: var(--n40); }
-.ah-meta span { display: inline-flex; align-items: center; }
-.ah-sep { display: inline-block; width: 4px; height: 4px; margin: 0 8px; border-radius: 999px; background: var(--n40); }
-.ah-desc { width: 360px; margin: 6px auto 0; text-align: center; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n0); }
-.ah-botoes { display: flex; justify-content: center; gap: 16px; margin-top: 0; }
-.ah-add, .ah-onde { position: relative; display: flex; align-items: center; justify-content: center; box-sizing: border-box; height: 56px; border-radius: 999px; font: 700 18px "Urbanist", system-ui, sans-serif; }
-.ah-add { width: 188px; background: var(--primary); box-shadow: 0 6px 20px #ff5c0059; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, box-shadow 0.25s ease; overflow: hidden; }
-.ah-add.is-press { transform: scale(0.94); }
-.ah-add-a, .ah-add-b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.25s ease, transform 0.3s ease; }
-.ah-add-b { opacity: 0; transform: translateY(8px); }
-.ah-add.is-on { background: #f9faff14; box-shadow: none; animation: ah-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.ah-add.is-on .ah-add-a { opacity: 0; transform: translateY(-8px); }
-.ah-add.is-on .ah-add-b { opacity: 1; transform: none; color: var(--n0); }
-.ah-check { width: 24px; height: 24px; }
-.ah-check path { stroke-dasharray: 24; stroke-dashoffset: 24; }
-.ah-add.is-on .ah-check path { stroke-dashoffset: 0; transition: stroke-dashoffset 0.45s ease 0.15s; }
 @keyframes ah-pop { 0% { transform: scale(0.94); } 60% { transform: scale(1.04); } 100% { transform: scale(1); } }
-.ah-onde { width: 146px; border: 1.5px solid var(--n70); color: var(--n0); }
-.ah-dots { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 24px; height: 8px; }
-.ah-dots span { width: 8px; height: 8px; border-radius: 999px; background: var(--n60, #565c7a); transition: width 0.4s ease, background 0.4s ease; }
-.ah-dots span.is-on { width: 38px; background: var(--n0); }
-.ah-secao { padding: 32px 0 0; }
-.ah-secao-topo { display: flex; align-items: baseline; justify-content: space-between; padding: 0 20px; }
-.ah-h2 { margin: 0; font: 500 22px/32px "Urbanist", system-ui, sans-serif; color: var(--n0); }
-.ah-link { padding-bottom: 2px; border-bottom: 1.5px solid var(--n50); font-size: 14px; line-height: 20px; color: var(--n40); }
-.ah-amigos { display: flex; gap: 26px; padding: 24px 0 0 25px; }
-.ah-amigo { display: flex; flex: none; flex-direction: column; align-items: center; gap: 8px; width: 68px; }
-.ah-ring { display: grid; place-items: center; box-sizing: border-box; width: 68px; height: 68px; border: 3px solid var(--primary); border-radius: 999px; background: var(--n90); box-shadow: 0 0 14px #ff5c0059; }
-.ah-ring img { width: 56px; height: 56px; border-radius: 999px; object-fit: cover; }
-.ah-ring.is-live { animation: ah-pulso 1.8s ease-in-out infinite; }
 @keyframes ah-pulso { 50% { box-shadow: 0 0 24px #ff5c02b3; transform: scale(1.06); } }
-.ah-nome { font-size: 14px; line-height: 20px; color: var(--n40); }
-.ah-cards { display: flex; flex-direction: column; gap: 16px; padding: 24px 20px 0; }
-.case-device-screen .ah-root img.ah-logo { width: 144px; height: 41px; object-fit: contain; }
-.case-device-screen .ah-root .ah-art img { width: 430px; height: 288px; max-width: none; object-fit: cover; }
-.case-device-screen .ah-root .ah-ring img { width: 56px; height: 56px; object-fit: cover; }
-.case-document .ah-root p { max-width: none; margin: 0; }
-.case-document .ah-root p.ah-meta { margin: 0; font: 400 14px/24px "Urbanist", system-ui, sans-serif; color: var(--n40); }
-.case-document .ah-root p.ah-desc { width: 360px; margin: 6px auto 0; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n0); }
-.case-document .ah-root p.ah-h2 { font: 500 22px/32px "Urbanist", system-ui, sans-serif; color: var(--n0); }
-@media (prefers-reduced-motion: reduce) { .ah-scroll, .ah-slide, .ah-add, .ah-add-a, .ah-add-b, .ah-dots span, .ah-check path { transition: none; } .ah-add.is-on { animation: none; } .ah-ring.is-live { animation: none; } }
 
 /* ---- Feed > Amigos do ANIMAE (430 x 932) e folha de comentários ---- */
+/* ---- Home do ANIMAE: ver bloco abaixo ---- */
 .fd-i16 { width: 16px; height: 16px; } .fd-i20 { width: 20px; height: 20px; } .fd-i24 { width: 24px; height: 24px; }
-.fd-scroll { position: absolute; top: 0; left: 0; right: 0; padding: 84px 0 126px; transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1); }
-.fd-scroll.is-rolou { transform: translateY(-300px); }
-.fd-topo { display: flex; flex-direction: column; gap: 28px; padding: 0 20px; }
-.fd-h1 { margin: 0; font: 700 28px/42px "Inter", system-ui, sans-serif; color: var(--n10); }
-.fd-tabs { display: flex; gap: 32px; height: 40px; border-bottom: 1px solid var(--n80); font-size: 16px; line-height: 20px; color: var(--n40); }
-.fd-tabs span { position: relative; padding-top: 0; }
-.fd-tabs .is-on { color: var(--primary); }
-.fd-tabs .is-on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 3px; border-radius: 999px; background: var(--primary); }
-.fd-amigos { padding-top: 24px; }
-.fd-card { margin: 20px 20px 0; overflow: hidden; border-radius: 20px; background: var(--n80); }
-.fd-art { position: relative; height: 220px; }
-.fd-art > img:first-child { display: block; width: 390px; height: 220px; object-fit: cover; object-position: 60% 30%; }
-.fd-tag { position: absolute; top: 16px; display: inline-flex; align-items: center; height: 32px; padding: 0 16px; border-radius: 999px; font: 500 14px "Urbanist", system-ui, sans-serif; color: var(--n0); }
-.fd-tag.is-acao { left: 16px; background: #f99d1c; } .fd-tag.is-hist { left: 84px; background: #4170ff; }
-.fd-autor { position: absolute; left: 16px; bottom: -28px; width: 52px; height: 52px; box-sizing: border-box; border: 3px solid var(--n80); border-radius: 999px; object-fit: cover; background: var(--n90); }
-.fd-corpo { padding: 36px 20px 0; }
-.fd-titulo { margin: 0; font: 700 18px/28px "Urbanist", system-ui, sans-serif; color: var(--n0); }
-.fd-meta { display: flex; align-items: center; margin: 4px 0 0; font: 400 12px/16px "Urbanist", system-ui, sans-serif; color: var(--n50); }
-.fd-anime { margin: 16px 0 0; padding-bottom: 15px; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n10); }
-.fd-acoes { display: flex; gap: 24px; align-items: center; height: 49px; padding: 0 20px; border-top: 1px solid var(--n70); background: #0f101826; color: var(--n50); }
-.fd-acao { display: inline-flex; align-items: center; gap: 8px; font: 500 16px "Urbanist", system-ui, sans-serif; transition: color 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.fd-acao b { font-weight: 500; }
-.fd-acao.is-on { color: var(--primary); }
-.fd-acao.is-on svg { animation: fd-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-.fd-acao.is-toque { color: var(--n0); transform: scale(0.9); }
-.fd-acao b.is-pop { animation: fd-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
 @keyframes fd-pop { 0% { transform: scale(0.7); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
-.fd-mini { display: flex; align-items: center; gap: 12px; padding: 16px; }
-.fd-mini-av { flex: none; width: 40px; height: 40px; border-radius: 999px; object-fit: cover; }
-.fd-mini-t { flex: 1; min-width: 0; }
-.fd-mini-t .fd-titulo { font-size: 16px; line-height: 24px; }
-.fd-mini-th { flex: none; width: 64px; height: 64px; border-radius: 10px; object-fit: cover; }
-.fd-stars { display: flex; gap: 2px; margin: 8px 0 0; color: var(--primary); }
-.fd-stars svg { fill: var(--primary); }
 /* folha de comentários */
 .fd-dim { position: absolute; inset: 0; z-index: 4; background: #000000a6; opacity: 0; pointer-events: none; transition: opacity 0.45s ease; }
 .fd-dim.is-on { opacity: 1; }
@@ -277,19 +193,150 @@
 .fd-send.is-on { background: var(--primary); color: var(--n0); }
 .fd-send.is-press { transform: scale(0.82); }
 .case-device-screen .fd-root img { max-width: none; }
-.case-device-screen .fd-root .fd-art > img:first-child { width: 390px; height: 220px; object-fit: cover; }
-.case-device-screen .fd-root img.fd-autor { width: 52px; height: 52px; }
-.case-device-screen .fd-root img.fd-mini-th { width: 64px; height: 64px; object-fit: cover; }
-.case-device-screen .fd-root img.fd-mini-av, .case-device-screen .fd-root img.fd-input-av { object-fit: cover; }
 .case-document .fd-root p { max-width: none; margin: 0; }
-.case-document .fd-root p.fd-h1 { font: 700 28px/42px "Inter", system-ui, sans-serif; color: var(--n10); }
-.case-document .fd-root p.fd-titulo { font: 700 18px/28px "Urbanist", system-ui, sans-serif; color: var(--n0); }
-.case-document .fd-root .fd-mini p.fd-titulo { font-size: 16px; line-height: 24px; }
-.case-document .fd-root p.fd-meta { margin-top: 4px; font: 400 12px/16px "Urbanist", system-ui, sans-serif; color: var(--n50); }
-.case-document .fd-root p.fd-anime { margin-top: 16px; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n10); }
 .case-document .fd-root p.fd-sheet-h { font: 600 18px/24px "Urbanist", system-ui, sans-serif; color: var(--n0); }
 .case-document .fd-root p.fd-c-nome { font: 400 14px/20px "Urbanist", system-ui, sans-serif; }
 .case-document .fd-root p.fd-c-texto { margin-top: 4px; font: 400 14px/20px "Urbanist", system-ui, sans-serif; color: var(--n10); }
 .case-document .fd-root p.fd-c-acoes { margin-top: 8px; font: 600 12px/16px "Urbanist", system-ui, sans-serif; color: var(--n40); }
-.case-document .fd-root p.fd-stars { margin-top: 8px; }
+
+
+/* ---- Home do ANIMAE (430 x 932), medidas do Figma "Home · Redesenho" ---- */
+.ah-header { position: absolute; z-index: 3; top: 0; left: 0; right: 0; display: flex; align-items: flex-end; justify-content: space-between; box-sizing: border-box; height: 112px; padding: 0 20px 12px; border-radius: 0 0 20px 20px; background: var(--n100); }
+.ah-logo { display: block; width: 144px; height: 41px; }
+.ah-icons { display: inline-flex; gap: 16px; align-items: center; height: 44px; color: var(--n0); }
+.ah-scroll { position: absolute; top: 0; left: 0; right: 0; padding-top: 112px; padding-bottom: 126px; transition: transform 2.4s cubic-bezier(0.65, 0, 0.35, 1); }
+.ah-scroll.is-rolou { transform: translateY(-560px); }
+.ah-hero { position: relative; height: 533px; border-radius: 0 0 40px 40px; background: var(--n100); overflow: hidden; }
+.ah-slides { position: relative; height: 421px; }
+.ah-slide { position: absolute; inset: 0; opacity: 0; transform: scale(1.02); transition: opacity 1.6s ease-in-out, transform 2.4s ease-out; }
+.ah-slide.is-on { opacity: 1; transform: none; }
+.ah-art { position: relative; height: 288px; overflow: hidden; }
+.ah-art img { display: block; width: 430px; height: 288px; object-fit: cover; }
+.ah-fade { position: absolute; inset: auto 0 0 0; height: 56px; background: linear-gradient(transparent, var(--n100)); }
+.ah-meta { display: flex; justify-content: center; align-items: center; height: 24px; margin: 0; font-size: 12px; line-height: 16px; color: var(--n50); }
+.ah-meta span { display: inline-flex; align-items: center; }
+.ah-sep { display: inline-block; width: 4px; height: 4px; margin: 0 8px; border-radius: 999px; background: var(--n50); }
+.ah-root .ad-status { z-index: 4; }
+.ah-desc { white-space: pre-line; width: 366px; margin: 6px auto 0; text-align: center; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n10); }
+.ah-botoes { display: flex; justify-content: center; gap: 16px; }
+.ah-add, .ah-onde { position: relative; display: flex; align-items: center; justify-content: center; box-sizing: border-box; height: 56px; border-radius: 999px; font: 600 16px/24px "Urbanist", system-ui, sans-serif; }
+.ah-add { width: 189px; background: var(--primary); box-shadow: 0 4px 6px #ff5c024d; transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, box-shadow 0.25s ease; overflow: hidden; }
+.ah-add.is-press { transform: scale(0.94); }
+.ah-add-a, .ah-add-b { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.25s ease, transform 0.3s ease; }
+.ah-add-b { opacity: 0; transform: translateY(8px); }
+.ah-add.is-on { background: #f9faff14; box-shadow: none; animation: ah-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.ah-add.is-on .ah-add-a { opacity: 0; transform: translateY(-8px); }
+.ah-add.is-on .ah-add-b { opacity: 1; transform: none; color: var(--n0); }
+.ah-check { width: 24px; height: 24px; }
+.ah-check path { stroke-dasharray: 24; stroke-dashoffset: 24; }
+.ah-add.is-on .ah-check path { stroke-dashoffset: 0; transition: stroke-dashoffset 0.45s ease 0.15s; }
+@keyframes ah-pop { 0% { transform: scale(0.94); } 60% { transform: scale(1.04); } 100% { transform: scale(1); } }
+.ah-onde { width: 146px; border: 1px solid var(--n70); color: var(--n0); }
+.ah-dots { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 24px; height: 8px; }
+.ah-dots span { width: 8px; height: 8px; border-radius: 999px; background: var(--n60, #565c7a); transition: width 0.8s ease, background 0.8s ease; }
+.ah-dots span.is-on { width: 38px; background: var(--n0); }
+.ah-conteudo { display: flex; flex-direction: column; gap: 40px; padding: 32px 0 0; }
+.ah-secao { display: flex; flex-direction: column; gap: 24px; }
+.ah-secao-topo { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+.ah-h2 { margin: 0; font: 600 22px/30px "Urbanist", system-ui, sans-serif; color: var(--n10); }
+.ah-link { padding-bottom: 4px; border-bottom: 1px solid var(--n40); font-size: 14px; line-height: 20px; color: var(--n40); }
+.ah-amigos { display: flex; gap: 16px; padding-left: 20px; }
+.ah-amigo { display: flex; flex: none; flex-direction: column; align-items: center; justify-content: center; gap: 8px; width: 78px; height: 94px; }
+.ah-ring { display: grid; place-items: center; box-sizing: border-box; width: 68px; height: 68px; border: 2px solid var(--primary); border-radius: 999px; background: var(--n90); box-shadow: 0 4px 12px -2px #ff5c0266; }
+.ah-ring img { width: 60px; height: 60px; border-radius: 999px; object-fit: cover; }
+.ah-ring.is-live { animation: ah-pulso 1.8s ease-in-out infinite; }
+@keyframes ah-pulso { 50% { box-shadow: 0 0 24px #ff5c02b3; transform: scale(1.06); } }
+.ah-nome { font-size: 12px; line-height: 16px; font-weight: 500; color: #d9dcea; }
+.ah-fila { display: flex; gap: 16px; padding: 0 20px; }
+.ah-cont { flex: none; width: 320px; box-sizing: border-box; overflow: hidden; border: 1px solid var(--n70); border-radius: 20px; background: var(--n80); }
+.ah-cont-media { position: relative; height: 124px; background: var(--n90); }
+.ah-cont-media img { display: block; width: 320px; height: 124px; object-fit: cover; }
+.ah-cont-media::after { content: ""; position: absolute; left: 0; right: 0; top: 40px; height: 84px; background: linear-gradient(rgba(20,23,37,0), rgba(20,23,37,0.92)); }
+.ah-cont-titulo { position: absolute; z-index: 1; left: 16px; top: 92px; margin: 0; font: 600 18px/22px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.ah-cont-corpo { display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+.ah-cont-prog { display: flex; flex-direction: column; gap: 8px; }
+.ah-cont-lab { display: flex; justify-content: space-between; font: 500 14px/17px "Urbanist", system-ui, sans-serif; color: #c4c8e0; }
+.ah-cont-lab span:last-child { color: var(--n50); }
+.ah-cont-barra { height: 6px; border-radius: 3px; background: var(--n70); overflow: hidden; }
+.ah-cont-barra i { display: block; height: 6px; background: var(--primary); }
+.ah-cont-btn { display: flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 999px; background: var(--primary); font: 700 16px/20px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.ah-poster { flex: none; display: flex; flex-direction: column; gap: 10px; width: 160px; }
+.ah-poster-img { position: relative; width: 160px; height: 232px; overflow: hidden; border-radius: 20px; background: var(--n80); }
+.ah-poster-img img { display: block; width: 160px; height: 232px; object-fit: cover; }
+.ah-nota { position: absolute; left: 104px; top: 200px; display: flex; align-items: center; gap: 4px; box-sizing: border-box; height: 24px; padding: 0 8px; border-radius: 999px; background: rgba(15,16,24,0.72); font: 600 12px/16px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.ah-nota svg { width: 12px; height: 12px; color: #ffb020; fill: #ffb020; }
+.ah-poster-nome { margin: 0; font: 700 14px/17px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.ah-poster-info { display: flex; align-items: center; gap: 6px; margin: 0; font: 500 12px/15px "Urbanist", system-ui, sans-serif; color: #9aa0b8; }
+.ah-poster-info svg { width: 16px; height: 16px; }
+.ah-poster-info.is-rev { font-weight: 700; color: var(--n0); }
+.case-device-screen .ah-root img.ah-logo { width: 144px; height: 41px; object-fit: contain; }
+.case-device-screen .ah-root .ah-art img { width: 430px; height: 288px; max-width: none; object-fit: cover; }
+.case-device-screen .ah-root .ah-ring img { width: 60px; height: 60px; object-fit: cover; }
+.case-device-screen .ah-root .ah-cont-media img { width: 320px; height: 124px; max-width: none; object-fit: cover; }
+.case-device-screen .ah-root .ah-poster-img img { width: 160px; height: 232px; max-width: none; object-fit: cover; }
+.case-document .ah-root p { max-width: none; margin: 0; }
+.case-document .ah-root p.ah-meta { margin: 0; font: 400 12px/16px "Urbanist", system-ui, sans-serif; color: var(--n50); }
+.case-document .ah-root p.ah-root .ad-status { z-index: 4; }
+.ah-desc { white-space: pre-line; width: 366px; margin: 6px auto 0; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n10); }
+.case-document .ah-root p.ah-h2 { font: 600 22px/30px "Urbanist", system-ui, sans-serif; color: var(--n10); }
+.case-document .ah-root p.ah-cont-titulo { font: 600 18px/22px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.case-document .ah-root p.ah-poster-nome { font: 700 14px/17px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.case-document .ah-root p.ah-poster-info { font: 500 12px/15px "Urbanist", system-ui, sans-serif; color: #9aa0b8; }
+.case-document .ah-root p.ah-poster-info.is-rev { font-weight: 700; color: var(--n0); }
+@media (prefers-reduced-motion: reduce) { .ah-scroll, .ah-slide, .ah-add, .ah-add-a, .ah-add-b, .ah-dots span, .ah-check path { transition: none; } .ah-add.is-on { animation: none; } .ah-ring.is-live { animation: none; } }
+
+/* ---- Feed > Amigos: layout do Figma "Feed · Redesenho" ---- */
+.fd-scroll { position: absolute; top: 0; left: 0; right: 0; padding: 84px 20px 126px; transition: transform 2.2s cubic-bezier(0.65, 0, 0.35, 1); }
+.fd-scroll.is-rolou { transform: translateY(-520px); }
+.fd-topo { display: flex; flex-direction: column; gap: 32px; }
+.fd-h1 { margin: 0; font: 700 28px/42px "Inter", system-ui, sans-serif; color: var(--n10); }
+.fd-sino { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; background: var(--n80); color: var(--n0); }
+.fd-tabs { position: relative; display: flex; gap: 32px; height: 33px; margin-top: 32px; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n40); }
+.fd-tabs::before { content: ""; position: absolute; left: 23px; right: 0; top: 32px; height: 1px; background: var(--n70); }
+.fd-tabs .is-on { color: var(--primary); text-shadow: 0 0 6px #ff5c0259; }
+.fd-tabs .is-on::after { content: ""; position: absolute; left: 1px; top: 30px; width: 88px; height: 3px; border-radius: 999px; background: var(--primary); }
+.fd-tabs span { position: relative; }
+.fd-amigos { display: flex; gap: 16px; margin: 24px -20px 0; padding-left: 20px; }
+.fd-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+.fd-card { position: relative; overflow: hidden; border-radius: 28px; background: var(--n80); }
+.fd-art { position: relative; height: 220px; }
+.fd-art > img:first-child { display: block; width: 390px; height: 220px; object-fit: cover; }
+.fd-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(0,0,0,0.7) 17.7%, rgba(0,0,0,0) 65%); }
+.fd-tags { position: absolute; z-index: 1; left: 16px; top: 16px; display: flex; gap: 8px; }
+.fd-tag { display: inline-flex; align-items: center; height: 28px; padding: 0 14px; border-radius: 999px; font: 400 14px/20px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.fd-autor-wrap { position: absolute; z-index: 2; left: 16px; top: 189px; width: 56px; height: 56px; }
+.fd-autor-wrap img { position: absolute; left: 4px; top: 4px; width: 48px; height: 48px; border-radius: 999px; object-fit: cover; }
+.fd-autor-wrap::after { content: ""; position: absolute; inset: 0; box-sizing: border-box; border: 4px solid var(--n80); border-radius: 999px; }
+.fd-corpo { padding: 32px 16px 16px; }
+.fd-titulo { margin: 0; font: 600 18px/26px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.fd-meta { display: flex; align-items: center; margin: 4px 0 0; font: 500 12px/16px "Urbanist", system-ui, sans-serif; color: var(--n50); }
+.fd-sep { display: inline-block; width: 4px; height: 4px; margin: 0 8px; border-radius: 999px; background: var(--n50); }
+.fd-anime { margin: 12px 0 0; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.fd-acoes { display: flex; gap: 16px; align-items: center; box-sizing: border-box; padding: 16px 20px; border-top: 1px solid var(--n70); color: var(--n50); }
+.fd-acao { display: inline-flex; align-items: center; gap: 8px; font: 400 14px/20px "Urbanist", system-ui, sans-serif; transition: color 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.fd-acao b { font-weight: 400; }
+.fd-acao.is-on { color: var(--primary); }
+.fd-acao.is-on svg { animation: fd-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+.fd-acao.is-toque { color: var(--n0); transform: scale(0.9); }
+.fd-acao b.is-pop { animation: fd-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes fd-pop { 0% { transform: scale(0.7); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
+.fd-conv { box-sizing: border-box; padding: 16px; border: 1.5px solid var(--primary); border-radius: 20px; background: var(--n80); box-shadow: 0 0 7.5px #ff5c023d; }
+.fd-conv .fd-titulo { margin-bottom: 8px; }
+.fd-conv-linha { display: flex; align-items: center; justify-content: space-between; }
+.fd-conv-av { display: flex; }
+.fd-conv-av img { width: 40px; height: 40px; border-radius: 999px; object-fit: cover; }
+.fd-conv-av img + img { margin-left: -8px; }
+.fd-seguir { display: flex; align-items: center; justify-content: center; height: 40px; padding: 0 32px; border-radius: 999px; background: var(--primary); box-shadow: 0 4px 6px #ff5c024d; font: 600 14px/21px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.case-device-screen .fd-root img { max-width: none; }
+.case-device-screen .fd-root .fd-art > img:first-child { width: 390px; height: 220px; object-fit: cover; }
+.case-device-screen .fd-root .fd-autor-wrap img { width: 48px; height: 48px; object-fit: cover; }
+.case-device-screen .fd-root .fd-conv-av img { width: 40px; height: 40px; object-fit: cover; }
+.case-document .fd-root p { max-width: none; margin: 0; }
+.case-document .fd-root p.fd-h1 { font: 700 28px/42px "Inter", system-ui, sans-serif; color: var(--n10); }
+.case-document .fd-root p.fd-titulo { font: 600 18px/26px "Urbanist", system-ui, sans-serif; color: var(--n0); }
+.case-document .fd-root p.fd-meta { margin-top: 4px; font: 500 12px/16px "Urbanist", system-ui, sans-serif; color: var(--n50); }
+.case-document .fd-root p.fd-anime { margin-top: 12px; font: 400 16px/24px "Urbanist", system-ui, sans-serif; color: var(--n0); }
 @media (prefers-reduced-motion: reduce) { .fd-scroll, .fd-sheet, .fd-dim, .fd-lista, .fd-acao, .fd-send, .fd-x, .fd-campo { transition: none; } .fd-acao.is-on svg, .fd-acao b.is-pop, .fd-novo, .fd-caret { animation: none; } }
+.case-device-screen .fd-root img.fd-c-av { width: 36px; height: 36px; object-fit: cover; }
+.case-device-screen .fd-root .fd-rep img.fd-c-av { width: 28px; height: 28px; }
+.case-device-screen .fd-root img.fd-input-av { width: 32px; height: 32px; object-fit: cover; }
