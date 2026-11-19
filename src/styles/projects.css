@@ -206,6 +206,7 @@
   color: var(--color-blue-900);
 }
 .project-folder:is(:hover, :focus-visible) .project-folder-category { visibility: visible; }
+.project-folder-category { text-transform: uppercase; }
 .project-folder.is-pending:is(:hover, :focus-visible) .project-folder-name { visibility: hidden; }
 .project-folder.is-pending:is(:hover, :focus-visible) .project-folder-pending { visibility: visible; }
 .projects-notice,
