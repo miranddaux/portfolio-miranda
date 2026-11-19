@@ -242,7 +242,7 @@ export default function CaseDocument({ project, onNavigate }) {
 
     <footer className="case-document-footer">
       <a className="xp-button xp-button--back" href="/#cases" onClick={(e) => projectLinkAction(e, onNavigate, "/#cases")}><ChevronLeft size={16} aria-hidden="true" />Meus projetos</a>
-      <a className="xp-button" href={`/cases/${next.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${next.id}`)}>Próximo: {next.title}</a>
+      {next && <a className="xp-button" href={`/cases/${next.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${next.id}`)}>Próximo: {next.title}</a>}
     </footer>
   </article>;
 }

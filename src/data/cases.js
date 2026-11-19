@@ -36,7 +36,8 @@ export const CASES = [
     problem:
       "Como aproximar a expectativa de corte do cliente da interpretação do barbeiro?",
     role: "Pesquisa · UX · UI · Protótipo",
-    status: "Projeto conceito · não lançado",
+    status: "Em construção",
+    pending: true,
     decisions: [
       "Começar com uma hipótese de dificuldade de agendamento.",
       "Conversar com três barbeiros e revisar a hipótese a partir das respostas.",
@@ -46,49 +47,20 @@ export const CASES = [
       "Pesquisa pequena não comprova um mercado inteiro, mas pode evitar que a solução comece pelo problema errado.",
   },
   {
-    id: "oficina-do-tenista",
-    title: "Oficina do Tenista",
-    type: "E-commerce · Experiência de compra",
-    group: "E-commerce",
+    id: "ciao",
+    title: "CIAO",
+    type: "Projeto · Em construção",
+    group: "Apps",
     number: "03",
     tone: "mint",
     icon: "◉",
-    kicker: "E-COMMERCE / UI CRAFT",
-    summary:
-      "Um trabalho de experiência de compra com foco na clareza das informações e no cuidado visual.",
-    problem:
-      "Como tornar a jornada de compra mais clara sem perder a identidade da marca?",
-    role: "UX/UI · E-commerce",
-    status: "Case em documentação",
-    decisions: [
-      "Mapear e documentar as principais etapas da experiência de compra.",
-      "Organizar hierarquia visual e prioridades de conteúdo.",
-      "Preparar comparações visuais e justificativas para o case público.",
-    ],
-    learning:
-      "Publicar evidências concretas de UX e UI importa mais do que afirmar resultados sem dados.",
-  },
-  {
-    id: "ultragrip",
-    title: "UltraGrip",
-    type: "E-commerce · Mais trabalhos",
-    group: "E-commerce",
-    number: "04",
-    tone: "blue",
-    icon: "◆",
-    kicker: "E-COMMERCE",
-    summary:
-      "Projeto de interface para comércio eletrônico. Detalhes e resultados em curadoria.",
-    problem:
-      "Como organizar uma experiência de loja digital orientada à descoberta de produtos?",
-    role: "UX/UI · E-commerce",
-    status: "Resumo em preparação",
-    decisions: [
-      "Estruturar informações e navegação da loja.",
-      "Explorar clareza de componentes de compra.",
-      "Documentar o que pode ser publicado sem dados não verificados.",
-    ],
-    learning:
-      "Uma boa apresentação distingue decisões visíveis de resultados ainda não medidos.",
+    kicker: "EM CONSTRUÇÃO",
+    summary: "Case em construção. Em breve, contexto, decisões e interfaces.",
+    problem: "Case em construção.",
+    role: "Em definição",
+    status: "Em construção",
+    pending: true,
+    decisions: [],
+    learning: "Case em construção.",
   },
 ];

@@ -20,9 +20,13 @@ export default function CaseCard({ data }) {
         <span className="case-category">{data.type}</span>
         <h3>{data.title}</h3>
         <p>{data.summary}</p>
-        <a className="case-link" href={`/cases/${data.id}`}>
-          Ler o case <ArrowUpRight size={16} />
-        </a>
+        {data.pending ? (
+          <span className="case-link" aria-disabled="true">Em construção</span>
+        ) : (
+          <a className="case-link" href={`/cases/${data.id}`}>
+            Ler o case <ArrowUpRight size={16} />
+          </a>
+        )}
       </div>
     </article>
   );

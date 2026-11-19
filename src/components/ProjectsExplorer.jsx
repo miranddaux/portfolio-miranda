@@ -59,13 +59,13 @@ export default function ProjectsExplorer({ onNavigate, embedded = false }) {
             const content = <>
               <span className="project-folder-icon">
                 <img src={FOLDER} alt="" width="64" height="64" draggable="false" />
-                {p.available && <span className={`project-folder-mark is-${p.id}`} aria-hidden="true">{p.id === "animae" ? "A" : p.id === "navaja" ? "N" : "OT"}</span>}
+                {p.available && <span className={`project-folder-mark is-${p.id}`} aria-hidden="true">{"A"}</span>}
               </span>
               <span className="project-folder-caption">
                 <span className="project-folder-name">{p.title}</span>
                 {!p.available && <span className="project-folder-pending" aria-hidden="true">Em construção</span>}
               </span>
-              {p.available && <span className="project-folder-category">{p.id === "oficina-do-tenista" ? "E-commerce · Disco" : p.id === "animae" ? "Produto próprio" : "UX Research · App"}</span>}
+              {p.available && <span className="project-folder-category">Produto próprio</span>}
             </>;
             return <li key={p.id}>
               {p.available ? <a className="project-folder" href={`/cases/${p.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${p.id}`)}>{content}</a>

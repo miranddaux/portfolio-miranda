@@ -12,9 +12,6 @@ const IMAGENS = [
   { src: `${C}/animae-quiz-draco.webp`, legenda: "ANIMAE · Quiz do Draco" },
   { src: `${C}/navaja-capa.png`, legenda: "Navaja · Sugestões de cortes" },
   { src: `${C}/navaja-estilos.png`, legenda: "Navaja · Catálogo de estilos" },
-  { src: `${C}/oficina-produto.png`, legenda: "Oficina do Tenista · Página de produto" },
-  { src: `${C}/oficina-comparador.png`, legenda: "Oficina do Tenista · Comparador de raquetes" },
-  { src: `${C}/oficina-guia.png`, legenda: "Oficina do Tenista · Guia por nível de jogo" },
 ];
 
 export default function AppVisualizador() {
