@@ -88,7 +88,7 @@ const SITE_DISCO = "https://www.agenciadisco.com/";
 const SITE_SHOPIFY = "https://www.shopify.com/br";
 
 // Conteúdo da janela "Sobre mim" no layout do Painel de Controle (Figma 135:2065).
-export default function PainelSobre({ aoAbrir, onNavigate }) {
+export default function PainelSobre({ aoAbrir, onNavigate, abaPedida }) {
   const [aba, setAba] = useState("sobre");
   const [buscaAberta, setBuscaAberta] = useState(false);
   const [consulta, setConsulta] = useState("");
@@ -106,6 +106,9 @@ export default function PainelSobre({ aoAbrir, onNavigate }) {
     setAlvoBusca(null);
     if (rolagemRef.current) rolagemRef.current.scrollTop = 0;
   };
+  useEffect(() => {
+    if (abaPedida?.aba) ir(abaPedida.aba);
+  }, [abaPedida?.n]); // eslint-disable-line react-hooks/exhaustive-deps
   const fecharBusca = () => {
     setBuscaAberta(false);
     setConsulta("");

@@ -97,6 +97,7 @@ export default function JanelaEmail() {
             </button>
           ))}
           <span className="painel-sep alto" aria-hidden="true" />
+          <SocialLink rede="whatsapp" />
           <SocialLink rede="linkedin" />
         </div>
       </div>
