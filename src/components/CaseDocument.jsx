@@ -47,7 +47,7 @@ export function CaseLinks({ links, projectTitle = "projeto", prototypePending = 
     setOpen(true);
   };
   return <div className="case-document-actions">
-    {actions.map(([key, label]) => <a key={key} className={`xp-button${key === "web" ? " xp-button--success" : ""}`} href={links[key]} target="_blank" rel="noopener noreferrer" onClick={key === "prototype" && canOpen ? openPrototype : undefined} aria-haspopup={key === "prototype" && canOpen ? "dialog" : undefined}>{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
+    {actions.map(([key, label]) => <a key={key} className="xp-button" href={links[key]} target="_blank" rel="noopener noreferrer" onClick={key === "prototype" && canOpen ? openPrototype : undefined} aria-haspopup={key === "prototype" && canOpen ? "dialog" : undefined}>{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
     {prototypePending && !links.prototype && <span className="xp-button is-disabled" aria-disabled="true" role="link">Ver protótipo<span className="sr-only"> (link em breve)</span></span>}
     {!actions.length && !prototypePending && <span className="case-links-pending">Links públicos em curadoria.</span>}
     {open && canOpen && <PrototypeModal title={projectTitle} url={links.prototype} embedUrl={embed} screens={screens} onClose={close} />}
@@ -167,6 +167,7 @@ function Blocks({ blocks }) {
       case "h3": return <h3 key={i}>{b.text}</h3>;
       case "p": return <p key={i}><Rich text={b.text} /></p>;
       case "ul": return <ul key={i} className="case-copy-list">{b.items.map((t) => <li key={t}>{t}</li>)}</ul>;
+      case "journey": return <div key={i} className="case-journeys"><div className="case-journey"><ol>{b.items.map((t, n) => <li key={t}><span className="case-journey-step" aria-hidden="true">{String(n + 1).padStart(2, "0")}</span><span>{t}</span></li>)}</ol></div></div>;
       case "ol": return <ol key={i} className="case-copy-list is-ordered">{b.items.map((t) => <li key={t}>{t}</li>)}</ol>;
       case "facts": return <dl key={i} className="case-research-facts">{b.items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>;
       case "kpis": return <ul key={i} className="case-kpis" aria-label="Métricas propostas, ainda sem resultados publicados">{b.items.map(([k, v]) => <li key={k}><span className="case-kpi-status">A medir</span><strong>{k}</strong><span>{v}</span></li>)}</ul>;
@@ -187,9 +188,10 @@ function EditorialSection({ index, section }) {
     </header>
     <div className="case-stage-body">
       <Blocks blocks={rest} />
-      {decisions.length > 0 && <div className="case-decisions">{decisions.map((d) => <section key={d.n} className="case-decision">
+      {decisions.length > 0 && <div className="case-decisions">{decisions.map((d) => <section key={d.n} className={`case-decision${d.images ? " has-shot" : ""}`}>
         <span className="case-decision-number" aria-hidden="true">{d.n}</span>
         <div><h3>{d.h3}</h3><Blocks blocks={d.blocks} /></div>
+        {d.images && <Frame layout="story" items={d.images} phone label={d.h3} />}
       </section>)}</div>}
       {items.length > 0 && <div className="case-stories">{items.map((it) => it.type === "flow"
         ? <article key={it.h3} className="case-flow">
@@ -226,7 +228,6 @@ function EditorialCase({ project, onNavigate }) {
       <p className="case-document-question">{c.tagline}</p>
       <p className="case-document-intro">{c.intro}</p>
       <CaseLinks links={project.links} projectTitle={project.title} screens={tourScreens} />
-      <p className="case-links-note">{c.ctaNote}</p>
     </header>
 
     <div className="case-hero-shot" role="group" aria-label="Telas do aplicativo em destaque">
@@ -236,14 +237,9 @@ function EditorialCase({ project, onNavigate }) {
     <dl className="case-overview-card" aria-label="Visão geral do projeto">
       {c.overview.map(([label, list]) => <div key={label}><dt>{label}</dt><dd><ul className="case-chips">{list.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>)}
       <div><dt>Período</dt><dd className="case-year"><span>{c.period}</span></dd></div>
-      <div className="case-overview-wide"><dt>Status</dt><dd>{c.status}</dd></div>
     </dl>
 
     {c.sections.map((section, i) => <EditorialSection key={section.id} index={i} section={section} />)}
-
-    <section className="case-final-cta" aria-label="Explorar o ANIMAE">
-      <CaseLinks links={{ web: project.links.web, webLabel: project.links.webLabel }} projectTitle={project.title} />
-    </section>
 
     <footer className="case-document-footer">
       <a className="xp-button xp-button--back" href="/#cases" onClick={(e) => projectLinkAction(e, onNavigate, "/#cases")}><ChevronLeft size={16} aria-hidden="true" />Meus projetos</a>

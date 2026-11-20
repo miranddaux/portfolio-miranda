@@ -283,9 +283,6 @@
 
 /* Case editorial (ANIMAE): copy oficial com H2/H3 semânticos */
 .case-document-intro { margin: 0; max-width: var(--case-measure); font-size: var(--text-16); line-height: var(--space-3); }
-.case-links-note { margin: 0; max-width: var(--case-measure); font-size: var(--text-14); line-height: var(--space-3); color: var(--case-muted); }
-.case-overview-wide { flex: 1 1 100%; }
-.case-overview-wide dd { font-size: var(--text-16); line-height: var(--space-3); max-width: var(--case-measure); }
 .case-stage-body > h3, .case-flow-text h3 { margin: 0; font-size: var(--text-24); line-height: var(--space-4); max-width: var(--case-measure); }
 .case-copy-list { margin: 0; padding-left: var(--space-3); display: grid; gap: var(--space-1); font-size: var(--text-16); line-height: var(--space-3); }
 .case-story-text .case-copy-list, .case-flow-text .case-copy-list { margin: 0; }
@@ -294,5 +291,16 @@
 .case-decision h3 + p { margin-top: 0; }
 .case-decision p { margin: 0 0 var(--space-1); }
 .case-story-index::before { content: none; }
-.case-final-cta { display: flex; justify-content: flex-start; padding: var(--space-4) 0; }
-.case-document-intro { margin-top: var(--space-1); }
+
+/* Cabeçalho do ANIMAE: título, subtítulo próximo e mais forte, apoio mais afastado, botões */
+.case-document-header h1 { margin-bottom: var(--space-1); }
+.case-document-header .case-document-question { font-weight: 600; margin-bottom: var(--space-3); }
+.case-document-header .case-document-intro { margin: 0 0 var(--space-4); color: var(--case-muted); }
+.case-document > .case-overview-card { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.5fr) auto; gap: var(--space-4); }
+@media (max-width: 720px) { .case-document > .case-overview-card { grid-template-columns: 1fr; gap: var(--space-3); } }
+.case-chips li { white-space: nowrap; }
+.case-decision.has-shot { grid-template-columns: auto minmax(0, 1fr) 216px; align-items: start; gap: var(--space-3); }
+.case-decision.has-shot .case-frame { --shot: 216px !important; }
+@media (max-width: 860px) { .case-decision.has-shot { grid-template-columns: auto minmax(0, 1fr); } .case-decision.has-shot .case-frame { grid-column: 1 / -1; justify-self: center; } }
+.case-decision.has-shot .case-frame { padding: 0; border: 0; background: none; }
+.case-stage-body .case-journeys { margin: calc(-1 * var(--space-2)) 0 0; }
