@@ -193,9 +193,9 @@ function EditorialSection({ index, section }) {
         {d.images && <Frame layout="story" items={d.images} phone label={d.h3} />}
       </section>)}</div>}
       {items.length > 0 && <div className="case-stories">{items.map((it) => it.type === "flow"
-        ? <article key={it.h3} className="case-flow">
+        ? <article key={it.h3} className="case-flow-edit">
             <div className="case-flow-text"><h3>{it.h3}</h3><Blocks blocks={it.blocks} /></div>
-            <section className="case-flow-group" aria-label={it.label}>
+            <section className="case-flow-frame" aria-label={it.label}>
               <ol className="case-flow-row" style={{ "--passos": it.images.length }}>
                 {it.images.map((m) => <li key={m.src}><div className="case-flow-shot"><img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" /></div></li>)}
               </ol>
