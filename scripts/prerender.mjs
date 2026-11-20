@@ -38,8 +38,9 @@ function blocksHtml(blocks) {
       case "p": return `<p>${rich(b.text)}</p>`;
       case "ul": return `<ul>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`;
       case "ol": return `<ol>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ol>`;
+      case "journey": return `<ol>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ol>`;
       case "facts": case "kpis": return `<ul>${b.items.map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join("")}</ul>`;
-      case "decision": return `<h3>${esc(b.h3)}</h3>${blocksHtml(b.blocks)}`;
+      case "decision": return `<h3>${esc(b.h3)}</h3>${blocksHtml(b.blocks)}${(b.images || []).map((m) => `<img src="${m.src}" alt="${esc(m.alt)}" width="${m.width}" height="${m.height}" loading="lazy" />`).join("")}`;
       case "item": case "flow": return `<h3>${esc(b.h3)}</h3>${blocksHtml(b.blocks)}${b.images.map((m) => `<img src="${m.src}" alt="${esc(m.alt)}" width="${m.width}" height="${m.height}" loading="lazy" />`).join("")}`;
       default: return "";
     }
@@ -53,12 +54,10 @@ function animaeBody() {
 <p><strong>${esc(c.tagline)}</strong></p>
 <p>${esc(c.intro)}</p>
 <p><a href="${ANIMAE_WEB_URL}" target="_blank" rel="noopener noreferrer">${esc(c.ctaWeb)}</a> · <a href="${esc(getCaseStudy("animae").links.prototype)}" target="_blank" rel="noopener noreferrer">${esc(c.ctaPrototype)}</a></p>
-<p>${esc(c.ctaNote)}</p>
 ${c.overview.map(([l, list]) => `<p><strong>${esc(l)}:</strong> ${esc(list.join(", "))}</p>`).join("\n")}
 <p><strong>Período:</strong> ${esc(c.period)}</p>
 <p><strong>Status:</strong> ${esc(c.status)}</p>
 ${c.sections.map((s) => `<section><h2>${esc(s.title)}</h2>\n${blocksHtml(s.blocks)}</section>`).join("\n")}
-<p><a href="${ANIMAE_WEB_URL}" target="_blank" rel="noopener noreferrer">${esc(c.ctaWeb)}</a></p>
 <p><a href="/">Portfólio de Thiago Miranda</a></p>
 </article></main>`;
 }
