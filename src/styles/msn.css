@@ -1046,3 +1046,16 @@ button.msn-aba-x:hover {
 .msn-msg { animation: msn-msg-entra 0.2s ease-out both; }
 @keyframes msn-msg-entra { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .msn-msg { animation: none; } }
+
+/* Lápis XP no canto da foto: indica que a imagem pode ser trocada */
+.msn-minha-foto { position: relative; }
+.msn-lapis { position: absolute; right: 8px; bottom: 32px; padding: 2px; border: 1px solid #7f9db9; border-radius: 4px; background: #f4f8ff; box-sizing: content-box; pointer-events: none; opacity: 0.9; }
+
+/* 20/11: a coluna dos avatares só cabe em janela larga. Regra no fim do arquivo
+   para vencer a redeclaração de .msn-corpo acima. */
+@container janela (max-width: 560px) {
+  .msn-corpo { grid-template-columns: minmax(0, 1fr); }
+  .msn-avatares { display: none; }
+  .msn-ferramenta { min-width: 40px; }
+  .msn-ferramenta span { display: none; }
+}

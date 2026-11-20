@@ -14,6 +14,8 @@ import AppCampoMinado from "../components/apps/AppCampoMinado.jsx";
 import AppPaint from "../components/apps/AppPaint.jsx";
 import AppPinball from "../components/apps/AppPinball.jsx";
 import DoomGameWindow from "../components/DoomGameWindow.jsx";
+import AvisoSoDesktop from "../components/apps/AvisoSoDesktop.jsx";
+import { useEhMobile } from "../lib/useEhMobile.js";
 import PainelSobre from "../components/PainelSobre";
 import JanelaCurriculo, { CURRICULOS } from "../components/JanelaCurriculo";
 import { MsnAviso, MsnContatos, MsnConversa } from "../components/Msn";
@@ -100,6 +102,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   const [avisoMsn, setAvisoMsn] = useState(false);
   const [tremer, setTremer] = useState(0);
   const [abaPedida, setAbaPedida] = useState(null);
+  const ehMobile = useEhMobile();
   const open = (id, focus = true) => {
     somAbrir();
     setWindows((w) => ({ ...w, [id]: "open" }));
@@ -109,6 +112,12 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
       requestAnimationFrame(() =>
         document.getElementById(`${id}-title`)?.focus({ preventScroll: true }),
       );
+  };
+  // "Contato" sempre abre o painel Sobre mim na aba Contato; o editor de e-mail abre só pelo botão E-mail do painel.
+  const abrir = (id, aba) => {
+    if (id === "contato") { setAbaPedida({ aba: "contato", n: Date.now() }); open("sobre"); return; }
+    if (aba) setAbaPedida({ aba, n: Date.now() });
+    open(id);
   };
   const hide = (id, state) => {
     if (state === "closed") somFechar();
@@ -125,7 +134,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   useEffect(() => {
     const sync = () => {
       const id = location.hash.slice(1);
-      if (APPS.some((a) => a.id === id)) open(id);
+      if (APPS.some((a) => a.id === id)) abrir(id);
     };
     sync();
     window.addEventListener("hashchange", sync);
@@ -181,7 +190,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
             key={a.id}
             id={`shortcut-${a.id}`}
             className="desktop-shortcut"
-            onClick={() => open(a.id)}
+            onClick={() => abrir(a.id)}
           >
             <img
               src={a.src}
@@ -231,6 +240,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               minLargura={app.minLargura}
               minAltura={app.minAltura}
               semStatus={app.semStatus}
+              telaCheia={app.id === "doom" ? ".doom-palco" : undefined}
               classe={app.id === "msnchat" && tremer % 2 === 1 ? "is-tremendo" : ""}
               onFocar={() => setActive(app.id)}
               onFechar={() => { if (app.id === "case") { somFechar(); onNavigate("/#cases"); } else hide(app.id, "closed"); }}
@@ -263,7 +273,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
                 <MsnConversa
                   ativa={active === "msnchat"}
                   aoFechar={() => hide("msnchat", "closed")}
-                  aoAbrir={(id, aba) => { if (aba) setAbaPedida({ aba, n: Date.now() }); open(id); }}
+                  aoAbrir={abrir}
                   aoNavegar={onNavigate}
                   aoChamar={() => {
                     setTremer((n) => n + 1);
@@ -272,7 +282,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
                 />
               )}
               {app.id === "curriculo" && (
-                <JanelaCurriculo lingua={linguaCv} aoContato={() => open("contato")} />
+                <JanelaCurriculo lingua={linguaCv} aoContato={() => abrir("contato")} />
               )}
               {app.id === "sobre" && <PainelSobre aoAbrir={open} onNavigate={onNavigate} abaPedida={abaPedida} />}
               {app.id === "cases" && <ProjectsExplorer onNavigate={onNavigate} />}
@@ -285,8 +295,12 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               {app.id === "visualizador" && <AppVisualizador />}
               {app.id === "minas" && <AppCampoMinado />}
               {app.id === "paint" && <AppPaint />}
-              {app.id === "pinball" && <AppPinball />}
-              {app.id === "doom" && <DoomGameWindow />}
+              {app.id === "pinball" && (ehMobile
+                ? <AvisoSoDesktop nome="3D Pinball" icone="/assets/xp/apps/pinball.png" texto="O Pinball usa as teclas Shift, barra de espaço e Z/. para as aletas — não dá para jogar com o toque." />
+                : <AppPinball />)}
+              {app.id === "doom" && (ehMobile
+                ? <AvisoSoDesktop nome="DOOM (1993)" icone="/assets/xp/menu-icons/doom.png" texto="O DOOM precisa de teclado para andar e atirar, e o motor do jogo é pesado para o celular." />
+                : <DoomGameWindow />)}
             </JanelaXP>
             )
           ) : null,
@@ -316,7 +330,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
       {start && (
         <MenuIniciar
           menuRef={menuRef}
-          aoAbrir={(id) => open(id)}
+          aoAbrir={(id) => abrir(id)}
           aoFazerLogoff={() => {
             setStart(false);
             onShowWelcome();

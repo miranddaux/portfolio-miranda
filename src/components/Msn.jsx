@@ -538,6 +538,12 @@ export function MsnConversa({ aoAbrir, aoNavegar, ativa, aoChamar, aoFechar }) {
               onClick={() => setPainel((p) => (p === "foto" ? null : "foto"))}
               title="Trocar minha imagem de exibição"
             />
+            <svg className="msn-lapis" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true">
+              <path d="M2 14l1-4 8-8 3 3-8 8z" fill="#f2c14e" stroke="#7a5a10" strokeWidth="1" strokeLinejoin="round" />
+              <path d="M11 2l3 3" stroke="#c0392b" strokeWidth="2" />
+              <path d="M2 14l1-4 3 3z" fill="#f5dcb0" stroke="#7a5a10" strokeWidth="1" strokeLinejoin="round" />
+              <path d="M2.4 13.2l.6-2 1.4 1.4z" fill="#333" />
+            </svg>
             <span className="msn-sob-foto" aria-hidden="true">
               <span>▾</span>
             </span>

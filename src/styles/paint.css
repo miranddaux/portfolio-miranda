@@ -1,37 +1,91 @@
-/* Paint (layout do Paint do Windows 7) */
-.app-paint { display: flex; flex: 1; flex-direction: column; min-height: 0; background: #f0f0f0; font: 400 12px/16px "Segoe UI", system-ui, sans-serif; color: #000; }
-.ap-menu { display: flex; flex: none; gap: 0; height: 24px; padding: 0 4px; background: linear-gradient(#fff, #dfe8f5); border-bottom: 1px solid #b8c6dc; }
+/* Paint (estilo clássico do Windows XP) */
+.app-paint { position: relative; display: flex; flex: 1; flex-direction: column; min-height: 0; background: #ece9d8; font: 400 11px/14px Tahoma, "Segoe UI", system-ui, sans-serif; color: #000; outline: none; }
+.ap-menu { display: flex; flex: none; height: 22px; padding: 0 2px; background: #ece9d8; border-bottom: 1px solid #aca899; }
 .ap-menu-item { position: relative; }
-.ap-menu-item > button { height: 24px; padding: 0 8px; border: 1px solid transparent; background: none; font: inherit; color: #000; cursor: default; }
-.ap-menu-item > button:disabled { color: #6d6d6d; }
-.ap-menu-item > button:not(:disabled):hover, .ap-menu-item > button[aria-expanded="true"] { border-color: #a8bcd8; background: linear-gradient(#fdfeff, #dbe7f7); }
-.ap-drop { position: absolute; z-index: 5; top: 24px; left: 0; display: flex; flex-direction: column; min-width: 160px; padding: 2px; border: 1px solid #979797; background: #f6f6f6; box-shadow: 2px 2px 3px rgba(0, 0, 0, .3); }
-.ap-drop button { padding: 4px 24px; border: 1px solid transparent; background: none; font: inherit; text-align: left; cursor: default; }
-.ap-drop button:hover { border-color: #a8bcd8; background: #dbe7f7; }
+.ap-menu-item > button { height: 22px; padding: 0 8px; border: 0; background: none; font: inherit; color: #000; cursor: default; }
+.ap-menu-item > button:hover, .ap-menu-item > button[aria-expanded="true"] { background: #316ac5; color: #fff; }
+.ap-drop { position: absolute; z-index: 6; top: 22px; left: 0; display: flex; flex-direction: column; min-width: 210px; padding: 2px; border: 1px solid #aca899; background: #fff; box-shadow: 2px 2px 3px rgba(0, 0, 0, .35); }
+.ap-drop button { display: grid; grid-template-columns: 18px 1fr auto; align-items: center; gap: 4px; padding: 3px 14px 3px 2px; border: 0; background: none; font: inherit; text-align: left; cursor: default; }
+.ap-drop button:not(:disabled):hover { background: #316ac5; color: #fff; }
+.ap-drop button:disabled { color: #aca899; }
+.ap-drop hr { margin: 2px 0 2px 22px; border: 0; border-top: 1px solid #d8d4c4; }
+.ap-ck { text-align: center; }
+.ap-atalho { padding-left: 24px; opacity: .8; }
 .ap-corpo { display: flex; flex: 1; min-height: 0; }
-.ap-lateral { display: flex; flex: none; flex-direction: column; gap: 8px; box-sizing: border-box; width: 64px; padding: 8px 4px; background: #f0f0f0; }
-.ap-ferramentas { display: grid; grid-template-columns: repeat(2, 26px); gap: 2px; justify-content: center; }
-.ap-ferramentas button, .ap-preench button, .ap-larguras button { display: grid; place-items: center; box-sizing: border-box; padding: 0; border: 1px solid transparent; border-radius: 2px; background: none; cursor: default; }
-.ap-ferramentas button { width: 26px; height: 26px; }
-.ap-ferramentas button:disabled { opacity: .45; }
-.ap-ferramentas button:not(:disabled):hover { border-color: #b8c6dc; background: #e8f0fb; }
-.ap-ferramentas button[aria-pressed="true"], .ap-preench button[aria-pressed="true"], .ap-larguras button[aria-pressed="true"] { border-color: #6f8fc0; background: #cfe0f7; box-shadow: inset 0 0 0 1px #fff; }
-.ap-ferramentas button:focus-visible, .ap-cores button:focus-visible, .ap-preench button:focus-visible, .ap-larguras button:focus-visible, .ap-menu-item > button:focus-visible { outline: 2px solid #316ac5; outline-offset: -2px; }
-.ap-opcoes { display: flex; flex-direction: column; gap: 8px; align-items: center; }
-.ap-preench, .ap-preench-vazio, .ap-larguras { display: flex; flex-direction: column; box-sizing: border-box; width: 52px; padding: 2px; border: 1px solid #d3d9e3; background: #fafbfd; }
-.ap-preench-vazio { height: 64px; }
+.ap-lateral { display: flex; flex: none; flex-direction: column; gap: 6px; box-sizing: border-box; width: 64px; padding: 6px 4px; background: #ece9d8; }
+.ap-ferramentas { display: grid; grid-template-columns: repeat(2, 25px); gap: 0; justify-content: center; }
+.ap-ferramentas button, .ap-preench button, .ap-larguras button, .ap-lista button { display: grid; place-items: center; box-sizing: border-box; padding: 0; border: 1px solid transparent; background: none; font: inherit; cursor: default; }
+.ap-ferramentas button { width: 25px; height: 25px; }
+.ap-ferramentas button:hover { border-color: #fff #808080 #808080 #fff; }
+.ap-ferramentas button[aria-pressed="true"], .ap-preench button[aria-pressed="true"], .ap-larguras button[aria-pressed="true"], .ap-lista button[aria-pressed="true"] { border-color: #808080 #fff #fff #808080; background: #f7f6ee; }
+.app-paint button:focus-visible, .app-paint select:focus-visible { outline: 1px dotted #000; outline-offset: -3px; }
+.ap-opcoes { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.ap-preench, .ap-larguras, .ap-lista { display: flex; flex-direction: column; box-sizing: border-box; width: 52px; padding: 2px; border: 1px solid; border-color: #808080 #fff #fff #808080; background: #ece9d8; }
 .ap-preench button { height: 20px; }
 .ap-preench i { display: block; width: 36px; height: 12px; border: 1px solid #000; box-sizing: border-box; }
-.ap-larguras button { height: 18px; }
+.ap-txt-op { height: 18px !important; font-size: 10px !important; }
+.ap-larguras button { height: 16px; }
 .ap-larguras i { display: block; width: 36px; background: #000; }
-.ap-principal { display: flex; flex: 1; flex-direction: column; min-width: 0; }
-.ap-paleta { display: flex; flex: none; align-items: center; gap: 8px; padding: 4px 8px 4px 0; }
-.ap-atual { position: relative; flex: none; width: 40px; height: 40px; border: 1px solid #b8c6dc; background: #fafbfd; }
-.ap-atual span { position: absolute; box-sizing: border-box; width: 20px; height: 20px; border: 1px solid #7b7b7b; }
-.ap-bg { right: 4px; bottom: 4px; }
-.ap-fg { left: 4px; top: 4px; }
-.ap-cores { display: grid; grid-template-columns: repeat(14, 20px); grid-template-rows: repeat(2, 20px); gap: 2px; padding: 2px; border: 1px solid #d3d9e3; background: #fafbfd; }
-.ap-cores button { box-sizing: border-box; width: 20px; height: 20px; padding: 0; border: 1px solid #7b7b7b; border-radius: 2px; cursor: default; }
-.ap-area { flex: 1; min-height: 0; overflow: auto; box-sizing: border-box; padding: 4px; border: 1px solid #8e8e8e; border-right: 0; background: #abb0b8; }
-.ap-area canvas { display: block; width: 640px; max-width: none; height: 400px; background: #fff; cursor: crosshair; touch-action: none; }
-.ap-status { flex: none; padding: 0 8px; height: 24px; line-height: 24px; border-top: 1px solid #c4cad4; background: #f0f0f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ap-lista button { height: 17px; }
+.ap-principal { display: flex; flex: 1; flex-direction: column; min-width: 0; min-height: 0; }
+.ap-fontes { display: flex; flex: none; gap: 4px; align-items: center; padding: 3px 4px; border-bottom: 1px solid #aca899; background: #ece9d8; }
+.ap-fontes select { height: 20px; font: inherit; }
+.ap-fontes button { width: 22px; height: 20px; padding: 0; border: 1px solid transparent; background: none; font: inherit; cursor: default; }
+.ap-fontes button[aria-pressed="true"] { border-color: #808080 #fff #fff #808080; background: #f7f6ee; }
+.ap-area { flex: 1; min-height: 0; overflow: auto; box-sizing: border-box; padding: 4px 10px 10px 4px; border: 2px solid; border-color: #808080 #fff #fff #808080; background: #808080; }
+.ap-tela { position: relative; flex: none; }
+.ap-cv { position: absolute; inset: 0; display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.ap-ov { cursor: crosshair; touch-action: none; }
+.ap-tela:not(.tem-grade) .ap-cv:first-child { background: #fff; }
+.tem-grade::after { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(to right, rgba(0, 0, 0, .25) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, .25) 1px, transparent 1px); background-size: var(--z) var(--z); }
+.ap-texto { position: absolute; box-sizing: border-box; margin: 0; padding: 1px 2px; border: 1px dashed #000; resize: none; overflow: hidden; outline: none; white-space: pre-wrap; }
+.ap-guia { position: absolute; left: 0; top: 0; pointer-events: none; border: 1px dashed #000; box-shadow: 0 0 0 1px #fff; }
+.ap-alca { position: absolute; width: 5px; height: 5px; background: #000080; touch-action: none; }
+.ap-alca.e { right: -7px; top: calc(50% - 2px); cursor: ew-resize; }
+.ap-alca.s { bottom: -7px; left: calc(50% - 2px); cursor: ns-resize; }
+.ap-alca.se { right: -7px; bottom: -7px; cursor: nwse-resize; }
+.ap-paleta { display: flex; flex: none; align-items: center; gap: 8px; padding: 4px 6px; background: #ece9d8; border-top: 1px solid #fff; }
+.ap-atual { position: relative; flex: none; width: 32px; height: 32px; border: 1px solid; border-color: #808080 #fff #fff #808080; background: #ece9d8; }
+.ap-atual span { position: absolute; box-sizing: border-box; width: 14px; height: 14px; border: 1px solid; border-color: #fff #404040 #404040 #fff; }
+.ap-bg { right: 3px; bottom: 3px; }
+.ap-fg { left: 3px; top: 3px; z-index: 1; }
+.ap-cores { display: grid; grid-template-columns: repeat(14, 16px); grid-template-rows: repeat(2, 16px); gap: 0; border: 1px solid; border-color: #808080 #fff #fff #808080; }
+.ap-cores button { box-sizing: border-box; width: 16px; height: 16px; padding: 0; border: 1px solid; border-color: #808080 #fff #fff #808080; cursor: default; }
+.ap-editar { height: 22px; padding: 0 8px; border: 1px solid #003c74; border-radius: 3px; background: linear-gradient(#fff, #ecebe5 86%, #d8d0c4); font: inherit; cursor: default; }
+.ap-editar:hover { border-color: #f4a62a; }
+.ap-oculto { position: absolute; width: 0; height: 0; opacity: 0; pointer-events: none; }
+.ap-status { display: grid; flex: none; grid-template-columns: 1fr 110px 110px; height: 20px; border-top: 1px solid #aca899; background: #ece9d8; }
+.ap-status > span { box-sizing: border-box; padding: 0 6px; line-height: 19px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ap-st-seg { border-left: 1px solid #aca899; }
+.ap-veu { position: absolute; z-index: 10; inset: 0; display: grid; place-items: center; background: rgba(0, 0, 0, .15); }
+.ap-dialogo { width: min(340px, 90%); border: 1px solid #0a246a; border-radius: 6px 6px 0 0; background: #ece9d8; box-shadow: 3px 3px 8px rgba(0, 0, 0, .4); }
+.ap-dlg-titulo { padding: 4px 8px; border-radius: 5px 5px 0 0; background: linear-gradient(#0a5fe0, #0453d8 60%, #0a4bc8); color: #fff; font-weight: 700; }
+.ap-dlg-corpo { display: flex; flex-direction: column; gap: 8px; padding: 12px; }
+.ap-dlg-corpo ul { margin: 0; padding-left: 16px; display: grid; gap: 4px; }
+.ap-dlg-corpo p { margin: 0; }
+.ap-dlg-corpo input { width: 64px; margin: 0 4px; font: inherit; }
+.ap-dlg-botoes { display: flex; justify-content: flex-end; gap: 6px; padding: 0 12px 12px; }
+.ap-dlg-botoes button { min-width: 70px; height: 22px; border: 1px solid #003c74; border-radius: 3px; background: linear-gradient(#fff, #ecebe5 86%, #d8d0c4); font: inherit; cursor: default; }
+
+/* ---------- Paint no celular: ferramentas e paleta compactas (20/11) ---------- */
+@media (max-width: 760px) {
+  .app-paint .ap-lateral { width: 56px; padding: 4px 2px; gap: 4px; }
+  .app-paint .ap-ferramentas { grid-template-columns: repeat(2, 25px); }
+  .app-paint .ap-preench, .app-paint .ap-larguras, .app-paint .ap-lista { width: 48px; }
+  .app-paint .ap-area { padding: 2px; }
+  .app-paint .ap-cores { grid-template-columns: repeat(7, 20px); grid-template-rows: repeat(4, 20px); }
+  .app-paint .ap-cores button { width: 20px; height: 20px; }
+  .app-paint .ap-editar { display: none; }
+  .app-paint .ap-status { grid-template-columns: 1fr 72px 80px; }
+  .app-paint .ap-menu-item > button { padding: 0 6px; min-height: 40px; }
+  .app-paint .ap-menu { height: 40px; }
+}
+
+/* ---------- Tablet em pé: janela em tela cheia, sem dica de F11 ---------- */
+@media (pointer: coarse) {
+  .aviso-tela-cheia { display: none; }
+}
+@media (min-width: 761px) and (max-width: 1024px) and (pointer: coarse) {
+  .desktop-shortcuts { width: auto; }
+  .painel-lateral { display: none; }
+}

@@ -166,6 +166,10 @@ function Blocks({ blocks }) {
       case "h3": return <h3 key={i}>{b.text}</h3>;
       case "p": return <p key={i}><Rich text={b.text} /></p>;
       case "ul": return <ul key={i} className="case-copy-list">{b.items.map((t) => <li key={t}>{t}</li>)}</ul>;
+      case "trio": return <div key={i}>
+        <Frame layout="trio" items={b.images} phone label={b.label} />
+        <p className="case-frame-dica" aria-hidden="true">Deslize para ver as três telas</p>
+      </div>;
       case "journey": return <div key={i} className="case-journeys"><div className="case-journey"><ol>{b.items.map((t, n) => <li key={t}><span className="case-journey-step" aria-hidden="true">{String(n + 1).padStart(2, "0")}</span><span>{t}</span></li>)}</ol></div></div>;
       case "ol": return <ol key={i} className="case-copy-list is-ordered">{b.items.map((t) => <li key={t}>{t}</li>)}</ol>;
       case "facts": return <dl key={i} className="case-research-facts">{b.items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>;

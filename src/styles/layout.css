@@ -365,4 +365,4 @@
 }
 
 /* Largura de leitura: parágrafos do site ficam entre 560 e 640 px */
-.about-grid p, .section-width > p { max-width: 720px; }
+.about-grid p, .section-width > p { max-width: 832px; }

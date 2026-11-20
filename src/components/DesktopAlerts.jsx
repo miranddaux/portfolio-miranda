@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { playChime } from "../lib/chime";
+import { useEhMobile } from "../lib/useEhMobile.js";
 
 const BALLOON_DELAY = 2500;
 const BALLOON_DURATION = 10000;
@@ -67,6 +68,7 @@ export default function DesktopAlerts({ ancoraRef, reabrir = 0, onFim }) {
 
 // Balão de boas-vindas ancorado no ícone de informação (Figma: Message 128:489).
 function Balao({ aoFechar }) {
+  const ehMobile = useEhMobile();
   return (
     <section className="balao" role="status" aria-label="Boas-vindas">
       <button className="balao-fechar" onClick={aoFechar} aria-label="Fechar aviso">
@@ -79,7 +81,7 @@ function Balao({ aoFechar }) {
         <strong>Bem-vindo ao Portfólio Miranda</strong>
       </div>
       <p>Meu portfólio, montado como um desktop Windows XP.</p>
-      <p>- Dê dois cliques em um ícone para começar</p>
+      <p>- {ehMobile ? "Toque em um ícone para começar" : "Dê dois cliques em um ícone para começar"}</p>
       <p>- Ou abra um programa pelo menu Iniciar</p>
       <svg className="balao-cauda" width="33" height="34" viewBox="0 0 33 34" aria-hidden="true">
         <path d="M0 0 L32 33 L32 0 Z" fill="#ffffe1" />
