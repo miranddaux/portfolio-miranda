@@ -54,8 +54,8 @@ const INTENCOES = [
   },
   {
     chaves: ["projet", "case", "portfolio", "trabalhos", "navaja", "ciao"],
-    respostas: ["O case disponível é o ANIMAE. Navaja e CIAO estão em construção."],
-    acao: { rotulo: "Abrir o case ANIMAE", rota: "/cases/animae" },
+    respostas: ["O case disponível atualmente é o ANIMAE. Navaja e CIAO estão em construção."],
+    acao: [{ rotulo: "Abrir o case ANIMAE", rota: "/cases/animae" }, { rotulo: "Abrir Meus projetos", abrir: "cases" }],
   },
   {
     chaves: ["animae", "anime", "app"],
