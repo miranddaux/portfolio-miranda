@@ -407,16 +407,17 @@ export function MsnConversa({ aoAbrir, aoNavegar, ativa, aoChamar, aoFechar }) {
                       ))}
                     </p>
                   )}
-                  {m.acao &&
-                    (m.acao.rota ? (
-                      <a className="msn-acao" href={m.acao.rota} onClick={(e) => { if (aoNavegar && e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey) { e.preventDefault(); aoNavegar(m.acao.rota); } }}>{m.acao.rotulo}</a>
-                    ) : m.acao.link ? (
-                      <a className="msn-acao" href={m.acao.link} target="_blank" rel="noreferrer">{m.acao.rotulo}</a>
+                  {m.acao && [].concat(m.acao).map((a) =>
+                    a.rota ? (
+                      <a key={a.rotulo} className="msn-acao" href={a.rota} onClick={(e) => { if (aoNavegar && e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey) { e.preventDefault(); aoNavegar(a.rota); } }}>{a.rotulo}</a>
+                    ) : a.link ? (
+                      <a key={a.rotulo} className="msn-acao" href={a.link} target="_blank" rel="noreferrer">{a.rotulo}</a>
                     ) : (
-                      <button type="button" className="msn-acao" onClick={() => aoAbrir(m.acao.abrir, m.acao.aba)}>
-                        {m.acao.rotulo}
+                      <button key={a.rotulo} type="button" className="msn-acao" onClick={() => aoAbrir(a.abrir, a.aba)}>
+                        {a.rotulo}
                       </button>
-                    ))}
+                    ),
+                  )}
                 </div>
               ),
             )}
