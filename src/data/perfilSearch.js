@@ -1,4 +1,4 @@
-import { ADICIONAL, CERTIFICACOES, CONTATO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "./perfil.js";
+import { ADICIONAL, CERTIFICACOES, CONTATO, DESENVOLVIMENTO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "./perfil.js";
 import { REDES_SOCIAIS } from "./social.js";
 
 export const ABAS_PERFIL = [
@@ -6,11 +6,12 @@ export const ABAS_PERFIL = [
   { id: "experiencia", nome: "Experiência", endereco: "Experiência" },
   { id: "educacao", nome: "Educação", endereco: "Educação" },
   { id: "habilidades", nome: "Habilidades", endereco: "Habilidades" },
+  { id: "desenvolvimento", nome: "Desenvolvimento", endereco: "Desenvolvimento" },
   { id: "projetos", nome: "Projetos", endereco: "Projetos" },
   { id: "contato", nome: "Contato", endereco: "Entre em contato" },
 ];
 
-export const BIO_PERFIL = "Sou Product Designer em São José do Rio Preto. De dia desenho e-commerces na Shopify pela Agência Disco. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.";
+export const BIO_PERFIL = "Sou Product Designer morando em São José do Rio Preto. De dia desenho e-commerces na Shopify pela Agência Disco. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.";
 export const RESUMO_PROJETOS = "ANIMAE (produto próprio, com contexto, decisões e interfaces). Navaja e CIAO estão em construção.";
 
 const experiencias = (itens, prefixo) => itens.map((item, i) => ({
@@ -35,6 +36,7 @@ const INDICE = [
   ...formacoes(CERTIFICACOES, "certificacao"),
   ...HABILIDADES.map((item, i) => ({ id: `perfil-habilidade-${i}`, aba: "habilidades", titulo: item.nome, texto: "Habilidades" })),
   { id: "perfil-ferramentas", aba: "habilidades", titulo: "Ferramentas", texto: FERRAMENTAS.join(" · ") },
+  { id: "perfil-desenvolvimento", aba: "desenvolvimento", titulo: `Desenvolvimento (${DESENVOLVIMENTO.selo})`, texto: DESENVOLVIMENTO.itens.join(" · ") },
   { id: "perfil-linguas", aba: "habilidades", titulo: "Línguas", texto: LINGUAS.join(" · ") },
   { id: "perfil-projetos", aba: "projetos", titulo: "Projetos", texto: RESUMO_PROJETOS },
   { id: "perfil-contato", aba: "contato", titulo: "Entre em contato", texto: `${Object.values(CONTATO).join(" · ")} · ${Object.values(REDES_SOCIAIS).map((r) => r.nome).join(" · ")}` },

@@ -5,6 +5,8 @@ import AnimaeHomeDemo from "./AnimaeHomeDemo.jsx";
 import AnimaeFeedDemo from "./AnimaeFeedDemo.jsx";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
+import { applySeo, pageFor } from "../data/seo.js";
+import { heroTrio as editorialHeroTrio } from "../data/animaeCase.js";
 
 // Botões do topo: protótipo e case completo. Mesmo .xp-button (azul com ▸) em todo o case.
 export function CaseLinks({ links, projectTitle = "projeto", prototypePending = false, screens = [] }) {
@@ -33,15 +35,19 @@ export function CaseLinks({ links, projectTitle = "projeto", prototypePending = 
     };
   }, [embed]);
   const actions = [
-    ["prototype", "Ver protótipo"],
+    ["web", links.webLabel || "Explorar versão web"],
+    ["prototype", links.prototypeLabel || "Ver protótipo"],
     ["design", "Ver no Figma"],
     ["behance", links.behanceLabel || "Ver no Behance"],
     ...(links.siteInTop ? [["site", links.siteLabel || "Visitar site"]] : []),
   ].filter(([key]) => links[key]);
+  const openPrototype = (event) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    setOpen(true);
+  };
   return <div className="case-document-actions">
-    {actions.map(([key, label]) => key === "prototype" && canOpen
-      ? <button key={key} type="button" className="xp-button" onClick={() => setOpen(true)} aria-haspopup="dialog">{label}</button>
-      : <a key={key} className="xp-button" href={links[key]} target="_blank" rel="noopener noreferrer">{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
+    {actions.map(([key, label]) => <a key={key} className={`xp-button${key === "web" ? " xp-button--success" : ""}`} href={links[key]} target="_blank" rel="noopener noreferrer" onClick={key === "prototype" && canOpen ? openPrototype : undefined} aria-haspopup={key === "prototype" && canOpen ? "dialog" : undefined}>{label}<span className="sr-only"> (abre em nova aba)</span></a>)}
     {prototypePending && !links.prototype && <span className="xp-button is-disabled" aria-disabled="true" role="link">Ver protótipo<span className="sr-only"> (link em breve)</span></span>}
     {!actions.length && !prototypePending && <span className="case-links-pending">Links públicos em curadoria.</span>}
     {open && canOpen && <PrototypeModal title={projectTitle} url={links.prototype} embedUrl={embed} screens={screens} onClose={close} />}
@@ -65,7 +71,7 @@ class DemoSegura extends Component {
 
 const DEMOS = { lista: AnimaeListaDemo, home: AnimaeHomeDemo, feed: AnimaeFeedDemo };
 
-function Shot({ media, phone }) {
+export function Shot({ media, phone }) {
   const Demo = DEMOS[media.demo];
   if (Demo) return <figure className="case-media is-phone">
     <div className="case-device"><span className="case-device-screen">
@@ -81,7 +87,7 @@ function Shot({ media, phone }) {
 }
 
 // Containers de imagem: wide (1), pair (2), trio (3) e mosaic (1 grande + linhas de até 3).
-function Frame({ layout, items, phone, label }) {
+export function Frame({ layout, items, phone, label }) {
   if (!items.length) return null;
   if (layout === "mosaic") {
     const [lead, ...rest] = items;
@@ -150,7 +156,103 @@ function Stage({ number, label, title, id, children }) {
   </section>;
 }
 
-export default function CaseDocument({ project, onNavigate }) {
+
+function Rich({ text }) {
+  return text.split("**").map((part, i) => (i % 2 ? <strong key={i}>{part}</strong> : part));
+}
+
+function Blocks({ blocks }) {
+  return blocks.map((b, i) => {
+    switch (b.type) {
+      case "h3": return <h3 key={i}>{b.text}</h3>;
+      case "p": return <p key={i}><Rich text={b.text} /></p>;
+      case "ul": return <ul key={i} className="case-copy-list">{b.items.map((t) => <li key={t}>{t}</li>)}</ul>;
+      case "ol": return <ol key={i} className="case-copy-list is-ordered">{b.items.map((t) => <li key={t}>{t}</li>)}</ol>;
+      case "facts": return <dl key={i} className="case-research-facts">{b.items.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>;
+      case "kpis": return <ul key={i} className="case-kpis" aria-label="Métricas propostas, ainda sem resultados publicados">{b.items.map(([k, v]) => <li key={k}><span className="case-kpi-status">A medir</span><strong>{k}</strong><span>{v}</span></li>)}</ul>;
+      default: return null;
+    }
+  });
+}
+
+function EditorialSection({ index, section }) {
+  const decisions = section.blocks.filter((b) => b.type === "decision");
+  const items = section.blocks.filter((b) => b.type === "item" || b.type === "flow");
+  const rest = section.blocks.filter((b) => !["decision", "item", "flow"].includes(b.type));
+  let solutionIndex = 0;
+  return <section className="case-stage" id={`case-animae-${section.id}`} aria-labelledby={`case-animae-${section.id}-title`}>
+    <header className="case-stage-head">
+      <p className="case-stage-kicker"><span className="case-stage-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span></p>
+      <h2 id={`case-animae-${section.id}-title`}>{section.title}</h2>
+    </header>
+    <div className="case-stage-body">
+      <Blocks blocks={rest} />
+      {decisions.length > 0 && <div className="case-decisions">{decisions.map((d) => <section key={d.n} className="case-decision">
+        <span className="case-decision-number" aria-hidden="true">{d.n}</span>
+        <div><h3>{d.h3}</h3><Blocks blocks={d.blocks} /></div>
+      </section>)}</div>}
+      {items.length > 0 && <div className="case-stories">{items.map((it) => it.type === "flow"
+        ? <article key={it.h3} className="case-flow">
+            <div className="case-flow-text"><h3>{it.h3}</h3><Blocks blocks={it.blocks} /></div>
+            <section className="case-flow-group" aria-label={it.label}>
+              <ol className="case-flow-row" style={{ "--passos": it.images.length }}>
+                {it.images.map((m) => <li key={m.src}><div className="case-flow-shot"><img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" /></div></li>)}
+              </ol>
+            </section>
+          </article>
+        : <article key={it.h3} className={`case-story ${solutionIndex++ % 2 ? "is-reverse" : ""}`}>
+            <div className="case-story-text"><h3>{it.h3}</h3><Blocks blocks={it.blocks} /></div>
+            <Frame layout="story" items={it.images} phone label={it.h3} />
+          </article>)}</div>}
+    </div>
+  </section>;
+}
+
+function EditorialCase({ project, onNavigate }) {
+  const c = project.editorial;
+  const title = useRef(null);
+  const root = useRef(null);
+  const next = nextCaseStudy(project.id);
+  const tourScreens = project.modules.flatMap((m) => (m.images || []).map((img) => ({ ...img, label: m.title }))).filter((m, i, all) => all.findIndex((x) => x.src === m.src) === i);
+  useEffect(() => {
+    applySeo(pageFor(`/cases/${project.id}`));
+    root.current?.closest(".case-document-scroll")?.scrollTo?.({ top: 0 });
+    title.current?.focus({ preventScroll: true });
+  }, [project.id]);
+  return <article ref={root} className={`case-document theme-${project.accent}`}>
+    <header className="case-document-header">
+      <ul className="case-tags" aria-label="Categorias do projeto">{c.tags.map((t) => <li key={t}>{t}</li>)}</ul>
+      <h1 ref={title} tabIndex={-1}>{c.h1}</h1>
+      <p className="case-document-question">{c.tagline}</p>
+      <p className="case-document-intro">{c.intro}</p>
+      <CaseLinks links={project.links} projectTitle={project.title} screens={tourScreens} />
+      <p className="case-links-note">{c.ctaNote}</p>
+    </header>
+
+    <div className="case-hero-shot" role="group" aria-label="Telas do aplicativo em destaque">
+      {editorialHeroTrio.map((m, i) => <div key={m.src} className="case-hero-phone"><img src={m.src} alt={m.alt} width={m.width} height={m.height} decoding="async" fetchPriority={i === 0 ? "high" : undefined} /></div>)}
+    </div>
+
+    <dl className="case-overview-card" aria-label="Visão geral do projeto">
+      {c.overview.map(([label, list]) => <div key={label}><dt>{label}</dt><dd><ul className="case-chips">{list.map((r) => <li key={r}>{r}</li>)}</ul></dd></div>)}
+      <div><dt>Período</dt><dd className="case-year"><span>{c.period}</span></dd></div>
+      <div className="case-overview-wide"><dt>Status</dt><dd>{c.status}</dd></div>
+    </dl>
+
+    {c.sections.map((section, i) => <EditorialSection key={section.id} index={i} section={section} />)}
+
+    <section className="case-final-cta" aria-label="Explorar o ANIMAE">
+      <CaseLinks links={{ web: project.links.web, webLabel: project.links.webLabel }} projectTitle={project.title} />
+    </section>
+
+    <footer className="case-document-footer">
+      <a className="xp-button xp-button--back" href="/#cases" onClick={(e) => projectLinkAction(e, onNavigate, "/#cases")}><ChevronLeft size={16} aria-hidden="true" />Meus projetos</a>
+      {next && <a className="xp-button" href={`/cases/${next.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${next.id}`)}>Próximo: {next.title}</a>}
+    </footer>
+  </article>;
+}
+
+function LegacyCase({ project, onNavigate }) {
   const title = useRef(null);
   const root = useRef(null);
   const next = nextCaseStudy(project.id);
@@ -245,4 +347,8 @@ export default function CaseDocument({ project, onNavigate }) {
       {next && <a className="xp-button" href={`/cases/${next.id}`} onClick={(e) => projectLinkAction(e, onNavigate, `/cases/${next.id}`)}>Próximo: {next.title}</a>}
     </footer>
   </article>;
+}
+
+export default function CaseDocument({ project, onNavigate }) {
+  return project.editorial ? <EditorialCase project={project} onNavigate={onNavigate} /> : <LegacyCase project={project} onNavigate={onNavigate} />;
 }

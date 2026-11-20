@@ -9,6 +9,7 @@ import XPGreeting from "./pages/XPGreeting";
 import useXPLogin from "./hooks/useXPLogin";
 import { CASES } from "./data/cases";
 import { getCaseStudy } from "./data/caseStudies.js";
+import { applySeo, pageFor } from "./data/seo.js";
 import { irParaEntrada, rota } from "./lib/rota.js";
 function initialMode() {
   return "xp";
@@ -42,9 +43,7 @@ export default function App() {
   const xpHome = mode === "xp" && (path === "/" || Boolean(study));
   useEffect(() => {
     if (path === "/") {
-      document.title = "Thiago Miranda · Product Designer pleno";
-      const meta = document.querySelector('meta[name="description"]');
-      if (meta) meta.content = "Portfólio de Thiago Miranda: UI craft, UX e design systems do Figma ao código.";
+      applySeo(pageFor("/"));
     }
   }, [path]);
   useEffect(() => {

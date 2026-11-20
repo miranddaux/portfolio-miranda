@@ -2,14 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { ABAS_PERFIL, abaVizinha, buscarNoPerfil } from "../src/data/perfilSearch.js";
 
-test("setas percorrem as seis abas em ordem e param nos extremos", () => {
+test("setas percorrem as sete abas em ordem e param nos extremos", () => {
   let atual = "sobre";
   const ordem = [atual];
   for (let i = 1; i < ABAS_PERFIL.length; i++) {
     atual = abaVizinha(atual, 1);
     ordem.push(atual);
   }
-  assert.deepEqual(ordem, ["sobre", "experiencia", "educacao", "habilidades", "projetos", "contato"]);
+  assert.deepEqual(ordem, ["sobre", "experiencia", "educacao", "habilidades", "desenvolvimento", "projetos", "contato"]);
   assert.equal(abaVizinha("contato", 1), "contato");
   assert.equal(abaVizinha("sobre", -1), "sobre");
   assert.equal(abaVizinha("habilidades", -1), "educacao");
