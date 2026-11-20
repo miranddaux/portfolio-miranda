@@ -13,7 +13,6 @@ const IMG = {
   onb: { src: "/assets/cases/animae-flow-onb-1.webp", width: 860, height: 1864, alt: "Onboarding 1: Seu universo otaku do seu jeito", caption: "Universo otaku" },
   login: { src: "/assets/cases/animae-login.webp", width: 860, height: 1864, alt: "Login com e-mail, senha, Criar conta, Entrar no fandom e login social", caption: "Login" },
   generos: { src: "/assets/cases/animae-generos.webp", width: 860, height: 1864, alt: "Cadastro: O que você curte, com gêneros para escolher", caption: "Gêneros" },
-  splash: { src: "/assets/cases/animae-flow-splash.webp", width: 860, height: 1864, alt: "Tela de abertura do ANIMAE com o Draco, o mascote do aplicativo, sobre fundo escuro" },
   streaming: { src: "/assets/cases/animae-flow-streaming.webp", width: 860, height: 1864, alt: "Cadastro: Onde você assiste, com lista de serviços de streaming", caption: "Onde assiste" },
 };
 
@@ -25,7 +24,7 @@ export const ANIMAE_COPY = {
   ctaWeb: "Explorar versão web",
   ctaPrototype: "Ver protótipo no Figma",
   overview: [
-    ["Função", ["Product Design", "UX/UI Design", "Design System", "Identidade visual", "Desenvolvimento com apoio de IA"]],
+    ["Função", ["Product Designer", "UX/UI Design", "Desenvolvimento"]],
     ["Ferramentas", ["Figma", "Illustrator", "React Native", "Expo", "Supabase", "Vercel", "APIs AniList e Jikan"]],
   ],
   period: "out/2025 — atual",
@@ -72,9 +71,9 @@ export const ANIMAE_COPY = {
       ],
     },
     {
-      id: "decisoes", title: "Decisões de Product Design",
+      id: "decisoes", title: "Decisões de produto",
       blocks: [
-        { type: "decision", n: "01", h3: "1. Comunidade em vez de streaming", images: [IMG.hub], blocks: [
+        { type: "decision", n: "01", h3: "1. Comunidade em vez de streaming", blocks: [
           { type: "p", text: "A primeira decisão foi retirar o player e as salas para assistir junto." },
           { type: "p", text: "O ANIMAE passou a indicar onde encontrar os animes nas plataformas disponíveis, enquanto concentra o acompanhamento, a lista pessoal e as possibilidades de interação." },
           { type: "p", text: "**O que precisei abrir mão:** a principal funcionalidade da proposta original." },
@@ -86,14 +85,14 @@ export const ANIMAE_COPY = {
           { type: "p", text: "**A troca:** menos personalização no primeiro acesso, mas uma entrada com menos etapas." },
           { type: "p", text: "A hipótese é que permitir a exploração antecipada facilite o entendimento da proposta do ANIMAE." },
         ] },
-        { type: "decision", n: "03", h3: "3. Gamificação com regras no servidor", images: [IMG.perfil], blocks: [
+        { type: "decision", n: "03", h3: "3. Gamificação com regras no servidor", blocks: [
           { type: "p", text: "Queria que acompanhar episódios também gerasse uma sensação de progresso." },
           { type: "p", text: "Por isso, o aplicativo utiliza XP, níveis, sequências de dias e conquistas no perfil." },
           { type: "p", text: "Cada episódio registrado contribui para a evolução do usuário. No quiz, os acertos também geram XP." },
           { type: "p", text: "O cálculo da pontuação fica no servidor, para evitar que os valores sejam alterados diretamente pelo aplicativo no aparelho." },
           { type: "p", text: "**A troca:** mais complexidade técnica em favor de regras de progressão mais consistentes." },
         ] },
-        { type: "decision", n: "04", h3: "4. Criar valor antes de a comunidade crescer", images: [IMG.splash], blocks: [
+        { type: "decision", n: "04", h3: "4. Criar valor antes de a comunidade crescer", blocks: [
           { type: "p", text: "Uma das dificuldades de construir um produto social é que, no começo, ainda não existe uma comunidade ativa." },
           { type: "p", text: "Então surgiu o Quiz do Draco, nosso mascote ranzinza." },
           { type: "p", text: "Criei uma experiência rápida de perguntas sobre anime, com tempo, vidas e pontuação, para que o usuário também tenha algo para fazer individualmente." },
@@ -118,7 +117,7 @@ export const ANIMAE_COPY = {
     {
       id: "solucao", title: "A solução: como o ANIMAE funciona",
       blocks: [
-        { type: "item", h3: "Descoberta de animes", images: [{ ...IMG.home, demo: "home" }], blocks: [
+        { type: "item", h3: "Descoberta de animes", images: [{ ...IMG.home, demo: "home" }, IMG.hub], blocks: [
           { type: "p", text: "A home utiliza um banner rotativo para apresentar títulos em destaque." },
           { type: "p", text: "Os dados do catálogo vêm de APIs públicas. Comecei utilizando a AniList e depois adicionei a Jikan para complementar as informações disponíveis." },
           { type: "p", text: "Da home, o usuário pode acessar a página de cada anime, consultar seus detalhes, acompanhar o progresso e encontrar indicações de onde assistir." },
@@ -135,7 +134,7 @@ export const ANIMAE_COPY = {
           { type: "p", text: "A proposta é que avaliações, conclusões e discussões sirvam como ponto de partida para conversas entre amigos e outros fãs." },
           { type: "p", text: "Em vez de separar completamente a lista pessoal da comunidade, quis aproximar essas duas experiências." },
         ] },
-        { type: "item", h3: "Perfil, XP e Quiz do Draco", images: [IMG.quiz], blocks: [
+        { type: "item", h3: "Perfil, XP e Quiz do Draco", images: [IMG.perfil, IMG.quiz], blocks: [
           { type: "p", text: "O perfil reúne informações sobre a jornada do usuário: animes acompanhados, horas assistidas, XP, níveis, sequência de dias e conquistas." },
           { type: "p", text: "O Quiz do Draco complementa essa experiência." },
           { type: "p", text: "São dez perguntas por partida, geradas a partir do catálogo, com 15 segundos por pergunta, três vidas e 2 XP por acerto." },

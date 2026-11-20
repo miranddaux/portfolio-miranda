@@ -299,19 +299,21 @@
 .case-document > .case-overview-card { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.5fr) auto; gap: var(--space-4); }
 @media (max-width: 720px) { .case-document > .case-overview-card { grid-template-columns: 1fr; gap: var(--space-3); } }
 .case-chips li { white-space: nowrap; }
-.case-decision.has-shot { grid-template-columns: auto minmax(0, 1fr) 216px; align-items: start; gap: var(--space-3); }
-.case-decision.has-shot .case-frame { --shot: 216px !important; }
-@media (max-width: 860px) { .case-decision.has-shot { grid-template-columns: auto minmax(0, 1fr); } .case-decision.has-shot .case-frame { grid-column: 1 / -1; justify-self: center; } }
-.case-decision.has-shot .case-frame { padding: 0; border: 0; background: none; }
 .case-stage-body .case-journeys { margin: calc(-1 * var(--space-2)) 0 0; }
 
 /* Banner do Draco: ocupa a largura da grade, fundo surface, imagem some para baixo */
-.case-draco-banner { display: flex; justify-content: center; align-items: flex-start; height: 480px; overflow: hidden; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-draco-banner { display: flex; justify-content: center; align-items: flex-start; height: 560px; overflow: hidden; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
 .case-document > .case-draco-banner { margin-top: var(--space-5); }
-.case-draco-banner img { display: block; width: auto; height: 720px; max-width: none; margin-top: calc(-1 * var(--space-5)); translate: 8% 0; rotate: 14deg; transform-origin: 50% 40%; -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 92%); mask-image: linear-gradient(to bottom, #000 30%, transparent 92%); animation: draco-subir 900ms ease-out both; }
+.case-document > .case-draco-banner + .case-overview-card { margin-top: var(--space-6); }
+.case-draco-banner img { display: block; width: auto; height: 520px; max-width: none; margin-top: var(--space-5); translate: 10% 0; rotate: 12deg; transform-origin: 50% 45%; -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); mask-image: linear-gradient(to bottom, #000 62%, transparent 100%); animation: draco-subir 900ms ease-out both; }
 @keyframes draco-subir { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .case-draco-banner img { animation: none; } }
-@media (max-width: 640px) { .case-draco-banner { height: 400px; } .case-draco-banner img { height: 520px; } }
+@media (max-width: 640px) { .case-draco-banner { height: 432px; } .case-draco-banner img { height: 432px; } }
 /* Largura de leitura: confortável, nem larga nem curta */
 .case-decision > div p { max-width: 720px; }
-.case-decision.has-shot { grid-template-columns: auto minmax(0, 1fr) 216px; }
+
+/* Onboarding: texto solto, só as telas dentro do container */
+.case-flow-edit { display: grid; gap: var(--space-4); }
+.case-flow-frame { padding: var(--space-5) var(--space-6); background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-flow-frame .case-flow-row { max-width: 800px; margin-inline: auto; }
+@media (max-width: 640px) { .case-flow-frame { padding: var(--space-3); } }

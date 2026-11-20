@@ -17,7 +17,7 @@ test("H2 do case seguem a estrutura oficial", () => {
     "Visão geral",
     "O problema e a mudança de direção",
     "Pesquisa e descoberta",
-    "Decisões de Product Design",
+    "Decisões de produto",
     "UX/UI, prototipação e Design System",
     "A solução: como o ANIMAE funciona",
     "Status atual e validação",
