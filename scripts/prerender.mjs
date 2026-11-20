@@ -38,6 +38,7 @@ function blocksHtml(blocks) {
       case "p": return `<p>${rich(b.text)}</p>`;
       case "ul": return `<ul>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`;
       case "ol": return `<ol>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ol>`;
+      case "trio": return b.images.map((m) => `<img src="${m.src}" alt="${esc(m.alt)}" width="${m.width}" height="${m.height}" loading="lazy" />`).join("");
       case "journey": return `<ol>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ol>`;
       case "facts": case "kpis": return `<ul>${b.items.map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(v)}</li>`).join("")}</ul>`;
       case "decision": return `<h3>${esc(b.h3)}</h3>${blocksHtml(b.blocks)}${(b.images || []).map((m) => `<img src="${m.src}" alt="${esc(m.alt)}" width="${m.width}" height="${m.height}" loading="lazy" />`).join("")}`;

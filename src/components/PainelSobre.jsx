@@ -336,7 +336,7 @@ export function ContatoConteudo({ aoEscrever }) {
   return (
     <div className="painel-contato" id="perfil-contato" tabIndex={-1}>
       <ul className="painel-redes painel-redes--social">
-        {["linkedin", "email", "whatsapp", "dribbble", "behance"].map((rede) => (
+        {["linkedin", "email", "dribbble", "behance", "whatsapp"].map((rede) => (
           <li key={rede}>
             <SocialLink rede={rede} variante="tile" onClick={rede === "email" ? aoEscrever : undefined} />
           </li>

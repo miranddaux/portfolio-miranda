@@ -31,6 +31,7 @@ export default function JanelaXP({
   topo = 32,
   semStatus = false,
   classe = "",
+  telaCheia,
   children,
 }) {
   const raiz = useRef(null);
@@ -41,6 +42,14 @@ export default function JanelaXP({
   const area = useCallback(() => {
     const pai = raiz.current?.offsetParent || document.body;
     return { w: pai.clientWidth, h: window.innerHeight - BARRA };
+  }, []);
+
+  // Tela cheia automática: largura de celular ou pouca altura em aparelho de toque
+  // (celular deitado), quando a moldura da janela comeria o conteúdo.
+  const semEspaco = useCallback((w) => {
+    const toque = window.matchMedia?.("(pointer: coarse)").matches;
+    // tablet em pé também ganha tela cheia: a janela flutuante só compensa com mouse
+    return w < COMPACTO || (toque && (w <= 1024 || window.innerHeight < 540));
   }, []);
 
   useLayoutEffect(() => {
@@ -56,13 +65,13 @@ export default function JanelaXP({
       w: lar,
       h: alt,
     });
-    setCompacta(w < COMPACTO);
+    setCompacta(semEspaco(w));
   }, [area]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const ajustar = () => {
       const { w, h } = area();
-      setCompacta(w < COMPACTO);
+      setCompacta(semEspaco(w));
       setCaixa((c) => {
         if (!c) return c;
         const largura = Math.min(c.w, w);
@@ -161,6 +170,16 @@ export default function JanelaXP({
     );
   };
 
+  // Janelas de jogo: maximizar entra em tela cheia de verdade (Esc sai).
+  const alternarMax = () => {
+    const alvo = telaCheia ? raiz.current?.querySelector(telaCheia) : null;
+    if (alvo?.requestFullscreen) {
+      if (document.fullscreenElement) document.exitFullscreen?.();
+      else alvo.requestFullscreen().then(() => alvo.focus?.()).catch(() => setMaximizada((m) => !m));
+      return;
+    }
+    setMaximizada((m) => !m);
+  };
   const cheia = maximizada || compacta;
   const estilo = caixa
     ? cheia
@@ -180,7 +199,7 @@ export default function JanelaXP({
       <div
         className="janela-xp-titulo"
         onPointerDown={arrastar}
-        onDoubleClick={() => !compacta && setMaximizada((m) => !m)}
+        onDoubleClick={() => !compacta && alternarMax()}
       >
         <div className="janela-xp-titulo-esq">
           <img src={icone} alt="" width="16" height="16" draggable="false" />
@@ -210,7 +229,7 @@ export default function JanelaXP({
             <button
               type="button"
               className="janela-xp-btn"
-              onClick={() => setMaximizada((m) => !m)}
+              onClick={alternarMax}
               aria-label={`${maximizada ? "Restaurar" : "Maximizar"} ${titulo}`}
               aria-pressed={maximizada}
             >

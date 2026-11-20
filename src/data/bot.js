@@ -55,7 +55,7 @@ const INTENCOES = [
   {
     chaves: ["projet", "case", "portfolio", "trabalhos", "navaja", "ciao"],
     respostas: ["O case disponível atualmente é o ANIMAE. Navaja e CIAO estão em construção."],
-    acao: [{ rotulo: "Abrir o case ANIMAE", rota: "/cases/animae" }, { rotulo: "Abrir Meus projetos", abrir: "cases" }],
+    acao: { rotulo: "Abrir o case ANIMAE", rota: "/cases/animae" },
   },
   {
     chaves: ["animae", "anime", "app"],
@@ -83,12 +83,12 @@ const INTENCOES = [
     acao: { rotulo: "Abrir Meu currículo", abrir: "curriculo" },
   },
   {
-    chaves: ["contato", "email", "e-mail", "linkedin", "whatsapp", "telefone", "falar", "chamar", "conversar", "vaga", "proposta", "contrat"],
+    chaves: ["contato", "email", "e-mail", "linkedin", "whatsapp", "telefone", "falar", "falo", "fale", "chamar", "conversar", "vaga", "proposta", "contrat"],
     respostas: [
       "O jeito mais rápido é pelo LinkedIn: linkedin.com/in/thiagomirandaui.",
       "Ou por e-mail: contato.thiagohmiranda@gmail.com.",
     ],
-    acao: { rotulo: "Abrir Contato", abrir: "sobre", aba: "contato" },
+    acao: { rotulo: "Abrir Contato", abrir: "contato" },
   },
   {
     chaves: ["formacao", "faculdade", "curso", "certific", "estud", "unip", "fiap"],

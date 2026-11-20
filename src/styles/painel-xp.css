@@ -1257,7 +1257,21 @@ button.painel-rede {
 }
 
 
-.painel-selo { margin-left: 8px; vertical-align: middle; display: inline-block; padding: 4px 16px; border: 1px solid #e0b73a; border-radius: 16px; background: #fff4cc; color: #5a4300; font-size: 14px; font-weight: 700; line-height: 20px; }
+.painel-selo { margin-left: 8px; vertical-align: middle; display: inline-block; padding: 0 8px; border: 1px solid #e0b73a; border-radius: 4px; background: #fff4cc; color: #5a4300; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: 0.04em; text-transform: uppercase; }
 
 /* Largura de leitura dos textos do painel */
-.painel-exp-item p, .painel-texto p { max-width: 720px; }
+.painel-exp-item p, .painel-texto p { max-width: 832px; }
+
+/* ---------- 20/11: celular. Medidas da réplica do XP (fora da régua de 8 pt). ---------- */
+@media (max-width: 760px), (max-height: 540px) and (pointer: coarse) {
+  /* O botão da barra de título continua pequeno como no XP; quem cresce é a área de toque. */
+  .janela-xp-controles { gap: 8px; }
+  .janela-xp-btn { position: relative; width: 26px; height: 24px; }
+  .janela-xp-btn::after { position: absolute; inset: -9px -7px; content: ""; }
+  .painel-abas { gap: 2px; }
+  /* Currículo: página na largura toda e zoom por toque */
+  .cv-area { padding: 8px 0; touch-action: pinch-zoom pan-x pan-y; }
+  .cv-pagina { width: calc(100% - 16px); }
+  .cv-area.is-zoom .cv-pagina { width: 896px; margin: 0 16px; }
+  .cv-janela .painel-menu { display: none; }
+}

@@ -1,0 +1,448 @@
+/* ============================================================
+   Mobile (20/11/2026)
+   Único arquivo com as adaptações de tela pequena. Importado por último,
+   para vencer os ajustes antigos sem precisar reescrevê-los.
+
+   Faixas: <=760 px (celular e tablet em pé — a janela já ocupa a tela toda),
+   <=480 px (celular comum) e <=360 px (celular pequeno).
+   Escala tipográfica: mesma régua de 8 pt, só que um degrau abaixo.
+   Alvo de toque: 40 px de altura em qualquer controle.
+   ============================================================ */
+
+/* Papel de parede do celular: só em pé, onde a imagem vertical faz sentido */
+@media (max-width: 760px) and (orientation: portrait) {
+  .xp-desktop {
+    background:
+      var(--color-blue-400) url("/assets/xp/wallpaper-mobile.webp") center
+        center / cover no-repeat scroll;
+  }
+}
+
+/* Celular em pé e também celular deitado, onde sobra pouca altura */
+@media (max-width: 760px), (max-height: 540px) and (pointer: coarse) {
+  :root {
+    --toque: 40px;
+  }
+  .xp-desktop {
+    background-attachment: scroll;
+  }
+
+  /* --- Menos movimento: o celular precisa de quadro estável --- */
+  .ruido-tv {
+    display: none;
+  }
+  .case-draco-banner img {
+    animation: none;
+  }
+
+  /* --- Atalhos: empilhados e centralizados --- */
+  .desktop-shortcuts {
+    position: absolute;
+    inset: var(--space-2) 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    width: 100%;
+    padding: 0;
+  }
+  .desktop-shortcuts .desktop-shortcut {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--space-2);
+    width: min(272px, calc(100% - var(--space-4)));
+    min-height: 56px;
+    padding: var(--space-1) var(--space-2);
+    text-align: left;
+    font-size: var(--text-16);
+    line-height: var(--space-3);
+  }
+  .desktop-shortcuts .desktop-shortcut img,
+  .desktop-shortcuts .retro-icon {
+    width: var(--space-5);
+    height: var(--space-5);
+  }
+
+  /* --- Janela: barra de título mais enxuta, botões com área de toque --- */
+  .janela-xp {
+    font-size: var(--text-14);
+  }
+  .janela-xp-titulo {
+    min-height: var(--space-4);
+    padding-inline: var(--space-1);
+  }
+  .janela-xp-titulo h2 {
+    font-size: var(--text-14);
+    line-height: var(--space-3);
+  }
+
+  /* --- Cromo do Internet Explorer: some o menu e o endereço, fica a navegação --- */
+  .painel-menu,
+  .painel-endereco,
+  .painel-adesivo,
+  .projects-menubar,
+  .projects-address {
+    display: none;
+  }
+  .painel-barras > .painel-linha:first-child,
+  .cv-janela .painel-menu {
+    display: none;
+  }
+  .painel-barras .painel-linha,
+  .painel-ferramentas,
+  .projects-toolbar {
+    padding-inline: var(--space-1);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .painel-ferramentas::-webkit-scrollbar,
+  .projects-toolbar::-webkit-scrollbar {
+    display: none;
+  }
+  .painel-ferramentas > *,
+  .projects-toolbar > * {
+    flex: 0 0 auto;
+  }
+  .painel-ferramentas button,
+  .projects-toolbar button {
+    min-height: var(--toque);
+  }
+  .projects-toolbar-label {
+    display: none;
+  }
+  /* Avançar e Acima saem: no celular a navegação é Voltar, Buscar e Projetos */
+  .painel-ferramentas > button:nth-of-type(2),
+  .painel-ferramentas > button:nth-of-type(3) {
+    display: none;
+  }
+
+  /* --- Abas do perfil: rolagem horizontal com pista visível --- */
+  .painel-abas {
+    padding: var(--space-1) var(--space-1) 0;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+  .painel-abas::-webkit-scrollbar {
+    display: none;
+  }
+  /* pista de rolagem: um véu à direita avisa que tem mais aba */
+  .painel-exibicao {
+    position: relative;
+  }
+  .painel-exibicao::before {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    width: var(--space-4);
+    height: var(--space-6);
+    background: linear-gradient(90deg, #dbe3f700, #dbe3f7);
+    content: "";
+    pointer-events: none;
+  }
+  .painel-abas button {
+    min-height: var(--toque);
+    padding: var(--space-1) var(--space-2);
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+
+  /* --- Perfil: uma coluna, foto menor, tipografia um degrau abaixo --- */
+  .painel-lateral {
+    display: none;
+  }
+  .painel-limite {
+    padding: var(--space-2);
+  }
+  .painel-foto {
+    width: 112px;
+    height: 112px;
+  }
+  .painel-titulo {
+    font-size: var(--text-16);
+    line-height: var(--space-3);
+  }
+  .painel-cartao h4.painel-nome {
+    font-size: var(--text-24);
+    line-height: var(--space-4);
+  }
+  .painel-texto p,
+  .painel-exp-item p,
+  .painel-item p {
+    font-size: var(--text-16);
+    line-height: var(--space-3);
+  }
+  .painel-subtitulo {
+    font-size: var(--text-16);
+    line-height: var(--space-3);
+  }
+  .painel-mosaico {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  /* Contato: dois por linha, sempre com 40 px de alvo */
+  .painel-redes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .painel-redes a,
+  .painel-redes button {
+    min-height: var(--toque);
+  }
+
+  /* --- Projetos: pastas em duas colunas, alvo grande --- */
+  .projects-folders {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+  .project-folder {
+    min-height: 112px;
+    padding: var(--space-2) var(--space-1);
+  }
+  .project-folder-icon img {
+    width: var(--space-6);
+    height: var(--space-6);
+  }
+
+  /* --- Barra de tarefas: rolagem e ícones --- */
+  .barra-tarefas-botoes {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .barra-tarefas-botoes::-webkit-scrollbar {
+    display: none;
+  }
+  .botao-barra {
+    flex: 0 0 auto;
+    max-width: 136px;
+  }
+
+  /* --- Avisos do Messenger: acima da barra, sem tampar o conteúdo --- */
+  .msn-aviso {
+    right: var(--space-1);
+    left: var(--space-1);
+    width: auto;
+    max-width: 360px;
+    margin-inline: auto;
+  }
+
+  /* --- Jogos só de teclado viram recado --- */
+  .so-desktop {
+    display: grid;
+    gap: var(--space-1);
+    align-content: center;
+    justify-items: center;
+    height: 100%;
+    padding: var(--space-4) var(--space-3);
+    background: linear-gradient(180deg, #0b1020, #131a2e);
+    color: #e9edf4;
+    text-align: center;
+  }
+  .so-desktop h2 {
+    margin: 0;
+    font-size: var(--text-16);
+    line-height: var(--space-3);
+  }
+  .so-desktop p {
+    max-width: 44ch;
+    margin: 0;
+    font-size: var(--text-14);
+    line-height: var(--space-3);
+  }
+  .so-desktop-dica {
+    color: #a6b0c4;
+  }
+
+  /* ===== Case: escala tipográfica menor, mesma régua de 8 pt ===== */
+  .case-document {
+    --case-gap-section: var(--space-6);
+    --case-gap-block: var(--space-3);
+    padding: var(--space-2);
+  }
+  .case-document-header h1 {
+    font-size: var(--text-32);
+    line-height: var(--space-5);
+  }
+  .case-document-header .case-document-question {
+    font-size: var(--text-16);
+    line-height: var(--space-3);
+  }
+  .case-document-intro,
+  .case-document p,
+  .case-document li {
+    font-size: var(--text-16);
+    line-height: var(--space-3);
+  }
+  .case-stage-head h2,
+  .case-hero h2 {
+    font-size: var(--text-24);
+    line-height: var(--space-4);
+  }
+  .case-stage-body > h3,
+  .case-story-text h3,
+  .case-flow-text h3 {
+    font-size: var(--text-16);
+    line-height: var(--space-3);
+  }
+  .case-stage-head {
+    margin-bottom: var(--space-3);
+  }
+  .case-document-actions .xp-button,
+  .case-document-footer .xp-button {
+    min-height: var(--toque);
+  }
+  /* Banner do Draco proporcional à tela */
+  .case-draco-banner {
+    height: 320px;
+  }
+  .case-draco-banner img {
+    height: 400px;
+    margin-top: var(--space-2);
+  }
+  /* Tags e chips: discretos, não competem com o título */
+  .case-tags {
+    margin-bottom: var(--space-2);
+  }
+  .case-tags li {
+    padding: 0 var(--space-1);
+    font-size: var(--text-12);
+    line-height: var(--space-3);
+    letter-spacing: 0.04em;
+  }
+  .case-overview-card {
+    padding: var(--space-2);
+    gap: var(--space-2);
+  }
+  .case-chips li {
+    padding: 0 var(--space-1);
+    font-size: var(--text-14);
+    line-height: var(--space-3);
+  }
+  /* Ritmo do texto: parágrafos mais próximos, seções ainda separadas */
+  .case-stage-body {
+    gap: var(--space-3);
+  }
+  .case-stories {
+    gap: var(--space-5);
+  }
+
+  /* Quadros de imagem: menos moldura, mais tela */
+  .case-frame {
+    padding: var(--space-2);
+    gap: var(--space-2);
+  }
+  .case-hero-shot {
+    height: 360px;
+    padding: var(--space-3) var(--space-2) 0;
+  }
+  .case-flow-frame {
+    padding: var(--space-2);
+  }
+  /* Três telas: vira carrossel que desliza, em vez de três celulares minúsculos */
+  .case-frame.is-trio {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .case-frame.is-trio .case-media {
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+  }
+  .case-frame.is-trio .case-device {
+    width: 208px;
+  }
+  /* dica de deslizar, só onde o quadro virou carrossel */
+  .case-frame.is-trio + .case-frame-dica,
+  .case-frame-dica {
+    display: block;
+    margin: calc(-1 * var(--space-2)) 0 0;
+    color: var(--case-muted);
+    font-size: var(--text-12);
+    line-height: var(--space-2);
+    text-align: center;
+  }
+  .case-frame.is-story.is-stagger {
+    height: 400px;
+  }
+  .case-frame.is-stagger .case-device {
+    width: 152px;
+  }
+  .case-frame.is-stagger .case-media:nth-child(2) {
+    margin-top: -80px;
+  }
+  /* Vídeo e navegador não estouram a tela */
+  .case-browser-scroll {
+    height: 360px;
+  }
+}
+
+/* ---------- Celular comum ---------- */
+@media (max-width: 480px), (max-height: 420px) and (pointer: coarse) {
+  .janela-xp-status {
+    display: none;
+  }
+  .botao-barra span {
+    display: none;
+  }
+  .botao-barra {
+    justify-content: center;
+    min-width: var(--toque);
+    max-width: var(--toque);
+    padding-inline: 0;
+  }
+  .case-document-actions .xp-button,
+  .case-document-footer .xp-button {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+  .projects-folders {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .case-hero-shot {
+    height: 320px;
+  }
+  .case-draco-banner {
+    height: 272px;
+  }
+  .case-draco-banner img {
+    height: 336px;
+  }
+}
+
+/* ---------- Celular pequeno (320–360) ---------- */
+@media (max-width: 360px) {
+  .case-document-header h1 {
+    font-size: var(--text-24);
+    line-height: var(--space-4);
+  }
+  .case-tags li {
+    font-size: var(--text-12);
+  }
+  .desktop-shortcuts .desktop-shortcut {
+    width: calc(100% - var(--space-3));
+  }
+  .projects-folders {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .case-frame.is-trio .case-device {
+    width: 176px;
+  }
+}
+
+/* ---------- Toque: alvos mínimos em qualquer aparelho sem mouse ---------- */
+@media (pointer: coarse) {
+  .painel-redes a,
+  .painel-redes button,
+  .painel-abas button,
+  .projects-toolbar button,
+  .painel-ferramentas button,
+  .case-document-actions .xp-button,
+  .xp-button {
+    min-height: 40px;
+  }
+  .project-folder {
+    min-height: 96px;
+  }
+}

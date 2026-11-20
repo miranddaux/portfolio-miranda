@@ -37,6 +37,7 @@ export const ANIMAE_COPY = {
         { type: "p", text: "A proposta do ANIMAE é reunir em um mesmo lugar a descoberta de animes, o acompanhamento de episódios e a interação entre fãs." },
         { type: "p", text: "O usuário pode organizar sua lista, acompanhar o progresso, descobrir o que outras pessoas estão assistindo e participar de atividades dentro da comunidade." },
         { type: "p", text: "A ideia é simples: fazer com que assistir a um anime seja o começo de uma experiência que também envolve acompanhar, descobrir e compartilhar." },
+        { type: "trio", label: "Home, Minha Lista e Perfil do ANIMAE", images: [{ ...IMG.home, demo: "home" }, { ...IMG.lista, demo: "lista" }, IMG.perfil] },
       ],
     },
     {
@@ -73,26 +74,26 @@ export const ANIMAE_COPY = {
     {
       id: "decisoes", title: "Decisões de produto",
       blocks: [
-        { type: "decision", n: "01", h3: "1. Comunidade em vez de streaming", blocks: [
+        { type: "decision", n: "01", h3: "Comunidade em vez de streaming", blocks: [
           { type: "p", text: "A primeira decisão foi retirar o player e as salas para assistir junto." },
           { type: "p", text: "O ANIMAE passou a indicar onde encontrar os animes nas plataformas disponíveis, enquanto concentra o acompanhamento, a lista pessoal e as possibilidades de interação." },
           { type: "p", text: "**O que precisei abrir mão:** a principal funcionalidade da proposta original." },
           { type: "p", text: "**Por quê:** construir um produto com escopo viável, sem depender de manter um catálogo próprio de streaming." },
         ] },
-        { type: "decision", n: "02", h3: "2. Explorar antes de criar uma conta", blocks: [
+        { type: "decision", n: "02", h3: "Explorar antes de criar uma conta", blocks: [
           { type: "p", text: "Não queria que o cadastro fosse a primeira barreira para conhecer o aplicativo." },
           { type: "p", text: "Por isso, o usuário pode explorar a home e o catálogo como visitante, antes de decidir criar seu perfil." },
           { type: "p", text: "**A troca:** menos personalização no primeiro acesso, mas uma entrada com menos etapas." },
           { type: "p", text: "A hipótese é que permitir a exploração antecipada facilite o entendimento da proposta do ANIMAE." },
         ] },
-        { type: "decision", n: "03", h3: "3. Gamificação com regras no servidor", blocks: [
+        { type: "decision", n: "03", h3: "Gamificação com regras no servidor", blocks: [
           { type: "p", text: "Queria que acompanhar episódios também gerasse uma sensação de progresso." },
           { type: "p", text: "Por isso, o aplicativo utiliza XP, níveis, sequências de dias e conquistas no perfil." },
           { type: "p", text: "Cada episódio registrado contribui para a evolução do usuário. No quiz, os acertos também geram XP." },
           { type: "p", text: "O cálculo da pontuação fica no servidor, para evitar que os valores sejam alterados diretamente pelo aplicativo no aparelho." },
           { type: "p", text: "**A troca:** mais complexidade técnica em favor de regras de progressão mais consistentes." },
         ] },
-        { type: "decision", n: "04", h3: "4. Criar valor antes de a comunidade crescer", blocks: [
+        { type: "decision", n: "04", h3: "Criar valor antes de a comunidade crescer", blocks: [
           { type: "p", text: "Uma das dificuldades de construir um produto social é que, no começo, ainda não existe uma comunidade ativa." },
           { type: "p", text: "Então surgiu o Quiz do Draco, nosso mascote ranzinza." },
           { type: "p", text: "Criei uma experiência rápida de perguntas sobre anime, com tempo, vidas e pontuação, para que o usuário também tenha algo para fazer individualmente." },
