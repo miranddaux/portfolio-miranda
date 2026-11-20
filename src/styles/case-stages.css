@@ -115,7 +115,7 @@
 @media (max-width: 640px) { .case-hero-shot { height: 400px; padding-inline: var(--space-2); } }
 
 /* ===== Revisão 17/11 (tarde): mais largura, overview em uma linha, histórias com imagem ===== */
-.case-document { max-width: 1152px; --case-measure: 960px; }
+.case-document { max-width: 1152px; --case-measure: 640px; }
 .editorial-case-shell { max-width: 1152px; }
 .case-document-header .case-document-actions { margin-top: var(--space-3); }
 .case-stage-kicker { align-items: center; }
@@ -304,3 +304,14 @@
 @media (max-width: 860px) { .case-decision.has-shot { grid-template-columns: auto minmax(0, 1fr); } .case-decision.has-shot .case-frame { grid-column: 1 / -1; justify-self: center; } }
 .case-decision.has-shot .case-frame { padding: 0; border: 0; background: none; }
 .case-stage-body .case-journeys { margin: calc(-1 * var(--space-2)) 0 0; }
+
+/* Banner do Draco: ocupa a largura da grade, fundo surface, imagem some para baixo */
+.case-draco-banner { display: flex; justify-content: center; align-items: flex-start; height: 480px; overflow: hidden; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-document > .case-draco-banner { margin-top: var(--space-5); }
+.case-draco-banner img { display: block; width: auto; height: 560px; max-width: none; margin-top: var(--space-3); -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 100%); mask-image: linear-gradient(to bottom, #000 45%, transparent 100%); animation: draco-subir 640ms ease-out both; }
+@keyframes draco-subir { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .case-draco-banner img { animation: none; } }
+@media (max-width: 640px) { .case-draco-banner { height: 400px; } .case-draco-banner img { height: 464px; } }
+/* Largura de leitura: confortável, nem larga nem curta */
+.case-decision > div p { max-width: 640px; }
+.case-decision.has-shot { grid-template-columns: auto minmax(0, 1fr) 216px; }

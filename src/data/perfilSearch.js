@@ -6,7 +6,6 @@ export const ABAS_PERFIL = [
   { id: "experiencia", nome: "Experiência", endereco: "Experiência" },
   { id: "educacao", nome: "Educação", endereco: "Educação" },
   { id: "habilidades", nome: "Habilidades", endereco: "Habilidades" },
-  { id: "desenvolvimento", nome: "Desenvolvimento", endereco: "Desenvolvimento" },
   { id: "projetos", nome: "Projetos", endereco: "Projetos" },
   { id: "contato", nome: "Contato", endereco: "Entre em contato" },
 ];
@@ -36,7 +35,7 @@ const INDICE = [
   ...formacoes(CERTIFICACOES, "certificacao"),
   ...HABILIDADES.map((item, i) => ({ id: `perfil-habilidade-${i}`, aba: "habilidades", titulo: item.nome, texto: "Habilidades" })),
   { id: "perfil-ferramentas", aba: "habilidades", titulo: "Ferramentas", texto: FERRAMENTAS.join(" · ") },
-  { id: "perfil-desenvolvimento", aba: "desenvolvimento", titulo: `Desenvolvimento (${DESENVOLVIMENTO.selo})`, texto: DESENVOLVIMENTO.itens.join(" · ") },
+  { id: "perfil-desenvolvimento", aba: "habilidades", titulo: `Desenvolvimento (${DESENVOLVIMENTO.selo})`, texto: DESENVOLVIMENTO.itens.join(" · ") },
   { id: "perfil-linguas", aba: "habilidades", titulo: "Línguas", texto: LINGUAS.join(" · ") },
   { id: "perfil-projetos", aba: "projetos", titulo: "Projetos", texto: RESUMO_PROJETOS },
   { id: "perfil-contato", aba: "contato", titulo: "Entre em contato", texto: `${Object.values(CONTATO).join(" · ")} · ${Object.values(REDES_SOCIAIS).map((r) => r.nome).join(" · ")}` },

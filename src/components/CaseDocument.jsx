@@ -6,7 +6,6 @@ import AnimaeFeedDemo from "./AnimaeFeedDemo.jsx";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
 import { applySeo, pageFor } from "../data/seo.js";
-import { heroTrio as editorialHeroTrio } from "../data/animaeCase.js";
 
 // Botões do topo: protótipo e case completo. Mesmo .xp-button (azul com ▸) em todo o case.
 export function CaseLinks({ links, projectTitle = "projeto", prototypePending = false, screens = [] }) {
@@ -230,8 +229,8 @@ function EditorialCase({ project, onNavigate }) {
       <CaseLinks links={project.links} projectTitle={project.title} screens={tourScreens} />
     </header>
 
-    <div className="case-hero-shot" role="group" aria-label="Telas do aplicativo em destaque">
-      {editorialHeroTrio.map((m, i) => <div key={m.src} className="case-hero-phone"><img src={m.src} alt={m.alt} width={m.width} height={m.height} decoding="async" fetchPriority={i === 0 ? "high" : undefined} /></div>)}
+    <div className="case-draco-banner">
+      <img src="/assets/cases/animae-draco-mao.webp" alt="Mão laranja do Draco, o mascote do ANIMAE, segurando um celular com a tela inicial do aplicativo" width="1200" height="1353" decoding="async" fetchPriority="high" />
     </div>
 
     <dl className="case-overview-card" aria-label="Visão geral do projeto">
