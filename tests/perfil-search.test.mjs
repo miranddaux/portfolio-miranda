@@ -9,7 +9,7 @@ test("setas percorrem as sete abas em ordem e param nos extremos", () => {
     atual = abaVizinha(atual, 1);
     ordem.push(atual);
   }
-  assert.deepEqual(ordem, ["sobre", "experiencia", "educacao", "habilidades", "desenvolvimento", "projetos", "contato"]);
+  assert.deepEqual(ordem, ["sobre", "experiencia", "educacao", "habilidades", "projetos", "contato"]);
   assert.equal(abaVizinha("contato", 1), "contato");
   assert.equal(abaVizinha("sobre", -1), "sobre");
   assert.equal(abaVizinha("habilidades", -1), "educacao");

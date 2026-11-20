@@ -1257,5 +1257,7 @@ button.painel-rede {
 }
 
 
-.painel-selo-linha { margin: -8px 0 16px; padding: 0 12px; }
-.painel-selo { display: inline-block; padding: 4px 16px; border: 1px solid #e0b73a; border-radius: 16px; background: #fff4cc; color: #5a4300; font-size: 14px; font-weight: 700; line-height: 20px; }
+.painel-selo { margin-left: 8px; vertical-align: middle; display: inline-block; padding: 4px 16px; border: 1px solid #e0b73a; border-radius: 16px; background: #fff4cc; color: #5a4300; font-size: 14px; font-weight: 700; line-height: 20px; }
+
+/* Largura de leitura dos textos do painel */
+.painel-exp-item p, .painel-texto p { max-width: 640px; }

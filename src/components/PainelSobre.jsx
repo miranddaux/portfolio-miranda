@@ -13,10 +13,10 @@ const FOTO = "/assets/xp/foto-thiago.webp";
 const LISTA_HABILIDADES = HABILIDADES.map((h) => h.nome);
 const LINKS_SOCIAIS = [...REDES_PRINCIPAIS, "medium"];
 
-function Tags({ titulo, itens, id }) {
+function Tags({ titulo, itens, id, selo }) {
   return (
     <section className="painel-tags-sec" id={id} tabIndex={-1}>
-      <h4 className="painel-subtitulo">{titulo}</h4>
+      <h4 className="painel-subtitulo">{titulo}{selo && <span className="painel-selo">{selo}</span>}</h4>
       <ul className="painel-tags">
         {itens.map((t) => (
           <li key={t}>{t}</li>
@@ -311,14 +311,8 @@ export default function PainelSobre({ aoAbrir, onNavigate, abaPedida }) {
                     ))}
                   </ul>
                   <Tags titulo="Ferramentas" itens={FERRAMENTAS} id="perfil-ferramentas" />
+                  <Tags titulo="Desenvolvimento" selo={DESENVOLVIMENTO.selo} itens={DESENVOLVIMENTO.itens} id="perfil-desenvolvimento" />
                   <Tags titulo="Línguas" itens={LINGUAS} id="perfil-linguas" />
-                </>
-              )}
-
-              {aba === "desenvolvimento" && (
-                <>
-                  <p className="painel-selo-linha"><span className="painel-selo">{DESENVOLVIMENTO.selo}</span></p>
-                  <Tags titulo="Tecnologias" itens={DESENVOLVIMENTO.itens} id="perfil-desenvolvimento" />
                 </>
               )}
 
