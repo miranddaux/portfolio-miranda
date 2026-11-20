@@ -34,8 +34,9 @@ const INTENCOES = [
   {
     chaves: ["gosta", "curte", "hobby", "hobbies", "horas vagas", "tempo livre", "lazer", "game", "jogo", "filme", "serie", "rpg", "geek", "nerd", "marvel", "capcom", "mario", "conteudo", "youtube", "medium"],
     respostas: [
-      "Nas horas vagas, o Thiago vive no universo geek, pop e retrô. Ele gosta de RPGs e jogou muito Call of Duty, Far Cry, Donkey Kong e Super Mario World, além de filmes e séries, com Marvel, Capcom e DC no meio.",
-      "Ele também cria conteúdo e quer expandir para o YouTube em breve. O Medium vem aí.",
+      "Quando não está desenhando interfaces, o Thiago provavelmente está jogando alguma coisa, assistindo a um filme ou revisitando alguma nostalgia dos anos 2000.",
+      "Curte RPGs e games da Nintendo, já passou boas horas jogando Perfect World, Donkey Kong e Super Mario World. Também gosta bastante de cinema, séries e de tudo que envolve os universos da Marvel e DC.",
+      "Também gosta de produzir conteúdo sobre design e tecnologia e está planejando levar isso para o YouTube e para o Medium.",
     ],
   },
   {
@@ -53,8 +54,8 @@ const INTENCOES = [
   },
   {
     chaves: ["projet", "case", "portfolio", "trabalhos", "navaja", "ciao"],
-    respostas: ["O case disponível é o ANIMAE, com contexto, decisões e interfaces. Navaja e CIAO estão em construção."],
-    acao: { rotulo: "Abrir Meus projetos", abrir: "cases" },
+    respostas: ["O case disponível é o ANIMAE. Navaja e CIAO estão em construção."],
+    acao: { rotulo: "Abrir o case ANIMAE", rota: "/cases/animae" },
   },
   {
     chaves: ["animae", "anime", "app"],
@@ -63,7 +64,10 @@ const INTENCOES = [
   },
   {
     chaves: ["ferrament", "figma", "framer", "adobe", "software", "programa", "tools", "usa"],
-    respostas: ["No dia a dia: Figma, Framer, Adobe CC e Shopify. Para levar o design ao código: VS Code, Claude Code e Codex."],
+    respostas: [
+      "No dia a dia: Figma, Framer, Adobe CC e Shopify. Para levar o design ao código: VS Code, Claude Code e Codex.",
+      "E ah, ele também está estudando CSS, HTML, JavaScript e React!",
+    ],
   },
   {
     chaves: ["habilidade", "skill", "design system", "ui", "ux", "especial", "forte"],
@@ -84,7 +88,7 @@ const INTENCOES = [
       "O jeito mais rápido é pelo LinkedIn: linkedin.com/in/thiagomirandaui.",
       "Ou por e-mail: contato.thiagohmiranda@gmail.com.",
     ],
-    acao: { rotulo: "Abrir Contato", abrir: "contato" },
+    acao: { rotulo: "Abrir Contato", abrir: "sobre", aba: "contato" },
   },
   {
     chaves: ["formacao", "faculdade", "curso", "certific", "estud", "unip", "fiap"],

@@ -99,6 +99,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   const [linguaCv, setLinguaCv] = useState("pt");
   const [avisoMsn, setAvisoMsn] = useState(false);
   const [tremer, setTremer] = useState(0);
+  const [abaPedida, setAbaPedida] = useState(null);
   const open = (id, focus = true) => {
     somAbrir();
     setWindows((w) => ({ ...w, [id]: "open" }));
@@ -262,7 +263,8 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
                 <MsnConversa
                   ativa={active === "msnchat"}
                   aoFechar={() => hide("msnchat", "closed")}
-                  aoAbrir={open}
+                  aoAbrir={(id, aba) => { if (aba) setAbaPedida({ aba, n: Date.now() }); open(id); }}
+                  aoNavegar={onNavigate}
                   aoChamar={() => {
                     setTremer((n) => n + 1);
                     setTimeout(() => setTremer((n) => n + 1), 520);
@@ -272,7 +274,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               {app.id === "curriculo" && (
                 <JanelaCurriculo lingua={linguaCv} aoContato={() => open("contato")} />
               )}
-              {app.id === "sobre" && <PainelSobre aoAbrir={open} onNavigate={onNavigate} />}
+              {app.id === "sobre" && <PainelSobre aoAbrir={open} onNavigate={onNavigate} abaPedida={abaPedida} />}
               {app.id === "cases" && <ProjectsExplorer onNavigate={onNavigate} />}
               {app.id === "case" && project && <>
                 <ProjectsToolbar title={project.title} onBack={() => onNavigate("/#cases")} />

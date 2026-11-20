@@ -254,7 +254,7 @@ function BotaoIcone({ icone, img, rotulo, onClick, children }) {
   );
 }
 
-export function MsnConversa({ aoAbrir, ativa, aoChamar, aoFechar }) {
+export function MsnConversa({ aoAbrir, aoNavegar, ativa, aoChamar, aoFechar }) {
   const [msgs, setMsgs] = useState([]);
   const [texto, setTexto] = useState("");
   const [digitando, setDigitando] = useState(false);
@@ -408,10 +408,12 @@ export function MsnConversa({ aoAbrir, ativa, aoChamar, aoFechar }) {
                     </p>
                   )}
                   {m.acao &&
-                    (m.acao.link ? (
+                    (m.acao.rota ? (
+                      <a className="msn-acao" href={m.acao.rota} onClick={(e) => { if (aoNavegar && e.button === 0 && !e.metaKey && !e.ctrlKey && !e.shiftKey) { e.preventDefault(); aoNavegar(m.acao.rota); } }}>{m.acao.rotulo}</a>
+                    ) : m.acao.link ? (
                       <a className="msn-acao" href={m.acao.link} target="_blank" rel="noreferrer">{m.acao.rotulo}</a>
                     ) : (
-                      <button type="button" className="msn-acao" onClick={() => aoAbrir(m.acao.abrir)}>
+                      <button type="button" className="msn-acao" onClick={() => aoAbrir(m.acao.abrir, m.acao.aba)}>
                         {m.acao.rotulo}
                       </button>
                     ))}
