@@ -8,7 +8,7 @@ export default function SocialLink({ rede, variante = "inline", onClick }) {
     ? { type: "button", onClick }
     : href
       ? { href, ...(externo ? { target: "_blank", rel: "noopener noreferrer" } : {}) }
-      : { "aria-disabled": true, title: `${nome} inativo` };
+      : { "aria-disabled": true, title: `${nome}: em breve` };
 
   return (
     <Tag className={`social-link social-link--${variante}`} {...atributos}>
@@ -16,7 +16,7 @@ export default function SocialLink({ rede, variante = "inline", onClick }) {
         <img className="social-link__icon" src={icone} alt="" width="24" height="24" draggable="false" />
       </span>
       <span className="social-link__name">{nome}</span>
-      {!href && !onClick && <span className="social-link__pending">inativo</span>}
+      {!href && !onClick && <span className="social-link__pending">em breve</span>}
       {externo && !onClick && <span className="sr-only"> (abre em nova aba)</span>}
     </Tag>
   );

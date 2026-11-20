@@ -1,4 +1,5 @@
 import { CASES } from "./cases.js";
+import { ANIMAE_COPY, ANIMAE_WEB_URL } from "./animaeCase.js";
 
 // Curadoria editorial: Notion, revisão de 03/11/2026. Indicadores propostos
 // ficam separados dos achados de pesquisa e dos resultados observados.
@@ -14,15 +15,17 @@ const STORIES = {
     categories: ["APP / WEB APP SOCIAL", "PRODUTO PRÓPRIO"],
     roleShort: "UX, UI, design system e código com auxílio de IA",
     team: "Projeto solo",
-    period: "Out/2025 — out/2026 · 1 ano",
+    period: "out/2025 — atual",
+    editorial: ANIMAE_COPY,
     tools: ["Figma", "Illustrator", "Expo", "React Native", "Supabase", "Vercel", "AniList", "Jikan"],
     status: "Produto próprio · web disponível",
     accent: "animae",
     source: "https://app.notion.com/p/40a34785429b814da1b9cc829c60f378",
     links: {
       prototype: "https://www.figma.com/proto/Sdyl9kTkLtCZaIN13yvIgd/%F0%9F%93%B1-Projeto-ANIMAE--%7C-18-10-25?node-id=2083-5498&viewport=75%2C288%2C0.26&t=MBJWwQLeEJVIIHt8-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=2083%3A5498&page-id=2083%3A5497",
-      site: "https://animaeapp.com.br/",
-      siteLabel: "Ver landing page",
+      web: ANIMAE_WEB_URL,
+      webLabel: ANIMAE_COPY.ctaWeb,
+      prototypeLabel: ANIMAE_COPY.ctaPrototype,
       // Behance do ANIMAE em pausa: o que está publicado lá é a proposta antiga de streaming.
     },
     // Tamanho do quadro inicial do protótipo no Figma (Home · Redesenho), usado para encaixar o embed.

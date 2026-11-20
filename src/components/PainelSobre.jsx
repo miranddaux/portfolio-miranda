@@ -5,7 +5,7 @@ import SocialLink from "./SocialLink.jsx";
 import ResultadosPerfil from "./ResultadosPerfil.jsx";
 import { ABAS_PERFIL as ABAS, abaVizinha, buscarNoPerfil } from "../data/perfilSearch.js";
 import { REDES_PRINCIPAIS } from "../data/social.js";
-import { ADICIONAL, CERTIFICACOES, CONTATO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "../data/perfil.js";
+import { ADICIONAL, CERTIFICACOES, CONTATO, DESENVOLVIMENTO, EDUCACAO, EXPERIENCIAS, FERRAMENTAS, HABILIDADES, LINGUAS } from "../data/perfil.js";
 
 const P = "/assets/xp/painel";
 const FOTO = "/assets/xp/foto-thiago.webp";
@@ -275,7 +275,7 @@ export default function PainelSobre({ aoAbrir, onNavigate }) {
                     <p className="painel-cargo">Product Designer pleno</p>
                     <p className="painel-destaque">São José do Rio Preto, SP</p>
                     <p>
-                      Sou Product Designer em São José do Rio Preto. De dia desenho e-commerces na <a className="sobre-link" href={SITE_SHOPIFY} target="_blank" rel="noopener noreferrer">Shopify<span className="sr-only"> (abre em nova aba)</span></a> pela <a className="sobre-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Agência Disco<span className="sr-only"> (abre em nova aba)</span></a>. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.
+                      Sou Product Designer morando em São José do Rio Preto. De dia desenho e-commerces na <a className="sobre-link" href={SITE_SHOPIFY} target="_blank" rel="noopener noreferrer">Shopify<span className="sr-only"> (abre em nova aba)</span></a> pela <a className="sobre-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Agência Disco<span className="sr-only"> (abre em nova aba)</span></a>. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.
                     </p>
                   </div>
                 </div>
@@ -309,6 +309,13 @@ export default function PainelSobre({ aoAbrir, onNavigate }) {
                   </ul>
                   <Tags titulo="Ferramentas" itens={FERRAMENTAS} id="perfil-ferramentas" />
                   <Tags titulo="Línguas" itens={LINGUAS} id="perfil-linguas" />
+                </>
+              )}
+
+              {aba === "desenvolvimento" && (
+                <>
+                  <p className="painel-selo-linha"><span className="painel-selo">{DESENVOLVIMENTO.selo}</span></p>
+                  <Tags titulo="Tecnologias" itens={DESENVOLVIMENTO.itens} id="perfil-desenvolvimento" />
                 </>
               )}
 

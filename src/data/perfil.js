@@ -18,28 +18,28 @@ export const EXPERIENCIAS = [
     empresa: "Agência Disco",
     periodo: "mar 2025 – atual",
     texto:
-      "Desenho e-commerces em Shopify de ponta a ponta, da estratégia ao handoff. Estruturo design systems com tokens no Figma, otimizo páginas de produto e checkout com foco em conversão (CRO).",
+      "Atuo no UX/UI de e-commerces Shopify, do discovery ao handoff. Desenho jornadas de compra, páginas de produto (PDP), coleções (PLP) e soluções de cross-sell e upsell. Também estruturo Design Systems com componentes e design tokens no Figma, com foco em usabilidade e otimização de conversão (CRO).",
   },
   {
     cargo: "Visual Designer",
     empresa: "M8K Agência",
     periodo: "set 2023 – fev 2025",
     texto:
-      "Transformei objetivos de clientes em peças visuais coesas para canais digitais e organizei o fluxo do time criativo para entregar mais rápido e com mais qualidade.",
+      "Transformei objetivos de clientes em soluções visuais para diferentes canais digitais. Também organizei o fluxo do time criativo para trazer mais agilidade e consistência às entregas.",
   },
   {
-    cargo: "Visual Designer",
+    cargo: "Designer Gráfico",
     empresa: "DR Publicidade",
     periodo: "mar 2022 – ago 2023",
     texto:
-      "Cuidei da estratégia visual de contas corporativas, como a Bosch Power Tools, seguindo diretrizes globais de marca, e criei conteúdo digital e interfaces para engajamento.",
+      "Fui responsável pela comunicação visual da conta Bosch Power Tools, seguindo as diretrizes globais da marca e desenvolvendo campanhas, conteúdos digitais e interfaces.",
   },
   {
-    cargo: "Visual Designer",
+    cargo: "Designer Gráfico",
     empresa: "Grupo ZNTT",
     periodo: "mai 2020 – ago 2021",
     texto:
-      "Gerenciei a identidade visual de 7 marcas, fazendo a ponte entre criação e comercial, e transformei dados técnicos em materiais claros e persuasivos.",
+      "Cuidei da identidade visual de 7 marcas e liderei uma equipe de 2 designers. Fiz a ponte entre criação e comercial, transformando informações técnicas em materiais visuais claros e consistentes, além de desenvolver uma visão mais ampla sobre design, organização e trabalho em equipe.",
   },
 ];
 
@@ -48,13 +48,13 @@ export const ADICIONAL = [
     cargo: "Fundador do ANIMAE",
     empresa: "Projeto próprio",
     periodo: "atual",
-    texto: "Aplicativo social para quem acompanha animes.",
+    texto: "Idealizei e construí o ANIMAE, um app social para fãs de anime, cuidando do produto, UX/UI, identidade visual e desenvolvimento com apoio de Inteligência Artificial.",
   },
   {
-    cargo: "Vencedor do Hackathon SouJunior | 1º lugar",
+    cargo: "1º lugar | Vencedor hackathon SouJunior",
     empresa: "Designer e mentor",
     periodo: "set 2026",
-    texto: "Atuei como designer e mentor da equipe que conquistou o 1º lugar entre 30 squads, com a landing page do Apoia.se.",
+    texto: "Atuei como designer e mentor do squad vencedor do Hackathon da SouJunior, conquistando o 1º lugar entre 30 equipes participantes.",
   },
 ];
 
@@ -73,14 +73,16 @@ export const CERTIFICACOES = [
 ];
 
 export const HABILIDADES = [
-  { icone: "contas", nome: "Estratégia de UX" },
-  { icone: "aparencia", nome: "UI e Visual Design" },
+  { icone: "contas", nome: "UX Design & Discovery" },
+  { icone: "aparencia", nome: "UI & Visual Design" },
   { icone: "programas", nome: "Design Systems" },
   { icone: "rede", nome: "Front-end" },
-  { icone: "regiao", nome: "E-commerce Shopify" },
-  { icone: "desempenho", nome: "Pensamento crítico" },
-  { icone: "acessibilidade", nome: "Acessibilidade" },
+  { icone: "regiao", nome: "E-commerce & CRO" },
+  { icone: "desempenho", nome: "Arquitetura da Informação" },
+  { icone: "acessibilidade", nome: "Acessibilidade Digital" },
 ];
+
+export const DESENVOLVIMENTO = { selo: "Em estudo", itens: ["HTML5", "CSS3", "JavaScript", "React"] };
 
 export const FERRAMENTAS = ["Figma", "Framer", "Adobe CC", "Shopify", "VS Code", "Claude Code", "Codex"];
 

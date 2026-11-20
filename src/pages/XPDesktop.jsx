@@ -166,9 +166,9 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   }, [start]);
   return (
     <main id="conteudo" className="xp-desktop">
-      <h1 className="sr-only">
-        Thiago Miranda · Product Designer pleno · Portfólio
-      </h1>
+      {project
+        ? <p className="sr-only">Thiago Miranda · Product Designer pleno · Portfólio</p>
+        : <h1 className="sr-only">Thiago Miranda · Product Designer pleno · Portfólio</h1>}
       <nav className="desktop-shortcuts" aria-label="Atalhos do portfólio">
         {[
           { id: "sobre", nome: "Sobre mim", img: "sobre", src: "/assets/xp/area/sobre.png" },
