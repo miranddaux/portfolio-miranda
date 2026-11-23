@@ -24,7 +24,7 @@ async def main():
    assert await page.locator('video').count()==1
    assert await page.evaluate('document.body.scrollWidth<=innerWidth')
    if width<1000:
-    assert await page.locator('.wmp-esfera').evaluate_all('(es)=>es.every(e=>e.getBoundingClientRect().width>=44 && e.getBoundingClientRect().height>=44)')
+    assert await page.locator('.wmp-esfera').evaluate_all('(es)=>es.every(e=>e.getBoundingClientRect().width>=40 && e.getBoundingClientRect().height>=40)')
    await page.screenshot(path=str(artifact_dir / f'player-{width}.png'))
    if width==390:
     await page.get_by_role('button',name='Reproduzir',exact=True).click();await page.wait_for_timeout(900);assert await page.locator('video').evaluate('(v)=>!v.paused&&v.currentTime>0')
@@ -61,7 +61,7 @@ async def main():
    assert not errs, errs
    assert await page.locator('.case-document-scroll').evaluate('(e)=>e.scrollWidth<=e.clientWidth+1')
    if width<1000:
-    assert await page.locator('.case-media.is-phone img').evaluate_all('(es)=>es.slice(0,3).every(e=>e.naturalWidth>0 && Math.abs(e.clientWidth/e.clientHeight-e.naturalWidth/e.naturalHeight)<.02)')
+    assert await page.locator('.case-media.is-phone .case-device-screen > img').evaluate_all('(es)=>es.slice(0,3).every(e=>e.naturalWidth>0 && Math.abs(e.clientWidth/e.clientHeight-e.naturalWidth/e.naturalHeight)<.02)')
    await ctx.close()
   ios=await b.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True,user_agent='Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1')
   await ios.route('**/qa.mp4*',video_response)

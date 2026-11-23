@@ -15,7 +15,7 @@ import AppPaint from "../components/apps/AppPaint.jsx";
 import AppPinball from "../components/apps/AppPinball.jsx";
 import DoomGameWindow from "../components/DoomGameWindow.jsx";
 import AvisoSoDesktop from "../components/apps/AvisoSoDesktop.jsx";
-import { useEhMobile } from "../lib/useEhMobile.js";
+import { useEhMobile, useMediaQuery } from "../lib/useEhMobile.js";
 import PainelSobre from "../components/PainelSobre";
 import JanelaCurriculo, { CURRICULOS } from "../components/JanelaCurriculo";
 import { MsnAviso, MsnContatos, MsnConversa } from "../components/Msn";
@@ -103,7 +103,9 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
   const [tremer, setTremer] = useState(0);
   const [abaPedida, setAbaPedida] = useState(null);
   const ehMobile = useEhMobile();
+  const headspaceMobile = useMediaQuery("(max-width:760px), (max-width:1024px) and (pointer:coarse)");
   const open = (id, focus = true) => {
+    if (id === "headspace" && window.matchMedia("(max-width:760px), (max-width:1024px) and (pointer:coarse)").matches) return;
     somAbrir();
     setWindows((w) => ({ ...w, [id]: "open" }));
     setActive(id);
@@ -205,7 +207,7 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
       <div className="desktop-workspace">
         {appWindows.map((app) =>
           windows[app.id] === "open" || windows[app.id] === "minimized" ? (
-            app.id === "headspace" ? (
+            app.id === "headspace" ? (headspaceMobile ? null :
               <JanelaHeadspace
                 key="headspace"
                 ativa={active === "headspace"}

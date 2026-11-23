@@ -2,6 +2,9 @@
 :root {
   /* Fixed layout and typography use the 8px scale. */
   --space-unit: 8px;
+  --tag-surface: #e8effc;
+  --tag-ink: #123c91;
+  --tag-border: #b9c9eb;
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;

@@ -306,10 +306,10 @@
 .case-draco-banner { display: flex; justify-content: center; align-items: flex-start; height: 528px; overflow: hidden; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
 .case-document > .case-draco-banner { margin-top: var(--space-5); }
 .case-document > .case-draco-banner + .case-overview-card { margin-top: var(--space-6); }
-.case-draco-banner img { display: block; width: auto; height: 608px; max-width: none; margin-top: var(--space-4); translate: 8% 0; rotate: 8deg; transform-origin: 50% 35%; -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 84%); mask-image: linear-gradient(to bottom, #000 60%, transparent 84%); animation: draco-subir 900ms ease-out both; }
+.case-draco-banner img { display: block; width: auto; height: 576px; max-width: none; margin-top: var(--space-4); translate: 8% 0; rotate: 8deg; transform-origin: 50% 35%; -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 84%); mask-image: linear-gradient(to bottom, #000 60%, transparent 84%); animation: draco-subir 900ms ease-out both; }
 @keyframes draco-subir { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .case-draco-banner img { animation: none; } }
-@media (max-width: 640px) { .case-draco-banner { height: 432px; } .case-draco-banner img { height: 520px; } }
+@media (max-width: 640px) { .case-draco-banner { height: 432px; } .case-draco-banner img { height: 496px; } }
 /* Largura de leitura: confortável, nem larga nem curta */
 
 
@@ -351,7 +351,7 @@
 @container janela (max-width: 720px) {
   .case-document > .case-overview-card { grid-template-columns: 1fr; gap: var(--space-3); }
   .case-draco-banner { height: 368px; }
-  .case-draco-banner img { height: 416px; }
+  .case-draco-banner img { height: 400px; }
   .case-hero-shot { height: 400px; }
 }
 @container janela (max-width: 640px) {
@@ -374,3 +374,6 @@
 }
 
 .case-frame-dica { display: none; }
+
+/* Controle explícito para parar os loops, além da preferência de movimento reduzido. */
+.xp-button.case-demo-toggle { display: flex; justify-content: center; width: fit-content; min-height: var(--space-5); margin: var(--space-2) auto 0; font-size: var(--text-12); }

@@ -72,13 +72,16 @@ class DemoSegura extends Component {
 const DEMOS = { lista: AnimaeListaDemo, home: AnimaeHomeDemo, feed: AnimaeFeedDemo };
 
 export function Shot({ media, phone }) {
-  const mobile = useMediaQuery("(max-width:760px), (max-width:1024px) and (pointer:coarse)");
-  const Demo = mobile ? null : DEMOS[media.demo];
+  const [parada, setParada] = useState(false);
+  const reduzirMovimento = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const Demo = DEMOS[media.demo];
+  const animar = !parada && !reduzirMovimento;
   if (Demo) return <figure className="case-media is-phone">
-    <div className="case-device"><span className="case-device-screen">
-      <img className="case-demo-poster" src={media.src} alt="" width={media.width} height={media.height} decoding="async" aria-hidden="true" />
-      <DemoSegura><Demo /></DemoSegura>
+    <div className="case-device"><span className="case-device-screen has-demo">
+      <img className="case-demo-poster" src={media.src} alt={animar ? "" : media.alt} width={media.width} height={media.height} decoding="async" aria-hidden={animar || undefined} />
+      {animar && <DemoSegura><Demo /></DemoSegura>}
     </span></div>
+    {!reduzirMovimento && <button type="button" className="xp-button xp-button--back case-demo-toggle" onClick={() => setParada(v => !v)}>{parada ? "Reproduzir animação" : "Parar animação"}</button>}
   </figure>;
   return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
     <a className={phone ? "case-device" : "case-shot"} href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar: ${media.alt}`}>

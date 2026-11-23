@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { REDES_PRINCIPAIS, REDES_SOCIAIS } from "../data/social.js";
 import { SetaVerde } from "./IconesMenu.jsx";
 import { logoDe } from "../data/logos.js";
+import { useMediaQuery } from "../lib/useEhMobile.js";
 
 const XP = "/assets/xp";
 const MI = "/assets/xp/menu-icons";
@@ -67,6 +68,7 @@ const Divisor = ({ mini }) => <div className={mini ? "mi-mini-divisor" : "mi-div
 
 // Menu Iniciar: atalhos à esquerda, redes e aplicativos à direita, Sair e Desligar no rodapé.
 export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbrir, aoFazerLogoff, aoSair }) {
+  const mobile = useMediaQuery("(max-width:760px), (max-width:1024px) and (pointer:coarse)");
   const [sub, setSub] = useState(null); // "todos" | "recente" | null
   const timer = useRef(null);
   useEffect(() => () => clearTimeout(timer.current), []);
@@ -113,7 +115,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Divisor mini />
                 <Mini icone={img(`${MI}/msn.png`, 16)} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
                 <Mini icone={img(`${MI}/player.png`, 16)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
-                <Mini icone={img(`${MI}/headspace.png`, 16)} rotulo="Headspace" aoClicar={() => aoAbrir("headspace")} />
+                <Mini icone={img(`${MI}/headspace.png`, 16)} rotulo={mobile ? "Headspace — indisponível no mobile" : "Headspace"} breve={mobile} aoClicar={() => aoAbrir("headspace")} />
                 <Divisor mini />
                 <Mini icone={img(`${MI}/prompt.png`, 16)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
                 <Mini icone={img(`${MI}/campo-minado.png`, 16)} rotulo="Campo minado" aoClicar={() => aoAbrir("minas")} />
@@ -142,7 +144,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
             )}
           </div>
           <Linha icone={img(`${MI}/player.png`)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
-          <Linha icone={img(`${MI}/headspace.png`)} rotulo="Headspace" aoClicar={() => aoAbrir("headspace")} />
+          <Linha icone={img(`${MI}/headspace.png`)} rotulo="Headspace" sub={mobile ? "Indisponível no mobile" : undefined} breve={mobile} aoClicar={() => aoAbrir("headspace")} />
           <Linha icone={img(`${MI}/prompt.png`)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
           <Linha icone={img(`${MI}/doom.png`)} rotulo="DOOM" aoClicar={() => aoAbrir("doom")} />
         </div>

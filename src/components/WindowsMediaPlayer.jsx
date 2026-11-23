@@ -59,7 +59,7 @@ export default function WindowsMediaPlayer({ src, playlist, poster, title, autoP
   const lista = playlist?.length ? playlist : src ? [{ src, title }] : [];
   const raiz = useRef(null);
   const [listaAberta, setListaAberta] = useState(false);
-  const [avisoTela, setAvisoTela] = useState("");
+  const [telaCheiaIndisponivel, setTelaCheiaIndisponivel] = useState(false);
   const [indice, setIndice] = useState(0);
   const [iniciar, setIniciar] = useState(autoPlay);
   const atual = lista[indice] || {};
@@ -84,10 +84,12 @@ export default function WindowsMediaPlayer({ src, playlist, poster, title, autoP
   const volumeEfetivo = p.mudo ? 0 : p.volume;
   const nome = atual.title || p.titulo || (temVideo && !idYT ? decodeURIComponent(atual.src.split("/").pop().split("?")[0]) : temVideo ? "YouTube" : "Nenhum arquivo");
   const volumeDoSistema = (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+  const permiteTelaCheia = !telaCheiaIndisponivel && (document.fullscreenEnabled || (!idYT && Boolean(mp.videoRef.current?.webkitEnterFullscreen)));
   const telaCheia = () => {
-    if (raiz.current?.requestFullscreen) raiz.current.requestFullscreen().catch(() => setAvisoTela('O navegador não permitiu tela cheia.'));
-    else if (mp.videoRef.current?.webkitEnterFullscreen) mp.videoRef.current.webkitEnterFullscreen();
-    else setAvisoTela('Use o link do vídeo para assistir em tela cheia.');
+    if (document.fullscreenEnabled && raiz.current?.requestFullscreen) raiz.current.requestFullscreen().catch(() => setTelaCheiaIndisponivel(true));
+    else if (mp.videoRef.current?.webkitEnterFullscreen) {
+      try { mp.videoRef.current.webkitEnterFullscreen(); } catch { setTelaCheiaIndisponivel(true); }
+    }
   };
   const status = p.erro || (p.carregando && temVideo ? "Carregando…" : nome);
 
@@ -106,7 +108,7 @@ export default function WindowsMediaPlayer({ src, playlist, poster, title, autoP
         <div className="wmp-mobile-tools" role="toolbar" aria-label="Opções do vídeo">
           {temVideo && <a href={atual.src} target="_blank" rel="noopener noreferrer" className="wmp-tool" aria-label="Abrir vídeo na origem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-2 2M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l2-2" /></svg></a>}
           {varios && <button type="button" className="wmp-tool" onClick={() => setListaAberta(a=>!a)} aria-label="Lista de vídeos" aria-expanded={listaAberta}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h12M9 12h12M9 18h12M3 6h1M3 12h1M3 18h1" /></svg></button>}
-          <button type="button" className="wmp-tool" onClick={telaCheia} disabled={!temVideo} aria-label="Tela cheia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3H3v6M15 3h6v6M3 15v6h6M21 15v6h-6" /></svg></button>
+          {permiteTelaCheia && <button type="button" className="wmp-tool" onClick={telaCheia} disabled={!temVideo} aria-label="Tela cheia"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3H3v6M15 3h6v6M3 15v6h6M21 15v6h-6" /></svg></button>}
         </div>
         {listaAberta && <ol className="wmp-mobile-list" aria-label="Lista de vídeos">{lista.map((v,i)=><li key={i}><button type="button" aria-current={i===indice?'true':undefined} onClick={()=>{irParaFaixa(i);setListaAberta(false);}}>{v.title || `Vídeo ${i+1}`}</button></li>)}</ol>}
         <img className="wmp-moldura" src={`${A}/moldura.webp`} alt="" width={W} height={H} draggable="false" />
@@ -200,7 +202,7 @@ export default function WindowsMediaPlayer({ src, playlist, poster, title, autoP
         {onMinimize && <button type="button" className="wmp-janela wmp-minimize" style={R(1340, 18, 38, 38)} onClick={onMinimize} aria-label="Minimizar" />}
         {onClose && <button type="button" className="wmp-janela wmp-close" style={R(1388, 18, 38, 38)} onClick={onClose} aria-label="Fechar" />}
         <div className="wmp-mobile-brand"><img src="/assets/xp/figma/bandeira.png" width="40" height="32" alt="Windows" /></div>
-        {(avisoTela || volumeDoSistema) && <p className="wmp-mobile-note" role="status">{avisoTela || 'Use os botões de volume do celular para ajustar o som.'}</p>}
+        {volumeDoSistema && <p className="wmp-mobile-note" role="status">Use os botões de volume do celular para ajustar o som.</p>}
       </div>
     </section>
   );

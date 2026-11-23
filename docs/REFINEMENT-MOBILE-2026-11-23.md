@@ -9,7 +9,7 @@ usar uma recriação Scratch do Purble Place. Mantém a base XP aprovada e o cas
   menus, mega menus). PDFs e WebPs regenerados, ambos em uma página.
 - Copy do ANIMAE usa usuário/usuários no lugar de pessoa/pessoas; lista pessoal
   continua sendo o nome correto da funcionalidade.
-- Banner principal: container 528 px, imagem 608 px, fade inferior mantido.
+- Banner principal: container 528 px, imagem 576 px, fade inferior mantido.
 - Cards de decisões continuam em 2×2, agora com `--case-surface` como os demais.
 - O selo Em estudo permanece em flex alinhado ao centro do título.
 - MSN: removida a referência ao DS do portfólio; LinkedIn, e-mail e WhatsApp são
@@ -25,9 +25,11 @@ usar uma recriação Scratch do Purble Place. Mantém a base XP aprovada e o cas
 - Filtro nativo no explorador: Todos, Cases disponíveis e Em construção. A lista
   filtrada é real, combina com busca e informa sua quantidade ao leitor de tela.
 - Telas de produto: uma por quadro no celular, proporção original e altura
-  natural. Não usa o corte/deslocamento das duplas do desktop. No mobile, os
-  demos interativos de tamanho fixo dão lugar às capturas reais dos mesmos assets;
-  no desktop continuam interativos. A imagem pode ser ampliada por um link.
+  natural. Não usa o corte/deslocamento das duplas do desktop. As demos de Home,
+  Minha Lista e Feed voltaram a rodar também no mobile, escaladas para a largura
+  real do celular e respeitando movimento reduzido. Cada demo pode ser parada
+  e reiniciada por botão; sem movimento, a captura real mantém o conteúdo. Telas
+  estáticas têm ampliação.
 - Onboarding segue a mesma regra, com um quadro por tela e links de ampliação.
 - Celulares e tablets de toque usam essa adaptação; desktop preserva suas grades.
 - Boas-vindas automáticas não cobrem o campo de mensagem no celular. O usuário
@@ -41,11 +43,11 @@ Usa moldura azul/prateada glossy em CSS inspirada nos anexos, glifos existentes,
 thumbs de progresso/volume já locais e o asset local da bandeira Windows. Não
 apresenta uma nova imagem gerada como se fosse o PNG original do anexo.
 
-Visor 16:9, textos e tempo reais, timeline, saltos de 10 s, play/pause, stop,
+Visor mobile 3:2, textos e tempo reais, timeline, saltos de 10 s, play/pause, stop,
 anterior/próximo, mute, volume, seleção da playlist e tela cheia funcionais.
 Reorganizar por breakpoint preserva o elemento de vídeo. A janela acompanha a
 mudança de orientação/largura e rola se faltar altura; respeita a safe area.
-Os botões mobile têm ao menos 44×44 px. O controle principal recebe mais destaque.
+Os botões mobile têm ao menos 40×40 px. O controle principal recebe mais destaque.
 No iPhone/iPad o slider de volume fica indisponível com orientação para os botões
 físicos; mute continua disponível. YouTube mantém sua API e o link para a origem.
 A disponibilidade de embeds e autoplay continua sob as regras da fonte/navegador.
@@ -56,9 +58,16 @@ impedir o evento de fim de avançar para o próximo item.
 ## Headspace
 
 A demonstração local começa como faixa padrão ao abrir, respeitando a permissão
-de áudio do navegador. No mobile, controles acessíveis substituem as pequenas
-áreas de clique da skin: a mesma instância de áudio, botões, progresso, volume e
-playlist. A skin e o equalizador desktop continuam como antes.
+de áudio do navegador. Por nova decisão do Thiago, Headspace está desabilitado
+no mobile até receber os assets. Menu e abertura programática respeitam essa
+restrição. A skin e o equalizador desktop continuam como antes.
+
+A recuperação desktop agora renova a URL da mesma faixa e tenta novamente até
+duas vezes (400/1200 ms) em falha transitória. A busca tem prazo de 12 s e o
+início do áudio, 15 s. Erros de mídia e rejeição do play não duplicam a tentativa.
+Trocar, pausar, parar ou fechar cancela tentativas pendentes; sem resultado no
+catálogo não dispara uma busca infinita. A seleção nunca é substituída por outra
+música. Isso trata falhas temporárias, sem prometer disponibilidade da Apple.
 
 ## Purble Place — original ainda pendente
 
@@ -87,9 +96,9 @@ Fontes verificadas além da pesquisa anterior:
 
 ## Verificação
 
-- `node --test tests/*.test.mjs`: 15 testes.
+- `node --test tests/*.test.mjs`: 20 testes.
 - `npm run check:design` e `npm run build`.
-- `MIRANDA_QA_BASE_URL=http://127.0.0.1:5175 python tests/media-player-browser.py`:
+- `MIRANDA_QA_BASE_URL=http://127.0.0.1:5173 python tests/media-player-browser.py`:
   Vite em execução; requer Python/Playwright, Chromium e ffmpeg. Gera um vídeo de
   teste temporário e responde aos pedidos HTTP Range corretamente. A fixture em
   tests/fixtures não entra no build de produção.
@@ -100,7 +109,64 @@ Fontes verificadas além da pesquisa anterior:
   fullscreen e callbacks de fechar/minimizar. iPhone emulado verifica o estado
   de volume indisponível; não substitui teste em Safari físico.
 - Fluxos do app a 390 px: filtro de projetos, abertura/minimização, links de contato,
-  Headspace com demo avançando e ausência de exceções JavaScript.
+  Headspace mobile desabilitado e ausência de exceções JavaScript.
+- Desktop: quatro prévias reais avançaram; uma falha de rede provocada no áudio
+  foi recuperada automaticamente na segunda requisição, sem trocar de faixa.
+  Trocas rápidas mantiveram a última seleção. Os aborts da faixa anterior são
+  esperados; a indisponibilidade espontânea relatada não se repetiu nesse teste.
+- `python tests/mobile-ui-browser.py` (mesma variável de URL): contato em 3+2,
+  recuo medido de 16 px, controles de janela com 40 px, fotos maiores, home
+  centralizada, Headspace mobile inativo e loop/stop/restart das demos.
 - Centro do título Desenvolvimento e do selo: ambos em y=603 na medição mobile.
 
 Os avisos de bundle principal e import do motor DOOM são anteriores e persistem.
+
+## Novo QA visual solicitado
+
+- Corrigida a soma indevida de recuos: rolagem sem padding + limite com 16 px;
+  título, contato e listas não somam outro recuo. Contato usa três redes na
+  primeira linha e duas na segunda; Orkut/MSN ocupam uma linha com duas colunas.
+- Tags de perfil, contexto e ferramentas do case compartilham superfície azul,
+  texto escuro, borda e brilho interno discretos. Swipe horizontal sem scrollbar.
+- Barra de título e primeira linha da janela têm 40 px. Controles têm alvo real
+  de 40 px e face visual de 24 px; o miolo começa abaixo da barra. Sem área de
+  toque sobreposta ao conteúdo nem botões escondidos por trás da navegação.
+- Foto do perfil: 128 px; avatar do menu: 56 px. Atalhos principais centralizados
+  verticalmente na área acima da barra de tarefas, mantendo ícone à esquerda.
+- Chat usa 14/24 px; controles de 40 px. Jogos indisponíveis usam um recado curto.
+- WMP mobile tem controles menores, visor mais alto e omite tela cheia quando
+  o navegador não oferece suporte. Rejeitar fullscreen remove o controle, sem
+  manter o recado técnico no rodapé; link de origem continua disponível.
+
+## Currículo — avaliação editorial e aderência às vagas
+
+A base é boa para UI/Product Designer pleno com especialidade em e-commerce.
+O PDF tem uma página por idioma, texto extraível, quatro links e cabeçalhos
+convencionais. A hierarquia separa bem experiência, projetos, formação e competências.
+Duas colunas funcionam visualmente, mas extração de texto não prova compatibilidade
+com todo ATS. Para formulários que misturem colunas, a alternativa é uma coluna.
+
+A descrição da Disco é específica: Shopify, PDP/PLP, carrinho, arquitetura de
+informação, menus/megamenus, componentes, tokens e handoff. Nomear essas entregas
+comunica melhor a atuação real. Checkout permanece fora porque Thiago não o desenha.
+As finalidades de usabilidade/conversão estão apresentadas como foco, sem fingir
+que uma melhora quantitativa foi medida.
+
+Comparação de requisitos consultados em 23/11/2026:
+
+| Referência | Aderência já demonstrada no currículo | Evidência que ainda fortaleceria a candidatura |
+| --- | --- | --- |
+| [OLX — Product Designer Pleno](https://vemsergrupoolx.gupy.io/jobs/12811937) | Figma, fluxos, interfaces, arquitetura de informação, Design System e handoff | Casos com pesquisa, validação, uso de dados, acompanhamento pós-entrega e Design QA |
+| [Grupo SBF — Product Designer Pleno](https://gruposbftalentos.gupy.io/jobs/12855399) | Navegação, visual design, acessibilidade e prototipação | Evidência de discovery/delivery e métodos de pesquisa aplicados |
+| [Freshly Commerce — Senior Product Designer](https://careers.freshlycommerce.com/jobs/product-designer) | Especialidade Shopify, craft visual, componentes e colaboração com desenvolvimento | Referência de competências do domínio, não indicação de senioridade ou garantia de vaga: requer ownership e impacto, além de comunicação fluente |
+
+A maior oportunidade é mostrar efeito das decisões: um antes/depois de navegação,
+exemplo de componente reutilizado e resultado validado. Só acrescentar números
+quando houver registro. A competência Testes de usabilidade merece evidência em
+case/entrevista; pesquisa de mesa do ANIMAE não equivale a entrevista com usuários.
+A validação do app continua descrita como próxima etapa.
+
+Manter a distinção entre seis anos em design e tempo no cargo de Product Designer.
+Inglês básico está honesto e pode limitar vagas internacionais que exigem comunicação
+fluente. Para o currículo, o objetivo é clareza e palavras-chave de ATS, não SEO
+como o de uma página web. Nenhuma comparação permite prometer match ou aprovação.
