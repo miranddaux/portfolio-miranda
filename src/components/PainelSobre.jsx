@@ -278,7 +278,7 @@ export default function PainelSobre({ aoAbrir, onNavigate, abaPedida }) {
                     <p className="painel-cargo">Product Designer pleno</p>
                     <p className="painel-destaque">São José do Rio Preto, SP</p>
                     <p>
-                      Sou Product Designer morando em São José do Rio Preto. De dia desenho e-commerces na <a className="sobre-link" href={SITE_SHOPIFY} target="_blank" rel="noopener noreferrer">Shopify<span className="sr-only"> (abre em nova aba)</span></a> pela <a className="sobre-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Agência Disco<span className="sr-only"> (abre em nova aba)</span></a>. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.
+                      Sou Product Designer morando em São José do Rio Preto. De dia <span className="painel-termo-inteiro">desenho e-commerces</span> na <a className="sobre-link" href={SITE_SHOPIFY} target="_blank" rel="noopener noreferrer">Shopify<span className="sr-only"> (abre em nova aba)</span></a> pela <a className="sobre-link" href={SITE_DISCO} target="_blank" rel="noopener noreferrer">Agência Disco<span className="sr-only"> (abre em nova aba)</span></a>. À noite, crio pequenos projetos inusitados na interseção entre tecnologia e design.
                     </p>
                   </div>
                 </div>

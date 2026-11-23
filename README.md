@@ -3,25 +3,21 @@
 Portfólio de Thiago Miranda, Product Designer pleno, em React + Vite + CSS + GSAP.
 Esta rodada aproxima a experiência da linguagem Windows XP e usa Segoe UI em todo o site.
 
-## Atualização de 16/11
+## Estado atual — revisão desktop de 23/11
 
-O desktop atual inclui Sobre Mim, currículo PT/EN, contato e MSN. Os links sociais
-compartilham ícone e nome; Medium fica inativo. No Sobre Mim, as setas e o seletor
-Endereço navegam pelas abas; Buscar pesquisa os conteúdos reais e leva ao item
-selecionado. O banner do MSN usa texto e layout em HTML/CSS, com marcas individuais.
-O favicon usa o retrato do Thiago. Detalhes e validação:
-[docs/REFINEMENT-2026-11-16.md](docs/REFINEMENT-2026-11-16.md).
-Teste da busca: `node --test tests/perfil-search.test.mjs`.
+Site de produção: https://portfolio-miranda-tawny.vercel.app/.
+As alterações desta rodada seguem em branch e PR, com prévia Vercel para revisão.
 
-Projetos abre diretamente no desktop e na aba do Sobre Mim, como um explorador XP
-com três cases disponíveis e duas pastas em construção (UltraGrip e CIAO).
-Playground foi removido desta versão. Os cases abrem dentro de uma
-janela XP, com URL própria, documento centralizado, resumo rápido, módulos visuais com mockups de celular em CSS, pesquisa,
-decisões, jornada, telas reais, resultados e plano de medição.
-Categorias informativas e botões de ação têm tratamentos distintos. O índice de
-âncoras foi removido e a rolagem é contida dentro das janelas. Os modos editoriais
-usam o mesmo conteúdo. Veja [docs/PROJECTS-XP.md](docs/PROJECTS-XP.md).
-Testes: `node --test tests/*.test.mjs`.
+XP é a experiência pública. A entrada abre Sobre mim; o ANIMAE é o case completo,
+com URL própria e janela XP. Navaja e CIAO permanecem em construção.
+Playground foi removido. Sobre tem navegação por abas, busca real e links sociais;
+Medium permanece inativo. O desktop inclui currículo PT/EN, MSN, mídia e jogos.
+
+Nesta revisão: currículos e previews atualizados, texto Shopify sem checkout,
+copy/grid/decisões/banner do ANIMAE refinados, reprodução Headspace corrigida,
+Codex no menu e Purble Place via recriação comunitária no TurboWarp.
+Reiniciar, logoff e refresh voltam a Sobre. Links novos para cases seguem diretos.
+Detalhes, fontes e limites: [revisão de 23/11](docs/REFINEMENT-2026-11-23.md).
 
 ## Rodar
 
@@ -34,17 +30,12 @@ npm run build
 Se o cache padrão do npm não for gravável, configure `npm_config_cache` para um
 subdiretório gravável do ambiente antes de instalar.
 
-## Modos
+## Experiência pública
 
-- **XP:** experiência inicial com janelas de perfil/projetos, menu Iniciar, atalhos,
-  filtros por pasta, minimizar, restaurar, maximizar e fechar. Os três cases ficam
-  visíveis ao entrar na Home. A abertura agora tem uma tela de boas-vindas XP,
-  sem senha, formulário de autenticação ou animação de boot.
-- **Rápido:** Home editorial clara com resumo de 60 segundos.
-- **Noite:** versão escura do modo editorial.
-
-O seletor salva a preferência localmente. Segoe UI usa system-ui/Roboto/Arial como fallback;
-nenhum arquivo proprietário de fonte é distribuído.
+O modo XP usa janelas redimensionáveis e leitura dentro do container do case.
+Os componentes Rápido/Noite são históricos e não têm seletor público nesta versão.
+Segoe UI usa system-ui/Roboto/Arial como fallback; os PDFs usam Inter local.
+Nenhum arquivo proprietário de fonte é distribuído.
 
 ## Tela de entrada — rodada 09/11
 

@@ -1257,7 +1257,9 @@ button.painel-rede {
 }
 
 
-.painel-selo { margin-left: 8px; vertical-align: middle; display: inline-block; padding: 0 8px; border: 1px solid #e0b73a; border-radius: 4px; background: #fff4cc; color: #5a4300; font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: 0.04em; text-transform: uppercase; }
+.painel-tags-sec .painel-subtitulo { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-1); }
+.painel-selo { display: inline-flex; align-items: center; padding: 0 var(--space-1); border: 1px solid #e0b73a; border-radius: 4px; background: #fff4cc; color: #5a4300; font-size: var(--text-12); font-weight: 700; line-height: var(--space-2); letter-spacing: 0.04em; text-transform: uppercase; }
+.painel-termo-inteiro { white-space: nowrap; }
 
 /* Largura de leitura dos textos do painel */
 .painel-exp-item p, .painel-texto p { max-width: 832px; }

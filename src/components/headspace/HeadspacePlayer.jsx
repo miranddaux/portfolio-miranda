@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BANDAS, ROTULO_BANDAS, criarFaixaDemo, criarMotor, formatarTempo } from "../../lib/headspaceAudio.js";
+import { criarReproducao } from "../../lib/headspacePlayback.js";
 import { MODOS, criarVisualizador } from "../../lib/headspaceViz.js";
 import "../../styles/headspace.css";
 
@@ -29,19 +30,6 @@ const CATALOGO = [
   ["Barbie Girl", "Aqua"], ["Wannabe", "Spice Girls"], ["I Want It That Way", "Backstreet Boys"], ["Bye Bye Bye", "*NSYNC"],
   ["Hung Up", "Madonna"], ["Titanium", "David Guetta"], ["Levels", "Avicii"],
 ].map(([titulo, artista]) => ({ id: `cat-${artista}-${titulo}`, titulo, artista, url: "", duracao: 30, origem: "catalogo" }));
-
-// Prévias oficiais de 30 s pela API pública de busca do iTunes (Apple). Nada é hospedado no site.
-const normaliza = (t) => t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
-async function buscarPrevia(f) {
-  const r = await fetch(`https://itunes.apple.com/search?${new URLSearchParams({ term: `${f.artista} ${f.titulo}`, media: "music", entity: "song", limit: "10" })}`);
-  if (!r.ok) throw new Error("busca");
-  const { results = [] } = await r.json();
-  const t = normaliza(f.titulo), a = normaliza(f.artista).replace(/^the /, "");
-  const ok = results.filter((x) => x.previewUrl);
-  const achou = ok.find((x) => normaliza(x.trackName).startsWith(t.split(" ")[0]) && normaliza(x.artistName).includes(a)) || ok.find((x) => normaliza(x.artistName).includes(a));
-  if (!achou) throw new Error("sem previa");
-  return achou.previewUrl;
-}
 
 const PlayVidro = () => (
   <svg className="hs-play-glifo" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
@@ -77,7 +65,9 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
   const [aleatorio, setAleatorio] = useState(false);
   const [aviso, setAviso] = useState("");
   const [buscando, setBuscando] = useState(false);
-  const cacheUrl = useRef({});
+  const reproducao = useRef(null);
+  const prepararRef = useRef(null);
+  const arquivosImportados = useRef([]);
 
   const faixa = faixas[atual];
   tocandoRef.current = tocando;
@@ -94,6 +84,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     if (!motor.current && audio.current) {
       try { motor.current = criarMotor(audio.current); } catch { motor.current = null; }
       if (motor.current) {
+        audio.current.volume = 1;
         motor.current.volume(mudo ? 0 : volume);
         motor.current.balance(balance);
         bandas.forEach((db, i) => motor.current.banda(i, db));
@@ -102,43 +93,13 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     return motor.current;
   }, [mudo, volume, balance, bandas]);
 
-  const tocar = useCallback(async () => {
-    const el = audio.current;
-    if (!el || !el.src) return;
-    garantirMotor();
-    try {
-      await motor.current?.retomar();
-      await el.play();
-      setAviso("");
-    } catch {
-      setTocando(false);
-      setAviso("Não foi possível reproduzir. Clique em play de novo.");
-    }
-  }, [garantirMotor]);
-
-  const pedido = useRef(0);
-  const carregar = useCallback(async (i, tocarLogo = true) => {
+  prepararRef.current = () => garantirMotor()?.retomar();
+  const carregar = useCallback((i) => {
     const f = faixas[i];
-    const el = audio.current;
-    if (!f || !el) return;
-    const meu = ++pedido.current;
-    setAtual(i); setTempo(0); setDuracao(f.duracao || 0); setAviso("");
-    let url = f.url;
-    if (f.origem === "catalogo") {
-      el.pause(); setBuscando(true);
-      try {
-        url = cacheUrl.current[f.id] || (cacheUrl.current[f.id] = await buscarPrevia(f));
-      } catch {
-        if (meu === pedido.current) { setBuscando(false); setAviso("Não encontrei esta música agora. Tente outra."); }
-        return;
-      }
-      if (meu !== pedido.current) return;
-      setBuscando(false);
-    }
-    el.src = url;
-    el.load();
-    if (tocarLogo) tocar();
-  }, [faixas, tocar]);
+    if (!f || !reproducao.current) return;
+    setAtual(i); setTempo(0); setDuracao(f.duracao || 0);
+    return reproducao.current.carregar(f);
+  }, [faixas]);
 
   const proxima = useCallback((auto = false) => {
     if (!faixas.length) return;
@@ -149,20 +110,15 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
       if (!repetir && auto) { audio.current.pause(); audio.current.currentTime = 0; setTempo(0); return; }
       i = 0;
     }
-    carregar(i, true);
+    carregar(i);
   }, [faixas, atual, aleatorio, repetir, carregar]);
 
   const anterior = () => {
     if (audio.current && audio.current.currentTime > 3) { audio.current.currentTime = 0; return; }
-    if (faixas.length) carregar((atual - 1 + faixas.length) % faixas.length, true);
+    if (faixas.length) carregar((atual - 1 + faixas.length) % faixas.length);
   };
-  const alternarTocar = () => {
-    const el = audio.current;
-    if (!el) return;
-    if (!el.src || buscando) { carregar(atual, true); return; }
-    if (el.paused) tocar(); else el.pause();
-  };
-  const parar = () => { const el = audio.current; if (!el) return; el.pause(); el.currentTime = 0; setTempo(0); };
+  const alternarTocar = () => { if (faixa) reproducao.current?.alternar(faixa); };
+  const parar = () => { reproducao.current?.parar(); setTempo(0); };
 
   // Elemento de áudio e eventos
   useEffect(() => {
@@ -170,11 +126,13 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     el.crossOrigin = "anonymous"; // necessário para o analisador ler o áudio das prévias
     el.preload = "metadata";
     audio.current = el;
+    const controle = criarReproducao({ audio: el, preparar: () => prepararRef.current?.(), estado: ({ aviso, buscando }) => { setAviso(aviso); setBuscando(buscando); } });
+    reproducao.current = controle;
     const aoTempo = () => { if (!arrastando.current) setTempo(el.currentTime); };
     const aoMeta = () => setDuracao(Number.isFinite(el.duration) ? el.duration : 0);
     const aoPlay = () => setTocando(true);
     const aoPausa = () => setTocando(false);
-    const aoErro = () => { setTocando(false); setAviso("Não foi possível carregar esta faixa."); };
+    const aoErro = () => { setTocando(false); controle.erro(); };
     el.addEventListener("timeupdate", aoTempo);
     el.addEventListener("loadedmetadata", aoMeta);
     el.addEventListener("durationchange", aoMeta);
@@ -182,6 +140,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     el.addEventListener("pause", aoPausa);
     el.addEventListener("error", aoErro);
     return () => {
+      controle.fechar(); reproducao.current = null;
       el.pause(); el.removeAttribute("src"); el.load();
       el.removeEventListener("timeupdate", aoTempo); el.removeEventListener("loadedmetadata", aoMeta); el.removeEventListener("durationchange", aoMeta);
       el.removeEventListener("play", aoPlay); el.removeEventListener("pause", aoPausa); el.removeEventListener("error", aoErro);
@@ -198,7 +157,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
   }, [proxima]);
 
   // Volume, balance e equalizador agem de verdade no áudio
-  useEffect(() => { motor.current?.volume(mudo ? 0 : volume); }, [volume, mudo]);
+  useEffect(() => { if (motor.current) motor.current.volume(mudo ? 0 : volume); else if (audio.current) audio.current.volume = mudo ? 0 : volume; }, [volume, mudo]);
   useEffect(() => { motor.current?.balance(balance); }, [balance]);
   useEffect(() => { bandas.forEach((db, i) => motor.current?.banda(i, db)); }, [bandas]);
 
@@ -256,6 +215,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
       duracao: 0,
       origem: "arquivo",
     }));
+    arquivosImportados.current.push(...novas.map(f => f.url));
     setFaixas((l) => [...l, ...novas]);
     novas.forEach((n) => {
       const t = new Audio(); t.preload = "metadata"; t.src = n.url;
@@ -263,7 +223,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     });
     ev.target.value = "";
   };
-  useEffect(() => () => faixas.forEach((f) => f.origem === "arquivo" && URL.revokeObjectURL(f.url)), []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => () => arquivosImportados.current.forEach(url => URL.revokeObjectURL(url)), []);
 
   const arrastarJanela = (e) => {
     if (e.target.closest("button, input, a, label, .hs-gaveta")) return;
@@ -283,7 +243,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     <div className="hs" onPointerDown={arrastarJanela}>
       <div className="hs-quadro">
         {/* Painel esquerdo: equalizador */}
-        <section className={`hs-gaveta hs-gaveta-esq ${eqAberto ? "is-aberta" : ""}`} aria-label="Equalizador" aria-hidden={!eqAberto} inert={!eqAberto ? "" : undefined}>
+        <section className={`hs-gaveta hs-gaveta-esq ${eqAberto ? "is-aberta" : ""}`} aria-label="Equalizador" aria-hidden={!eqAberto} inert={!eqAberto}>
           <div className="hs-poco">
             <div className="hs-linha-ctrl">
               <label>Balance<input type="range" min="-1" max="1" step="0.05" value={balance} onChange={(e) => setBalance(Number(e.target.value))} aria-label="Balance" /></label>
@@ -306,7 +266,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
         </section>
 
         {/* Painel direito: playlist */}
-        <section className={`hs-gaveta hs-gaveta-dir ${listaAberta ? "is-aberta" : ""}`} aria-label="Playlist" aria-hidden={!listaAberta} inert={!listaAberta ? "" : undefined}>
+        <section className={`hs-gaveta hs-gaveta-dir ${listaAberta ? "is-aberta" : ""}`} aria-label="Playlist" aria-hidden={!listaAberta} inert={!listaAberta}>
           <div className="hs-poco">
             <div className="hs-linha-botoes hs-topo-lista">
               <span className="hs-leitura">Playlist</span>
@@ -316,7 +276,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
             <ul className="hs-lista" aria-label="Faixas">
               {lista.map((f, i) => (
                 <li key={f.id}>
-                  <button type="button" className={`hs-faixa ${i === atual ? "is-atual" : ""}`} aria-current={i === atual ? "true" : undefined} onClick={() => carregar(i, true)}>
+                  <button type="button" className={`hs-faixa ${i === atual ? "is-atual" : ""}`} aria-current={i === atual ? "true" : undefined} onClick={() => carregar(i)}>
                     <span className="hs-faixa-nome">{i === atual && (tocando || buscando) ? (buscando ? "… " : "▶ ") : ""}{f.titulo} - {f.artista}</span>
                     <span className="hs-faixa-dur">{f.origem === "catalogo" ? "" : formatarTempo(f.duracao)}</span>
                   </button>
@@ -341,7 +301,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
         {!tocando && <div className="hs-play-sobre" style={area(531, 165, 76)} aria-hidden="true"><PlayVidro /></div>}
 
         <button type="button" className="hs-bt" style={area(441, 164, 90)} onClick={anterior} aria-label="Faixa anterior" />
-        <button type="button" className="hs-bt" style={area(531, 165, 88)} onClick={alternarTocar} aria-label={tocando ? "Pausar" : "Tocar"} />
+        <button type="button" className="hs-bt" style={area(531, 165, 88)} onClick={alternarTocar} aria-label={buscando ? "Cancelar busca" : tocando ? "Pausar" : "Tocar"} />
         <button type="button" className="hs-bt" style={area(621, 165, 88)} onClick={parar} aria-label="Parar" />
         <button type="button" className="hs-bt" style={area(711, 165, 88)} onClick={() => proxima(false)} aria-label="Próxima faixa" />
         <button type="button" className="hs-bt hs-bt-visual" style={area(819, 166, 94)} onClick={() => setMenuVisual((m) => !m)} aria-haspopup="menu" aria-expanded={menuVisual} aria-label={`Escolher visualização. Atual: ${MODOS[modo]}`} />

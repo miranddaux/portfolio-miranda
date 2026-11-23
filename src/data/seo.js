@@ -7,7 +7,7 @@ export const PAGES = [
   {
     path: "/",
     title: "Thiago Miranda · Product Designer pleno",
-    description: "Portfólio de Thiago Miranda: UI craft, UX e design systems do Figma ao código.",
+    description: "Thiago Miranda, Product Designer em São José do Rio Preto, Brasil. UX/UI, Design Systems e e-commerce Shopify, do Figma ao código.",
     ogType: "website",
   },
   {

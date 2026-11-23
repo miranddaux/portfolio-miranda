@@ -175,3 +175,17 @@ As imagens Navaja vêm de https://thiagomirandaux.framer.website/work/navaja.
 A captura atual da LP https://animaeapp.com.br/ continua pendente; o espaço no case
 é identificado como captura em preparação. Nenhum print de referência foi usado
 como se fosse uma tela do ANIMAE.
+
+## Revisão de 23/11/2026
+
+- `logos/codex.png`: marca monocromática oficial, extraída com a máscara de
+  transparência original do [PDF Codex da OpenAI](https://cdn.openai.com/pdf/8a9f00cf-d379-4e20-b06f-dd7ba5196a11/OAI_WhitePaper_Codex-maxxing26.pdf),
+  página 1, imagem xref 776. Uso identificador da ferramenta solicitada pelo Thiago.
+  O fundo azul é CSS; o PNG não foi redesenhado.
+- `xp/apps/purble-place.svg`: ilustração original de bolo feita para este portfólio.
+- Purble Place: conteúdo remoto de DipsyNugget no Scratch, exibido no TurboWarp.
+  Nenhum executável/DLL da Microsoft é incluído. Pesquisa e destinos em
+  [REFINEMENT-2026-11-23.md](REFINEMENT-2026-11-23.md).
+- `cv/*.pdf` e previews: gerados de `src/data/curriculos.js`, a partir dos PDFs
+  PT/EN anexados e das correções explícitas do Thiago em 23/11. Inter vem do pacote
+  local @fontsource/inter. O exportador usa Chromium e PyMuPDF.

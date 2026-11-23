@@ -10,8 +10,11 @@ import useXPLogin from "./hooks/useXPLogin";
 import { CASES } from "./data/cases";
 import { getCaseStudy } from "./data/caseStudies.js";
 import { applySeo, pageFor } from "./data/seo.js";
-import { irParaEntrada, rota } from "./lib/rota.js";
+import { rota } from "./lib/rota.js";
 function initialMode() {
+  // Refresh é uma nova sessão de desktop. Links diretos de cases continuam compartilháveis.
+  const recarregou = performance.getEntriesByType('navigation')[0]?.type === 'reload';
+  if (recarregou || (rota() === '/' && location.hash)) history.replaceState(null, '', '/');
   return "xp";
 }
 function initialWelcome() {
@@ -70,10 +73,8 @@ export default function App() {
   }
 
   function showEntry() {
-    if (path !== "/") {
-      irParaEntrada();
-      return;
-    }
+    history.replaceState(null, '', '/');
+    setPath('/');
     login.reset();
     window.scrollTo({ top: 0 });
   }

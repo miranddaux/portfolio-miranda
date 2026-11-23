@@ -9,7 +9,7 @@ const img = (src, t = 32, classe) => <img className={classe} src={src} alt="" wi
 const imgRede = (r, t = 32) => img(`${MI}/${r.nome.toLowerCase()}.png`, t, `mi-rede mi-rede-${r.nome.toLowerCase()}`);
 
 // Programas usados recentemente: só os que têm logo enviado pelo Thiago.
-const RECENTES = ["Adobe Photoshop", "Adobe Illustrator", "Claude Code", "Cursor", "VS Code", "Figma", "Shopify", "Framer AI"];
+const RECENTES = ["Adobe Photoshop", "Adobe Illustrator", "Claude Code", "Codex", "Cursor", "VS Code", "Figma", "Shopify", "Framer AI"];
 const LOGO_RECENTE = { "Adobe Illustrator": "illustrator", "Adobe Photoshop": "photoshop", "Claude Code": "claude" };
 const logoRecente = (nome) => logoDe(LOGO_RECENTE[nome] || nome);
 
@@ -95,6 +95,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
           <Linha icone={img(`${MI}/campo-minado.png`)} rotulo="Campo Minado" aoClicar={() => aoAbrir("minas")} />
           <Linha icone={img(`${MI}/paint.png`)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
           <Linha icone={img(`${MI}/pinball.png`)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
+          <Linha icone={img("/assets/xp/apps/purble-place.svg")} rotulo="Purble Place" aoClicar={() => aoAbrir("purble")} />
           <div className="mi-todos-area" onMouseEnter={() => abrir("todos")} onMouseLeave={fechar}>
             <Divisor />
             <button type="button" className={`mi-todos ${sub === "todos" ? "is-aberto" : ""}`} onClick={() => alternar("todos")} onKeyDown={teclaSub("todos")} aria-haspopup="menu" aria-expanded={sub === "todos"}>
@@ -118,6 +119,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Mini icone={img(`${MI}/campo-minado.png`, 16)} rotulo="Campo minado" aoClicar={() => aoAbrir("minas")} />
                 <Mini icone={img(`${MI}/paint.png`, 16)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
                 <Mini icone={img(`${MI}/pinball.png`, 16)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
+                <Mini icone={img("/assets/xp/apps/purble-place.svg", 16)} rotulo="Purble Place" aoClicar={() => aoAbrir("purble")} />
                 <Mini icone={img(`${MI}/doom.png`, 16)} rotulo="DOOM" aoClicar={() => aoAbrir("doom")} />
                 <Divisor mini />
               </div>
@@ -135,7 +137,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
             </button>
             {sub === "recente" && (
               <div className="mi-flyout mi-flyout-recente" role="menu" aria-label="Usado recentemente">
-                {RECENTES.map((nome) => <Mini key={nome} icone={img(logoRecente(nome), 16)} rotulo={nome} breve />)}
+                {RECENTES.map((nome) => <Mini key={nome} icone={img(logoRecente(nome), 16, nome === "Codex" ? "mi-logo-codex" : undefined)} rotulo={nome} breve />)}
               </div>
             )}
           </div>
@@ -146,7 +148,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
         </div>
       </div>
       <div className="mi-rodape">
-        <button type="button" className="mi-acao" onClick={aoSair}>
+        <button type="button" className="mi-acao" onClick={aoFazerLogoff}>
           <img src={`${XP}/menu/sair.png`} alt="" width="32" height="32" />
           <span>Sair</span>
         </button>

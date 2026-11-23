@@ -6,6 +6,8 @@
   overflow-anchor: none;
   scrollbar-gutter: stable;
   background: var(--color-neutral-50);
+  container-type: inline-size;
+  container-name: janela;
 }
 .case-document {
   --case-paper: var(--color-neutral-50);

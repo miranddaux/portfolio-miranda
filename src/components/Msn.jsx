@@ -349,7 +349,7 @@ export function MsnConversa({ aoAbrir, aoNavegar, ativa, aoChamar, aoFechar }) {
   const arquivos = () => falarBot(["O arquivo mais útil daqui é o currículo do Thiago, em português e inglês. (I)"], { acao: { rotulo: "Abrir Meu currículo", abrir: "curriculo" } });
   const convidar = () => falarBot(["Quer chamar alguém do seu time? Mande um e-mail para o Thiago e ele responde todo mundo. ({)(})"], { acao: { rotulo: "Abrir Contato", abrir: "contato" } });
   const atividades = () => falarBot(["Uma boa atividade: conhecer o case do ANIMAE. (I)"], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
-  const tema = () => falarBot(["O visual desta janela é uma homenagem ao MSN. (H) O design system do portfólio está nos projetos."], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
+  const tema = () => falarBot(["O visual desta janela é uma homenagem ao MSN. (H)"]);
 
   return (
     <div className="msn-conversa">

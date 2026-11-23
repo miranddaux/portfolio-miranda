@@ -4,6 +4,8 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { PAGES, SITE_URL, SITE_NAME, absolute } from "../src/data/seo.js";
 import { getCaseStudy } from "../src/data/caseStudies.js";
 import { ANIMAE_COPY, ANIMAE_WEB_URL } from "../src/data/animaeCase.js";
+import { ADICIONAL, CONTATO, EXPERIENCIAS } from "../src/data/perfil.js";
+import { BIO_PERFIL } from "../src/data/perfilSearch.js";
 
 const dist = new URL("../dist/", import.meta.url);
 const template = readFileSync(new URL("index.html", dist), "utf8");
@@ -64,7 +66,11 @@ ${c.sections.map((s) => `<section><h2>${esc(s.title)}</h2>\n${blocksHtml(s.block
 }
 
 function homeBody() {
-  return `<main><h1>Thiago Miranda — Product Designer</h1><p>Portfólio de UI craft, UX e design systems do Figma ao código.</p><p><a href="/cases/animae">Case ANIMAE — Aplicativo social de anime</a></p></main>`;
+  const person = { '@context': 'https://schema.org', '@type': 'Person', name: 'Thiago Miranda', jobTitle: 'Product Designer', url: SITE_URL, email: CONTATO.email, address: { '@type': 'PostalAddress', addressLocality: 'São José do Rio Preto', addressRegion: 'SP', addressCountry: 'BR' }, sameAs: [CONTATO.linkedin, CONTATO.behance, CONTATO.dribbble] };
+  return `<main><h1>Thiago Miranda — Product Designer pleno</h1><section><h2>Sobre mim</h2><p>${esc(BIO_PERFIL)}</p></section>
+<section><h2>Experiência</h2>${EXPERIENCIAS.map(x => `<article><h3>${esc(x.cargo)} · ${esc(x.empresa)}</h3><p>${esc(x.periodo)}</p><p>${esc(x.texto)}</p></article>`).join('')}</section>
+<section><h2>Projetos e prêmios</h2><p><a href="/cases/animae">Case ANIMAE — Aplicativo social de anime</a></p>${ADICIONAL.map(x => `<article><h3>${esc(x.cargo)}</h3><p>${esc(x.texto)}</p></article>`).join('')}</section>
+<section><h2>Contato e currículo</h2><p><a href="mailto:${CONTATO.email}">${esc(CONTATO.email)}</a> · <a href="${CONTATO.linkedin}">LinkedIn</a></p><p><a href="/assets/cv/thiago-miranda-curriculo-pt.pdf">Currículo em português</a> · <a href="/assets/cv/thiago-miranda-resume-en.pdf">Resume in English</a></p></section></main><script type="application/ld+json">${JSON.stringify(person).replace(/</g, '\\u003c')}</script>`;
 }
 
 for (const page of PAGES) {

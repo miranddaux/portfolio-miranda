@@ -72,3 +72,9 @@ Branch: `claude/modo-xp-desktop`. Prévia privada: https://claude.ai/artifact/9z
 
 ## Como testar
 `npm install`, `npm run dev`, `npm run check:design` (escala de 8 px; exceções: `replica-figma.css`, `painel-xp.css`, `msn.css`).
+
+## Continuidade — 23/11
+
+Leia primeiro [REFINEMENT-2026-11-23.md](REFINEMENT-2026-11-23.md): revisão desktop,
+fontes editáveis dos CVs, correções Headspace, Purble Place e verificações atuais.
+Prioridade seguinte: Thiago fecha QA desktop do ANIMAE antes da rodada mobile/WMP.
