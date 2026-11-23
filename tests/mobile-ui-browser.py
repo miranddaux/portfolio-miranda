@@ -46,11 +46,10 @@ async def main():
    assert await page.locator('.case-document a:has(img)').count()==0
    assert await page.locator('.case-document a[aria-label^="Ampliar"]').count()==0
    banner=page.locator('.case-draco-banner');await banner.scroll_into_view_if_needed()
-   assert await banner.evaluate('(e)=>{const r=e.getBoundingClientRect(),i=e.querySelector("img").getBoundingClientRect();return i.top>=r.top && i.bottom<=r.bottom && i.left>=r.left && i.right<=r.right}')
-   assert await banner.locator('img').evaluate('(e)=>getComputedStyle(e).maskImage')=='none'
+   assert 'linear-gradient' in await banner.locator('img').evaluate('(e)=>getComputedStyle(e).maskImage')
    await page.screenshot(path=str(OUT/f'banner-{width}.png'))
    await home.scroll_into_view_if_needed();await page.screenshot(path=str(OUT/f'animation-{width}.png'))
-   await c.close();print('autoplay before scroll / no image links / full banner',width,'PASS',flush=True)
+   await c.close();print('autoplay before scroll / no image links / banner fade',width,'PASS',flush=True)
   c=await b.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True,reduced_motion='reduce',ignore_https_errors=True);page=await c.new_page();await page.goto(BASE+'/cases/animae');screen=page.locator('.case-device-screen.has-demo').first;await screen.scroll_into_view_if_needed();await page.wait_for_timeout(500);assert await screen.locator('.ad-root').count()==0;assert await screen.locator('img').get_attribute('alt');await c.close();print('reduced-motion PASS',flush=True)
   await b.close()
 asyncio.run(main())

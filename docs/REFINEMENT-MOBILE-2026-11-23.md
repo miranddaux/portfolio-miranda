@@ -9,8 +9,10 @@ usar uma recriação Scratch do Purble Place. Mantém a base XP aprovada e o cas
   menus, mega menus). PDFs e WebPs regenerados, ambos em uma página.
 - Copy do ANIMAE usa usuário/usuários no lugar de pessoa/pessoas; lista pessoal
   continua sendo o nome correto da funcionalidade.
-- Banner principal: container 528 px, imagem com 84% da altura, centralizada e sem fade.
-  O mockup inteiro cabe no quadro, mantendo sua proporção e inclinação.
+- Banner principal: enquadramento anterior restaurado: container 528 px, imagem
+  de 576 px, proporção e inclinação preservadas. O fade deixa a base transparente
+  antes do recorte original do braço, sem mostrar a borda cortada da mão.
+  No mobile, mantém os tamanhos proporcionais de 320/384 px com o mesmo fade.
 - Cards de decisões continuam em 2×2, agora com `--case-surface` como os demais.
 - O selo Em estudo permanece em flex alinhado ao centro do título.
 - MSN: removida a referência ao DS do portfólio; LinkedIn, e-mail e WhatsApp são
@@ -121,7 +123,7 @@ Fontes verificadas além da pesquisa anterior:
 - `python tests/mobile-ui-browser.py` (mesma variável de URL): contato em 3+2,
   recuo medido de 16 px, controles de janela com 40 px, fotos maiores, home
   centralizada, Headspace mobile inativo e autoplay das demos antes de qualquer rolagem ou clique, sem controles e sem
-  links de imagem. O mockup do banner fica inteiro dentro do quadro, sem máscara.
+  links de imagem. O banner usa novamente a máscara inferior para esconder o recorte do braço.
 - Centro do título Desenvolvimento e do selo: ambos em y=603 na medição mobile.
 
 Os avisos de bundle principal e import do motor DOOM são anteriores e persistem.

@@ -302,11 +302,13 @@
 .case-stage-body .case-journeys { margin: calc(-1 * var(--space-2)) 0 0; }
 
 /* Banner do Draco: ocupa a largura da grade, fundo surface, imagem some para baixo */
-.case-draco-banner { display: flex; justify-content: center; align-items: center; height: 528px; overflow: hidden; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-draco-banner { display: flex; justify-content: center; align-items: flex-start; height: 528px; overflow: hidden; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
 .case-document > .case-draco-banner { margin-top: var(--space-5); }
 .case-document > .case-draco-banner + .case-overview-card { margin-top: var(--space-6); }
-.case-draco-banner img { display: block; width: auto; height: 84%; max-width: 80%; object-fit: contain; translate: 8% 0; rotate: 8deg; transform-origin: center; }
-@media (max-width: 640px) { .case-draco-banner { height: 432px; } }
+.case-draco-banner img { display: block; width: auto; height: 576px; max-width: none; margin-top: var(--space-4); translate: 8% 0; rotate: 8deg; transform-origin: 50% 35%; -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 84%); mask-image: linear-gradient(to bottom, #000 60%, transparent 84%); animation: draco-subir 900ms ease-out both; }
+@keyframes draco-subir { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .case-draco-banner img { animation: none; } }
+@media (max-width: 640px) { .case-draco-banner { height: 432px; } .case-draco-banner img { height: 496px; } }
 /* Largura de leitura: confortável, nem larga nem curta */
 
 
@@ -348,6 +350,7 @@
 @container janela (max-width: 720px) {
   .case-document > .case-overview-card { grid-template-columns: 1fr; gap: var(--space-3); }
   .case-draco-banner { height: 368px; }
+  .case-draco-banner img { height: 400px; }
   .case-hero-shot { height: 400px; }
 }
 @container janela (max-width: 640px) {

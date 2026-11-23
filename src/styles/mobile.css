@@ -295,6 +295,10 @@
   .case-draco-banner {
     height: 320px;
   }
+  .case-draco-banner img {
+    height: 384px;
+    margin-top: var(--space-2);
+  }
   /* Tags e chips: discretos, não competem com o título */
   .case-tags {
     margin-bottom: var(--space-2);
@@ -401,6 +405,9 @@
   }
   .case-draco-banner {
     height: 272px;
+  }
+  .case-draco-banner img {
+    height: 320px;
   }
 }
 
