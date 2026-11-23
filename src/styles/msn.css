@@ -1059,3 +1059,13 @@ button.msn-aba-x:hover {
   .msn-ferramenta { min-width: 40px; }
   .msn-ferramenta span { display: none; }
 }
+
+/* Revisão de leitura: mensagens, links de contato e ações com respiro. */
+.msn-atalhos { gap: 8px 16px; margin-top: 8px; }
+.msn-msg { margin-block: 8px; }
+.msn-msg .msn-diz { margin-bottom: 8px; color: #536078; }
+.msn-msg .msn-texto { line-height: 24px; overflow-wrap: anywhere; }
+.msn-texto a { color: #002697; text-underline-offset: 2px; }
+.msn-msg .msn-links { gap: 8px 16px; margin-top: 16px !important; }
+.msn-msg .msn-acao { margin-top: 16px; margin-right: 16px; line-height: 24px; }
+.msn-msg .msn-links button { line-height: 24px; }

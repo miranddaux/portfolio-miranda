@@ -15,9 +15,11 @@ Medium permanece inativo. O desktop inclui currículo PT/EN, MSN, mídia e jogos
 
 Nesta revisão: currículos e previews atualizados, texto Shopify sem checkout,
 copy/grid/decisões/banner do ANIMAE refinados, reprodução Headspace corrigida,
-Codex no menu e Purble Place via recriação comunitária no TurboWarp.
+Codex no menu, links diretos no MSN e adaptação mobile com Media Player vertical.
+Purble Place original fica em pesquisa; a recriação foi retirada.
 Reiniciar, logoff e refresh voltam a Sobre. Links novos para cases seguem diretos.
-Detalhes, fontes e limites: [revisão de 23/11](docs/REFINEMENT-2026-11-23.md).
+Detalhes: [desktop](docs/REFINEMENT-2026-11-23.md) e
+[continuação mobile e pesquisa do original](docs/REFINEMENT-MOBILE-2026-11-23.md).
 
 ## Rodar
 

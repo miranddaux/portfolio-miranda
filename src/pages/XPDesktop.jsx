@@ -12,7 +12,6 @@ import AppPrompt from "../components/apps/AppPrompt.jsx";
 import AppVisualizador from "../components/apps/AppVisualizador.jsx";
 import AppCampoMinado from "../components/apps/AppCampoMinado.jsx";
 import AppPaint from "../components/apps/AppPaint.jsx";
-import AppPurblePlace from "../components/apps/AppPurblePlace.jsx";
 import AppPinball from "../components/apps/AppPinball.jsx";
 import DoomGameWindow from "../components/DoomGameWindow.jsx";
 import AvisoSoDesktop from "../components/apps/AvisoSoDesktop.jsx";
@@ -48,7 +47,6 @@ const APPS = [
   { id: "paint", name: "Paint", title: "Paint", icon: "app", barraIcone: "/assets/xp/figma/paint.png" },
   { id: "pinball", name: "Pinball", title: "3D Pinball", icon: "app", barraIcone: "/assets/xp/apps/pinball.png" },
   { id: "doom", name: "DOOM", title: "DOOM (1993)", icon: "app", barraIcone: "/assets/xp/menu-icons/doom.png" },
-  { id: "purble", name: "Purble Place", title: "Purble Place", icon: "app", barraIcone: "/assets/xp/apps/purble-place.svg" },
   { id: "case", name: "Case", title: "Case", icon: "document" },
 ];
 const APPS_JANELAS = [
@@ -66,7 +64,6 @@ const APPS_JANELAS = [
   { ...APPS.find(a => a.id === "paint"), janelaIcone: "/assets/xp/figma/paint.png", largura: 800, altura: 560, cascata: 2, minLargura: 480, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "pinball"), janelaIcone: "/assets/xp/apps/pinball.png", largura: 640, altura: 560, cascata: 3, minLargura: 400, minAltura: 360, semStatus: true },
   { ...APPS.find(a => a.id === "doom"), janelaIcone: "/assets/xp/menu-icons/doom.png", largura: 960, altura: 720, cascata: 1, minLargura: 480, minAltura: 360, semStatus: true },
-  { ...APPS.find(a => a.id === "purble"), janelaIcone: "/assets/xp/apps/purble-place.svg", largura: 880, altura: 752, cascata: 1, minLargura: 480, minAltura: 480, semStatus: true },
   { ...APPS.find(a => a.id === "case"), janelaIcone: "/assets/xp/figma/pasta.png", largura: 1120, altura: 800, cascata: 0, minLargura: 480 },
 ];
 export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate }) {
@@ -297,7 +294,6 @@ export default function XPDesktop({ setMode, onShowWelcome, project, onNavigate 
               {app.id === "visualizador" && <AppVisualizador />}
               {app.id === "minas" && <AppCampoMinado />}
               {app.id === "paint" && <AppPaint />}
-              {app.id === "purble" && <AppPurblePlace />}
               {app.id === "pinball" && (ehMobile
                 ? <AvisoSoDesktop nome="3D Pinball" icone="/assets/xp/apps/pinball.png" texto="O Pinball usa as teclas Shift, barra de espaço e Z/. para as aletas — não dá para jogar com o toque." />
                 : <AppPinball />)}

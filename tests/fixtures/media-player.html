@@ -1,0 +1,4 @@
+<!doctype html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"></head><body style="margin:0;background:#5179e1"><div id="test"></div><script type="module">
+import React from 'react';import{createRoot}from'react-dom/client';import Player from '/src/components/WindowsMediaPlayer.jsx';
+createRoot(document.getElementById('test')).render(React.createElement(Player,{playlist:[{src:'/qa.mp4',title:'Vídeo de demonstração'},{src:'/qa.mp4?second=1',title:'Segundo vídeo'}],onClose:()=>window.__closed=true,onMinimize:()=>window.__minimized=true}));
+</script></body></html>

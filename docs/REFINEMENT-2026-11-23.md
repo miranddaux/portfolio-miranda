@@ -1,5 +1,8 @@
 # Revisão desktop — 23/11/2026
 
+Continuação mais recente: [mobile, player e Purble Place original](REFINEMENT-MOBILE-2026-11-23.md).
+A recriação descrita abaixo foi retirada após nova orientação do Thiago.
+
 Base: `main` em `15e876a` (merge PR #49). O código e a copy aprovados nessa base
 prevalecem sobre os planos históricos de três modos, Playground e outros cases.
 A rodada mobile/Windows Media Player do texto anexado fica para a próxima fase.

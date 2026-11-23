@@ -189,3 +189,7 @@ como se fosse uma tela do ANIMAE.
 - `cv/*.pdf` e previews: gerados de `src/data/curriculos.js`, a partir dos PDFs
   PT/EN anexados e das correções explícitas do Thiago em 23/11. Inter vem do pacote
   local @fontsource/inter. O exportador usa Chromium e PyMuPDF.
+
+Atualização posterior de 23/11: a integração remota Purble/Scratch foi retirada;
+o SVG aparece apenas no item inativo do menu. A moldura mobile do WMP é CSS,
+com glifos, thumbs e bandeira existentes. Ver [continuação mobile](REFINEMENT-MOBILE-2026-11-23.md).

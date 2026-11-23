@@ -17,7 +17,7 @@ export const CURRICULOS_TEXTO = {
     jobs: [
       ['Agência Disco, Remoto', 'Product Designer', 'Mar 2025 – Atual', [
         'Desenho lojas Shopify do briefing ao handoff: home, páginas de produto (PDP), coleções (PLP), carrinho e páginas institucionais, com foco em usabilidade e conversão (CRO).',
-        'Organizo a arquitetura de informação, os mega menus e os cards de produto para facilitar a descoberta e a navegação pela loja.',
+        'Organizo a arquitetura de informação, menus e megamenus e os cards de produto para facilitar a descoberta e a navegação pela loja.',
         'Estruturo Design Systems no Figma com tokens, componentes e wireframes reutilizáveis. Documento estados e interações no handoff para aproximar design e implementação.',
       ]],
       ['M8K Agência, Remoto', 'Visual Designer', 'Set 2023 – Fev 2025', [
@@ -67,7 +67,7 @@ export const CURRICULOS_TEXTO = {
     jobs: [
       ['Agência Disco, Remote', 'Product Designer', 'Mar 2025 – Present', [
         'Design Shopify storefronts from brief to handoff: home, product pages (PDP), collection pages (PLP), cart and brand pages, focusing on usability and conversion rate optimization (CRO).',
-        'Structure information architecture, mega menus and product cards to support product discovery and navigation.',
+        'Structure information architecture, menus, mega menus and product cards to support product discovery and navigation.',
         'Build Figma Design Systems with tokens, reusable components and wireframes. Document states and interactions for developer handoff, connecting design and implementation.',
       ]],
       ['M8K Agência, Remote', 'Visual Designer', 'Sep 2023 – Feb 2025', [

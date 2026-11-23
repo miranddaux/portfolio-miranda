@@ -18,7 +18,7 @@ export const EXPERIENCIAS = [
     empresa: "Agência Disco",
     periodo: "mar 2025 – atual",
     texto:
-      "Desenho lojas Shopify do briefing ao handoff: home, páginas de produto (PDP), coleções (PLP), carrinho e páginas institucionais. Organizo a arquitetura de informação, os mega menus e os cards de produto para facilitar a descoberta e a compra. No Figma, estruturo Design Systems com componentes e tokens e documento estados e interações para o desenvolvimento, com foco em usabilidade, consistência e conversão (CRO).",
+      "Desenho lojas Shopify do briefing ao handoff: home, páginas de produto (PDP), coleções (PLP), carrinho e páginas institucionais. Organizo a arquitetura de informação, menus e megamenus e os cards de produto para facilitar a descoberta e a compra. No Figma, estruturo Design Systems com componentes e tokens e documento estados e interações para o desenvolvimento, com foco em usabilidade, consistência e conversão (CRO).",
   },
   {
     cargo: "Visual Designer",

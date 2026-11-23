@@ -66,6 +66,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
   const [aviso, setAviso] = useState("");
   const [buscando, setBuscando] = useState(false);
   const reproducao = useRef(null);
+  const demoIniciada = useRef(null);
   const prepararRef = useRef(null);
   const arquivosImportados = useRef([]);
 
@@ -100,6 +101,15 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
     setAtual(i); setTempo(0); setDuracao(f.duracao || 0);
     return reproducao.current.carregar(f);
   }, [faixas]);
+
+  // A música de demonstração é a seleção padrão ao abrir, sem buscar no catálogo.
+  useEffect(() => {
+    const demo = faixas[0];
+    if (demo?.origem === 'demo' && demoIniciada.current !== demo.url) {
+      demoIniciada.current = demo.url;
+      carregar(0);
+    }
+  }, [faixas, carregar]);
 
   const proxima = useCallback((auto = false) => {
     if (!faixas.length) return;
@@ -241,6 +251,7 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
 
   return (
     <div className="hs" onPointerDown={arrastarJanela}>
+      <div className="hs-mobile-header"><strong>Headspace</strong><button type="button" onClick={onMinimize} aria-label="Minimizar">−</button><button type="button" onClick={onClose} aria-label="Fechar">×</button></div>
       <div className="hs-quadro">
         {/* Painel esquerdo: equalizador */}
         <section className={`hs-gaveta hs-gaveta-esq ${eqAberto ? "is-aberta" : ""}`} aria-label="Equalizador" aria-hidden={!eqAberto} inert={!eqAberto}>
@@ -322,6 +333,21 @@ export default function HeadspacePlayer({ onClose, onMinimize, onDragStart }) {
         </div>
         {aviso && <p className="hs-aviso" role="status">{aviso}</p>}
       </div>
+      <section className="hs-mobile-controls" aria-label="Reprodução de música">
+        <div className="hs-mobile-track"><img src="/assets/xp/menu-icons/headspace.png" width="48" height="48" alt=""/><div><strong>{faixa?.titulo}</strong><span>{faixa?.artista}</span></div></div>
+        <label className="hs-mobile-progress">{formatarTempo(tempo)} / {formatarTempo(duracao)}<input type="range" min="0" max={duracao || 1} step="0.1" value={Math.min(tempo,duracao||1)} onChange={buscar} disabled={!duracao} aria-label="Posição da música" /></label>
+        <div className="hs-mobile-buttons">
+          <button type="button" className="xp-button" onClick={anterior}>Anterior</button>
+          <button type="button" className="xp-button" onClick={alternarTocar}>{buscando ? 'Cancelar' : tocando ? 'Pausar' : 'Tocar'}</button>
+          <button type="button" className="xp-button" onClick={() => proxima(false)}>Próxima</button>
+          <button type="button" className="xp-button" onClick={parar}>Parar</button>
+          <button type="button" className="xp-button" aria-pressed={mudo} onClick={()=>setMudo(v=>!v)}>Mudo</button>
+          <button type="button" className="xp-button" aria-expanded={listaAberta} onClick={()=>setListaAberta(v=>!v)}>Playlist</button>
+        </div>
+        <label>Volume<input type="range" min="0" max="1" step="0.05" value={volume} onChange={e=>{setVolume(Number(e.target.value));setMudo(false);}} aria-label="Volume da música"/></label>
+        {aviso && <p role="status">{aviso}</p>}
+        {listaAberta && <ul className="hs-mobile-list">{lista.map((f,i)=><li key={f.id}><button type="button" aria-current={i===atual?'true':undefined} onClick={()=>carregar(i)}>{f.titulo} — {f.artista}</button></li>)}</ul>}
+      </section>
     </div>
   );
 }

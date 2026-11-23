@@ -5,6 +5,7 @@ import AnimaeHomeDemo from "./AnimaeHomeDemo.jsx";
 import AnimaeFeedDemo from "./AnimaeFeedDemo.jsx";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
+import { useMediaQuery } from "../lib/useEhMobile.js";
 import { applySeo, pageFor } from "../data/seo.js";
 
 // Botões do topo: protótipo e case completo. Mesmo .xp-button (azul com ▸) em todo o case.
@@ -71,7 +72,8 @@ class DemoSegura extends Component {
 const DEMOS = { lista: AnimaeListaDemo, home: AnimaeHomeDemo, feed: AnimaeFeedDemo };
 
 export function Shot({ media, phone }) {
-  const Demo = DEMOS[media.demo];
+  const mobile = useMediaQuery("(max-width:760px), (max-width:1024px) and (pointer:coarse)");
+  const Demo = mobile ? null : DEMOS[media.demo];
   if (Demo) return <figure className="case-media is-phone">
     <div className="case-device"><span className="case-device-screen">
       <img className="case-demo-poster" src={media.src} alt="" width={media.width} height={media.height} decoding="async" aria-hidden="true" />
@@ -79,9 +81,9 @@ export function Shot({ media, phone }) {
     </span></div>
   </figure>;
   return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
-    <div className={phone ? "case-device" : "case-shot"}>
+    <a className={phone ? "case-device" : "case-shot"} href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar: ${media.alt}`}>
       <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" decoding="async" /></span>
-    </div>
+    </a>
   </figure>;
 }
 
@@ -128,9 +130,9 @@ function FlowStory({ index, module }) {
       <h4>{row.label}</h4>
       <ol className="case-flow-row" style={{ "--passos": row.items.length }}>
         {row.items.map((m) => <li key={m.src}>
-          <div className="case-flow-shot">
+          <a className="case-flow-shot" href={m.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar: ${m.alt}`}>
             <img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" />
-          </div>
+          </a>
         </li>)}
       </ol>
     </section>)}
@@ -168,7 +170,7 @@ function Blocks({ blocks }) {
       case "ul": return <ul key={i} className="case-copy-list">{b.items.map((t) => <li key={t}>{t}</li>)}</ul>;
       case "trio": return <div key={i}>
         <Frame layout="trio" items={b.images} phone label={b.label} />
-        <p className="case-frame-dica" aria-hidden="true">Deslize para ver as três telas</p>
+        <p className="case-frame-dica" aria-hidden="true">Toque em uma tela para ampliar</p>
       </div>;
       case "journey": return <div key={i} className="case-journeys"><div className="case-journey"><ol>{b.items.map((t, n) => <li key={t}><span className="case-journey-step" aria-hidden="true">{String(n + 1).padStart(2, "0")}</span><span>{t}</span></li>)}</ol></div></div>;
       case "ol": return <ol key={i} className="case-copy-list is-ordered">{b.items.map((t) => <li key={t}>{t}</li>)}</ol>;
@@ -201,7 +203,7 @@ function EditorialSection({ index, section }) {
             <div className="case-flow-text"><h3>{it.h3}</h3><Blocks blocks={it.blocks} /></div>
             <section className="case-flow-frame" aria-label={it.label}>
               <ol className="case-flow-row" style={{ "--passos": it.images.length }}>
-                {it.images.map((m) => <li key={m.src}><div className="case-flow-shot"><img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" /></div></li>)}
+                {it.images.map((m) => <li key={m.src}><a className="case-flow-shot" href={m.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar: ${m.alt}`}><img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" /></a></li>)}
               </ol>
             </section>
           </article>

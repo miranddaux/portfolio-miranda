@@ -12,9 +12,14 @@ export default function JanelaPlayer({ ativa, oculta, onFocar, onFechar, onMinim
   const [caixa, setCaixa] = useState(null);
 
   useLayoutEffect(() => {
-    const pai = raiz.current?.offsetParent || document.body;
-    const w = limitar(Math.min(720, pai.clientWidth - 32), 320, 720);
-    setCaixa({ x: Math.max(0, Math.round((pai.clientWidth - w) / 2)), y: 48, w });
+    const ajustar = () => {
+      const pai = raiz.current?.offsetParent || document.body;
+      const w = limitar(Math.min(720, pai.clientWidth - 32), 288, 720);
+      setCaixa(c => ({ x: c ? limitar(c.x, 0, Math.max(0,pai.clientWidth-w)) : Math.max(0, Math.round((pai.clientWidth - w) / 2)), y: c ? limitar(c.y,0,Math.max(0,window.innerHeight-96)) : 48, w }));
+    };
+    ajustar();
+    window.addEventListener('resize', ajustar);
+    return () => window.removeEventListener('resize', ajustar);
   }, []);
 
   const arrastar = (e) => {

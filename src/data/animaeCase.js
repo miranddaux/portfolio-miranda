@@ -35,7 +35,7 @@ export const ANIMAE_COPY = {
       blocks: [
         { type: "h3", text: "Uma experiência que continua depois do episódio" },
         { type: "p", text: "A proposta do ANIMAE é reunir em um mesmo lugar a descoberta de animes, o acompanhamento de episódios e a interação entre fãs." },
-        { type: "p", text: "O usuário pode organizar sua lista, acompanhar o progresso, descobrir o que outras pessoas estão assistindo e participar de atividades dentro da comunidade." },
+        { type: "p", text: "O usuário pode organizar sua lista, acompanhar o progresso, descobrir o que outros usuários estão assistindo e participar de atividades dentro da comunidade." },
         { type: "p", text: "A ideia é simples: fazer com que assistir a um anime seja o começo de uma experiência que também envolve acompanhar, descobrir e compartilhar." },
         { type: "trio", label: "Home, Minha Lista e Perfil do ANIMAE", images: [{ ...IMG.home, demo: "home" }, { ...IMG.lista, demo: "lista" }, IMG.perfil] },
       ],
@@ -44,7 +44,7 @@ export const ANIMAE_COPY = {
       id: "problema", title: "O problema e a mudança de direção",
       blocks: [
         { type: "h3", text: "Como aproximar descoberta, acompanhamento e comunidade sem depender de um streaming próprio?" },
-        { type: "p", text: "Eu sentia falta de um espaço que reunisse três coisas: descobrir animes, acompanhar o que estou assistindo e trocar ideias com outras pessoas que gostam das mesmas histórias." },
+        { type: "p", text: "Eu sentia falta de um espaço que reunisse três coisas: descobrir animes, acompanhar o que estou assistindo e trocar ideias com outros usuários que gostam das mesmas histórias." },
         { type: "p", text: "No começo, tentei resolver isso criando o ANIMAE+, uma plataforma de streaming social, com catálogo, player próprio e salas para assistir junto." },
         { type: "p", text: "Cheguei a desenhar esses fluxos e interfaces, incluindo o CinéRoom, uma proposta de sala compartilhada." },
         { type: "p", text: "Mas, estudando melhor o projeto, percebi que manter um catálogo próprio envolveria licenças, custos e uma estrutura que não seriam viáveis para alguém construindo tudo sozinho." },
@@ -58,12 +58,12 @@ export const ANIMAE_COPY = {
       id: "pesquisa", title: "Pesquisa e descoberta",
       blocks: [
         { type: "h3", text: "O que os relatos de outros fãs mostravam?" },
-        { type: "p", text: "Antes de avançar nas novas interfaces, procurei entender como as pessoas utilizavam aplicativos de acompanhamento de anime e o que comentavam sobre essas experiências." },
+        { type: "p", text: "Antes de avançar nas novas interfaces, procurei entender como os usuários utilizavam aplicativos de acompanhamento de anime e o que comentavam sobre essas experiências." },
         { type: "p", text: "Analisei fontes públicas, avaliações e relatos de usuários de produtos existentes." },
         { type: "p", text: "Entre os pontos que apareceram estavam interfaces carregadas, experiências de comunidade pouco integradas ao acompanhamento e limitações de personalização." },
         { type: "p", text: "Esses relatos ajudaram a orientar as primeiras hipóteses do ANIMAE." },
         { type: "p", text: "Mas é importante deixar claro: **foi uma pesquisa de mesa, não uma pesquisa com entrevistas ou testes de usabilidade.**" },
-        { type: "p", text: "Por isso, as oportunidades identificadas ainda precisam ser validadas com pessoas utilizando o produto." },
+        { type: "p", text: "Por isso, as oportunidades identificadas ainda precisam ser validadas com usuários utilizando o produto." },
         { type: "facts", items: [
           ["Método", "pesquisa de mesa e análise de relatos públicos."],
           ["Oportunidade", "aproximar acompanhamento, descoberta e interação entre fãs."],
@@ -81,7 +81,7 @@ export const ANIMAE_COPY = {
         ] },
         { type: "decision", n: "02", h3: "Explorar antes de criar uma conta", blocks: [
           { type: "p", text: "Deixei a home e o catálogo acessíveis como visitante, para que o cadastro não fosse a primeira barreira para conhecer o aplicativo." },
-          { type: "p", text: "**A hipótese:** conhecer a proposta na prática pode ajudar a pessoa a decidir se quer criar seu perfil. Ainda preciso validar isso com usuários." },
+          { type: "p", text: "**A hipótese:** conhecer a proposta na prática pode ajudar o usuário a decidir se quer criar seu perfil. Ainda preciso validar isso com usuários." },
           { type: "p", text: "**A troca:** menos personalização no primeiro acesso, mas uma entrada com menos etapas." },
         ] },
         { type: "decision", n: "03", h3: "Gamificação com regras no servidor", blocks: [
@@ -92,7 +92,7 @@ export const ANIMAE_COPY = {
         { type: "decision", n: "04", h3: "Criar valor antes de a comunidade crescer", blocks: [
           { type: "p", text: "Criei o Quiz do Draco: perguntas sobre anime com tempo, vidas e pontuação. Assim, existe uma atividade individual mesmo enquanto a comunidade ainda está começando." },
           { type: "p", text: "**A hipótese:** oferecer valor antes de existir um feed ativo. O efeito na retenção ainda precisa ser medido." },
-          { type: "p", text: "**A troca:** o quiz cria uma atividade independente da quantidade de pessoas no feed, mas não substitui as interações reais entre os fãs." },
+          { type: "p", text: "**A troca:** o quiz cria uma atividade independente da quantidade de usuários no feed, mas não substitui as interações reais entre os fãs." },
         ] },
       ],
     },
@@ -106,7 +106,7 @@ export const ANIMAE_COPY = {
         { type: "p", text: "O aplicativo foi desenvolvido com React Native e Expo, utiliza Supabase no back-end e possui uma versão web hospedada na Vercel." },
         { type: "p", text: "O desenvolvimento contou com apoio de IA, enquanto continuei responsável pelas decisões de produto, interface e direção visual." },
         { type: "h3", text: "Jornada principal do usuário" },
-        { type: "journey", items: ["Explorar e descobrir animes", "Adicionar títulos à lista pessoal", "Registrar o progresso dos episódios", "Interagir com outras pessoas da comunidade"] },
+        { type: "journey", items: ["Explorar e descobrir animes", "Adicionar títulos à lista pessoal", "Registrar o progresso dos episódios", "Interagir com outros usuários da comunidade"] },
       ],
     },
     {
@@ -136,7 +136,7 @@ export const ANIMAE_COPY = {
           { type: "p", text: "O Draco reage às respostas, trazendo um pouco da personalidade do aplicativo para a interação." },
         ] },
         { type: "flow", h3: "Onboarding e cadastro", label: "Fluxo de entrada", images: [IMG.onb, IMG.login, IMG.generos, IMG.streaming], blocks: [
-          { type: "p", text: "O fluxo de entrada apresenta o universo do ANIMAE. Antes de criar uma conta, a pessoa pode explorar a home e o catálogo para entender o que o aplicativo oferece." },
+          { type: "p", text: "O fluxo de entrada apresenta o universo do ANIMAE. Antes de criar uma conta, o usuário pode explorar a home e o catálogo para entender o que o aplicativo oferece." },
           { type: "p", text: "Quis dar contexto antes de pedir um compromisso: primeiro conhecer o produto, depois decidir se faz sentido criar um perfil." },
           { type: "p", text: "Durante o cadastro, a escolha de gêneros favoritos e plataformas de streaming ajuda a orientar a personalização inicial da experiência." },
           { type: "p", text: "Distribuí essas escolhas ao longo do fluxo para apresentar o produto aos poucos, sem concentrar todas as decisões na primeira abertura. A intenção é reduzir a carga inicial; o efeito ainda precisa ser avaliado em testes de usabilidade." },
@@ -153,7 +153,7 @@ export const ANIMAE_COPY = {
         { type: "p", text: "Ainda preciso realizar testes de usabilidade estruturados e acompanhar o comportamento de usuários reais para entender o que funciona, o que precisa mudar e quais funcionalidades realmente geram valor." },
         { type: "h3", text: "Métricas que pretendo acompanhar" },
         { type: "kpis", items: [
-          ["Ativação", "proporção de pessoas que realizam uma primeira ação relevante após o cadastro."],
+          ["Ativação", "proporção de usuários que realizam uma primeira ação relevante após o cadastro."],
           ["Retenção D7", "proporção de usuários que retornam sete dias depois, com definição clara da coorte e do evento de retorno."],
           ["Participação", "atividade no feed e publicações por usuário ao longo do período."],
         ] },
@@ -165,7 +165,7 @@ export const ANIMAE_COPY = {
       blocks: [
         { type: "h3", text: "Mudar a solução não significa abandonar o problema" },
         { type: "p", text: "O maior aprendizado do **ANIMAE** foi entender que mudar de direção não significa necessariamente começar de novo." },
-        { type: "p", text: "Comecei tentando criar uma plataforma de streaming e construí um espaço para acompanhar animes e conectar pessoas que gostam das mesmas histórias." },
+        { type: "p", text: "Comecei tentando criar uma plataforma de streaming e construí um espaço para acompanhar animes e conectar usuários que gostam das mesmas histórias." },
         { type: "p", text: "Nesse processo, precisei tomar decisões que foram além das interfaces: cortar funcionalidades, reorganizar o escopo, construir um Design System e aproximar design e código." },
         { type: "p", text: "O próximo desafio é colocar essas decisões à prova." },
         { type: "p", text: "**Quero descobrir se a experiência que construí realmente faz sentido para quem vai utilizar o ANIMAE.**" },
