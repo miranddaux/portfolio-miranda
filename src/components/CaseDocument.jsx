@@ -61,7 +61,7 @@ export function CaseJourney({ journeys }) {
   </div>)}</div>;
 }
 
-// Só a tela, sem legenda. O alt descreve a imagem; clicar amplia em nova aba.
+// Telas ilustrativas, sem navegação ao clicar. O alt descreve a imagem.
 // Se a demonstração em código falhar, a captura da tela continua visível por baixo (nunca fica um celular vazio).
 class DemoSegura extends Component {
   state = { falhou: false };
@@ -72,21 +72,19 @@ class DemoSegura extends Component {
 const DEMOS = { lista: AnimaeListaDemo, home: AnimaeHomeDemo, feed: AnimaeFeedDemo };
 
 export function Shot({ media, phone }) {
-  const [parada, setParada] = useState(false);
   const reduzirMovimento = useMediaQuery("(prefers-reduced-motion: reduce)");
   const Demo = DEMOS[media.demo];
-  const animar = !parada && !reduzirMovimento;
+  const animar = !reduzirMovimento;
   if (Demo) return <figure className="case-media is-phone">
     <div className="case-device"><span className="case-device-screen has-demo">
       <img className="case-demo-poster" src={media.src} alt={animar ? "" : media.alt} width={media.width} height={media.height} decoding="async" aria-hidden={animar || undefined} />
       {animar && <DemoSegura><Demo /></DemoSegura>}
     </span></div>
-    {!reduzirMovimento && <button type="button" className="xp-button xp-button--back case-demo-toggle" onClick={() => setParada(v => !v)}>{parada ? "Reproduzir animação" : "Parar animação"}</button>}
   </figure>;
   return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
-    <a className={phone ? "case-device" : "case-shot"} href={media.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar: ${media.alt}`}>
+    <div className={phone ? "case-device" : "case-shot"}>
       <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" decoding="async" /></span>
-    </a>
+    </div>
   </figure>;
 }
 
@@ -133,9 +131,9 @@ function FlowStory({ index, module }) {
       <h4>{row.label}</h4>
       <ol className="case-flow-row" style={{ "--passos": row.items.length }}>
         {row.items.map((m) => <li key={m.src}>
-          <a className="case-flow-shot" href={m.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar: ${m.alt}`}>
+          <div className="case-flow-shot">
             <img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" />
-          </a>
+          </div>
         </li>)}
       </ol>
     </section>)}
@@ -173,7 +171,6 @@ function Blocks({ blocks }) {
       case "ul": return <ul key={i} className="case-copy-list">{b.items.map((t) => <li key={t}>{t}</li>)}</ul>;
       case "trio": return <div key={i}>
         <Frame layout="trio" items={b.images} phone label={b.label} />
-        <p className="case-frame-dica" aria-hidden="true">Toque em uma tela para ampliar</p>
       </div>;
       case "journey": return <div key={i} className="case-journeys"><div className="case-journey"><ol>{b.items.map((t, n) => <li key={t}><span className="case-journey-step" aria-hidden="true">{String(n + 1).padStart(2, "0")}</span><span>{t}</span></li>)}</ol></div></div>;
       case "ol": return <ol key={i} className="case-copy-list is-ordered">{b.items.map((t) => <li key={t}>{t}</li>)}</ol>;
@@ -206,7 +203,7 @@ function EditorialSection({ index, section }) {
             <div className="case-flow-text"><h3>{it.h3}</h3><Blocks blocks={it.blocks} /></div>
             <section className="case-flow-frame" aria-label={it.label}>
               <ol className="case-flow-row" style={{ "--passos": it.images.length }}>
-                {it.images.map((m) => <li key={m.src}><a className="case-flow-shot" href={m.src} target="_blank" rel="noopener noreferrer" aria-label={`Ampliar: ${m.alt}`}><img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" /></a></li>)}
+                {it.images.map((m) => <li key={m.src}><div className="case-flow-shot"><img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" /></div></li>)}
               </ol>
             </section>
           </article>

@@ -61,7 +61,7 @@
 .case-frame-row { display: grid; }
 .case-frame-lead { display: flex; justify-content: center; --shot: 320px; }
 .case-frame .case-media { min-width: 0; margin: 0; }
-.case-frame .is-phone a { display: block; width: fit-content; max-width: 100%; margin-inline: auto; }
+.case-frame .is-phone .case-device { display: block; width: fit-content; max-width: 100%; margin-inline: auto; }
 .case-frame .is-phone .case-device { position: relative; width: var(--shot, 240px); padding: var(--space-1); border: 2px solid var(--color-neutral-700); border-radius: var(--space-4); background: var(--color-neutral-950); box-shadow: inset 0 0 0 1px var(--color-neutral-500), 0 8px 24px #1b243633; }
 .case-frame .case-device-screen { display: block; aspect-ratio: 9 / 19.5; overflow: hidden; border-radius: var(--space-3); }
 .case-frame .case-device-screen img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
@@ -246,7 +246,6 @@
 .case-flow-row li { display: grid; gap: var(--space-1); align-content: start; min-width: 0; }
 .case-flow-shot { display: block; aspect-ratio: 9 / 19.5; overflow: hidden; border: 2px solid var(--color-neutral-700); border-radius: var(--space-2); background: var(--color-neutral-950); }
 .case-flow-shot img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-.case-flow-shot:focus-visible { outline: 2px solid var(--case-accent); outline-offset: 2px; }
 @media (max-width: 860px) {
   .case-flow-row { grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: 120px; overflow-x: auto; padding-bottom: var(--space-1); }
 }
@@ -303,13 +302,11 @@
 .case-stage-body .case-journeys { margin: calc(-1 * var(--space-2)) 0 0; }
 
 /* Banner do Draco: ocupa a largura da grade, fundo surface, imagem some para baixo */
-.case-draco-banner { display: flex; justify-content: center; align-items: flex-start; height: 528px; overflow: hidden; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
+.case-draco-banner { display: flex; justify-content: center; align-items: center; height: 528px; overflow: hidden; background: var(--case-surface); border: 1px solid var(--case-line); border-radius: var(--raio-medio); }
 .case-document > .case-draco-banner { margin-top: var(--space-5); }
 .case-document > .case-draco-banner + .case-overview-card { margin-top: var(--space-6); }
-.case-draco-banner img { display: block; width: auto; height: 576px; max-width: none; margin-top: var(--space-4); translate: 8% 0; rotate: 8deg; transform-origin: 50% 35%; -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 84%); mask-image: linear-gradient(to bottom, #000 60%, transparent 84%); animation: draco-subir 900ms ease-out both; }
-@keyframes draco-subir { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .case-draco-banner img { animation: none; } }
-@media (max-width: 640px) { .case-draco-banner { height: 432px; } .case-draco-banner img { height: 496px; } }
+.case-draco-banner img { display: block; width: auto; height: 84%; max-width: 80%; object-fit: contain; translate: 8% 0; rotate: 8deg; transform-origin: center; }
+@media (max-width: 640px) { .case-draco-banner { height: 432px; } }
 /* Largura de leitura: confortável, nem larga nem curta */
 
 
@@ -351,7 +348,6 @@
 @container janela (max-width: 720px) {
   .case-document > .case-overview-card { grid-template-columns: 1fr; gap: var(--space-3); }
   .case-draco-banner { height: 368px; }
-  .case-draco-banner img { height: 400px; }
   .case-hero-shot { height: 400px; }
 }
 @container janela (max-width: 640px) {
@@ -374,6 +370,3 @@
 }
 
 .case-frame-dica { display: none; }
-
-/* Controle explícito para parar os loops, além da preferência de movimento reduzido. */
-.xp-button.case-demo-toggle { display: flex; justify-content: center; width: fit-content; min-height: var(--space-5); margin: var(--space-2) auto 0; font-size: var(--text-12); }

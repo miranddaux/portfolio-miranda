@@ -1,13 +1,15 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useMediaQuery } from "../lib/useEhMobile.js";
 
 // Base das demos do ANIMAE: escala a tela de 430 px para a largura do container,
-// avisa quando está visível e respeita prefers-reduced-motion.
+// inicia os loops ao abrir o case e respeita a preferência de movimento reduzido.
 export const DESIGN = { width: 430, height: 932 };
 
 export function useDemoTela(varEscala = "--ad-scale") {
   const root = useRef(null);
   const screen = useRef(null);
-  const [visivel, setVisivel] = useState(false);
+  const [paginaVisivel, setPaginaVisivel] = useState(() => document.visibilityState !== "hidden");
+  const reduzirMovimento = useMediaQuery("(prefers-reduced-motion: reduce)");
 
   useLayoutEffect(() => {
     const el = root.current;
@@ -23,11 +25,11 @@ export function useDemoTela(varEscala = "--ad-scale") {
   }, [varEscala]);
 
   useEffect(() => {
-    const io = new IntersectionObserver(([e]) => setVisivel(e.isIntersecting), { threshold: 0.4 });
-    io.observe(root.current);
-    return () => io.disconnect();
+    const atualizar = () => setPaginaVisivel(document.visibilityState !== "hidden");
+    document.addEventListener("visibilitychange", atualizar);
+    return () => document.removeEventListener("visibilitychange", atualizar);
   }, []);
 
-  const animar = visivel && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const animar = paginaVisivel && !reduzirMovimento;
   return { root, screen, animar };
 }

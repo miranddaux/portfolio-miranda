@@ -109,7 +109,7 @@
   margin: var(--space-4) 0;
   padding: 0;
 }
-.case-media a {
+.case-media .case-shot {
   display: block;
   border: 1px solid var(--case-line);
   border-radius: 8px;

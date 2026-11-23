@@ -9,7 +9,8 @@ usar uma recriação Scratch do Purble Place. Mantém a base XP aprovada e o cas
   menus, mega menus). PDFs e WebPs regenerados, ambos em uma página.
 - Copy do ANIMAE usa usuário/usuários no lugar de pessoa/pessoas; lista pessoal
   continua sendo o nome correto da funcionalidade.
-- Banner principal: container 528 px, imagem 576 px, fade inferior mantido.
+- Banner principal: container 528 px, imagem com 84% da altura, centralizada e sem fade.
+  O mockup inteiro cabe no quadro, mantendo sua proporção e inclinação.
 - Cards de decisões continuam em 2×2, agora com `--case-surface` como os demais.
 - O selo Em estudo permanece em flex alinhado ao centro do título.
 - MSN: removida a referência ao DS do portfólio; LinkedIn, e-mail e WhatsApp são
@@ -27,10 +28,11 @@ usar uma recriação Scratch do Purble Place. Mantém a base XP aprovada e o cas
 - Telas de produto: uma por quadro no celular, proporção original e altura
   natural. Não usa o corte/deslocamento das duplas do desktop. As demos de Home,
   Minha Lista e Feed voltaram a rodar também no mobile, escaladas para a largura
-  real do celular e respeitando movimento reduzido. Cada demo pode ser parada
-  e reiniciada por botão; sem movimento, a captura real mantém o conteúdo. Telas
-  estáticas têm ampliação.
-- Onboarding segue a mesma regra, com um quadro por tela e links de ampliação.
+  real do celular e respeitando movimento reduzido. Os loops começam ao abrir o
+  case, sem exigir 40% da tela visível, rolagem ou clique. Não há botões de parar
+  ou reproduzir. Em aba oculta, os timers param; em movimento reduzido, aparece
+  a captura real. As imagens são ilustrativas, sem links de ampliação.
+- Onboarding segue a mesma regra, com um quadro por tela, sem links de ampliação.
 - Celulares e tablets de toque usam essa adaptação; desktop preserva suas grades.
 - Boas-vindas automáticas não cobrem o campo de mensagem no celular. O usuário
   pode abrir o aviso pelo ícone de informação. Abrir o bot não força o teclado.
@@ -72,7 +74,9 @@ música. Isso trata falhas temporárias, sem prometer disponibilidade da Apple.
 ## Purble Place — original ainda pendente
 
 Thiago rejeitou a recriação e informou que não tem os arquivos originais.
-A integração Scratch foi retirada, e o item fica inativo com Original em pesquisa.
+A integração Scratch foi retirada, e o item fica oculto tanto no menu principal quanto em Todos os programas.
+A flag MOSTRAR_PURBLE_PLACE permanece false; os pontos de integração e o asset
+continuam no código para uma futura retomada.
 Não foi trocado por outra recriação nem renomeado para parecer o original.
 
 Fontes verificadas além da pesquisa anterior:
@@ -116,7 +120,8 @@ Fontes verificadas além da pesquisa anterior:
   esperados; a indisponibilidade espontânea relatada não se repetiu nesse teste.
 - `python tests/mobile-ui-browser.py` (mesma variável de URL): contato em 3+2,
   recuo medido de 16 px, controles de janela com 40 px, fotos maiores, home
-  centralizada, Headspace mobile inativo e loop/stop/restart das demos.
+  centralizada, Headspace mobile inativo e autoplay das demos antes de qualquer rolagem ou clique, sem controles e sem
+  links de imagem. O mockup do banner fica inteiro dentro do quadro, sem máscara.
 - Centro do título Desenvolvimento e do selo: ambos em y=603 na medição mobile.
 
 Os avisos de bundle principal e import do motor DOOM são anteriores e persistem.
@@ -125,7 +130,9 @@ Os avisos de bundle principal e import do motor DOOM são anteriores e persistem
 
 - Corrigida a soma indevida de recuos: rolagem sem padding + limite com 16 px;
   título, contato e listas não somam outro recuo. Contato usa três redes na
-  primeira linha e duas na segunda; Orkut/MSN ocupam uma linha com duas colunas.
+  primeira linha e duas na segunda; até 380 px usa duas colunas e WhatsApp na
+  linha inteira. Ícone ao lado do texto e altura de 40 px. Orkut/MSN ocupam
+  uma linha com duas colunas.
 - Tags de perfil, contexto e ferramentas do case compartilham superfície azul,
   texto escuro, borda e brilho interno discretos. Swipe horizontal sem scrollbar.
 - Barra de título e primeira linha da janela têm 40 px. Controles têm alvo real

@@ -6,6 +6,8 @@ import { useMediaQuery } from "../lib/useEhMobile.js";
 
 const XP = "/assets/xp";
 const MI = "/assets/xp/menu-icons";
+// Mantido para retomar a integração quando houver uma versão original jogável.
+const MOSTRAR_PURBLE_PLACE = false;
 const img = (src, t = 32, classe) => <img className={classe} src={src} alt="" width={t} height={t} />;
 const imgRede = (r, t = 32) => img(`${MI}/${r.nome.toLowerCase()}.png`, t, `mi-rede mi-rede-${r.nome.toLowerCase()}`);
 
@@ -97,7 +99,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
           <Linha icone={img(`${MI}/campo-minado.png`)} rotulo="Campo Minado" aoClicar={() => aoAbrir("minas")} />
           <Linha icone={img(`${MI}/paint.png`)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
           <Linha icone={img(`${MI}/pinball.png`)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
-          <Linha icone={img("/assets/xp/apps/purble-place.svg")} rotulo="Purble Place" sub="Original em pesquisa" breve />
+          {MOSTRAR_PURBLE_PLACE && <Linha icone={img("/assets/xp/apps/purble-place.svg")} rotulo="Purble Place" sub="Original em pesquisa" breve />}
           <div className="mi-todos-area" onMouseEnter={() => abrir("todos")} onMouseLeave={fechar}>
             <Divisor />
             <button type="button" className={`mi-todos ${sub === "todos" ? "is-aberto" : ""}`} onClick={() => alternar("todos")} onKeyDown={teclaSub("todos")} aria-haspopup="menu" aria-expanded={sub === "todos"}>
@@ -121,7 +123,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Mini icone={img(`${MI}/campo-minado.png`, 16)} rotulo="Campo minado" aoClicar={() => aoAbrir("minas")} />
                 <Mini icone={img(`${MI}/paint.png`, 16)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
                 <Mini icone={img(`${MI}/pinball.png`, 16)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
-                <Mini icone={img("/assets/xp/apps/purble-place.svg", 16)} rotulo="Purble Place — original em pesquisa" breve />
+                {MOSTRAR_PURBLE_PLACE && <Mini icone={img("/assets/xp/apps/purble-place.svg", 16)} rotulo="Purble Place — original em pesquisa" breve />}
                 <Mini icone={img(`${MI}/doom.png`, 16)} rotulo="DOOM" aoClicar={() => aoAbrir("doom")} />
                 <Divisor mini />
               </div>

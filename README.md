@@ -16,10 +16,12 @@ Medium permanece inativo. O desktop inclui currículo PT/EN, MSN, mídia e jogos
 Nesta revisão: currículos e previews atualizados, texto Shopify sem checkout,
 copy/grid/decisões/banner do ANIMAE refinados, reprodução Headspace corrigida,
 Codex no menu, links diretos no MSN e adaptação mobile com Media Player vertical.
-Mobile: contato 3+2, conteúdo com 16 px, tags uniformes, controles compactos,
+Mobile: contato compacto com ícone ao lado do texto, conteúdo com 16 px, tags
+uniformes, controles compactos,
 atalhos centralizados e demos do ANIMAE em loop. Headspace fica desativado no
 celular e recupera falhas transitórias no desktop.
-Purble Place original fica em pesquisa; a recriação foi retirada.
+Purble Place original fica oculto no menu, com a flag de integração desativada;
+a recriação foi retirada. As imagens dos cases não abrem arquivos ao clicar.
 Reiniciar, logoff e refresh voltam a Sobre. Links novos para cases seguem diretos.
 Detalhes: [desktop](docs/REFINEMENT-2026-11-23.md) e
 [continuação mobile e pesquisa do original](docs/REFINEMENT-MOBILE-2026-11-23.md).
