@@ -1,4 +1,5 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { DESIGN, useDemoTela } from "./useDemoTela.js";
 import { ArrowLeft, Bell, Bookmark, Check, Ellipsis, Home, Newspaper, Signal, Wifi, BatteryFull } from "lucide-react";
 import "@fontsource/urbanist/latin-400.css";
 import "@fontsource/urbanist/latin-500.css";
@@ -9,7 +10,6 @@ import "@fontsource/inter/latin-700.css";
 // Tela "Minha lista" do ANIMAE refeita em código, com os tokens do design system do app
 // (Urbanist, neutros 0-100, laranja #ff5c02, raios 10/20/999). Os números são ilustrativos do layout.
 // A animação é só React + CSS, em looping (sem interação): marca o episódio, a barra enche e o anime vai para Concluídos.
-const DESIGN = { width: 430, height: 932 };
 const ITEMS = [
   { title: "Attack on Titan", thumb: "/assets/cases/animae-thumb-aot.webp", ep: 14, total: 25, last: "Último: E14 · há 2 dias" },
   { title: "Demon Slayer", thumb: "/assets/cases/animae-thumb-demon.webp", ep: 8, total: 26, last: "Último: E8 · há 5 dias" },
@@ -17,36 +17,12 @@ const ITEMS = [
 ];
 
 export default function AnimaeListaDemo() {
-  const root = useRef(null);
-  const screen = useRef(null);
+  const { root, screen, animar } = useDemoTela();
   const [fase, setFase] = useState(0); // 0 parado, 1 toque, 2 barra enchendo, 3 concluído, 4 saindo da lista
   const [ep, setEp] = useState(ITEMS[0].ep);
   const [ciclo, setCiclo] = useState(0);
-  const [visivel, setVisivel] = useState(false);
-
-  // Escala a tela de 430 px para a largura do container.
-  useLayoutEffect(() => {
-    const el = root.current;
-    const fit = () => {
-      const largura = el.clientWidth || el.getBoundingClientRect().width;
-      if (largura > 0) screen.current?.style.setProperty("--ad-scale", String(largura / DESIGN.width));
-    };
-    fit();
-    const ro = new ResizeObserver(fit);
-    ro.observe(el);
-    window.addEventListener("load", fit);
-    return () => { ro.disconnect(); window.removeEventListener("load", fit); };
-  }, []);
-
-  // O looping só corre enquanto a tela está visível.
   useEffect(() => {
-    const io = new IntersectionObserver(([e]) => setVisivel(e.isIntersecting), { threshold: 0.4 });
-    io.observe(root.current);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!visivel || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+    if (!animar) return undefined;
     const ids = [];
     const at = (ms, fn) => ids.push(setTimeout(fn, ms));
     const item = ITEMS[0];
@@ -69,7 +45,7 @@ export default function AnimaeListaDemo() {
     };
     volta();
     return () => ids.forEach((id) => { clearTimeout(id); clearInterval(id); });
-  }, [visivel]);
+  }, [animar]);
 
   const fora = fase >= 4;
   return (

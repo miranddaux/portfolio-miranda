@@ -5,6 +5,7 @@ import AnimaeHomeDemo from "./AnimaeHomeDemo.jsx";
 import AnimaeFeedDemo from "./AnimaeFeedDemo.jsx";
 import PrototypeModal, { prototypeEmbedUrl } from "./PrototypeModal.jsx";
 import { nextCaseStudy, projectLinkAction } from "../data/caseStudies.js";
+import { useMediaQuery } from "../lib/useEhMobile.js";
 import { applySeo, pageFor } from "../data/seo.js";
 
 // Botões do topo: protótipo e case completo. Mesmo .xp-button (azul com ▸) em todo o case.
@@ -60,7 +61,7 @@ export function CaseJourney({ journeys }) {
   </div>)}</div>;
 }
 
-// Só a tela, sem legenda. O alt descreve a imagem; clicar amplia em nova aba.
+// Telas ilustrativas, sem navegação ao clicar. O alt descreve a imagem.
 // Se a demonstração em código falhar, a captura da tela continua visível por baixo (nunca fica um celular vazio).
 class DemoSegura extends Component {
   state = { falhou: false };
@@ -71,11 +72,13 @@ class DemoSegura extends Component {
 const DEMOS = { lista: AnimaeListaDemo, home: AnimaeHomeDemo, feed: AnimaeFeedDemo };
 
 export function Shot({ media, phone }) {
+  const reduzirMovimento = useMediaQuery("(prefers-reduced-motion: reduce)");
   const Demo = DEMOS[media.demo];
+  const animar = !reduzirMovimento;
   if (Demo) return <figure className="case-media is-phone">
-    <div className="case-device"><span className="case-device-screen">
-      <img className="case-demo-poster" src={media.src} alt="" width={media.width} height={media.height} decoding="async" aria-hidden="true" />
-      <DemoSegura><Demo /></DemoSegura>
+    <div className="case-device"><span className="case-device-screen has-demo">
+      <img className="case-demo-poster" src={media.src} alt={animar ? "" : media.alt} width={media.width} height={media.height} decoding="async" aria-hidden={animar || undefined} />
+      {animar && <DemoSegura><Demo /></DemoSegura>}
     </span></div>
   </figure>;
   return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
@@ -168,7 +171,6 @@ function Blocks({ blocks }) {
       case "ul": return <ul key={i} className="case-copy-list">{b.items.map((t) => <li key={t}>{t}</li>)}</ul>;
       case "trio": return <div key={i}>
         <Frame layout="trio" items={b.images} phone label={b.label} />
-        <p className="case-frame-dica" aria-hidden="true">Deslize para ver as três telas</p>
       </div>;
       case "journey": return <div key={i} className="case-journeys"><div className="case-journey"><ol>{b.items.map((t, n) => <li key={t}><span className="case-journey-step" aria-hidden="true">{String(n + 1).padStart(2, "0")}</span><span>{t}</span></li>)}</ol></div></div>;
       case "ol": return <ol key={i} className="case-copy-list is-ordered">{b.items.map((t) => <li key={t}>{t}</li>)}</ol>;

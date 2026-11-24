@@ -32,10 +32,11 @@ export default function ProjectsExplorer({ onNavigate, embedded = false }) {
   const searchId = useId();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [filter, setFilter] = useState("todos");
   const [notice, setNotice] = useState("");
   const searchRef = useRef(null);
   const items = [...CASE_STUDIES.map((c) => ({ ...c, category: c.type, available: true })), ...PENDING_PROJECTS];
-  const visible = items.filter((p) => normalize(`${p.title} ${p.category} ${(p.categories || []).join(" ")}`).includes(normalize(query.trim())));
+  const visible = items.filter((p) => (filter === "todos" || (filter === "disponiveis" ? p.available : !p.available)) && normalize(`${p.title} ${p.category} ${(p.categories || []).join(" ")}`).includes(normalize(query.trim())));
   function toggleSearch() {
     setSearchOpen(!searchOpen);
     setQuery("");
@@ -52,6 +53,12 @@ export default function ProjectsExplorer({ onNavigate, embedded = false }) {
         <input ref={searchRef} id={`${searchId}-input`} type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="ANIMAE, Navaja, e-commerce…" />
         <button type="button" className="xp-button" onClick={toggleSearch}>Fechar busca</button>
       </form>}
+      <div className="projects-filter" role="group" aria-label="Filtrar projetos">
+        <label htmlFor={`${searchId}-filter`}>Exibir</label>
+        <select id={`${searchId}-filter`} value={filter} onChange={e=>setFilter(e.target.value)}>
+          <option value="todos">Todos os projetos</option><option value="disponiveis">Cases disponíveis</option><option value="construcao">Em construção</option>
+        </select>
+      </div>
       <div className="projects-folders-scroll">
         <h2 className="sr-only">Projetos selecionados</h2>
         <ul className="projects-folders" aria-label="Pastas de projetos">
@@ -75,7 +82,7 @@ export default function ProjectsExplorer({ onNavigate, embedded = false }) {
         </ul>
         {!visible.length && <p className="projects-empty" role="status">Nenhum projeto encontrado. Tente outro nome ou categoria.</p>}
       </div>
-      <p className="projects-notice sr-only" role="status">{query ? `${visible.length} pastas encontradas.` : notice}</p>
+      <p className="projects-notice sr-only" role="status">{query || filter !== "todos" ? `${visible.length} pastas encontradas.` : notice}</p>
     </div>
   );
 }

@@ -72,3 +72,10 @@ Branch: `claude/modo-xp-desktop`. Prévia privada: https://claude.ai/artifact/9z
 
 ## Como testar
 `npm install`, `npm run dev`, `npm run check:design` (escala de 8 px; exceções: `replica-figma.css`, `painel-xp.css`, `msn.css`).
+
+## Continuidade — 23/11
+
+Leia primeiro [REFINEMENT-2026-11-23.md](REFINEMENT-2026-11-23.md): revisão desktop,
+fontes editáveis dos CVs, correções Headspace, Purble Place e verificações atuais.
+Continuação autorizada e implementada: [mobile/WMP e busca do Purble original](REFINEMENT-MOBILE-2026-11-23.md).
+Purble original permanece pendente; a recriação foi retirada. Próximo passo: QA do Thiago na prévia.

@@ -70,3 +70,26 @@
 .hs-menu-visual { position: absolute; z-index: 7; top: 16%; right: 2%; min-width: 168px; margin: 0; padding: 4px; list-style: none; border: 2px solid #2f7000; border-radius: 8px; background: #150818; box-shadow: 0 4px 10px #000a; }
 .hs-menu-visual button { display: block; width: 100%; padding: 4px 8px; border: 0; border-radius: 4px; background: transparent; color: #eaffd0; font: 14px/16px "Segoe UI", Tahoma, sans-serif; text-align: left; cursor: pointer; }
 .hs-menu-visual button:hover, .hs-menu-visual button:focus-visible { background: #b02be0; color: #fff; outline: none; }
+
+.hs-mobile-header, .hs-mobile-controls { display: none; }
+@media (max-width: 760px), (max-width: 1024px) and (pointer: coarse) {
+  .janela-headspace { left: 16px !important; top: 16px !important; width: calc(100% - 32px) !important; height: auto !important; max-height: calc(100dvh - 64px); overflow-y: auto; border: 2px solid #002697; border-radius: 8px; background: #eef2fa; }
+  .hs { height: auto; cursor: default; touch-action: pan-y; }
+  .hs-quadro { display: none; }
+  .hs-mobile-header { display: flex; align-items: center; min-height: 48px; padding-left: 16px; background: linear-gradient(#5179e1,#002697); color: #fff; }
+  .hs-mobile-header strong { margin-right: auto; }
+  .hs-mobile-header button { width: 48px; min-height: 48px; border: 0; background: none; color: #fff; font-size: 24px; }
+  .hs-mobile-controls { display: grid; gap: 16px; padding: 16px; color: #1b2436; }
+  .hs-mobile-track { display: flex; gap: 16px; align-items: center; }
+  .hs-mobile-track div { display: grid; gap: 8px; }
+  .hs-mobile-track span { font-size: 14px; }
+  .hs-mobile-controls label { display: grid; gap: 8px; }
+  .hs-mobile-controls input { width: 100%; min-height: 48px; accent-color: #002697; }
+  .hs-mobile-buttons { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+  .hs-mobile-buttons button { min-width: 0; min-height: 48px; padding: 8px; }
+  .hs-mobile-list { max-height: 240px; overflow-y: auto; padding: 0; margin: 0; list-style: none; border: 1px solid #bac3d2; background: #fff; }
+  .hs-mobile-list button { width: 100%; min-height: 48px; padding: 8px; border: 0; border-bottom: 1px solid #d7dde8; background: #fff; color: #1b2436; text-align: left; font: inherit; }
+  .hs-mobile-list button[aria-current] { background: #002697; color: #fff; }
+}
+
+@media (max-width: 760px), (max-width: 1024px) and (pointer: coarse) { .hs-mobile-buttons .xp-button::before { display: none; } }

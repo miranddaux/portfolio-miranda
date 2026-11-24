@@ -45,13 +45,25 @@ const CONTATOS = [
   { nome: "Duda Lima", status: "revisão de matemática :'(", online: false },
 ];
 
+// Contatos conhecidos viram links sem interpretar HTML da conversa.
+const CONTATO_REGEX = new RegExp([CONTATO.linkedin, CONTATO.linkedinTexto, CONTATO.email, CONTATO.whatsapp].sort((a,b)=>b.length-a.length).map(s=>s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|'), 'gi');
+function TextoContato({ texto }) {
+  const partes = texto.split(new RegExp(`(${CONTATO_REGEX.source})`, 'gi'));
+  return partes.map((parte,i) => {
+    if (i % 2 === 0) return parte;
+    const mail = parte.includes('@');
+    const href = mail ? `mailto:${CONTATO.email}` : parte.toLowerCase().includes('linkedin') ? CONTATO.linkedin : CONTATO.whatsapp;
+    return <a key={i} href={href} target={mail ? undefined : '_blank'} rel={mail ? undefined : 'noopener noreferrer'}>{parte}</a>;
+  });
+}
+
 // Texto com emoticons do MSN no lugar dos códigos (:) ;) (L) ...).
 export function ComEmoticons({ texto, tamanho = 19 }) {
   return partesComEmoticons(texto).map((p, i) =>
     p.emoticon ? (
       <img key={i} className="msn-emo" src={p.emoticon.src} alt={p.emoticon.codigo} title={p.emoticon.nome} width={tamanho} height={tamanho} />
     ) : (
-      <span key={i}>{p.texto}</span>
+      <span key={i}><TextoContato texto={p.texto} /></span>
     ),
   );
 }
@@ -171,6 +183,7 @@ export function MsnContatos({ aoConversar }) {
             </p>
             <nav className="msn-atalhos" aria-label="Redes sociais de Thiago Miranda">
               {REDES_PRINCIPAIS.map((rede) => <SocialLink key={rede} rede={rede} />)}
+              <a className="msn-email" href={`mailto:${CONTATO.email}`}>E-mail</a>
             </nav>
           </div>
         </div>
@@ -300,7 +313,7 @@ export function MsnConversa({ aoAbrir, aoNavegar, ativa, aoChamar, aoFechar }) {
   }, [msgs]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (ativa) campo.current?.focus({ preventScroll: true });
+    if (ativa && !window.matchMedia("(pointer: coarse)").matches) campo.current?.focus({ preventScroll: true });
   }, [ativa]);
 
   useEffect(() => {
@@ -349,7 +362,7 @@ export function MsnConversa({ aoAbrir, aoNavegar, ativa, aoChamar, aoFechar }) {
   const arquivos = () => falarBot(["O arquivo mais útil daqui é o currículo do Thiago, em português e inglês. (I)"], { acao: { rotulo: "Abrir Meu currículo", abrir: "curriculo" } });
   const convidar = () => falarBot(["Quer chamar alguém do seu time? Mande um e-mail para o Thiago e ele responde todo mundo. ({)(})"], { acao: { rotulo: "Abrir Contato", abrir: "contato" } });
   const atividades = () => falarBot(["Uma boa atividade: conhecer o case do ANIMAE. (I)"], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
-  const tema = () => falarBot(["O visual desta janela é uma homenagem ao MSN. (H) O design system do portfólio está nos projetos."], { acao: { rotulo: "Abrir Meus projetos", abrir: "cases" } });
+  const tema = () => falarBot(["O visual desta janela é uma homenagem ao MSN. (H)"]);
 
   return (
     <div className="msn-conversa">

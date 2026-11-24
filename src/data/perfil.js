@@ -18,7 +18,7 @@ export const EXPERIENCIAS = [
     empresa: "Agência Disco",
     periodo: "mar 2025 – atual",
     texto:
-      "Atuo no UX/UI de e-commerces Shopify, do discovery ao handoff. Desenho jornadas de compra, páginas de produto (PDP), coleções (PLP) e soluções de cross-sell e upsell. Também estruturo Design Systems com componentes e design tokens no Figma, com foco em usabilidade e otimização de conversão (CRO).",
+      "Desenho lojas Shopify do briefing ao handoff: home, páginas de produto (PDP), coleções (PLP), carrinho e páginas institucionais. Organizo a arquitetura de informação, menus e megamenus e os cards de produto para facilitar a descoberta e a compra. No Figma, estruturo Design Systems com componentes e tokens e documento estados e interações para o desenvolvimento, com foco em usabilidade, consistência e conversão (CRO).",
   },
   {
     cargo: "Visual Designer",
@@ -54,7 +54,7 @@ export const ADICIONAL = [
     cargo: "1º lugar | Vencedor hackathon SouJunior",
     empresa: "Designer e mentor",
     periodo: "set 2026",
-    texto: "Atuei como designer e mentor do squad vencedor do Hackathon da SouJunior, conquistando o 1º lugar entre 30 equipes participantes.",
+    texto: "Atuei como designer e mentor do squad vencedor do Hackathon SouJunior: 1º lugar entre 30 equipes. Contribuí com wireframes, Design System, navegação e protótipo para transformar a proposta da equipe em uma interface consistente.",
   },
 ];
 

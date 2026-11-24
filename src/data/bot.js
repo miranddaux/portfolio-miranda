@@ -1,3 +1,4 @@
+import { CONTATO } from "./perfil.js";
 // Respostas prontas do Thiago Bot (sem IA de verdade: procura palavras-chave na pergunta).
 // Só usar fatos confirmados pelo Thiago. Nada de números ou promessas inventadas.
 
@@ -87,6 +88,7 @@ const INTENCOES = [
     respostas: [
       "O jeito mais rápido é pelo LinkedIn: linkedin.com/in/thiagomirandaui.",
       "Ou por e-mail: contato.thiagohmiranda@gmail.com.",
+      `Também pelo WhatsApp: ${CONTATO.whatsapp}`,
     ],
     acao: { rotulo: "Abrir Contato", abrir: "contato" },
   },

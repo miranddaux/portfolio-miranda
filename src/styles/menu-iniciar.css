@@ -99,3 +99,6 @@
 .mi-colunas { grid-template-columns: 224px minmax(0, 1fr); }
 .mi-flyout-todos { width: 256px; }
 .mi-acao img { width: 24px; height: 24px; }
+
+/* Marca oficial em branco, sobre um fundo azul para manter contraste. */
+.mi-logo-codex { background: var(--color-blue-600); border-radius: 4px; }

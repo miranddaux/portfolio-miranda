@@ -58,3 +58,62 @@
 .wmp-yt { position: absolute; inset: 0; background: #000; }
 .wmp-yt iframe { display: block; width: 100%; height: 100%; border: 0; pointer-events: none; }
 .wmp-yt-clique { position: absolute !important; inset: 0; z-index: 2; background: transparent !important; cursor: default; }
+
+/* A mesma mídia e os mesmos controles ganham uma moldura vertical no celular. */
+.wmp-mobile-tools, .wmp-mobile-list, .wmp-mobile-brand, .wmp-mobile-note { display: none; }
+@media (max-width: 760px), (max-width: 1024px) and (pointer: coarse) {
+  .janela-player { left: 50% !important; transform: translateX(-50%); max-width: 480px; top: 16px !important; width: calc(100% - 32px) !important; max-height: calc(100dvh - 64px - env(safe-area-inset-bottom)); overflow-y: auto; overscroll-behavior: contain; border-radius: 24px; touch-action: pan-y; }
+  .wmp { color: #0c2a80; }
+  .wmp .wmp-escala { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-template-areas: 'tools tools tools min close' 'list list list list list' 'screen screen screen screen screen' 'info info info info info' 'rewind timeline timeline timeline forward' 'play stop prev next mute' 'volume volume volume volume volume' 'brand brand brand brand brand' 'note note note note note'; align-items: center; gap: 8px; aspect-ratio: auto !important; padding: 8px; border: 4px solid #406cbd; border-radius: 24px 40px 24px 24px; background: linear-gradient(125deg, #fff 0%, #b4d4ff 8%, #eaf5ff 18%, #9cbced 30%, #d6e6ff 50%, #92b4ee 83%, #174dd0 100%); box-shadow: inset 0 0 0 2px #f2f9ff, inset 0 0 16px #2a5dd3, 0 0 0 2px #123280; }
+  .wmp > .wmp-escala > * { position: relative; inset: auto !important; width: auto !important; height: auto !important; min-width: 0; }
+  .wmp .wmp-moldura, .wmp .wmp-alca { display: none; }
+  .wmp .wmp-mobile-tools { grid-area: tools; display: flex; gap: 8px; }
+  .wmp .wmp-tool { display: grid; place-items: center; width: 40px; height: 40px; flex: 0 0 40px; border: 2px solid #4d6c94; border-radius: 50%; background: radial-gradient(circle at 35% 22%, #fff, #e3f5ff 45%, #b4cfe6 67%, #5190be 85%); box-shadow: inset 0 0 0 2px #f4fcff, 0 2px 2px #193e78; color: #103080; }
+  .wmp-tool svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; fill: none; }
+  .wmp .wmp-tela { grid-area: screen; aspect-ratio: 3/2; min-height: 0; border: 2px solid #eff7ff; border-radius: 8px; box-shadow: 0 0 0 1px #3e5a85; }
+  .wmp .wmp-info { grid-area: info; display: grid; grid-template-columns: 16px minmax(0,1fr); gap: 8px; padding: 8px; border: 1px solid #647eaa; border-radius: 4px; background: linear-gradient(#20262c, #000); color: #abed00; font-size: 14px; line-height: 16px; }
+  .wmp .wmp-info-glifo { width: 16px; height: 16px; }
+  .wmp .wmp-info-tempo { grid-column: 2; font-size: 12px; }
+  .wmp .wmp-aviso { font-size: 14px; line-height: 24px; padding: 16px; }
+  .wmp .wmp-rewind { grid-area: rewind; }
+  .wmp .wmp-forward { grid-area: forward; }
+  .wmp .wmp-pilula { min-width: 40px; min-height: 40px; border: 2px solid #5c799e; background: linear-gradient(#fff, #c6e6fc 48%, #7cadd5); box-shadow: inset 0 0 0 2px #effaff; }
+  .wmp .wmp-rewind::before { content: '−10'; font-size: 12px; font-weight: 700; }
+  .wmp .wmp-forward::before { content: '+10'; font-size: 12px; font-weight: 700; }
+  .wmp .wmp-timeline { grid-area: timeline; min-height: 40px; }
+  .wmp .wmp-slider::before { content: ''; position: absolute; inset: 16px 0; border: 1px solid #477e4e; border-radius: 16px; background: linear-gradient(#6f8d9f, #c9e3fb); box-shadow: 0 0 0 2px #e7f5ff; }
+  .wmp .wmp-preenchimento { top: 16px; height: 12px; background: linear-gradient(#98fa00,#40ad00); opacity: 1; }
+  .wmp .wmp-marcador, .wmp .wmp-marcador-vol { width: 24px !important; max-height: 40px; object-fit: contain; }
+  .wmp .wmp-play { grid-area: play; }
+  .wmp .wmp-stop { grid-area: stop; }
+  .wmp .wmp-prev { grid-area: prev; }
+  .wmp .wmp-next { grid-area: next; }
+  .wmp .wmp-mute { grid-area: mute; }
+  .wmp .wmp-esfera { justify-self: center; width: min(100%, 40px); aspect-ratio: 1; min-width: 40px; min-height: 40px; border: 2px solid #365777; background: radial-gradient(circle at 36% 22%, #fff, #e5f5ff 38%, #afcce5 70%, #4289b3 88%); box-shadow: inset 0 0 0 2px #effaff, 0 2px 2px #17456f; }
+  .wmp .wmp-esfera:active, .wmp .wmp-tool:active { background: radial-gradient(circle at 50% 70%, #e5f5ff, #76a0cd); box-shadow: inset 0 2px 4px #2b5178; }
+  .wmp .wmp-volume { grid-area: volume; min-height: 40px; margin-inline: 16px; }
+  .wmp .wmp-cunha { display: none; }
+  .wmp .wmp-volume::before { background: linear-gradient(#405e95, #d7eaff); }
+  .wmp .wmp-minimize { grid-area: min; }
+  .wmp .wmp-close { grid-area: close; }
+  .wmp .wmp-janela { min-width: 40px; min-height: 40px; color: #0c2a80; font-size: 24px; line-height: 40px; text-shadow: 0 2px #fff; }
+  .wmp .wmp-minimize::before { content: '−'; }
+  .wmp .wmp-close::before { content: '×'; }
+  .wmp .wmp-mobile-brand { grid-area: brand; display: flex; justify-content: center; padding: 8px; }
+  .wmp-mobile-brand img { width: 40px; height: 32px; object-fit: contain; }
+  .wmp .wmp-mobile-list { grid-area: list; display: grid; gap: 8px; padding: 8px; margin: 0; list-style: none; border: 1px solid #4a6795; border-radius: 8px; background: #f5f7fb; }
+  .wmp-mobile-list button { width: 100%; min-height: 40px; padding: 8px; text-align: left; }
+  .wmp-mobile-list button[aria-current] { background: #002697; color: #fff; border-radius: 4px; }
+  .wmp .wmp-mobile-note { grid-area: note; display: block; margin: 0; padding: 8px; font-size: 12px; line-height: 16px; }
+  .wmp button:disabled, .wmp [aria-disabled='true'] { opacity: .5; cursor: not-allowed; }
+  .wmp .wmp-slider[aria-disabled='true'] { pointer-events: none; }
+  .wmp :is(button,a,[role='slider']):focus-visible { outline: 2px solid #002697; outline-offset: 2px; }
+  .wmp:fullscreen { height: 100%; max-width: none; overflow-y: auto; background: #bad4f7; }
+}
+
+@media (max-width: 760px), (max-width: 1024px) and (pointer: coarse) { .wmp .wmp-esfera.is-grande { width: min(100%, 48px); } }
+@media (max-width: 760px), (max-width: 1024px) and (pointer: coarse) {
+  .wmp { max-width: 480px; }
+  .wmp .wmp-esfera { width: min(100%, 40px) !important; }
+  .wmp .wmp-esfera.is-grande { width: min(100%, 48px) !important; }
+}

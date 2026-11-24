@@ -17,15 +17,18 @@ function alreadyShown() {
 
 /** Balão de boas-vindas: abre depois de ~2,5 s com som e fecha sozinho em 10 s. */
 export default function DesktopAlerts({ ancoraRef, reabrir = 0, onFim }) {
+  const mobile = useEhMobile();
   const [balloon, setBalloon] = useState(false);
   const fimRef = useRef(false);
   const avisarFim = () => {
+    if (mobile) return;
     if (fimRef.current) return;
     fimRef.current = true;
     setTimeout(() => onFim?.(), 800);
   };
 
   useEffect(() => {
+    if (mobile) { setBalloon(false); return; } // No celular, só abre pelo ícone de informação.
     if (alreadyShown()) {
       const t = setTimeout(avisarFim, 2500);
       return () => clearTimeout(t);
@@ -35,7 +38,7 @@ export default function DesktopAlerts({ ancoraRef, reabrir = 0, onFim }) {
     } catch {}
     const a = setTimeout(() => setBalloon(true), BALLOON_DELAY);
     return () => clearTimeout(a);
-  }, []);
+  }, [mobile]);
 
   useEffect(() => {
     if (reabrir > 0) setBalloon(true);

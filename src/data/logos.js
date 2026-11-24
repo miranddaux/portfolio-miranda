@@ -2,6 +2,7 @@
 // Só entra aqui quem tem arquivo; o resto aparece apenas como texto.
 const L = "/assets/logos";
 const LOGOS = {
+  codex: `${L}/codex.png`,
   figma: `${L}/figma.png`,
   photoshop: `${L}/photoshop.png`,
   illustrator: `${L}/illustrator.png`,

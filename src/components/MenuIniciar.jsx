@@ -2,14 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { REDES_PRINCIPAIS, REDES_SOCIAIS } from "../data/social.js";
 import { SetaVerde } from "./IconesMenu.jsx";
 import { logoDe } from "../data/logos.js";
+import { useMediaQuery } from "../lib/useEhMobile.js";
 
 const XP = "/assets/xp";
 const MI = "/assets/xp/menu-icons";
+// Mantido para retomar a integração quando houver uma versão original jogável.
+const MOSTRAR_PURBLE_PLACE = false;
 const img = (src, t = 32, classe) => <img className={classe} src={src} alt="" width={t} height={t} />;
 const imgRede = (r, t = 32) => img(`${MI}/${r.nome.toLowerCase()}.png`, t, `mi-rede mi-rede-${r.nome.toLowerCase()}`);
 
 // Programas usados recentemente: só os que têm logo enviado pelo Thiago.
-const RECENTES = ["Adobe Photoshop", "Adobe Illustrator", "Claude Code", "Cursor", "VS Code", "Figma", "Shopify", "Framer AI"];
+const RECENTES = ["Adobe Photoshop", "Adobe Illustrator", "Claude Code", "Codex", "Cursor", "VS Code", "Figma", "Shopify", "Framer AI"];
 const LOGO_RECENTE = { "Adobe Illustrator": "illustrator", "Adobe Photoshop": "photoshop", "Claude Code": "claude" };
 const logoRecente = (nome) => logoDe(LOGO_RECENTE[nome] || nome);
 
@@ -67,6 +70,7 @@ const Divisor = ({ mini }) => <div className={mini ? "mi-mini-divisor" : "mi-div
 
 // Menu Iniciar: atalhos à esquerda, redes e aplicativos à direita, Sair e Desligar no rodapé.
 export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbrir, aoFazerLogoff, aoSair }) {
+  const mobile = useMediaQuery("(max-width:760px), (max-width:1024px) and (pointer:coarse)");
   const [sub, setSub] = useState(null); // "todos" | "recente" | null
   const timer = useRef(null);
   useEffect(() => () => clearTimeout(timer.current), []);
@@ -95,6 +99,7 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
           <Linha icone={img(`${MI}/campo-minado.png`)} rotulo="Campo Minado" aoClicar={() => aoAbrir("minas")} />
           <Linha icone={img(`${MI}/paint.png`)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
           <Linha icone={img(`${MI}/pinball.png`)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
+          {MOSTRAR_PURBLE_PLACE && <Linha icone={img("/assets/xp/apps/purble-place.svg")} rotulo="Purble Place" sub="Original em pesquisa" breve />}
           <div className="mi-todos-area" onMouseEnter={() => abrir("todos")} onMouseLeave={fechar}>
             <Divisor />
             <button type="button" className={`mi-todos ${sub === "todos" ? "is-aberto" : ""}`} onClick={() => alternar("todos")} onKeyDown={teclaSub("todos")} aria-haspopup="menu" aria-expanded={sub === "todos"}>
@@ -112,12 +117,13 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
                 <Divisor mini />
                 <Mini icone={img(`${MI}/msn.png`, 16)} rotulo="Messenger" aoClicar={() => aoAbrir("msn")} />
                 <Mini icone={img(`${MI}/player.png`, 16)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
-                <Mini icone={img(`${MI}/headspace.png`, 16)} rotulo="Headspace" aoClicar={() => aoAbrir("headspace")} />
+                <Mini icone={img(`${MI}/headspace.png`, 16)} rotulo={mobile ? "Headspace — indisponível no mobile" : "Headspace"} breve={mobile} aoClicar={() => aoAbrir("headspace")} />
                 <Divisor mini />
                 <Mini icone={img(`${MI}/prompt.png`, 16)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
                 <Mini icone={img(`${MI}/campo-minado.png`, 16)} rotulo="Campo minado" aoClicar={() => aoAbrir("minas")} />
                 <Mini icone={img(`${MI}/paint.png`, 16)} rotulo="Paint" aoClicar={() => aoAbrir("paint")} />
                 <Mini icone={img(`${MI}/pinball.png`, 16)} rotulo="Pinball" aoClicar={() => aoAbrir("pinball")} />
+                {MOSTRAR_PURBLE_PLACE && <Mini icone={img("/assets/xp/apps/purble-place.svg", 16)} rotulo="Purble Place — original em pesquisa" breve />}
                 <Mini icone={img(`${MI}/doom.png`, 16)} rotulo="DOOM" aoClicar={() => aoAbrir("doom")} />
                 <Divisor mini />
               </div>
@@ -135,18 +141,18 @@ export default function MenuIniciar({ menuRef, usuario = "Thiago Miranda", aoAbr
             </button>
             {sub === "recente" && (
               <div className="mi-flyout mi-flyout-recente" role="menu" aria-label="Usado recentemente">
-                {RECENTES.map((nome) => <Mini key={nome} icone={img(logoRecente(nome), 16)} rotulo={nome} breve />)}
+                {RECENTES.map((nome) => <Mini key={nome} icone={img(logoRecente(nome), 16, nome === "Codex" ? "mi-logo-codex" : undefined)} rotulo={nome} breve />)}
               </div>
             )}
           </div>
           <Linha icone={img(`${MI}/player.png`)} rotulo="Reprodutor de mídia" aoClicar={() => aoAbrir("player")} />
-          <Linha icone={img(`${MI}/headspace.png`)} rotulo="Headspace" aoClicar={() => aoAbrir("headspace")} />
+          <Linha icone={img(`${MI}/headspace.png`)} rotulo="Headspace" sub={mobile ? "Indisponível no mobile" : undefined} breve={mobile} aoClicar={() => aoAbrir("headspace")} />
           <Linha icone={img(`${MI}/prompt.png`)} rotulo="Prompt de Comando" aoClicar={() => aoAbrir("prompt")} />
           <Linha icone={img(`${MI}/doom.png`)} rotulo="DOOM" aoClicar={() => aoAbrir("doom")} />
         </div>
       </div>
       <div className="mi-rodape">
-        <button type="button" className="mi-acao" onClick={aoSair}>
+        <button type="button" className="mi-acao" onClick={aoFazerLogoff}>
           <img src={`${XP}/menu/sair.png`} alt="" width="32" height="32" />
           <span>Sair</span>
         </button>
