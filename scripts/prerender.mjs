@@ -1,5 +1,5 @@
 // Pós-build: gera HTML estático por rota (título, descrição, canonical, OG/Twitter, texto real do case),
-// robots.txt e sitemap.xml. O React substitui o conteúdo estático ao carregar; crawlers e leitores sem JS veem o texto.
+// robots.txt e sitemap.xml. O texto estático é fallback sem JavaScript; não aparece antes da interface XP.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { PAGES, SITE_URL, SITE_NAME, absolute } from "../src/data/seo.js";
 import { getCaseStudy } from "../src/data/caseStudies.js";
@@ -11,6 +11,8 @@ const dist = new URL("../dist/", import.meta.url);
 const template = readFileSync(new URL("index.html", dist), "utf8");
 const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const rich = (t) => esc(t).replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+
+const person = { '@context': 'https://schema.org', '@type': 'Person', name: 'Thiago Miranda', jobTitle: 'Product Designer', url: SITE_URL, email: CONTATO.email, address: { '@type': 'PostalAddress', addressLocality: 'São José do Rio Preto', addressRegion: 'SP', addressCountry: 'BR' }, sameAs: [CONTATO.linkedin, CONTATO.behance, CONTATO.dribbble] };
 
 function head(page) {
   const url = absolute(page.path);
@@ -30,6 +32,7 @@ function head(page) {
     `<meta name="twitter:description" content="${esc(page.description)}" />`,
     ...(image ? [`<meta name="twitter:image" content="${image}" />`] : []),
   ];
+  if (page.path === "/") tags.push(`<script type="application/ld+json">${JSON.stringify(person).replace(/</g, '\\u003c')}</script>`);
   return tags.join("\n    ");
 }
 
@@ -66,11 +69,10 @@ ${c.sections.map((s) => `<section><h2>${esc(s.title)}</h2>\n${blocksHtml(s.block
 }
 
 function homeBody() {
-  const person = { '@context': 'https://schema.org', '@type': 'Person', name: 'Thiago Miranda', jobTitle: 'Product Designer', url: SITE_URL, email: CONTATO.email, address: { '@type': 'PostalAddress', addressLocality: 'São José do Rio Preto', addressRegion: 'SP', addressCountry: 'BR' }, sameAs: [CONTATO.linkedin, CONTATO.behance, CONTATO.dribbble] };
   return `<main><h1>Thiago Miranda — Product Designer pleno</h1><section><h2>Sobre mim</h2><p>${esc(BIO_PERFIL)}</p></section>
 <section><h2>Experiência</h2>${EXPERIENCIAS.map(x => `<article><h3>${esc(x.cargo)} · ${esc(x.empresa)}</h3><p>${esc(x.periodo)}</p><p>${esc(x.texto)}</p></article>`).join('')}</section>
 <section><h2>Projetos e prêmios</h2><p><a href="/cases/animae">Case ANIMAE — Aplicativo social de anime</a></p>${ADICIONAL.map(x => `<article><h3>${esc(x.cargo)}</h3><p>${esc(x.texto)}</p></article>`).join('')}</section>
-<section><h2>Contato e currículo</h2><p><a href="mailto:${CONTATO.email}">${esc(CONTATO.email)}</a> · <a href="${CONTATO.linkedin}">LinkedIn</a></p><p><a href="/assets/cv/thiago-miranda-curriculo-pt.pdf">Currículo em português</a> · <a href="/assets/cv/thiago-miranda-resume-en.pdf">Resume in English</a></p></section></main><script type="application/ld+json">${JSON.stringify(person).replace(/</g, '\\u003c')}</script>`;
+<section><h2>Contato e currículo</h2><p><a href="mailto:${CONTATO.email}">${esc(CONTATO.email)}</a> · <a href="${CONTATO.linkedin}">LinkedIn</a></p><p><a href="/assets/cv/thiago-miranda-curriculo-pt.pdf">Currículo em português</a> · <a href="/assets/cv/thiago-miranda-resume-en.pdf">Resume in English</a></p></section></main>`;
 }
 
 for (const page of PAGES) {
@@ -78,7 +80,7 @@ for (const page of PAGES) {
     .replace(/<title>.*?<\/title>/s, `<title>${esc(page.title)}</title>`)
     .replace(/<meta\s+name="description"[\s\S]*?\/>/, `<meta name="description" content="${esc(page.description)}" />`)
     .replace("</head>", `  ${head(page)}\n  </head>`)
-    .replace('<div id="root"></div>', `<div id="root">${page.path === "/" ? homeBody() : animaeBody()}</div>`);
+    .replace('<div id="root"></div>', `<div id="root"></div><noscript id="static-fallback"><style>#root { display: none; }</style>${page.path === "/" ? homeBody() : animaeBody()}</noscript>`);
   const dir = new URL(page.path === "/" ? "./" : `.${page.path}/`, dist);
   mkdirSync(dir, { recursive: true });
   writeFileSync(new URL("index.html", dir), html);

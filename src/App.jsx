@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import XPDesktop from "./pages/XPDesktop";
@@ -49,7 +49,7 @@ export default function App() {
       applySeo(pageFor("/"));
     }
   }, [path]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.dataset.mode = mode;
     document.documentElement.dataset.layout = xpHome && !showWelcome ? "desktop" : "document";
     document.documentElement.dataset.screen = showWelcome

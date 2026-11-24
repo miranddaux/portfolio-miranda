@@ -195,3 +195,18 @@ como o de uma página web. Nenhuma comparação permite prometer match ou aprova
 - `tests/projects-layout-browser.py`: grade embarcada em 320/390/768/1440 px,
   filtro, alinhamento, redimensionamento da janela e Explorer independente;
   capturas prontas antes de rolar, ausência de entrada e demos preservadas.
+
+## QA posterior — flash de HTML na abertura
+
+- Reproduzido no domínio público ao atrasar o módulo JavaScript: o texto
+  pré-renderizado dentro de #root aparecia antes de o React montar a interface.
+- #root inicia vazio. O documento estático fica em noscript e só é exibido
+  quando JavaScript está desativado; não depende de uma classe adicionada tarde
+  para esconder o texto. Títulos, canonical, OG/Twitter e conteúdo alternativo
+  permanecem no HTML. O JSON-LD de Person foi movido para head.
+- Fundo crítico azul #002697 inline, sem nova etapa ou tempo de espera.
+  Estado visual de tema/layout é aplicado em useLayoutEffect, antes da pintura.
+- tests/startup-browser.py testa o build com o JS retido, abertura da home/case,
+  refresh, 390/1440 px, assets externos bloqueados, interface pronta e leitura
+  sem JavaScript. Usar npm run build + npm run preview; o dev server não contém
+  o HTML pré-renderizado que causava o bug.
