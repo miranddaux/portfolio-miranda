@@ -64,7 +64,11 @@ async def main():
                 await standalone.locator('button[aria-label^="Fechar"]').click()
             await page.goto(BASE + '/cases/animae')
             # Capturas prontas antes da primeira rolagem: sem placeholders tardios.
-            assert await page.locator('.case-media .case-device-screen > img, .case-flow-shot img').evaluate_all('(es)=>es.length>0 && es.every(e=>e.complete && e.naturalWidth>0)')
+            await page.locator('.case-document').wait_for()
+            await page.wait_for_function('''() => {
+              const images = [...document.querySelectorAll('.case-media .case-device-screen > img, .case-flow-shot img')];
+              return images.length > 0 && images.every(e => e.complete && e.naturalWidth > 0);
+            }''', timeout=20000)
             assert await page.locator('.ad-slot').first.evaluate('(e)=>getComputedStyle(e).animationName') == 'none'
             assert await page.locator('.case-stage,.case-frame,.case-media,.case-device').evaluate_all('(es)=>es.every(e=>getComputedStyle(e).animationName==="none")')
             if width == 1440:
