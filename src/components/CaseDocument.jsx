@@ -83,7 +83,7 @@ export function Shot({ media, phone }) {
   </figure>;
   return <figure className={`case-media ${phone ? "is-phone" : "is-wide"}`}>
     <div className={phone ? "case-device" : "case-shot"}>
-      <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="lazy" decoding="async" /></span>
+      <span className={phone ? "case-device-screen" : "case-image"}><img src={media.src} alt={media.alt} width={media.width} height={media.height} loading="eager" decoding="async" /></span>
     </div>
   </figure>;
 }
@@ -132,7 +132,7 @@ function FlowStory({ index, module }) {
       <ol className="case-flow-row" style={{ "--passos": row.items.length }}>
         {row.items.map((m) => <li key={m.src}>
           <div className="case-flow-shot">
-            <img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" />
+            <img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="eager" decoding="async" />
           </div>
         </li>)}
       </ol>
@@ -203,7 +203,7 @@ function EditorialSection({ index, section }) {
             <div className="case-flow-text"><h3>{it.h3}</h3><Blocks blocks={it.blocks} /></div>
             <section className="case-flow-frame" aria-label={it.label}>
               <ol className="case-flow-row" style={{ "--passos": it.images.length }}>
-                {it.images.map((m) => <li key={m.src}><div className="case-flow-shot"><img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="lazy" decoding="async" /></div></li>)}
+                {it.images.map((m) => <li key={m.src}><div className="case-flow-shot"><img src={m.src} alt={m.alt} width={m.width} height={m.height} loading="eager" decoding="async" /></div></li>)}
               </ol>
             </section>
           </article>

@@ -179,3 +179,19 @@ Manter a distinção entre seis anos em design e tempo no cargo de Product Desig
 Inglês básico está honesto e pode limitar vagas internacionais que exigem comunicação
 fluente. Para o currículo, o objetivo é clareza e palavras-chave de ATS, não SEO
 como o de uma página web. Nenhuma comparação permite prometer match ou aprovação.
+
+## QA posterior — grid dos projetos e entradas do case
+
+- Explorer usa três colunas na largura maior, duas quando o próprio componente
+  tem até 560 px e uma somente abaixo de 280 px. A regra responde à janela
+  redimensionada e à aba do perfil, sem depender do tamanho do viewport.
+- Título e lista compartilham o recuo: 32 px no desktop, 16 px no mobile.
+  A aba não soma padding do limite, da rolagem e da lista. Filtro continua
+  alinhado no celular; filtrar não muda as colunas nem estica uma única pasta.
+- Removida a entrada por opacidade/subida dos cards de Minha Lista. O usuário
+  confirmou que as demonstrações dentro dos celulares devem continuar rodando.
+- Capturas e fluxos carregam ao abrir o case, preservando suas dimensões,
+  para evitar o aparecimento tardio ao rolar. O hero mantém sua animação e fade.
+- `tests/projects-layout-browser.py`: grade embarcada em 320/390/768/1440 px,
+  filtro, alinhamento, redimensionamento da janela e Explorer independente;
+  capturas prontas antes de rolar, ausência de entrada e demos preservadas.

@@ -191,10 +191,6 @@
   }
 
   /* --- Projetos: pastas em duas colunas, alvo grande --- */
-  .projects-folders {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-2);
-  }
   .project-folder {
     min-height: 112px;
     padding: var(--space-2) var(--space-1);
@@ -397,9 +393,6 @@
     flex: 1 1 100%;
     justify-content: center;
   }
-  .projects-folders {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .case-hero-shot {
     height: 320px;
   }
@@ -422,9 +415,6 @@
   }
   .desktop-shortcuts .desktop-shortcut {
     width: calc(100% - var(--space-3));
-  }
-  .projects-folders {
-    grid-template-columns: minmax(0, 1fr);
   }
   .case-frame.is-trio .case-device {
     width: 176px;
@@ -465,7 +455,8 @@
   .painel-mosaico .painel-item img { width: 48px; height: 48px; }
   .painel-redes { gap: 8px; }
   .painel-redes a { padding: 8px; }
-  .projects-folders { padding: 16px; gap: 16px; }
+  .projects-embedded-heading, .projects-folders-scroll { padding: 16px; }
+  .projects-folders { gap: 16px; }
   .project-folder-icon img { width: 64px; height: 64px; }
   .case-document { padding: 16px; }
   .case-tags { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
