@@ -6,7 +6,8 @@ Esta rodada aproxima a experiência da linguagem Windows XP e usa Segoe UI em to
 ## Estado atual — revisão desktop de 23/11
 
 Site de produção: https://portfolio-miranda-tawny.vercel.app/.
-As alterações desta rodada seguem em branch e PR, com prévia Vercel para revisão.
+A versão pública está publicada na Vercel. Alterações entram por branch e PR,
+com prévia para verificação antes da publicação.
 
 XP é a experiência pública. A entrada abre Sobre mim; o ANIMAE é o case completo,
 com URL própria e janela XP. Navaja e CIAO permanecem em construção.

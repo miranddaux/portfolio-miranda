@@ -20,7 +20,7 @@
 .ad-count { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid var(--n70); border-radius: 999px; background: var(--n80); font-size: 12px; font-weight: 500; color: var(--n50); }
 .ad-pill.is-on .ad-count { border-color: var(--n100); background: var(--n100); color: var(--n0); }
 .ad-list { display: flex; flex-direction: column; margin-top: -12px; padding: 0 20px; }
-.ad-slot { display: grid; grid-template-rows: 1fr; animation: ad-in 0.45s ease both; transition: opacity 0.35s ease, transform 0.35s ease, grid-template-rows 0.55s ease 0.3s; }
+.ad-slot { display: grid; grid-template-rows: 1fr; transition: opacity 0.35s ease, transform 0.35s ease, grid-template-rows 0.55s ease 0.3s; }
 .ad-slot-in { min-height: 0; overflow: hidden; padding-bottom: 16px; }
 .ad-slot.is-out { grid-template-rows: 0fr; opacity: 0; transform: translateY(-24px); }
 @keyframes ad-in { from { opacity: 0; transform: translateY(16px); } }
